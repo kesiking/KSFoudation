@@ -1,0 +1,54 @@
+//
+//  HSOpenPlatform.pch
+//  HSOpenPlatform
+//
+//  Created by 孟希羲 on 15/9/29.
+//  Copyright (c) 2015年 孟希羲. All rights reserved.
+//
+
+#ifndef HSOpenPlatform_HSOpenPlatform_pch
+#define HSOpenPlatform_HSOpenPlatform_pch
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+#endif
+
+// for log
+#import "EHLog.h"
+// for third library
+#import "KSLibHeader.h"
+// for navigation url
+#import "KSConfigCenter.h"
+#import "KSBasicNavigator.h"
+// for common UI
+#import "UIMacro.h"
+#import "HSPageMapMacro.h"
+#import "EHSocializedSharedMacro.h"
+#import "HSInterfaceFieldConst.h"
+#import "EHNotificationConst.h"
+// for login&register
+#import "KSLoginHeader.h"
+// for util
+#import "EHUtils.h"
+// for gaode map
+#import "HSMAMapMacro.h"
+// for device data
+#import "HSDeviceDataCenter.h"
+#import "HSDateManagerCenter.h"
+// for data analysis
+#import "MobClick.h"
+
+// 线上环境
+//#define ONLINE_ENVIEONMENT
+
+#ifndef ONLINE_ENVIEONMENT
+// 测试环境
+    #define DEBUG_ENVIEONMENT
+// for network mock data
+//    #define MOCKDATA
+    #define MOCK_USER_PHONE
+#endif
+
+#endif

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Jih-lD-Ofb" customClass="HSMyMessageInfoCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tsC-Qs-IZt">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="timeLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSH-ap-tJE">
+                            <rect key="frame" x="8" y="14" width="304" height="15"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="15" id="hKh-mw-hCh"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NiN-kP-ba8">
+                            <rect key="frame" x="10" y="40" width="300" height="90"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ypE-F2-cbB">
+                            <rect key="frame" x="11" y="89" width="298" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="2OK-O3-hIs"/>
+                                <constraint firstAttribute="height" constant="40" id="qsO-gA-QJO"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="270" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="messageInfoButton" image="icon_Recharge_Arrow.png">
+                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="2OK-O3-hIs"/>
+                                </mask>
+                            </variation>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MB5-hp-LZm">
+                            <rect key="frame" x="260" y="80" width="52" height="28"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <state key="normal" title="查看详情">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="messageInfoLabel" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyH-rR-i0M" customClass="TTTAttributedLabel">
+                            <rect key="frame" x="30" y="62" width="260" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="ZJR-Ml-479"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="ZJR-Ml-479"/>
+                                </mask>
+                            </variation>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="eyH-rR-i0M" firstAttribute="leading" secondItem="tsC-Qs-IZt" secondAttribute="leading" constant="30" id="1n9-tp-g9o"/>
+                        <constraint firstItem="NiN-kP-ba8" firstAttribute="top" secondItem="LSH-ap-tJE" secondAttribute="bottom" constant="8" id="8Rx-Es-XaG"/>
+                        <constraint firstItem="NiN-kP-ba8" firstAttribute="top" secondItem="eyH-rR-i0M" secondAttribute="bottom" constant="-40" id="EnC-Ub-Fuj"/>
+                        <constraint firstItem="MB5-hp-LZm" firstAttribute="top" secondItem="eyH-rR-i0M" secondAttribute="bottom" id="NHx-PW-0h8"/>
+                        <constraint firstAttribute="trailing" secondItem="eyH-rR-i0M" secondAttribute="trailing" constant="30" id="PHg-tz-fWX"/>
+                        <constraint firstAttribute="trailing" secondItem="ypE-F2-cbB" secondAttribute="trailing" constant="11" id="SYs-4v-2QJ"/>
+                        <constraint firstAttribute="trailing" secondItem="NiN-kP-ba8" secondAttribute="trailing" constant="10" id="Saw-iC-gIC"/>
+                        <constraint firstItem="NiN-kP-ba8" firstAttribute="leading" secondItem="tsC-Qs-IZt" secondAttribute="leading" constant="10" id="Ucd-YV-wf3"/>
+                        <constraint firstItem="NiN-kP-ba8" firstAttribute="top" secondItem="eyH-rR-i0M" secondAttribute="top" constant="-22" id="XGG-cl-gfn"/>
+                        <constraint firstAttribute="bottom" secondItem="ypE-F2-cbB" secondAttribute="bottom" constant="11" id="bJx-iO-9be"/>
+                        <constraint firstAttribute="trailing" secondItem="MB5-hp-LZm" secondAttribute="trailing" constant="8" id="br7-UT-W8n"/>
+                        <constraint firstAttribute="bottom" secondItem="NiN-kP-ba8" secondAttribute="bottom" constant="10" id="fXr-8o-paQ"/>
+                        <constraint firstItem="NiN-kP-ba8" firstAttribute="top" secondItem="LSH-ap-tJE" secondAttribute="bottom" constant="40" id="h6c-uJ-UNd"/>
+                        <constraint firstItem="ypE-F2-cbB" firstAttribute="leading" secondItem="tsC-Qs-IZt" secondAttribute="leading" constant="11" id="khb-Jh-ETD"/>
+                        <constraint firstItem="LSH-ap-tJE" firstAttribute="top" secondItem="tsC-Qs-IZt" secondAttribute="top" constant="14" id="ncE-XX-CLa"/>
+                        <constraint firstItem="LSH-ap-tJE" firstAttribute="leading" secondItem="tsC-Qs-IZt" secondAttribute="leading" constant="8" id="nmT-dM-ioz"/>
+                        <constraint firstItem="eyH-rR-i0M" firstAttribute="top" secondItem="LSH-ap-tJE" secondAttribute="bottom" constant="30" id="qyr-jg-Mbp"/>
+                        <constraint firstAttribute="trailing" secondItem="LSH-ap-tJE" secondAttribute="trailing" constant="8" id="s0u-JH-SH0"/>
+                        <constraint firstItem="NiN-kP-ba8" firstAttribute="top" secondItem="tsC-Qs-IZt" secondAttribute="top" constant="40" id="uLQ-Y9-eSf"/>
+                        <constraint firstItem="NiN-kP-ba8" firstAttribute="top" secondItem="eyH-rR-i0M" secondAttribute="bottom" constant="-40" id="uNm-FO-B7R"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="8Rx-Es-XaG"/>
+                            <exclude reference="EnC-Ub-Fuj"/>
+                            <exclude reference="h6c-uJ-UNd"/>
+                            <exclude reference="uNm-FO-B7R"/>
+                            <exclude reference="qyr-jg-Mbp"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="tsC-Qs-IZt" firstAttribute="leading" secondItem="Jih-lD-Ofb" secondAttribute="leading" id="6D3-CW-RBb"/>
+                <constraint firstItem="tsC-Qs-IZt" firstAttribute="top" secondItem="Jih-lD-Ofb" secondAttribute="top" id="7rL-KG-aMe"/>
+                <constraint firstAttribute="trailing" secondItem="tsC-Qs-IZt" secondAttribute="trailing" id="HVV-0y-Dho"/>
+                <constraint firstAttribute="bottom" secondItem="tsC-Qs-IZt" secondAttribute="bottom" id="kjK-02-TSK"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="ks_contentView" destination="tsC-Qs-IZt" id="s9w-kn-EOs"/>
+                <outlet property="messageBackgroundImageView" destination="NiN-kP-ba8" id="ZYn-cl-t10"/>
+                <outlet property="messageCheckDetailInfoButton" destination="MB5-hp-LZm" id="PU1-JV-L59"/>
+                <outlet property="messageInfoButton" destination="ypE-F2-cbB" id="18z-wv-Gnb"/>
+                <outlet property="messageInfoLabel" destination="eyH-rR-i0M" id="Kog-Sl-4Sa"/>
+                <outlet property="messageTimeLabel" destination="LSH-ap-tJE" id="63y-aK-fyF"/>
+            </connections>
+            <point key="canvasLocation" x="739" y="99"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_Recharge_Arrow.png" width="15" height="15"/>
+    </resources>
+</document>

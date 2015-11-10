@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>user/showUserMsg.do</key>
+	<string>{
+  &quot;dataCounts&quot;: 10,
+  &quot;message&quot;: &quot;success&quot;,
+  &quot;responseData&quot;: [
+    {
+      &quot;msgDate&quot;: &quot;2015-10-19 12:29:00&quot;,
+      &quot;msgContent&quot;: &quot;尊敬的用户：截止10月1日09点，您本月使用的国内上网数据流量为43M427K，剩余可用256M597K。查看详情&quot;,
+      &quot;msgCategory&quot;: 1,
+      &quot;params&quot;: {
+        &quot;activityId&quot;: &quot;1&quot;
+      },
+      &quot;detailUrl&quot;: &quot;http://www.taobao.com&quot;
+    },
+    {
+      &quot;msgDate&quot;: &quot;2015-10-19 12:35:00&quot;,
+      &quot;msgContent&quot;: &quot;尊敬的用户：截止10月1日09点，您本月使用的国内上网数据流量为43M427K，剩余可用256M597K。&quot;,
+      &quot;rechargeUrl&quot;: &quot;http://www.taobao.com&quot;,
+      &quot;detailUrl&quot;: &quot;http://www.taobao.com&quot;
+    },
+    {
+      &quot;msgDate&quot;: &quot;2015-10-19 13:35:00&quot;,
+      &quot;msgContent&quot;: &quot;尊敬的用户：截止10月1日09点，您本月使用的国内上网数据流量为43M427K，剩余可用256M597K。&quot;,
+      &quot;msgCategory&quot;: 1
+    },
+    {
+      &quot;msgDate&quot;: &quot;2015-10-20 13:35:00&quot;,
+      &quot;msgContent&quot;: &quot;尊敬的用户：截止10月1日09点，您本月使用的国内上网数据流量为43M427K，剩余可用256M597K。&quot;,
+      &quot;msgCategory&quot;: 1
+    },
+    {
+      &quot;msgDate&quot;: &quot;2015-10-21 13:35:00&quot;,
+      &quot;msgContent&quot;: &quot;尊敬的用户：截止10月1日09点，您本月使用的国内上网数据流量为43M427K，剩余可用256M597K。&quot;
+    },
+    {
+      &quot;msgDate&quot;: &quot;2015-10-21 13:35:00&quot;,
+      &quot;msgContent&quot;: &quot;尊敬的用户：截止10月1日09点，您本月使用的国内上网数据流量为43M427K，剩余可用256M597K。&quot;,
+      &quot;rechargeUrl&quot;: &quot;http://www.taobao.com&quot;
+    },
+    {
+      &quot;msgDate&quot;: &quot;2015-10-21 13:35:00&quot;,
+      &quot;msgContent&quot;: &quot;尊敬的用户：截止10月1日09点，您本月使用的国内上网数据流量为43M427K，剩余可用256M597K。&quot;,
+      &quot;rechargeUrl&quot;: &quot;http://www.taobao.com&quot;
+    },
+    {
+      &quot;msgDate&quot;: &quot;2015-10-21 13:35:00&quot;,
+      &quot;msgContent&quot;: &quot;尊敬的用户：截止10月1日09点，您本月使用的国内上网数据流量为43M427K，剩余可用256M597K。&quot;
+    },
+    {
+      &quot;msgDate&quot;: &quot;2015-10-21 13:35:00&quot;,
+      &quot;msgContent&quot;: &quot;尊敬的用户：截止10月1日09点，您本月使用的国内上网数据流量为43M427K，剩余可用256M597K。&quot;
+    },
+    {
+      &quot;msgDate&quot;: &quot;2015-10-21 13:35:00&quot;,
+      &quot;msgContent&quot;: &quot;尊敬的用户：截止10月1日09点，您本月使用的国内上网数据流量为43M427K，剩余可用256M597K。&quot;
+    }
+  ],
+  &quot;status&quot;: 1,
+  &quot;time&quot;: &quot;2015-10-15 11:14:40&quot;
+}</string>
+	<key>userPhone</key>
+	<string>18867103795</string>
+</dict>
+</plist>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name_to_class</key>
+	<dict>
+		<key>login</key>
+		<string>KSLoginViewController</string>
+		<key>registerPage</key>
+		<string>KSRegisterViewController</string>
+		<key>validateCodeAndRegisterPage</key>
+		<string>KSRegisterValidateCodeViewController</string>
+		<key>resetPwdPage</key>
+		<string>KSResetPasswordViewController</string>
+		<key>doneResetPwdPage</key>
+		<string>KSDoneResetViewController</string>
+		<key>modifyPwdPage</key>
+		<string>KSModifyPasswordViewController</string>
+		<key>modifyPhoneSecurityPage</key>
+		<string>KSModifyPhoneSecuriyViewController</string>
+		<key>modifyPhonePage</key>
+		<string>KSModifyPhoneViewController</string>
+	</dict>
+	<key>object_list</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>login</string>
+			<key>class</key>
+			<string>KSLoginResolver</string>
+		</dict>
+	</array>
+</dict>
+</plist>

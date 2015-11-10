@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name_to_class</key>
+	<dict>
+		<key>activity_info_detail_url</key>
+		<string>HSActivityInfoDetailViewController</string>
+	</dict>
+	<key>object_list</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>openPlatform_home_url</string>
+			<key>class</key>
+			<string>KSTabbarURLResolver</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>openPlatform_service_url</string>
+			<key>class</key>
+			<string>KSTabbarURLResolver</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>openPlatform_myinfo_url</string>
+			<key>class</key>
+			<string>KSTabbarURLResolver</string>
+		</dict>
+	</array>
+</dict>
+</plist>

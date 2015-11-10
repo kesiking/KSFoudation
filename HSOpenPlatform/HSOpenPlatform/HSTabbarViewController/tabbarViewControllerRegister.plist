@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>viewControllerClassName</key>
+		<string>HSHomeTabViewController</string>
+		<key>viewControllerURL</key>
+		<string>openPlatform_home_url</string>
+		<key>tabbarNormalImage</key>
+		<string>tabitem_home_normal</string>
+		<key>tabbarSelectedImage</key>
+		<string>tabitem_home_highlight</string>
+		<key>tabbarTitle</key>
+		<string>发现</string>
+	</dict>
+	<dict>
+		<key>viewControllerClassName</key>
+		<string>HSServiceTabViewContioller</string>
+		<key>viewControllerURL</key>
+		<string>openPlatform_service_url</string>
+		<key>tabbarNormalImage</key>
+		<string>tabitem_healthy_normal</string>
+		<key>tabbarSelectedImage</key>
+		<string>tabitem_healthy_highlight</string>
+		<key>tabbarTitle</key>
+		<string>应用</string>
+	</dict>
+	<dict>
+		<key>viewControllerClassName</key>
+		<string>HSMyInfoTabViewController</string>
+		<key>viewControllerURL</key>
+		<string>openPlatform_myinfo_url</string>
+		<key>tabbarNormalImage</key>
+		<string>tabitem_info_normal</string>
+		<key>tabbarSelectedImage</key>
+		<string>tabitem_info_highlight</string>
+		<key>tabbarTitle</key>
+		<string>我</string>
+	</dict>
+</array>
+</plist>
