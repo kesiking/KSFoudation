@@ -21,7 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = EH_bgcor1;
-
+    self.title = @"附近营业厅";
+    
     [self.view addSubview:self.businessHallListView];
     [self.businessHallListView beginRefreshing];
 }

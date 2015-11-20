@@ -6,6 +6,8 @@
 //  Copyright (c) 2015年 孟希羲. All rights reserved.
 //
 
+#ifdef USE_AsyncDisplayKit
+
 #import "KSASCollectionViewCellNode.h"
 #import <AsyncDisplayKit/ASDisplayNode+Subclasses.h>
 
@@ -135,3 +137,5 @@
 }
 
 @end
+
+#endif

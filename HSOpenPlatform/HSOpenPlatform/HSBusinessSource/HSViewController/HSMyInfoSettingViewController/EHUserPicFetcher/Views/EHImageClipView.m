@@ -58,7 +58,9 @@
     CGContextSaveGState(context);
     [theView.layer renderInContext:context];
     UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIImage *imgeee = [UIImage imageWithCGImage:CGImageCreateWithImageInRect([theImage CGImage], rect)];
+    CGImageRef cgImage = CGImageCreateWithImageInRect([theImage CGImage], rect);
+    UIImage *imgeee = [UIImage imageWithCGImage:cgImage];
+    CGImageRelease(cgImage);
     UIGraphicsEndImageContext();
     return  imgeee;
 }

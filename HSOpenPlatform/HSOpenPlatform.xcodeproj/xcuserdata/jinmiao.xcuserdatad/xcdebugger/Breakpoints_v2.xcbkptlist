@@ -74,13 +74,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HSOpenPlatform/HSBusinessSource/HSCustom/HSAppCollectionViewCell.m"
-            timestampString = "467799902.280713"
+            timestampString = "469444142.507283"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "13"
-            endingLineNumber = "13"
-            landmarkName = "-initWithFrame:"
-            landmarkType = "5">
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "@implementation HSAppCollectionViewCell"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -154,39 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HSOpenPlatform/HSBusinessSource/HSTabViewController/HSOpenPlatformService/HSServiceTabViewContioller.m"
-            timestampString = "468226076.706221"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "-reloadFail"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HSOpenPlatform/HSBusinessSource/HSTabViewController/HSOpenPlatformService/HSServiceTabViewContioller.m"
-            timestampString = "468226076.706221"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "-reloadFail"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HSOpenPlatform/HSBusinessSource/HSTabViewController/HSOpenPlatformService/HSServiceTabViewContioller.m"
-            timestampString = "468226076.706221"
+            timestampString = "469444142.507283"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "82"
@@ -202,12 +170,171 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HSOpenPlatform/HSBusinessSource/HSTabViewController/HSOpenPlatformService/HSServiceTabViewContioller.m"
-            timestampString = "468226076.706221"
+            timestampString = "469444142.507283"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "-reloadFail"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HSOpenPlatform/HSBusinessSource/HSTabViewController/HSOpenPlatformService/HSServiceTabViewContioller.m"
+            timestampString = "469444142.507283"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "-reloadFail"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HSOpenPlatform/HSBusinessSource/HSTabViewController/HSOpenPlatformService/HSServiceTabViewContioller.m"
+            timestampString = "469444142.507283"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "-configGetFamilyAppList"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HSOpenPlatform/HSBusinessSource/HSTabViewController/HSOpenPlatformMyInfo/HSMyInfoTabViewController.m"
+            timestampString = "469072992.27682"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HSOpenPlatform/HSBusinessSource/HSTabViewController/HSOpenPlatformService/HSServiceTabViewContioller.m"
+            timestampString = "469444599.947502"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "-collectionView"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HSOpenPlatform/HSBusinessSource/HSViewController/HSAfterSaleViewController/HSAfterSaleViewController/HSAfterSaleViewController.m"
+            timestampString = "469519831.078748"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "-serviceCollectionView"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__50-[HSAfterSaleViewController serviceCollectionView]_block_invoke"
+                  moduleName = "HSOpenPlatform"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jinmiao/%E5%AE%B6%E5%BC%80%E5%B9%B3%E5%8F%B0/code/trunk/Client/IOS/HSOpenPaltform_1.0/HSOpenPlatform/HSOpenPlatform/HSBusinessSource/HSViewController/HSAfterSaleViewController/HSAfterSaleViewController/HSAfterSaleViewController.m"
+                  timestampString = "469523192.713609"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "182">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__copy_helper_block_123"
+                  moduleName = "HSOpenPlatform"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jinmiao/%E5%AE%B6%E5%BC%80%E5%B9%B3%E5%8F%B0/code/trunk/Client/IOS/HSOpenPaltform_1.0/HSOpenPlatform/HSOpenPlatform/HSBusinessSource/HSViewController/HSAfterSaleViewController/HSAfterSaleViewController/HSAfterSaleViewController.m"
+                  timestampString = "469523192.714249"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "21">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_124"
+                  moduleName = "HSOpenPlatform"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jinmiao/%E5%AE%B6%E5%BC%80%E5%B9%B3%E5%8F%B0/code/trunk/Client/IOS/HSOpenPaltform_1.0/HSOpenPlatform/HSOpenPlatform/HSBusinessSource/HSViewController/HSAfterSaleViewController/HSAfterSaleViewController/HSAfterSaleViewController.m"
+                  timestampString = "469523192.714711"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "17">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HSOpenPlatform/HSBusinessSource/HSViewController/HSAfterSaleViewController/HSAfterSaleViewController/HSAfterSaleViewController.m"
+            timestampString = "469519831.078748"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "-serviceCollectionView"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HSOpenPlatform/HSBusinessSource/HSView/HSHomeBusinessView/HSHomeCustomerServiceCollectionView/HSHomeCustomerServiceCollectionView.m"
+            timestampString = "469521963.233795"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "-setItemIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

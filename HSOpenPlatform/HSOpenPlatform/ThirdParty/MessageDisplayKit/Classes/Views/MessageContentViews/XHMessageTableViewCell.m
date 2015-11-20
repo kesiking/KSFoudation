@@ -121,6 +121,10 @@ static const CGFloat kXHUserNameLabelHeight = 20;
 #pragma mark - Menu Actions
 
 - (void)copyed:(id)sender {
+    if (self.messageBubbleView.displayTextView.text == nil) {
+        [self resignFirstResponder];
+        return;
+    }
     [[UIPasteboard generalPasteboard] setString:self.messageBubbleView.displayTextView.text];
     [self resignFirstResponder];
     DLog(@"Cell was copy");
@@ -185,8 +189,9 @@ static const CGFloat kXHUserNameLabelHeight = 20;
         }
         timeText = [dataFormatter stringFromDate:message.timestamp];
 //        timeText = [NSDateFormatter localizedStringFromDate:message.timestamp dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
-        
-        self.timestampLabel.text = [NSString stringWithFormat:@"%@ %@",dateText,timeText];
+        if (timeText && dateText) {
+            self.timestampLabel.text = [NSString stringWithFormat:@"%@ %@",dateText,timeText];
+        }
     }
 }
 
@@ -431,9 +436,9 @@ static const CGFloat kXHUserNameLabelHeight = 20;
             }
             LKBadgeView *timestampLabel = [[LKBadgeView alloc] initWithFrame:CGRectMake(0, kXHLabelPadding, MDK_SCREEN_WIDTH, kXHTimeStampLabelHeight)];
             timestampLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
-            timestampLabel.badgeColor = timestampBackgroundColor;
-            timestampLabel.textColor = timestampLabelTextColor;
-            timestampLabel.font = [UIFont systemFontOfSize:10.0f];
+            timestampLabel.badgeColor = [UIColor clearColor];
+            timestampLabel.textColor = [UIColor colorWithRed:0x99/255.0 green:0x99/255.0 blue:0x99/255.0 alpha:1.0];
+            timestampLabel.font = [UIFont boldSystemFontOfSize:12.0];
             timestampLabel.center = CGPointMake(CGRectGetWidth([[UIScreen mainScreen] bounds]) / 2.0, timestampLabel.center.y);
             [self.contentView addSubview:timestampLabel];
             [self.contentView bringSubviewToFront:timestampLabel];
@@ -460,6 +465,17 @@ static const CGFloat kXHUserNameLabelHeight = 20;
         }
         
         UIButton *avatarButton = [[UIButton alloc] initWithFrame:avatarButtonFrame];
+        //圆角头像
+//        avatarButton.layer.shouldRasterize = YES;
+//        avatarButton.layer.rasterizationScale = [UIScreen mainScreen].scale;
+//        avatarButton.layer.masksToBounds = YES;
+//        avatarButton.layer.cornerRadius = avatarButtonFrame.size.width/2;
+        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:avatarButton.bounds cornerRadius:avatarButtonFrame.size.width/2];
+        CAShapeLayer *maskLayer = [[CAShapeLayer alloc]init];
+        maskLayer.frame = avatarButton.bounds;
+        maskLayer.path = maskPath.CGPath;
+        avatarButton.layer.mask = maskLayer;
+        
         [avatarButton setImage:[self getAvatarPlaceholderImage] forState:UIControlStateNormal];
         [avatarButton addTarget:self action:@selector(avatarButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:avatarButton];
@@ -469,8 +485,8 @@ static const CGFloat kXHUserNameLabelHeight = 20;
         UILabel *userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.avatarButton.bounds) + 20, kXHUserNameLabelHeight)];
         userNameLabel.textAlignment = NSTextAlignmentCenter;
         userNameLabel.backgroundColor = [UIColor clearColor];
-        userNameLabel.font = [UIFont systemFontOfSize:12];
-        userNameLabel.textColor = [UIColor colorWithRed:0.140 green:0.635 blue:0.969 alpha:1.000];
+        userNameLabel.font = [UIFont systemFontOfSize:12.0f];
+        userNameLabel.textColor = [UIColor colorWithRed:0x33/255.0 green:0x33/255.0 blue:0x33/255.0 alpha:1.0];
         [self.contentView addSubview:userNameLabel];
         self.userNameLabel = userNameLabel;
         self.userNameLabel.hidden = !message.shouldShowUserName;

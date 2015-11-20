@@ -22,7 +22,7 @@
 
 @property (strong, nonatomic) HSFamilyAppInfoService *familyAppInfoService;
 
-@property (strong, nonatomic) NSArray *imageNameArray;
+@property (nonatomic, strong) NSDictionary *imageStrDictionary;
 
 @end
 
@@ -33,8 +33,6 @@
     
     [self configGetFamilyAppList];
     [self configGetFamilyAppIntro];
-    
-    self.imageNameArray = @[@"icon_lushang",@"icon_heluyou",@"icon_hemu",@"icon_zhaota",@"icon_mobaihe",@"icon_migu"];
 }
 
 -(void)refreshDataRequest {
@@ -47,15 +45,11 @@
     
     WEAKSELF
     _familyAppListService.serviceDidFinishLoadBlock = ^(WeAppBasicService* service){
-        STRONGSELF
-        EHLogInfo(@"%@",service.dataList);
-        
+        STRONGSELF        
         strongSelf.collectionView.dataArray = service.dataList;
         for (NSInteger i=0; i<strongSelf.collectionView.dataArray.count; i++) {
             HSApplicationModel *item = service.dataList[i];
-            if (i < strongSelf.imageNameArray.count) {
-                item.placeholderImageStr = strongSelf.imageNameArray[i];
-            }
+            item.placeholderImageStr = [strongSelf.imageStrDictionary objectForKey:item.appName];
         }
         strongSelf.collectionView.height = (service.dataList.count + 1) / 2 * home_businessListCell_height;
         strongSelf.height = strongSelf.collectionView.height;
@@ -77,10 +71,7 @@
     WEAKSELF
     _familyAppInfoService.serviceDidFinishLoadBlock = ^(WeAppBasicService* service){
         STRONGSELF
-        EHLogInfo(@"%@",service.dataList);
-        //strongSelf.appIntroList = service.dataList;
         HSApplicationIntroModel *appIntro = (HSApplicationIntroModel *)service.item;
-        NSLog(@"strongSelf.appIntro.appDetailIos = %@",appIntro.appDetailIos.appIOSURLScheme);
         NSURL *appURLScheme = [NSURL URLWithString:appIntro.appDetailIos.appIOSURLScheme];
         BOOL isAppInstalled = [[UIApplication sharedApplication] canOpenURL:appURLScheme];
         TBOpenURLFromSourceAndParams(internalURL(@"HSFamilyAppIntroViewController"), strongSelf,@{WEB_REQUEST_URL_ADDRESS_KEY:appIntro.appExtUrl,WEB_VIEW_TITLE_KEY:appIntro.appName,@"isAppInstalled":@(isAppInstalled),appIntro.appDetailIos.appIOSURLScheme:@"appIOSURLScheme"});
@@ -102,11 +93,21 @@
         _collectionView.appSelectedBlock = ^(NSInteger selectedIndex) {
             STRONGSELF
             HSApplicationModel *appModel = strongSelf.collectionView.dataArray[selectedIndex];
+            TBOpenURLFromSourceAndParams(internalURL(@"HSAfterSaleForAppViewController"), strongSelf, @{@"appModel":appModel});
+            return ;
             [strongSelf configGetFamilyAppIntro];
             [strongSelf.familyAppInfoService loadFamilyAppInfoWithAppId:appModel.appId];
         };
     }
     return _collectionView;
+}
+
+
+- (NSDictionary *)imageStrDictionary {
+    if (!_imageStrDictionary) {
+        _imageStrDictionary = @{@"路尚":@"icon_heluyou",@"和目":@"icon_hemu",@"路尚":@"icon_lushang",@"咪咕":@"icon_migu",@"魔百盒":@"icon_mobaihe",@"找它":@"icon_zhaota",};
+    }
+    return _imageStrDictionary;
 }
 
 @end

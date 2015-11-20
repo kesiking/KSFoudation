@@ -22,6 +22,7 @@
 #import "KSTouchEvent.h"
 #import "UIButton+KSTouchEvent.h"
 #import "EHSocialShareHandle.h"
+#import "HSPopMenuListView.h"
 
 //#define EH_USE_NAVIGATION_NOTIFICATION
 
@@ -37,6 +38,7 @@
 
 #define UINAVIGATIONBAR_TITLE_SIZE EHSiz0
 
+#define UISYSTEM_FAILED_ERROR_TITLE    @"服务器在偷懒，请稍后再试"
 #define UISYSTEM_NETWORK_ERROR_TITLE   @"网络连接异常"
 #define UISYSTEM_NETWORK_ERROR_MESSAGE @"当前网络异常，请检查您的网络设置！"
 
@@ -144,6 +146,7 @@
 #define EHSize8 60//120px
 
 
+#define EHFont0 [UIFont systemFontOfSize:EHSiz0]//34px
 #define EHFont1 [UIFont systemFontOfSize:EHSiz1]//34px
 #define EHFont2 [UIFont systemFontOfSize:EHSiz2]//30px
 #define EHFont3 [UIFont systemFontOfSize:EHSiz3]//28px

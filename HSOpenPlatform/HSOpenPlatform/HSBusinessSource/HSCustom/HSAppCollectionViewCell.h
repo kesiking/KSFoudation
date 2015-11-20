@@ -2,19 +2,12 @@
 //  HSAppCollectionViewCell.h
 //  HSOpenPlatform
 //
-//  Created by jinmiao on 15/10/27.
+//  Created by jinmiao on 15/11/17.
 //  Copyright © 2015年 孟希羲. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "HSApplicationModel.h"
+#import "HSBasicCollectionViewCell.h"
 
-
-@interface HSAppCollectionViewCell : UICollectionViewCell
-
-@property (strong, nonatomic) UIImageView *appIconImageView;
-@property (strong, nonatomic) UILabel *appNameLabel;
-
-- (void)setupCollectionItems:(HSApplicationModel *)collectionItem;
+@interface HSAppCollectionViewCell : HSBasicCollectionViewCell
 
 @end

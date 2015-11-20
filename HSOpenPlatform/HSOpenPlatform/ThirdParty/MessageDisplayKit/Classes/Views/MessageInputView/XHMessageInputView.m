@@ -202,6 +202,7 @@
     if (self.isRecording) {
         if ([self.delegate respondsToSelector:@selector(didCancelRecordingVoiceAction)]) {
             [self.delegate didCancelRecordingVoiceAction];
+            self.isRecording = NO;
         }
     } else {
         self.isCancelled = YES;
@@ -214,6 +215,7 @@
     if (self.isRecording) {
         if ([self.delegate respondsToSelector:@selector(didFinishRecoingVoiceAction)]) {
             [self.delegate didFinishRecoingVoiceAction];
+            self.isRecording = NO;
         }
     } else {
         self.isCancelled = YES;
@@ -482,9 +484,17 @@
     _allowsSendFace = YES;
     _allowsSendMultiMedia = YES;
     
+    //Bug修复EHOMEIOS-347 当录音时APP被迫进入后台（如电话打入等），直接发送已经录制的语音
     _messageInputViewStyle = XHMessageInputViewStyleFlat;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillResignActive:)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:nil];
 }
-
+- (void)applicationWillResignActive:(id)sender
+{
+    [self holdDownButtonTouchUpInside];
+}
 - (void)awakeFromNib {
     [self setup];
 }
@@ -499,6 +509,7 @@
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.inputedText = nil;
     _inputTextView.delegate = nil;
     _inputTextView = nil;

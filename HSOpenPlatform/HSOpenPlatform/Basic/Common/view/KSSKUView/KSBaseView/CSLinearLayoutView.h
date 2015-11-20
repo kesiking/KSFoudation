@@ -88,6 +88,7 @@ typedef struct {
 @interface CSLinearLayoutItem : NSObject
 
 @property (nonatomic, strong) UIView *view;
+@property (nonatomic, assign) BOOL                       animationChangeFrame;
 @property (nonatomic, assign) CSLinearLayoutItemFillMode fillMode;
 @property (nonatomic, assign) CSLinearLayoutItemHorizontalAlignment horizontalAlignment;    // Use horizontalAlignment when the layout view is set to VERTICAL orientation
 @property (nonatomic, assign) CSLinearLayoutItemVerticalAlignment verticalAlignment;        // Use verticalAlignment when the layout view is set to HORIZONTAL orientation
@@ -99,5 +100,11 @@ typedef struct {
 + (CSLinearLayoutItem *)layoutItemForView:(UIView *)aView;
 
 CSLinearLayoutItemPadding CSLinearLayoutMakePadding(CGFloat top, CGFloat left, CGFloat bottom, CGFloat right);
+
+@end
+
+@interface UIView (CSLinearLayoutItem)
+
+@property (nonatomic, strong) CSLinearLayoutItem            *linearLayoutItem;
 
 @end

@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>994AFA64-BEC1-4EFC-BB2A-1DFB96D1BE8A</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>HSOpenPlatform</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>1516352e-a091-473c-b0da-786ab135f98d++7805</key>
 		<string>http://192.168.11.4/zdyy/HSOpenPlatform/code/trunk/Client/IOS/HSOpenPaltform_1.0</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>HSOpenPlatform/HSOpenPlatform.xcodeproj/project.xcworkspace</string>
+	<string>HSOpenPlatform/HSOpenPlatform.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>1516352e-a091-473c-b0da-786ab135f98d++7805</key>
@@ -26,7 +26,7 @@
 		<string>http://192.168.11.4/zdyy/HSOpenPlatform</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>http://192.168.11.4/zdyy/HSOpenPlatform/code/trunk/Client/IOS/HSOpenPaltform_1.0/HSOpenPlatform/HSOpenPlatform.xcodeproj/project.xcworkspace</string>
+	<string>http://192.168.11.4/zdyy/HSOpenPlatform/code/trunk/Client/IOS/HSOpenPaltform_1.0/HSOpenPlatform/HSOpenPlatform.xcodeproj</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

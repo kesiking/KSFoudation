@@ -6,6 +6,8 @@
 //  Copyright (c) 2015年 孟希羲. All rights reserved.
 //
 
+#ifdef USE_AsyncDisplayKit
+
 #import "KSASCollectionViewController.h"
 
 @interface KSASCollectionViewController ()
@@ -411,3 +413,5 @@
 }
 
 @end
+
+#endif

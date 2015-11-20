@@ -114,6 +114,7 @@ KSCGPointMake(CGFloat x, CGFloat y)
 -(UIButton *)buttonViewName{\
     if (!_##buttonViewName){\
         _##buttonViewName = [[UIButton alloc] init];\
+        [_##buttonViewName setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];\
         [_##buttonViewName addTarget:self action:@selector(buttonViewName##Clicked:) forControlEvents:UIControlEventTouchUpInside];\
         {\
             __VA_ARGS__\

@@ -133,7 +133,7 @@
             }];
             [self deleteItemAtIndexs:indexSet];
             // Now delete the items from the collection view.
-            [self.tableView deleteRowsAtIndexPaths:self.collectionDeleteItems withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView deleteRowsAtIndexPaths:self.collectionDeleteItems withRowAnimation:UITableViewRowAnimationFade];
             [self.tableView endUpdates];
             if (completeBlock) {
                 completeBlock();
@@ -379,8 +379,7 @@
     
     if (configObject.autoAdjustFrameSize == YES
         && configObject.needNextPage == NO
-        && configObject.needQueueLoadData == NO
-        && [self.dataSourceRead count] > 0) {
+        && configObject.needQueueLoadData == NO) {
         CGFloat totleHeight = 0;
         
         if (self.tableHeaderView) {
@@ -400,10 +399,12 @@
             totleHeight += self.tableFooterView.height;
         }
         
-        if (totleHeight > 0) {
-            CGRect rect = self.tableView.frame;
-            rect.size.height = totleHeight;
-            [self setFrame:rect];
+        CGRect rect = self.tableView.frame;
+        CGRect oldFrame = rect;
+        rect.size.height = totleHeight;
+        [self setFrame:rect];
+        if (self.scrollViewFrameSizeToFitDidFinished) {
+            self.scrollViewFrameSizeToFitDidFinished(self, rect, oldFrame);
         }
     }
 }

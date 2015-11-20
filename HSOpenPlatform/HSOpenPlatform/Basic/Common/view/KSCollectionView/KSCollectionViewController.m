@@ -447,8 +447,13 @@
         
         if (totleHeight > 0) {
             CGRect rect = self.collectionView.frame;
+            CGRect oldFrame = rect;
             rect.size.height = totleHeight;
             [self setFrame:rect];
+            
+            if (self.scrollViewFrameSizeToFitDidFinished) {
+                self.scrollViewFrameSizeToFitDidFinished(self, rect, oldFrame);
+            }
         }
     }
 }

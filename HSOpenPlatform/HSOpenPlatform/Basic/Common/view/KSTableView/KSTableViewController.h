@@ -9,8 +9,38 @@
 #import "KSScrollViewServiceController.h"
 #import "KSCollectionViewConfigObject.h"
 
+/*!
+ *  @author 孟希羲, 15-11-19 09:11:13
+ *
+ *  @brief  tableViewDidSelectedBlock 列表中的某个cell被选中时回调
+ *
+ *  @param tableView    tableView description
+ *  @param indexPath    indexPath description
+ *  @param dataSource   dataSource description
+ *  @param configObject configObject description
+ *
+ *  @since 1.0
+ */
 typedef void(^tableViewDidSelectedBlock) (UITableView* tableView,NSIndexPath* indexPath,KSDataSource* dataSource,KSCollectionViewConfigObject* configObject);
+
+/*!
+ *  @author 孟希羲, 15-11-19 09:11:44
+ *
+ *  @brief  tableViewDelete删除cell时用到，tableViewDeleteProgressBlock用于真正删除cell及数据之前调用
+ *
+ *  @param collectionDeleteItems collectionDeleteItems存储的是需要删除的cell的indexPath
+ *  @param dataSource            dataSource description
+ *
+ *  @since 1.0
+ */
 typedef void(^tableViewDeleteProgressBlock)(NSArray* collectionDeleteItems,KSDataSource* dataSource);
+/*!
+ *  @author 孟希羲, 15-11-19 09:11:26
+ *
+ *  @brief  tableViewDelete删除cell时用到，tableViewDeleteCompleteBlock用于真正删除cell及数据之后调用。
+ *
+ *  @since 1.0
+ */
 typedef void(^tableViewDeleteCompleteBlock)(void);
 
 @interface KSTableViewController : KSScrollViewServiceController<UITableViewDataSource, UITableViewDelegate>{

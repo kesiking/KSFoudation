@@ -19,9 +19,9 @@
 
 #define kXHArrowMarginWidth 9.0f // 箭头宽度
 
-#define kXHTopAndBottomBubbleMargin 15.0f // 文本在气泡内部的上下间隙
-#define kXHLeftTextHorizontalBubblePadding 15.0f // 文本的水平间隙
-#define kXHRightTextHorizontalBubblePadding 15.0f // 文本的水平间隙
+#define kXHTopAndBottomBubbleMargin 12.0f // 文本在气泡内部的上下间隙
+#define kXHLeftTextHorizontalBubblePadding 10.0f // 文本的水平间隙
+#define kXHRightTextHorizontalBubblePadding 10.0f // 文本的水平间隙
 
 #define kXHUnReadDotSize 10.0f // 语音未读的红点大小
 
@@ -56,38 +56,42 @@
 #pragma mark - Bubble view
 
 // 获取文本的实际大小
-+ (CGFloat)neededWidthForText:(NSString *)text {
-    CGSize stringSize;
-    NSRange range = [text rangeOfString:@"\n" options:0];
-    if (range.length > 0) {
-        NSArray *array = [text componentsSeparatedByString:@"\n"];
-        stringSize = CGSizeMake(0, 0);
-        CGSize temp;
-        for (int i = 0; i < array.count; i++) {
-            temp = [[array objectAtIndex:i] sizeWithFont:[[XHMessageBubbleView appearance] font] constrainedToSize:CGSizeMake(MAXFLOAT, 20)];
-            if (temp.width > stringSize.width) {
-                stringSize = temp;
-            }
-        }
-    } else {
-        stringSize = [text sizeWithFont:[[XHMessageBubbleView appearance] font]
-                      constrainedToSize:CGSizeMake(MAXFLOAT, 20)];
-    }
-    
-    return roundf(stringSize.width);
-}
+//+ (CGFloat)neededWidthForText:(NSString *)text {
+//    CGSize stringSize;
+//    NSRange range = [text rangeOfString:@"\n" options:0];
+//    if (range.length > 0) {
+//        NSArray *array = [text componentsSeparatedByString:@"\n"];
+//        stringSize = CGSizeMake(0, 0);
+//        CGSize temp;
+//        for (int i = 0; i < array.count; i++) {
+//            temp = [[array objectAtIndex:i] sizeWithFont:[[XHMessageBubbleView appearance] font] constrainedToSize:CGSizeMake(MAXFLOAT, 20)];
+//            if (temp.width > stringSize.width) {
+//                stringSize = temp;
+//            }
+//        }
+//    }else if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0){
+//        NSDictionary *attribute = [NSDictionary dictionaryWithObjectsAndKeys:[[XHMessageBubbleView appearance] font],NSFontAttributeName, nil];
+//        stringSize = [text boundingRectWithSize:CGSizeMake(MAXFLOAT, 20) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
+//    }else{
+//        stringSize = [text sizeWithFont:[[XHMessageBubbleView appearance] font]
+//                      constrainedToSize:CGSizeMake(MAXFLOAT, 20)];
+//    }
+//    //实际测试，由于iOS9字体原因会有10的误差，stringSize.width加10
+//    return roundf(stringSize.width + 10);
+//}
 
 // 计算文本实际的大小
 + (CGSize)neededSizeForText:(NSString *)text {
     CGFloat maxWidth = CGRectGetWidth([[UIScreen mainScreen] bounds]) * (kIsiPad ? 0.8 : (kIs_iPhone_6 ? 0.6 : (kIs_iPhone_6P ? 0.62 : 0.55)));
     
-    CGFloat dyWidth = [XHMessageBubbleView neededWidthForText:text];
+//    CGFloat dyWidth = [XHMessageBubbleView neededWidthForText:text];
     
     CGSize textSize = [SETextView frameRectWithAttributtedString:[[XHMessageBubbleHelper sharedMessageBubbleHelper] bubbleAttributtedStringWithText:text]
                                                   constraintSize:CGSizeMake(maxWidth, MAXFLOAT)
                                                      lineSpacing:kXHTextLineSpacing
                                                             font:[[XHMessageBubbleView appearance] font]].size;
-    return CGSizeMake((dyWidth > textSize.width ? textSize.width : dyWidth), textSize.height);
+//    return CGSizeMake((dyWidth > textSize.width ? textSize.width : dyWidth), textSize.height);
+    return CGSizeMake(textSize.width, textSize.height);
 }
 
 // 计算图片实际大小
@@ -336,13 +340,13 @@
 - (void)configureVoiceDurationLabelFrameWithBubbleFrame:(CGRect)bubbleFrame {
     [_voiceDurationLabel sizeToFit];
     CGRect voiceFrame = _voiceDurationLabel.frame;
-    voiceFrame.origin.x = (self.message.bubbleMessageType == XHBubbleMessageTypeSending ? bubbleFrame.origin.x - CGRectGetWidth(voiceFrame) : bubbleFrame.origin.x + bubbleFrame.size.width);
+    voiceFrame.origin.x = (self.message.bubbleMessageType == XHBubbleMessageTypeSending ? bubbleFrame.origin.x - CGRectGetWidth(voiceFrame)-5 : bubbleFrame.origin.x + bubbleFrame.size.width+5);
     _voiceDurationLabel.frame = voiceFrame;
 }
 
 - (void)configureVoiceUnreadDotImageViewFrameWithBubbleFrame:(CGRect)bubbleFrame {
     CGRect voiceUnreadDotFrame = _voiceUnreadDotImageView.frame;
-    voiceUnreadDotFrame.origin.x = (self.message.bubbleMessageType == XHBubbleMessageTypeSending ? bubbleFrame.origin.x + kXHUnReadDotSize : CGRectGetMaxX(bubbleFrame) - kXHUnReadDotSize * 2);
+    voiceUnreadDotFrame.origin.x = (self.message.bubbleMessageType == XHBubbleMessageTypeSending ? bubbleFrame.origin.x + kXHUnReadDotSize : CGRectGetMaxX(bubbleFrame) + 25);
     voiceUnreadDotFrame.origin.y = CGRectGetMidY(bubbleFrame) - kXHUnReadDotSize / 2.0;
     _voiceUnreadDotImageView.frame = voiceUnreadDotFrame;
 }
@@ -369,10 +373,11 @@
         // 2、初始化显示文本消息的TextView
         if (!_displayTextView) {
             SETextView *displayTextView = [[SETextView alloc] initWithFrame:CGRectZero];
-            displayTextView.textColor = [UIColor colorWithWhite:0.143 alpha:1.000];
+            displayTextView.textColor = [UIColor colorWithRed:0x33/255.0 green:0x33/255.0 blue:0x33/255.0 alpha:1.0];
             displayTextView.backgroundColor = [UIColor clearColor];
             displayTextView.selectable = NO;
             displayTextView.lineSpacing = kXHTextLineSpacing;
+            displayTextView.lineBreakMode = NSLineBreakByCharWrapping;
             displayTextView.font = [[XHMessageBubbleView appearance] font];
             displayTextView.showsEditingMenuAutomatically = NO;
             displayTextView.highlighted = NO;
@@ -398,7 +403,7 @@
                 geolocationsLabel.lineBreakMode = NSLineBreakByTruncatingTail;
                 geolocationsLabel.textColor = [UIColor whiteColor];
                 geolocationsLabel.backgroundColor = [UIColor clearColor];
-                geolocationsLabel.font = [UIFont systemFontOfSize:12];
+                geolocationsLabel.font = [UIFont systemFontOfSize:12.0f];
                 [bubblePhotoImageView addSubview:geolocationsLabel];
                 _geolocationsLabel = geolocationsLabel;
             }
@@ -407,9 +412,9 @@
         // 4、初始化显示语音时长的label
         if (!_voiceDurationLabel) {
             UILabel *voiceDurationLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 26, 28, 20)];
-            voiceDurationLabel.textColor = [UIColor colorWithWhite:0.579 alpha:1.000];
+            voiceDurationLabel.textColor = [UIColor colorWithRed:0x99/255.0 green:0x99/255.0 blue:0x99/255.0 alpha:1.0];
             voiceDurationLabel.backgroundColor = [UIColor clearColor];
-            voiceDurationLabel.font = [UIFont systemFontOfSize:13.f];
+            voiceDurationLabel.font = [UIFont boldSystemFontOfSize:12.f];
             voiceDurationLabel.textAlignment = NSTextAlignmentCenter;
             voiceDurationLabel.hidden = YES;
             [self addSubview:voiceDurationLabel];
@@ -485,11 +490,10 @@
                 }
                 
                 CGFloat marginY = kXHTopAndBottomBubbleMargin;
-                
                 CGRect textFrame = CGRectMake(textX,
                                               CGRectGetMinY(bubbleFrame) + marginY,
                                               CGRectGetWidth(bubbleFrame) - kXHLeftTextHorizontalBubblePadding - kXHRightTextHorizontalBubblePadding - kXHArrowMarginWidth,
-                                              bubbleFrame.size.height - kXHHaveBubbleMargin * 2);
+                                              bubbleFrame.size.height - 2*kXHTopAndBottomBubbleMargin);
                 
                 self.displayTextView.frame = CGRectIntegral(textFrame);
             }

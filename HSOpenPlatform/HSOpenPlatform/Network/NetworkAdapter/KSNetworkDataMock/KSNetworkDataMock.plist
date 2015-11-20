@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>user/showUserMsg.do</key>
+	<key>user/showUserMsg.do_deprecate</key>
 	<string>{
   &quot;dataCounts&quot;: 10,
   &quot;message&quot;: &quot;success&quot;,
@@ -57,6 +57,28 @@
     {
       &quot;msgDate&quot;: &quot;2015-10-21 13:35:00&quot;,
       &quot;msgContent&quot;: &quot;尊敬的用户：截止10月1日09点，您本月使用的国内上网数据流量为43M427K，剩余可用256M597K。&quot;
+    }
+  ],
+  &quot;status&quot;: 1,
+  &quot;time&quot;: &quot;2015-10-15 11:14:40&quot;
+}</string>
+	<key>user/getUserInfoList.do</key>
+	<string>{
+  &quot;dataCounts&quot;: 10,
+  &quot;message&quot;: &quot;success&quot;,
+  &quot;responseData&quot;: [
+    {
+      &quot;userAccountPhone&quot;: &quot;15088604830&quot;,
+      &quot;userAccountName&quot;: &quot;test0&quot;,
+      &quot;isUserAccountHousehold&quot;: true
+    },
+    {
+      &quot;userAccountPhone&quot;: &quot;15088604821&quot;,
+      &quot;userAccountName&quot;: &quot;张三&quot;
+    },
+    {
+      &quot;userAccountPhone&quot;: &quot;15088604822&quot;,
+      &quot;userAccountName&quot;: &quot;李四&quot;
     }
   ],
   &quot;status&quot;: 1,

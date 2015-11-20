@@ -43,7 +43,9 @@
                 item.placeholderImageStr = nameStringArr[i];
             }
             [strongSelf reloadData];
-            !strongSelf.itemIndexBlock?:strongSelf.itemIndexBlock(0);
+            //!strongSelf.itemIndexBlock?:strongSelf.itemIndexBlock(strongSelf.itemIndexPath);
+            
+            !strongSelf.serviceDidFinishLoadBlock?:strongSelf.serviceDidFinishLoadBlock();
         };
         _familyAppListService.serviceDidFailLoadBlock = ^(WeAppBasicService* service,NSError* error){
             STRONGSELF
@@ -51,6 +53,13 @@
         };
     }
     return _familyAppListService;
+}
+
+-(void)setItemIndexPath:(NSIndexPath *)itemIndexPath{
+    //[super setItemIndexPath:itemIndexPath];
+    _itemIndexPath = itemIndexPath;
+    !self.itemIndexBlock?:self.itemIndexBlock(itemIndexPath);
+
 }
 
 

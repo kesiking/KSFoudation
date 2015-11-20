@@ -11,9 +11,10 @@
 @interface XHVoiceRecordHUD ()
 
 @property (strong, nonatomic) UILabel *centerLabel;
-@property (nonatomic, strong) UILabel *titleLabel;
+//@property (nonatomic, strong) UILabel *titleLabel;
 @property (strong, nonatomic) NSTimer *timer;
 
+@property (strong, nonatomic)UIProgressView *timerProcessView;
 @property (nonatomic, weak) UILabel *remindLabel;
 @property (nonatomic, weak) UIImageView *microPhoneImageView;
 @property (nonatomic, weak) UIImageView *cancelRecordImageView;
@@ -93,7 +94,7 @@
 }
 
 - (void)configRecordingHUDImageWithPeakPower:(CGFloat)peakPower {
-    NSString *imageName = @"RecordingSignal00";
+    NSString *imageName = @"icon_voice05_";
     if (peakPower >= 0 && peakPower <= 0.1) {
         imageName = [imageName stringByAppendingString:@"1"];
     } else if (peakPower > 0.1 && peakPower <= 0.2) {
@@ -101,15 +102,15 @@
     } else if (peakPower > 0.3 && peakPower <= 0.4) {
         imageName = [imageName stringByAppendingString:@"3"];
     } else if (peakPower > 0.4 && peakPower <= 0.5) {
-        imageName = [imageName stringByAppendingString:@"4"];
+        imageName = [imageName stringByAppendingString:@"3"];
     } else if (peakPower > 0.5 && peakPower <= 0.6) {
-        imageName = [imageName stringByAppendingString:@"5"];
+        imageName = [imageName stringByAppendingString:@"4"];
     } else if (peakPower > 0.7 && peakPower <= 0.8) {
-        imageName = [imageName stringByAppendingString:@"6"];
+        imageName = [imageName stringByAppendingString:@"4"];
     } else if (peakPower > 0.8 && peakPower <= 0.9) {
-        imageName = [imageName stringByAppendingString:@"7"];
+        imageName = [imageName stringByAppendingString:@"5"];
     } else if (peakPower > 0.9 && peakPower <= 1.0) {
-        imageName = [imageName stringByAppendingString:@"8"];
+        imageName = [imageName stringByAppendingString:@"6"];
     }
     self.recordingHUDImageView.image = [UIImage imageNamed:imageName];
 }
@@ -121,38 +122,48 @@
 
 - (UILabel *)centerLabel{
     if (!_centerLabel) {
-        _centerLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, self.titleLabel.bottom + 3, self.width, 30)];
+        _centerLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 3, self.width, 30)];
         _centerLabel.backgroundColor = [UIColor clearColor];
-        _centerLabel.text = @"10";
+        _centerLabel.text = @"10.0";
         _centerLabel.textAlignment = NSTextAlignmentCenter;
-        _centerLabel.font = [UIFont systemFontOfSize:30];
-        _centerLabel.textColor = [UIColor yellowColor];
+        _centerLabel.font = [UIFont systemFontOfSize:12.0f];
+        _centerLabel.textColor = [UIColor colorWithRed:0xff/255.0 green:0xff/255.0 blue:0xff/255.0 alpha:1.0];
         
     }
     return _centerLabel;
 }
 
-- (UILabel *)titleLabel{
-    if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.width, 20)];
-        _titleLabel.text = @"录音时间";
-        _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.font = [UIFont boldSystemFontOfSize:18];
-        _titleLabel.textColor = [UIColor whiteColor];
+//- (UILabel *)titleLabel{
+//    if (!_titleLabel) {
+//        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.width, 20)];
+//        _titleLabel.text = @"录音时间";
+//        _titleLabel.textAlignment = NSTextAlignmentCenter;
+//        _titleLabel.font = [UIFont boldSystemFontOfSize:18];
+//        _titleLabel.textColor = [UIColor whiteColor];
+//    }
+//    return _titleLabel;
+//}
+- (UIProgressView *)timerProcessView
+{
+    if (!_timerProcessView) {
+        _timerProcessView = [[UIProgressView alloc] initWithFrame:CGRectMake(32, 27, 136, 3)];
+        _timerProcessView.trackTintColor = [UIColor blackColor];
+        _timerProcessView.progressTintColor = [UIColor colorWithRed:0x7b/255.0 green:0xac/255.0 blue:0xfc/255.0 alpha:1.0];
+        _timerProcessView.progress = 1.0;
     }
-    return _titleLabel;
+    return _timerProcessView;
 }
-
 - (void)setup {
-    self.backgroundColor = [UIColor blackColor];
+    self.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.6];
     self.layer.masksToBounds = YES;
     self.layer.cornerRadius = 10;
     
     [self addSubview:self.centerLabel];
-    [self addSubview:self.titleLabel];
+    [self addSubview:self.timerProcessView];
+//    [self addSubview:self.titleLabel];
     
     if (!_remindLabel) {
-        UILabel *remindLabel= [[UILabel alloc] initWithFrame:CGRectMake(9.0, 114.0 + self.centerLabel.bottom, 120.0, 21.0)];
+        UILabel *remindLabel= [[UILabel alloc] initWithFrame:CGRectMake(37.0, 120.0, 126.0, 21.0)];
         remindLabel.textColor = [UIColor whiteColor];
         remindLabel.font = [UIFont systemFontOfSize:13];
         remindLabel.layer.masksToBounds = YES;
@@ -166,8 +177,8 @@
     }
     
     if (!_microPhoneImageView) {
-        UIImageView *microPhoneImageView = [[UIImageView alloc] initWithFrame:CGRectMake(27.0, 8.0 + self.centerLabel.bottom, 50.0, 99.0)];
-        microPhoneImageView.image = [UIImage imageNamed:@"RecordingBkg"];
+        UIImageView *microPhoneImageView = [[UIImageView alloc] initWithFrame:CGRectMake(48.0, 48.0, 30.0, 55.0)];
+        microPhoneImageView.image = [UIImage imageNamed:@"icon_voice04"];
         microPhoneImageView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
         microPhoneImageView.contentMode = UIViewContentModeScaleToFill;
         [self addSubview:microPhoneImageView];
@@ -175,8 +186,8 @@
     }
     
     if (!_recordingHUDImageView) {
-        UIImageView *recordHUDImageView = [[UIImageView alloc] initWithFrame:CGRectMake(82.0, 34.0 + self.centerLabel.bottom, 18.0, 61.0)];
-        recordHUDImageView.image = [UIImage imageNamed:@"RecordingSignal001"];
+        UIImageView *recordHUDImageView = [[UIImageView alloc] initWithFrame:CGRectMake(102.0, 55, 50.0, 40.0)];
+        recordHUDImageView.image = [UIImage imageNamed:@"icon_voice05_1"];
         recordHUDImageView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
         recordHUDImageView.contentMode = UIViewContentModeScaleToFill;
         [self addSubview:recordHUDImageView];
@@ -184,8 +195,8 @@
     }
     
     if (!_cancelRecordImageView) {
-        UIImageView *cancelRecordImageView = [[UIImageView alloc] initWithFrame:CGRectMake(19.0, 7.0 + self.centerLabel.bottom, 100.0, 100.0)];
-        cancelRecordImageView.image = [UIImage imageNamed:@"RecordCancel"];
+        UIImageView *cancelRecordImageView = [[UIImageView alloc] initWithFrame:CGRectMake(65, 33, 70.0, 79.0)];
+        cancelRecordImageView.image = [UIImage imageNamed:@"icon_cancel send"];
         cancelRecordImageView.hidden = YES;
         cancelRecordImageView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
         cancelRecordImageView.contentMode = UIViewContentModeScaleToFill;
@@ -226,10 +237,11 @@
     if (second <= 3.0f) {
         self.centerLabel.textColor = [UIColor redColor];
     }else{
-        self.centerLabel.textColor = [UIColor yellowColor];
+        self.centerLabel.textColor = [UIColor colorWithRed:0xff/255.0 green:0xff/255.0 blue:0xff/255.0 alpha:1.0];
     }
     self.centerLabel.text = [NSString stringWithFormat:@"%.1f",second-0.1];
     [UIView commitAnimations];
+    self.timerProcessView.progress -=0.1f/10.0f;
 }
 
 /*

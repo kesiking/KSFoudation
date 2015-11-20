@@ -21,6 +21,8 @@ typedef void(^clickedButtonAtIndexBlock) (EHAleatView * alertView, NSUInteger in
 // 可设置自定义view，如果子类继承可用getCustomView，如果关联使用可用customView属性
 @property (nonatomic, strong) UIView*                     customView;
 
+- (void)config;
+
 // override by subclass for change aleatview show
 - (UIView*)getAleatCustomView;
 

@@ -39,7 +39,10 @@
     CGRect rect = self.ks_deleteView.frame;
     rect.origin.x = CGRectGetMaxX(self.ks_deleteView.superview.bounds) - rect.size.width;
     rect.origin.y = CGRectGetMinY(self.ks_deleteView.superview.bounds) + (CGRectGetHeight(self.ks_deleteView.superview.bounds) - rect.size.height)/2;
-    [self.ks_deleteView setFrame:rect];
+    rect = [self getCustomDeleteViewFrameWithFrame:rect];
+    if (!CGRectEqualToRect(self.ks_deleteView.frame, rect)){
+        [self.ks_deleteView setFrame:rect];
+    }
     if ([self needMoveViewCellOringeXForShowDeleteView]) {
         CGFloat originX = [self getOriginXWithEditModex:self.isEditModel];
         CGRect frame = CGRectMake(originX, self.ks_contentView.origin.y, self.ks_contentView.width, self.ks_contentView.height);
@@ -67,6 +70,11 @@
             self.ks_deleteView.hidden = NO;
             NSMutableArray* collectionDeleteItems = [self getCollectionDeleteItems];
             BOOL isSelect = extroParams.cellIndexPath && [collectionDeleteItems containsObject:extroParams.cellIndexPath];
+            // 改变
+            CGRect ks_deleteView_rect = [self getCustomDeleteViewFrameWithFrame:self.ks_deleteView.frame];
+            if (!CGRectEqualToRect(self.ks_deleteView.frame, ks_deleteView_rect)){
+                [self.ks_deleteView setFrame:ks_deleteView_rect];
+            }
             [self setupDeleteViewStatus:isSelect];
             return;
         }
@@ -94,6 +102,10 @@
 
 -(CGFloat)getOriginXWithEditModex:(BOOL)isEditMode{
     return (CGFloat)(isEditMode ? 0 - self.ks_deleteView.width : 0);
+}
+
+-(CGRect)getCustomDeleteViewFrameWithFrame:(CGRect)frame{
+    return frame;
 }
 
 -(BOOL)needMoveViewCellOringeXForShowDeleteView{

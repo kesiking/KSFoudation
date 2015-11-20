@@ -163,10 +163,16 @@
 
 -(void)setupDeleteButtonStatus:(BOOL)isSelect{
     if (isSelect) {
-        [self.messageDeleteButton setImage:[UIImage imageNamed:@"deleteFavrate"] forState:UIControlStateNormal];
+        [self.messageDeleteButton setImage:[UIImage imageNamed:@"radiobox_set_on"] forState:UIControlStateNormal];
     }else{
-        [self.messageDeleteButton setImage:[UIImage imageNamed:@"unDeleteFavrate"] forState:UIControlStateNormal];
+        [self.messageDeleteButton setImage:[UIImage imageNamed:@"radiobox_set_off02"] forState:UIControlStateNormal];
     }
+}
+
+-(CGRect)getCustomDeleteViewFrameWithFrame:(CGRect)frame{
+    CGRect rect = self.messageBackgroundImageView.frame;
+    frame.origin.y = rect.origin.y + (rect.size.height - frame.size.height)/2;
+    return frame;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

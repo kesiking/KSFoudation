@@ -9,7 +9,7 @@
 #import "KSLoginService.h"
 #import "KSLoginComponentItem.h"
 
-#define LOGIN_DEFAULT_SCHEME @"http"
+#define LOGIN_DEFAULT_SCHEME @"https"
 #define LOGIN_DEFAULT_HOST @"112.54.207.8"
 #define LOGIN_DEFAULT_PORT @"8081"
 #define LOGIN_DEFAULT_PARH @"PersonSafeManagement/"

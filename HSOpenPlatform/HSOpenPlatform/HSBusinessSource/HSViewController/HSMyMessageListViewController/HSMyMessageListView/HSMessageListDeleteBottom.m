@@ -19,24 +19,37 @@
 
 -(void)setupView{
     [super setupView];
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.deleteBtn];
 }
 
 -(TBDetailSKUButton *)deleteBtn{
     if (_deleteBtn == nil) {
         CGRect rect = self.bounds;
+        rect.origin.x = 53;
+        rect.origin.y = (self.bounds.size.height - 40)/2;
+        rect.size.width = self.bounds.size.width - 2 * rect.origin.x;
+        rect.size.height = 40;
         _deleteBtn = [[TBDetailSKUButton alloc] initWithFrame:rect];
         
         _deleteBtn.reversesTitleShadowWhenHighlighted = NO;
         _deleteBtn.adjustsImageWhenHighlighted = NO;
         _deleteBtn.backgroundColor = RGB_A(0x00, 0x00, 0x00, 0.7);
-
+        
         [_deleteBtn addTarget:self
                      action:@selector(deleteButtonClicked:)
            forControlEvents:UIControlEventTouchUpInside];
         
         [_deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
+        [_deleteBtn.titleLabel setFont:EHFont0];
+        [_deleteBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_deleteBtn setTitleColor:UINEXTBUTTON_UNSELECT_COLOR forState:UIControlStateDisabled];
+        [_deleteBtn setBackgroundImage:[UIImage imageNamed:@"btn_complete_n"] forState:UIControlStateNormal];
+        [_deleteBtn setImage:[UIImage imageNamed:@"btn_Delete"] forState:UIControlStateNormal];
+        [_deleteBtn setImageEdgeInsets:UIEdgeInsetsMake(11.5, -7, 13.5, 0)];
+        
+        _deleteBtn.layer.cornerRadius = 5;
+        _deleteBtn.layer.masksToBounds = YES;
         
         [self resizeButton:_deleteBtn];
         

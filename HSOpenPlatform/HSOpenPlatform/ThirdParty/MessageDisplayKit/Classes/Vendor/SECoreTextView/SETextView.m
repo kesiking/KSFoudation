@@ -206,12 +206,14 @@ static NSString * const PARAGRAPH_SEPARATOR = @"\u2029";
     NSMutableAttributedString *mutableAttributedString = attributedString.mutableCopy;
     
     CTTextAlignment textAlignment = kCTTextAlignmentNatural;
+    CTLineBreakMode lineBreakMode = kCTLineBreakByCharWrapping;
     lineSpacing = roundf(lineSpacing);
     CGFloat lineHeight = 0.0f;
     paragraphSpacing = roundf(paragraphSpacing);
     
     CTParagraphStyleSetting setting[] = {
         { kCTParagraphStyleSpecifierAlignment, sizeof(textAlignment), &textAlignment},
+        { kCTParagraphStyleSpecifierLineBreakMode, sizeof(lineBreakMode), &lineBreakMode},
         { kCTParagraphStyleSpecifierMinimumLineHeight, sizeof(lineHeight), &lineHeight },
         { kCTParagraphStyleSpecifierMaximumLineHeight, sizeof(lineHeight), &lineHeight },
         { kCTParagraphStyleSpecifierLineSpacing, sizeof(lineSpacing), &lineSpacing },

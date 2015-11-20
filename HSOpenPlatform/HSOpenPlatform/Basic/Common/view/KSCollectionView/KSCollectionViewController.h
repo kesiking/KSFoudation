@@ -9,6 +9,18 @@
 #import "KSScrollViewServiceController.h"
 #import "KSCollectionViewConfigObject.h"
 
+/*!
+ *  @author 孟希羲, 15-11-19 09:11:15
+ *
+ *  @brief  collectionViewDidSelectedBlock，列表中的某个cell被选中时回调
+ *
+ *  @param collectionView collectionView description
+ *  @param indexPath      indexPath description
+ *  @param dataSource     dataSource description
+ *  @param configObject   configObject description
+ *
+ *  @since 1.0
+ */
 typedef void(^collectionViewDidSelectedBlock) (UICollectionView* collectionView,NSIndexPath* indexPath,KSDataSource* dataSource,KSCollectionViewConfigObject*configObject);
 
 

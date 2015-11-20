@@ -11,7 +11,8 @@
 #import "HSHomeAccountInfoView.h"
 #import "HSMyInfoHeaderView.h"
 #import "HSMessageNavBarRightView.h"
-
+#import "HSHomeCustomerServiceCollectionView.h"
+#import "HSMyInfoAppCollectionViewCell.h"
 
 
 @interface HSMyInfoTabViewController()<UITableViewDataSource, UITableViewDelegate>
@@ -76,7 +77,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -85,9 +86,12 @@
             return 1;
             break;
         case 1:
-            return 3;
+            return 1;
             break;
         case 2:
+            return 1;
+            break;
+        case 3:
             return 3;
             break;
         default:
@@ -98,7 +102,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = EHCor1;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     NSDictionary *dict;
@@ -110,11 +113,44 @@
 
     }
     else if(indexPath.section == 1){
+        
+        NSInteger collectionViewTag = 20010;
+        if (![cell.contentView viewWithTag:collectionViewTag]) {
+            UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc] init];
+            [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+            HSHomeCustomerServiceCollectionView *collectionView = [[HSHomeCustomerServiceCollectionView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 300) collectionViewLayout:flowLayout cellClass:[HSMyInfoAppCollectionViewCell class]];
+            collectionView.cellWidth = SCREEN_WIDTH/3;
+            collectionView.cellHeight = 150;
+            [collectionView refreshDataRequest];
+            [cell.contentView addSubview:collectionView];
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            collectionView.tag = collectionViewTag;
+            //[collectionView setItemIndex:-1];
+            //collectionView.itemIndexPath = [NSIndexPath indexPathForRow:-1 inSection:0];
+            WEAKSELF
+            __weak __typeof(collectionView) weakCollectionView = collectionView;
+            collectionView.itemIndexBlock = ^(NSIndexPath *itemIndexPath){
+                if (itemIndexPath.row >= 0) {
+                    HSApplicationModel *appModel = (HSApplicationModel *)weakCollectionView.dataArray[itemIndexPath.row];
+                    NSMutableDictionary* params = [NSMutableDictionary dictionary];
+                    if (appModel) {
+                        [params setObject:appModel forKeyedSubscript:@"appModel"];
+                    }
+                    if (appModel.appId) {
+                        [params setObject:appModel.appId forKeyedSubscript:@"appId"];
+                    }
+                    TBOpenURLFromSourceAndParams((@"HSBusinessDetailViewController"), weakSelf, params);
+                }
+            };
+        }
+    }
+
+    else if(indexPath.section == 2){
         dict = _myInfoSettingConfigList[indexPath.row];
         //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else{
-        dict = _myInfoSettingConfigList[3+indexPath.row];
+        dict = _myInfoSettingConfigList[1+indexPath.row];
         
 
     }
@@ -130,16 +166,13 @@
     if (indexPath.section == 0) {
         
     }else if(indexPath.section == 1){
-        // 我的设备 我的家庭 我的消息
-        if (indexPath.row == 0) {
-            // 我的设备
-        }else if (indexPath.row == 1){
-            // 我的家庭
-        }else{
-            // 我的消息
-            TBOpenURLFromTarget(@"HSMyMessageInfoViewController", self);
-        }
-    }else{
+        
+    }
+    else if(indexPath.section == 2){
+        TBOpenURLFromTarget(@"HSMyMessageInfoViewController", self);
+        
+    }
+    else{
         // 分享 关于 设置
         if (indexPath.row == 0) {
             // 分享
@@ -151,12 +184,16 @@
             TBOpenURLFromTarget(internalURL(@"EHMyInfoViewController"), self);
         }
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
         return 150+home_accountInfoView_height;
+    }
+    else if(indexPath.section ==1){
+        return 300;
     }
     else
     {
@@ -174,6 +211,9 @@
             return 15;
             break;
         case 2:
+            return 15;
+            break;
+        case 3:
             return 15;
             break;
         default:

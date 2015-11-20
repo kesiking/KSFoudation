@@ -24,8 +24,8 @@
 
 @property (nonatomic, strong) NSString *addressDes;
 
-@property (nonatomic, strong) NSNumber *longitude;
+@property (nonatomic, strong) NSArray *location;
 
-@property (nonatomic, strong) NSNumber *latitude;
+@property (nonatomic, strong) NSNumber *distance;
 
 @end

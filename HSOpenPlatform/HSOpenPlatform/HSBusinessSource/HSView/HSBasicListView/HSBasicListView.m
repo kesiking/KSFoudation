@@ -71,6 +71,7 @@
             [self addSubview:self.collectionViewCtl.scrollView];
         }
             break;
+#ifdef USE_AsyncDisplayKit
         case HSBasicListViewTypeASTableView:{
             [self addSubview:self.KSAStableViewCtl.scrollView];
         }
@@ -79,6 +80,7 @@
             [self addSubview:self.KSASCollectionViewCtl.scrollView];
         }
             break;
+#endif
         default:{
             [self addSubview:self.tableViewCtl.scrollView];
         }
@@ -94,8 +96,10 @@
 -(void)dealloc{
     _tableViewCtl = nil;
     _collectionViewCtl = nil;
+#ifdef USE_AsyncDisplayKit
     _KSAStableViewCtl = nil;
     _KSASCollectionViewCtl = nil;
+#endif
     _basicListService.delegate = nil;
     _basicListService = nil;
 }
@@ -125,6 +129,8 @@
     return _collectionViewCtl;
 }
 
+#ifdef USE_AsyncDisplayKit
+
 -(KSASTableViewController *)KSAStableViewCtl{
     if (_KSAStableViewCtl == nil) {
         KSCollectionViewConfigObject* configObject = [[KSCollectionViewConfigObject alloc] init];
@@ -149,6 +155,8 @@
     return _KSASCollectionViewCtl;
 }
 
+#endif
+
 -(KSScrollViewServiceController*)getBasicListView{
     switch (self.basicListViewType) {
         case HSBasicListViewTypeTableView:{
@@ -159,6 +167,7 @@
             return self.collectionViewCtl;
         }
             break;
+#ifdef USE_AsyncDisplayKit
         case HSBasicListViewTypeASTableView:{
             return self.KSAStableViewCtl;
         }
@@ -167,6 +176,7 @@
             return self.KSASCollectionViewCtl;
         }
             break;
+#endif
         default:{
             return self.tableViewCtl;
         }
@@ -199,7 +209,6 @@
         _basicListService.serviceDidFinishLoadBlock = ^(WeAppBasicService* service){
             STRONGSELF
             [strongSelf hideLoadingView];
-            
         };
         _basicListService.serviceDidFailLoadBlock = ^(WeAppBasicService* service, NSError* error){
             STRONGSELF
@@ -207,8 +216,10 @@
         };
         [_tableViewCtl setService:_basicListService];
         [_collectionViewCtl setService:_basicListService];
+#ifdef USE_AsyncDisplayKit
         [_KSAStableViewCtl setService:_basicListService];
         [_KSASCollectionViewCtl setService:_basicListService];
+#endif
     }
 }
 
@@ -222,8 +233,10 @@
     _viewCellClass = viewCellClass;
     [_tableViewCtl registerClass:_viewCellClass];
     [_collectionViewCtl registerClass:_viewCellClass];
+#ifdef USE_AsyncDisplayKit
     [_KSAStableViewCtl registerClass:_viewCellClass];
     [_KSASCollectionViewCtl registerClass:_viewCellClass];
+#endif
 }
 
 -(KSDataSource *)dataSourceRead {
@@ -238,6 +251,21 @@
         _dataSourceWrite = [[KSDataSource alloc] init];
     }
     return _dataSourceWrite;
+}
+
+-(CGSize)sizeThatFits:(CGSize)size{
+    KSScrollViewConfigObject* config = [self getBasicListView].configObject;
+    if ([config isKindOfClass:[KSCollectionViewConfigObject class]]) {
+        KSCollectionViewConfigObject* collectionViewConfigObject = (KSCollectionViewConfigObject*)config;
+        if (collectionViewConfigObject.autoAdjustFrameSize) {
+            KSScrollViewServiceController* viewController = [self getBasicListView];
+            if ([viewController respondsToSelector:@selector(sizeToFit)]) {
+                [viewController performSelector:@selector(sizeToFit) withObject:nil];
+            }
+            return [self getBasicListView].scrollView.size;
+        }
+    }
+    return size;
 }
 
 @end

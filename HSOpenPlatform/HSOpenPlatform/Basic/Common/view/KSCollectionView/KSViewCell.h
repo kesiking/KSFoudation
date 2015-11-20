@@ -32,6 +32,8 @@
 @property (nonatomic,weak)   KSScrollViewServiceController* scrollViewCtl;
 
 @property (nonatomic,strong) NSIndexPath                   *indexPath;
+// 上下文，用于scrollViewController传递给viewCell之间数据的沟通桥梁
+@property (nonatomic, strong) id                            scrollViewControllerContext;
 
 + (id)createView;
 

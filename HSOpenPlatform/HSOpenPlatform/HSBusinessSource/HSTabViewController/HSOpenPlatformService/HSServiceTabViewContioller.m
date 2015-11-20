@@ -11,7 +11,8 @@
 #import "HSFamilyAppInfoService.h"
 #import "HSApplicationIntroModel.h"
 #import "HSApplicationModel.h"
-#import "HSAppListCollectionView.h"
+#import "HSCommonAppListCollectionView.h"
+#import "HSAppCollectionViewCell.h"
 #import "WeAppLoadingView.h"
 #import "MJRefresh.h"
 
@@ -30,7 +31,9 @@
 
 @property (strong, nonatomic) HSApplicationIntroModel *appIntro;
 //@property (strong, nonatomic) HSAppCollectionView *collectionTableView;
-@property (strong, nonatomic) HSAppListCollectionView *collectionView;
+//@property (strong, nonatomic) HSAppListCollectionView *collectionView;
+@property (strong, nonatomic) HSCommonAppListCollectionView *collectionView;
+
 @property (strong, nonatomic) HSFamilyAppInfoService *familyAppInfoService;
 
 @property (nonatomic, strong) WeAppLoadingView                  *refreshPageLoadingView;
@@ -151,7 +154,7 @@
 
 #pragma mark - setter and getter
 
--(HSAppListCollectionView *)collectionView{
+-(HSCommonAppListCollectionView *)collectionView{
     if (!_collectionView) {
         UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc] init];
         [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
@@ -159,15 +162,18 @@
         //        flowLayout.sectionInset = UIEdgeInsetsZero;
         //        flowLayout.minimumInteritemSpacing = 0.;
         //        flowLayout.minimumLineSpacing = 0.;
-        _collectionView = [[HSAppListCollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
+//        _collectionView = [[HSCommonAppListCollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
+        _collectionView = [[HSCommonAppListCollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:flowLayout cellClass:[HSAppCollectionViewCell class]];
+        _collectionView.cellWidth = SCREEN_WIDTH/3;
+        _collectionView.cellHeight = 150;
         CALayer *topLine = [CALayer layer];
         [topLine setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.5)];
         topLine.backgroundColor = EHLinecor1.CGColor;
         [_collectionView.layer addSublayer:topLine];
         WEAKSELF
-        _collectionView.appIndexBlock = ^(NSInteger appIndex){
+        _collectionView.itemIndexBlock = ^(NSIndexPath *appIndexPath){
             STRONGSELF
-            HSApplicationModel *appModel = strongSelf.collectionView.dataArray[appIndex];
+            HSApplicationModel *appModel = strongSelf.collectionView.dataArray[appIndexPath.row];
             [strongSelf configGetFamilyAppIntro];
             [strongSelf.familyAppInfoService loadFamilyAppInfoWithAppId:appModel.appId];
         };
@@ -185,7 +191,7 @@
     return _refreshPageLoadingView;
 }
 
-- (void)setRefreshHeaderOnCollectionView:(HSAppListCollectionView *)collectionView {
+- (void)setRefreshHeaderOnCollectionView:(HSCommonAppListCollectionView *)collectionView {
     MJRefreshHeader *header = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
     // 设置文字
     //    [header setTitle:@"下拉加载更多" forState:MJRefreshStateIdle];
@@ -198,7 +204,7 @@
     collectionView.header = header;
 }
 
-- (void)setLoadMoreFooterOnCollectionView:(HSAppListCollectionView *)collectionView {
+- (void)setLoadMoreFooterOnCollectionView:(HSCommonAppListCollectionView *)collectionView {
     collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:nil];
     [(MJRefreshAutoNormalFooter *)self.collectionView.footer setTitle:@"" forState:MJRefreshStateNoMoreData];
     //不再触发动画过程，显示加载完毕的效果，只显示文本

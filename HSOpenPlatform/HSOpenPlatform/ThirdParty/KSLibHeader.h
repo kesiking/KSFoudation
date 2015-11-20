@@ -33,7 +33,9 @@
 #import "VoiceConverter.h"
 #import "View+MASAdditions.h"
 #import "GroupedTableView.h"
+#ifdef USE_AsyncDisplayKit
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
+#endif
 
 #define WEAKSELF typeof(self) __weak __block weakSelf = self;
 #define STRONGSELF typeof(self) __strong strongSelf = weakSelf;

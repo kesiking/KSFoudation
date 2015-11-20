@@ -7,22 +7,51 @@
 //
 
 #import "HSHorizontalCollectionView.h"
-#import "HSHorizontalCollectionViewCell.h"
+//#import "HSHorizontalCollectionViewCell.h"
+#import "HSBasicCollectionViewCell.h"
 #import "HSApplicationModel.h"
 
+@interface HSHorizontalCollectionView ()
+
+@property (strong, nonatomic) Class cellClass;
+
+
+@end
+
 @implementation HSHorizontalCollectionView
+
+-(instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout cellClass:(Class)cellClass{
+    self = [self initWithFrame:frame collectionViewLayout:layout];
+    if (self) {
+        _cellClass = cellClass;
+        [self registerClass:cellClass forCellWithReuseIdentifier:NSStringFromClass(self.cellClass)];
+    }
+    return self;
+}
 
 -(instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout{
     self = [super initWithFrame:frame collectionViewLayout:layout];
     if (self) {
         self.delegate = self;
         self.dataSource = self;
-        [self registerClass:[HSHorizontalCollectionViewCell class] forCellWithReuseIdentifier:@"HSHorizontalCollectionViewCell"];
+//        self.cellClass = [HSBasicCollectionViewCell class];
+//        [self registerClass:self.cellClass forCellWithReuseIdentifier:NSStringFromClass(self.cellClass)];
         self.backgroundColor = [UIColor whiteColor];
         self.dataArray = [[NSArray alloc]init];
     }
     return self;
 }
+
+//- (void)setCellClass:(Class)cellClass {
+//    _cellClass = cellClass;
+//    [self registerClass:cellClass forCellWithReuseIdentifier:NSStringFromClass(cellClass)];
+//}
+//-(Class)cellClass{
+//    if (_cellClass != nil) {
+//        return _cellClass;
+//    }
+//    return [HSBasicCollectionViewCell class];
+//}
 
 #pragma mark - UICollectionViewDataSource
 
@@ -31,9 +60,12 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellID = @"HSHorizontalCollectionViewCell";
-    HSHorizontalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
-    cell.appModel = self.dataArray[indexPath.row];
+    //static NSString *cellID = NSStringFromClass(self.cellClass);
+    //HSHorizontalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(self.cellClass) forIndexPath:indexPath];
+//    WeAppComponentBaseItem *model = [[self.modelClass alloc]init];
+//    model = self.dataArray[indexPath.row];
+    HSBasicCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(self.cellClass) forIndexPath:indexPath];
+    cell.model = self.dataArray[indexPath.row];
     return cell;
     
 }

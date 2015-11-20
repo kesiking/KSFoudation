@@ -121,7 +121,15 @@
                 height = self.frame.size.height - (item.padding.top + item.padding.bottom);
             }
             
-            item.view.frame = CGRectMake(relativePosition, absolutePosition, item.view.frame.size.width, height);
+            if (item.animationChangeFrame) {
+                [UIView animateKeyframesWithDuration:0.3 delay:0.0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
+                    item.view.frame = CGRectMake(relativePosition, absolutePosition, item.view.frame.size.width, height);
+                } completion:^(BOOL finished) {
+                    
+                }];
+            }else{
+                item.view.frame = CGRectMake(relativePosition, absolutePosition, item.view.frame.size.width, height);
+            }
             currentOffset = item.view.frame.size.width;
             
         } else {
@@ -130,10 +138,16 @@
             if (item.fillMode == CSLinearLayoutItemFillModeStretch) {
                 width = self.frame.size.width - (item.padding.left + item.padding.right);
             }
-            
-            item.view.frame = CGRectMake(absolutePosition, relativePosition, width, item.view.frame.size.height);
+            if (item.animationChangeFrame) {
+                [UIView animateKeyframesWithDuration:0.3 delay:0.0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
+                    item.view.frame = CGRectMake(absolutePosition, relativePosition, width, item.view.frame.size.height);
+                } completion:^(BOOL finished) {
+                    
+                }];
+            }else{
+                item.view.frame = CGRectMake(absolutePosition, relativePosition, width, item.view.frame.size.height);
+            }
             currentOffset = item.view.frame.size.height;
-            
         }
         
         relativePosition += currentOffset + endPadding;
@@ -350,6 +364,7 @@
     self = [super init];
     if (self) {
         self.view = aView;
+        [self.view setLinearLayoutItem:self];
         self.horizontalAlignment = CSLinearLayoutItemHorizontalAlignmentLeft;
         self.verticalAlignment = CSLinearLayoutItemVerticalAlignmentTop;
         self.fillMode = CSLinearLayoutItemFillModeNormal;
@@ -382,6 +397,24 @@ CSLinearLayoutItemPadding CSLinearLayoutMakePadding(CGFloat top, CGFloat left, C
     padding.right = right;
     
     return padding;
+}
+
+@end
+
+#import <objc/runtime.h>
+
+@implementation UIView (CSLinearLayoutItem)
+
+static char KSCSLinearLayoutItem_Key;
+
+- (void)setLinearLayoutItem:(CSLinearLayoutItem *)linearLayoutItem
+{
+    objc_setAssociatedObject(self, &KSCSLinearLayoutItem_Key, linearLayoutItem, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (CSLinearLayoutItem *)linearLayoutItem
+{
+    return objc_getAssociatedObject(self, &KSCSLinearLayoutItem_Key);
 }
 
 @end

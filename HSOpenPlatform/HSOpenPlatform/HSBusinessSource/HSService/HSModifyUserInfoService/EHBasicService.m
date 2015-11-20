@@ -8,7 +8,7 @@
 
 #import "EHBasicService.h"
 
-#define EH_DEFAULT_SCHEME @"http"
+#define EH_DEFAULT_SCHEME @"https"
 #define EH_DEFAULT_HOST @"112.54.207.8"
 #define EH_DEFAULT_PORT @"8081"
 #define EH_DEFAULT_PARH @"PersonSafeManagement/"

@@ -79,6 +79,7 @@
             }
         }
         _cellView.scrollViewCtl = self.scrollViewCtl;
+        _cellView.scrollViewControllerContext = self.scrollViewCtl.scrollViewControllerContext;
     }
     return _cellView;
 }

@@ -11,10 +11,19 @@
 
 #define service_error_message @"服务器在偷懒，请稍后再试"
 
+@class KSView;
+
+typedef void(^viewFrameWillChangedBlock) (KSView* view, CGRect newFrame ,CGRect currentFrame);
+
+typedef void(^viewFrameDidChangedBlock) (KSView* view, CGRect currentFrame ,CGRect oldFrame);
+
 @interface KSView : UIView
 
 @property(nonatomic,strong) TBModelStatusHandler*               statusHandler;
 
+@property(nonatomic, copy)  viewFrameWillChangedBlock           viewFrameWillChangedBlock;
+
+@property(nonatomic, copy)  viewFrameDidChangedBlock            viewFrameDidChangedBlock;
 
 // 寻找Keyboard输入框
 + (UIView *)findKeyboard;

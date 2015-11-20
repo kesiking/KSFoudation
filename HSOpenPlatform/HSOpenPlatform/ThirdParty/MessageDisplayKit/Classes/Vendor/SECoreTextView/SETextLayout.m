@@ -117,6 +117,7 @@
     }
     frameRect.origin.y = CGRectGetMaxY(frameRect) - frameSize.height;
     frameRect.size.height = frameSize.height;
+    frameRect.size.width = frameSize.width;
     
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathAddRect(path, NULL, frameRect);

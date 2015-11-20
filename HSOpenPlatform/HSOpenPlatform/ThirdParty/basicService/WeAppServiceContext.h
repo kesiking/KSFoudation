@@ -14,4 +14,7 @@
 
 @property (nonatomic, strong) NSString*            baseUrl;
 
+// 用于存储额外的数据，与service无关，仅仅是做一个保存等请求成功或是失败时使用
+@property (nonatomic, strong) id                   serviceExtContextData;
+
 @end

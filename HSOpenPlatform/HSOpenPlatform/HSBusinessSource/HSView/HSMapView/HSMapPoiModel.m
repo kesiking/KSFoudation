@@ -27,8 +27,9 @@
     if (self) {
         self.name       = model.localAfterSaleName;
         self.tel        = model.afterSalePhone;
+        self.distance   = [model.distance integerValue];
         self.address    = model.addressDes;
-        self.coordinate = CLLocationCoordinate2DMake([model.latitude doubleValue], [model.longitude doubleValue]);
+        self.coordinate = CLLocationCoordinate2DMake([model.location[1] doubleValue], [model.location[0] doubleValue]);
     }
     return self;
 }

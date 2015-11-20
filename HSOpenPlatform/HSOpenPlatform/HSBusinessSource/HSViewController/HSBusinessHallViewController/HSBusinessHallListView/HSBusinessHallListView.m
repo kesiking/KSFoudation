@@ -44,7 +44,7 @@
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setObject:self.dataArray forKey:@"poiList"];
     [params setObject:@(indexPath.section) forKey:@"selectedIndex"];
-    TBOpenURLFromSourceAndParams(@"HSBusinessHallMapViewController", self, params);
+    TBOpenURLFromSourceAndParams(internalURL(@"HSBusinessHallMapViewController"), self, params);
 }
 
 - (HSAMapPoiSearchService *)poiSearchService {

@@ -13,12 +13,18 @@
 #import "KSAuthenticationCenter.h"
 #import "KSNetworkDataMock.h"
 
-//#define DEFAULT_SCHEME @"http"
-#define DEFAULT_SCHEME @"https"
-//#define DEFAULT_HOST @"172.20.10.248"
-#define DEFAULT_HOST @"112.54.207.12"
-//#define DEFAULT_PORT @"8080"
-#define DEFAULT_PORT @"9080"
+//#define LINK_TEST_NETWORK
+
+#ifdef LINK_TEST_NETWORK
+    #define DEFAULT_SCHEME @"http"
+    #define DEFAULT_HOST @"192.168.7.245"
+    #define DEFAULT_PORT @"8081"
+#else
+    #define DEFAULT_SCHEME @"https"
+    #define DEFAULT_HOST @"112.54.207.12"
+    #define DEFAULT_PORT @"9080"
+#endif
+
 //#define DEFAULT_PARH @"PersonSafeManagement/"
 #define DEFAULT_PARH @"BMS/"
 #define KS_MANWU_BASE_URL [NSString stringWithFormat:@"%@://%@:%@/%@",DEFAULT_SCHEME,DEFAULT_HOST,DEFAULT_PORT,DEFAULT_PARH]

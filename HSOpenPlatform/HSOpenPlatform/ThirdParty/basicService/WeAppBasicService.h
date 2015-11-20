@@ -86,7 +86,7 @@ _##customService.serviceCacheDidLoadBlock = ^(WeAppBasicService* service, NSArra
 @interface WeAppBasicService : NSObject <WeAppBasicRequestModelDelegate>
 
 // delegate与block任选其一即可
-@property (nonatomic, assign) id<WeAppBasicServiceDelegate>delegate;
+@property (nonatomic, weak)  id<WeAppBasicServiceDelegate>delegate;
 
 // service init
 -(id)initWithItemClass:(Class)itemClass andRequestModelClass:(Class)requestModelClass;

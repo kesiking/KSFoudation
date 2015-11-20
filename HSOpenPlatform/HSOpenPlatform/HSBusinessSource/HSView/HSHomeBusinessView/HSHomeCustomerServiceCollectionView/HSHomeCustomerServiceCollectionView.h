@@ -6,12 +6,16 @@
 //  Copyright © 2015年 孟希羲. All rights reserved.
 //
 
-#import "HSHorizontalCollectionView.h"
+#import "HSCommonAppListCollectionView.h"
 #import "HSApplicationModel.h"
 
 typedef void(^ServiceDidFailLoadBlock)(void);
+typedef void(^ServiceDidFinishLoadBlock)(void);
 
-@interface HSHomeCustomerServiceCollectionView : HSHorizontalCollectionView
+
+@interface HSHomeCustomerServiceCollectionView : HSCommonAppListCollectionView
+
+@property (nonatomic, copy) ServiceDidFinishLoadBlock serviceDidFinishLoadBlock;
 
 @property (nonatomic, copy) ServiceDidFailLoadBlock serviceDidFailLoadBlock;
 

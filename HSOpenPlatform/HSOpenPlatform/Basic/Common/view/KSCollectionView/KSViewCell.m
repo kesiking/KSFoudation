@@ -31,8 +31,9 @@
 
 -(instancetype)init
 {
-    self = [[self class] createView];
-    if (!self) {
+    if ([[self class] isViewCellInstanceFromNib]) {
+        self = [[self class] createView];
+    }else{
         self = [super init];
     }
     if (self) {
@@ -43,11 +44,11 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [[self class] createView];
-    if (!self) {
-        self = [super initWithFrame:frame];
-    }else{
+    if ([[self class] isViewCellInstanceFromNib]) {
+        self = [[self class] createView];
         self.frame = frame;
+    }else{
+        self = [super initWithFrame:frame];
     }
     if (self) {
         [self setupView];

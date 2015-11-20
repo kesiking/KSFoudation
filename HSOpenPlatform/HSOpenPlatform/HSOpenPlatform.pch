@@ -39,15 +39,16 @@
 #import "HSDateManagerCenter.h"
 // for data analysis
 #import "MobClick.h"
-
+// for js and oc call
+#import <JavaScriptCore/JavaScriptCore.h>
 // 线上环境
 //#define ONLINE_ENVIEONMENT
-
+#define USE_AsyncDisplayKit
 #ifndef ONLINE_ENVIEONMENT
 // 测试环境
     #define DEBUG_ENVIEONMENT
 // for network mock data
-//    #define MOCKDATA
+    #define MOCKDATA
     #define MOCK_USER_PHONE
 #endif
 

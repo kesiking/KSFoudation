@@ -67,6 +67,19 @@
 -(CGFloat)getOriginXWithEditModex:(BOOL)isEditMode;
 
 /*!
+ *  @author 孟希羲, 15-11-16 15:11:47
+ *
+ *  @brief  使用者可自由改变deleteView的位置
+ *
+ *  @param  frame 默认计算的位置，上下居中，左右居中
+ *
+ *  @return 新的frame位置
+ *
+ *  @since 1.0
+ */
+-(CGRect)getCustomDeleteViewFrameWithFrame:(CGRect)frame;
+
+/*!
  *  @author 孟希羲, 15-10-26 11:10:37
  *
  *  @brief  当tableView或是collectionView进入编辑模式时是否需要移动当前viewCell，例如IOS的邮箱系统进入编辑模式会向右移动

@@ -86,6 +86,17 @@
     }
 }
 
+-(void)setFrame:(CGRect)frame{
+    if (self.viewFrameWillChangedBlock) {
+        self.viewFrameWillChangedBlock(self, frame , self.frame);
+    }
+    CGRect oldFrame = self.frame;
+    [super setFrame:frame];
+    if (self.viewFrameDidChangedBlock) {
+        self.viewFrameWillChangedBlock(self, self.frame , oldFrame);
+    }
+}
+
 #pragma mark- override by subclass
 
 -(void)setupView{

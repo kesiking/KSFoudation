@@ -103,7 +103,7 @@
 -(HSMessageListDeleteBottom *)deleteView{
     if (_deleteView == nil) {
         CGRect rect = self.bounds;
-        rect.size.height = 44;
+        rect.size.height = 60;
         rect.origin.y = self.bottom;
         _deleteView = [[HSMessageListDeleteBottom alloc] initWithFrame:rect];
         WEAKSELF

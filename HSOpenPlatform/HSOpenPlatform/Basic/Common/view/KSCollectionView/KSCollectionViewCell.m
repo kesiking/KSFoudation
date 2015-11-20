@@ -80,6 +80,7 @@
             _cellView = [[KSViewCell alloc] initWithFrame:self.bounds];
         }
         _cellView.scrollViewCtl = self.scrollViewCtl;
+        _cellView.scrollViewControllerContext = self.scrollViewCtl.scrollViewControllerContext;
     }
     return _cellView;
 }

@@ -59,6 +59,8 @@ typedef NS_ENUM(NSInteger, WeAppRefreshDataModelType) {
 + (NSString*)getCollectionStringWithKeys:(NSArray*)keys withSeparatedByString:(NSString *)separator;
 + (NSString*)getJSONStringWithDictionary:(NSDictionary*)dict;
 
++(NSString*)trimWhitespaceAndNewlineCharacterWithString:(NSString*)string;
+
 + (BOOL)keyNeedParseFromString:(NSString *)string;
 + (BOOL)keyNeedParseFromString:(NSString *)string withCharacter:(unichar)car;
 + (BOOL)keyHasApiListPathFromString:(NSString *)string;

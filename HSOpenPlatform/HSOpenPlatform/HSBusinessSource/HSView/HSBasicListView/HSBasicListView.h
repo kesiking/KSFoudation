@@ -9,8 +9,10 @@
 #import "KSView.h"
 #import "KSTableViewController.h"
 #import "KSCollectionViewController.h"
+#ifdef USE_AsyncDisplayKit
 #import "KSASTableViewController.h"
 #import "KSASCollectionViewController.h"
+#endif
 #import "KSAdapterService.h"
 
 typedef NS_ENUM(NSInteger, HSBasicListViewType) {
@@ -20,17 +22,21 @@ typedef NS_ENUM(NSInteger, HSBasicListViewType) {
     HSBasicListViewTypeASCollectionView    = 3,    //  ASCollectionView 封装了asyncDisplayKit的ASCollectionView，内存使用比较多，且cellNode与普通的不一样，需要使用asyncDisplayKit的ASTextNode机ASNetworkImageNode等
 } NS_ENUM_AVAILABLE_IOS(6_0);
 
-@interface HSBasicListView : KSView{
+NS_CLASS_AVAILABLE_IOS(6_0) @interface HSBasicListView : KSView{
     KSTableViewController*          _tableViewCtl;
     KSCollectionViewController*     _collectionViewCtl;
+#ifdef USE_AsyncDisplayKit
     KSASTableViewController*        _KSAStableViewCtl;
     KSASCollectionViewController*   _KSASCollectionViewCtl;
+#endif
 }
 
 @property (nonatomic,strong) KSTableViewController*         tableViewCtl;
 @property (nonatomic,strong) KSCollectionViewController*    collectionViewCtl;
+#ifdef USE_AsyncDisplayKit
 @property (nonatomic,strong) KSASTableViewController*       KSAStableViewCtl;
 @property (nonatomic,strong) KSASCollectionViewController*  KSASCollectionViewCtl;
+#endif
 
 @property (nonatomic,strong) KSAdapterService*              basicListService;
 

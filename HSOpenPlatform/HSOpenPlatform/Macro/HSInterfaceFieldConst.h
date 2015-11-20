@@ -41,6 +41,12 @@ static NSString * const kHSNationalAfterSaleApiName = @"device/getUniAfterSale.d
 
 static NSString * const kHSLocalAfterSaleApiName = @"device/getLocalAfterSale.do";
 
+static NSString * const kHSGetBusinessUserInfoListApiName = @"user/getUserInfoList.do";
+
+static NSString * const kHSGetBusinessUserInfoNickNameApiName = @"user/getNickname.do";
+
+static NSString * const kHSModifyBusinessUserNickNameApiName = @"user/setNickname.do";
+
 #define RESPONSE_DATA_KEY @"responseData"
 
 #endif

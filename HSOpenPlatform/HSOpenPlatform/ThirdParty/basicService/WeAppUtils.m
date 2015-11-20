@@ -362,6 +362,19 @@ typedef struct
     return nil;
 }
 
++(NSString*)trimWhitespaceAndNewlineCharacterWithString:(NSString*)string{
+    if (string == nil) {
+        return nil;
+    }
+    if (![string isKindOfClass:[NSString class]]) {
+        return nil;
+    }
+    if (string.length == 0) {
+        return string;
+    }
+    return [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
+
 //模板数据填充
 +(NSMutableDictionary*)parseDataBinding:(NSDictionary*)dataBinding index:(NSUInteger)index{
     return [self parseDataBinding:dataBinding index:index prefix:nil];

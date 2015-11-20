@@ -22,11 +22,11 @@
 @property (nonatomic, strong) KSDataSource*      dataSourceRead;
 // for write
 @property (nonatomic, strong) KSDataSource*      dataSourceWrite;
-
+// 控制scrollView的frame
 @property (nonatomic, assign) CGRect             frame;
-
+// 滑动速度高于阈值时设置为NO，速度较慢或是停止时设置为YES，标识图片在活动过程中是否可以加载
 @property (nonatomic, assign) BOOL               canImageRefreshed;
-
+// 预留字段，暂时没有使用
 @property (nonatomic, assign) BOOL               listComponentDidRelease;
 
 // 滑动到offset位置

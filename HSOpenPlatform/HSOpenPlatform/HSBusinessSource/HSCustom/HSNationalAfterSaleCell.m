@@ -10,7 +10,7 @@
 
 static NSString *const kHSPositionImageName     = @"icon_Businesshall_Position";
 static NSString *const kHSPhoneImageName        = @"icon_Businesshall_Phone";
-static NSString *const kHSArrorImageName        = @"icon_Arrow";
+static NSString *const kHSMailImageName        = @"icon_Businesshall_mail";
 
 @interface HSNationalAfterSaleCell ()
 
@@ -55,7 +55,7 @@ static NSString *const kHSArrorImageName        = @"icon_Arrow";
     
     self.addressImv.image  = [UIImage imageNamed:kHSPositionImageName];
     self.telImv.image      = [UIImage imageNamed:kHSPhoneImageName];
-    self.mailImv.image     = [UIImage imageNamed:kHSPositionImageName];
+    self.mailImv.image     = [UIImage imageNamed:kHSMailImageName];
 
     self.addressLabel.text = model.addressDes;
     self.telLabel.text     = model.afterSalePhone;
@@ -68,13 +68,13 @@ static NSString *const kHSArrorImageName        = @"icon_Arrow";
     [super layoutSubviews];
     self.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
 
-    self.appImv.frame = CGRectMake(caculateNumber(15), caculateNumber(20), caculateNumber(60), caculateNumber(60));
-    self.addressImv.frame = CGRectMake(caculateNumber(100), caculateNumber(10), caculateNumber(20), caculateNumber(20));
-    self.telImv.frame = CGRectMake(caculateNumber(100), caculateNumber(40), caculateNumber(20), caculateNumber(20));
-    self.mailImv.frame = CGRectMake(caculateNumber(100), caculateNumber(70), caculateNumber(20), caculateNumber(20));
-    self.addressLabel.frame = CGRectMake(caculateNumber(135), caculateNumber(10), self.width - caculateNumber(150), caculateNumber(20));
-    self.telLabel.frame = CGRectMake(caculateNumber(135), caculateNumber(40), self.width - caculateNumber(150), caculateNumber(20));
-    self.mailLabel.frame = CGRectMake(caculateNumber(135), caculateNumber(70), self.width - caculateNumber(150), caculateNumber(20));
+    self.appImv.frame = CGRectMake(caculateNumber(18), caculateNumber(10.5), caculateNumber(67), caculateNumber(67));
+    self.addressImv.frame = CGRectMake(caculateNumber(102.5), caculateNumber(16.5), caculateNumber(14), caculateNumber(14));
+    self.telImv.frame = CGRectMake(caculateNumber(102.5), caculateNumber(37.5), caculateNumber(14), caculateNumber(14));
+    self.mailImv.frame = CGRectMake(caculateNumber(102.5), caculateNumber(58.5), caculateNumber(14), caculateNumber(14));
+    self.addressLabel.frame = CGRectMake(caculateNumber(121.5), caculateNumber(16.5), self.width - caculateNumber(121.5), caculateNumber(14));
+    self.telLabel.frame = CGRectMake(caculateNumber(121.5), caculateNumber(37.5), self.width - caculateNumber(121.5), caculateNumber(14));
+    self.mailLabel.frame = CGRectMake(caculateNumber(121.5), caculateNumber(58.5), self.width - caculateNumber(121.5), caculateNumber(14));
 }
 
 - (UIImageView *)appImv {
@@ -108,7 +108,7 @@ static NSString *const kHSArrorImageName        = @"icon_Arrow";
 - (UILabel *)addressLabel {
     if (!_addressLabel) {
         _addressLabel = [[UILabel alloc]init];
-        _addressLabel.font = EHFont5;
+        _addressLabel.font = EHFont2;
         _addressLabel.textColor = EHCor5;
     }
     return _addressLabel;
@@ -117,7 +117,7 @@ static NSString *const kHSArrorImageName        = @"icon_Arrow";
 - (UILabel *)telLabel {
     if (!_telLabel) {
         _telLabel = [[UILabel alloc]init];
-        _telLabel.font = EHFont5;
+        _telLabel.font = EHFont2;
         _telLabel.textColor = EHCor5;
     }
     return _telLabel;
@@ -126,7 +126,7 @@ static NSString *const kHSArrorImageName        = @"icon_Arrow";
 - (UILabel *)mailLabel {
     if (!_mailLabel) {
         _mailLabel = [[UILabel alloc]init];
-        _mailLabel.font = EHFont5;
+        _mailLabel.font = EHFont2;
         _mailLabel.textColor = EHCor5;
     }
     return _mailLabel;

@@ -360,7 +360,7 @@ static CGPoint  delayOffset = {0.0};
 
 - (XHVoiceRecordHUD *)voiceRecordHUD {
     if (!_voiceRecordHUD) {
-        _voiceRecordHUD = [[XHVoiceRecordHUD alloc] initWithFrame:CGRectMake(0, 0, 140, 185)];
+        _voiceRecordHUD = [[XHVoiceRecordHUD alloc] initWithFrame:CGRectMake(0, 0, 200, 150)];
     }
     return _voiceRecordHUD;
 }

@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, WeAppGetDataMethodType) {
     
 }
 
-@property (nonatomic, assign) id<WeAppBasicRequestModelDelegate> delegate;
+@property (nonatomic, weak )  id<WeAppBasicRequestModelDelegate> delegate;
 @property (nonatomic, strong) NSString*   basicUrl;
 @property (nonatomic, strong) NSURL*      requestUrl;
 @property (nonatomic, assign) BOOL        isLoading;
