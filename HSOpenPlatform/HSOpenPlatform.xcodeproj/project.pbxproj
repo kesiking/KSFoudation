@@ -157,6 +157,7 @@
 		5F17FFBD1BE0AE1F00670317 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F17FFBA1BE0AE1F00670317 /* libMobClickLibrary.a */; };
 		5F1E4FB81BFB2D2F0051997E /* HSBusinessUserInfoEditAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1E4FB71BFB2D2F0051997E /* HSBusinessUserInfoEditAlertView.m */; };
 		5F1E4FBB1BFC5BE60051997E /* HSServiceAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1E4FBA1BFC5BE60051997E /* HSServiceAlertView.m */; };
+		5F2CDAC81BFF2273007D03CF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDAC71BFF21C7007D03CF /* libReact.a */; };
 		5F2E22EF1BDA327B00F36DAF /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2E22EE1BDA327B00F36DAF /* TTTAttributedLabel.m */; };
 		5F2E22F21BDDB54D00F36DAF /* deleteFavrate.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F2E22F01BDDB54D00F36DAF /* deleteFavrate.png */; };
 		5F2E22F31BDDB54D00F36DAF /* unDeleteFavrate.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F2E22F11BDDB54D00F36DAF /* unDeleteFavrate.png */; };
@@ -817,6 +818,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5F2CDAC61BFF21C7007D03CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5F2CDAC21BFF21C7007D03CF /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
+			remoteInfo = React;
+		};
 		5F42D44D1BF0326C001E7930 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5F42D4461BF0326C001E7930 /* AsyncDisplayKit.xcodeproj */;
@@ -1091,6 +1099,7 @@
 		5F1E4FB71BFB2D2F0051997E /* HSBusinessUserInfoEditAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSBusinessUserInfoEditAlertView.m; sourceTree = "<group>"; };
 		5F1E4FB91BFC5BE60051997E /* HSServiceAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSServiceAlertView.h; sourceTree = "<group>"; };
 		5F1E4FBA1BFC5BE60051997E /* HSServiceAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSServiceAlertView.m; sourceTree = "<group>"; };
+		5F2CDAC21BFF21C7007D03CF /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = React/React.xcodeproj; sourceTree = "<group>"; };
 		5F2E22ED1BDA327B00F36DAF /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
 		5F2E22EE1BDA327B00F36DAF /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		5F2E22F01BDDB54D00F36DAF /* deleteFavrate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deleteFavrate.png; sourceTree = "<group>"; };
@@ -2217,6 +2226,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F2CDAC81BFF2273007D03CF /* libReact.a in Frameworks */,
 				5F034E211BF2CF9F003A9741 /* JavaScriptCore.framework in Frameworks */,
 				5F42D45E1BF037EA001E7930 /* AssetsLibrary.framework in Frameworks */,
 				5F42D45C1BF037E2001E7930 /* Photos.framework in Frameworks */,
@@ -2708,6 +2718,22 @@
 				5F17FFBC1BE0AE1F00670317 /* MobClickSocialAnalytics.h */,
 			);
 			path = UMAnalytics_Sdk_3.6.5;
+			sourceTree = "<group>";
+		};
+		5F2CD9BA1BFF21BA007D03CF /* ReactNative */ = {
+			isa = PBXGroup;
+			children = (
+				5F2CDAC21BFF21C7007D03CF /* React.xcodeproj */,
+			);
+			path = ReactNative;
+			sourceTree = "<group>";
+		};
+		5F2CDAC31BFF21C7007D03CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5F2CDAC71BFF21C7007D03CF /* libReact.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		5F2E22EC1BDA327B00F36DAF /* TTTAttributedLabel */ = {
@@ -3806,6 +3832,7 @@
 		5F66C1941BBA5CC300CC21F7 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				5F2CD9BA1BFF21BA007D03CF /* ReactNative */,
 				5F42D08C1BF031F9001E7930 /* AsyncDisplayKit */,
 				5F17FFB91BE0AE1F00670317 /* UMAnalytics_Sdk_3.6.5 */,
 				5FA309DB1BDFB4FC00C2EC21 /* SVProgressHUD */,
@@ -5839,6 +5866,10 @@
 					ProductGroup = 5F42D4471BF0326C001E7930 /* Products */;
 					ProjectRef = 5F42D4461BF0326C001E7930 /* AsyncDisplayKit.xcodeproj */;
 				},
+				{
+					ProductGroup = 5F2CDAC31BFF21C7007D03CF /* Products */;
+					ProjectRef = 5F2CDAC21BFF21C7007D03CF /* React.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -5849,6 +5880,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		5F2CDAC71BFF21C7007D03CF /* libReact.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReact.a;
+			remoteRef = 5F2CDAC61BFF21C7007D03CF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		5F42D44E1BF0326C001E7930 /* libAsyncDisplayKit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;

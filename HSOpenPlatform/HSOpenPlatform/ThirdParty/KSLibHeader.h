@@ -37,6 +37,10 @@
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 #endif
 
+#ifdef USE_ReactNative
+#import "RCTRootView.h"
+#endif
+
 #define WEAKSELF typeof(self) __weak __block weakSelf = self;
 #define STRONGSELF typeof(self) __strong strongSelf = weakSelf;
 
