@@ -238,7 +238,7 @@
                 [[KSLoginComponentItem sharedInstance] updateUserComponentItem:(KSLoginComponentItem*)service.item];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kUserRegisterSuccessNotification object:nil userInfo:nil];
             }else{
-                NSError* error = [NSError errorWithDomain:@"返回数据与预期不符，请检查接口是否正确" code:400 userInfo:nil];
+                NSError* error = [NSError errorWithDomain:@"获取个人信息失败，请稍微再试" code:400 userInfo:nil];
                 [strongSelf model:strongSelf.requestModel didFailLoadWithError:error];
             }
         };

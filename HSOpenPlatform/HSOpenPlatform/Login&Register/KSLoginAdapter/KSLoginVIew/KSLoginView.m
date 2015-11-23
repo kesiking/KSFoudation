@@ -99,7 +99,7 @@
     _service.serviceDidFailLoadBlock = ^(WeAppBasicService* service , NSError* error){
         STRONGSELF
         [strongSelf hideLoadingView];
-        NSString *errorInfo = error.userInfo[@"NSLocalizedDescription"]?:LOGIN_FAIL_INFO;
+        NSString *errorInfo = error.userInfo[@"NSLocalizedDescription"]?:error.domain?:LOGIN_FAIL_INFO;
         [WeAppToast toast:errorInfo];
     };
 }
