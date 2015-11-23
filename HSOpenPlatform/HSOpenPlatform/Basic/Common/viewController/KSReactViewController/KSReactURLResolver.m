@@ -10,6 +10,8 @@
 #import "KSReactURLResolver.h"
 #import "KSReactViewController.h"
 
+#define APP_REACT_NATIVE_SCHEME_URL @"http"// APP_DEFAULT_SCHEME
+
 @implementation KSReactURLResolver
 
 - (BOOL)handleURLAction:(TBURLAction*)urlAction{
@@ -30,7 +32,7 @@
     
     UIViewController* viewController = nil;
     if ([[url scheme] isEqualToString:kInternalReactNativeURLScheme]) {
-        NSString* newSchemeUrl = [url.absoluteString stringByReplacingOccurrencesOfString:kInternalReactNativeURLScheme withString:@"http"];
+        NSString* newSchemeUrl = [url.absoluteString stringByReplacingOccurrencesOfString:kInternalReactNativeURLScheme withString:APP_REACT_NATIVE_SCHEME_URL];
         viewController = [[KSReactViewController alloc] initWithNavigatorURL:newSchemeUrl?[NSURL URLWithString:newSchemeUrl]:action.URL query:action.extraInfo nativeParams:action.nativeParams];
     }
     if (viewController == nil) {
