@@ -31,6 +31,8 @@
     Class urlResolverClass = nil;
     if ([KSConfigCenter isHttpUrlWithURL:action.URL]) {
         urlResolverClass = [KSConfigCenter getWebViewUrlResolverClassWithURL:action.URL];
+    }else if([KSConfigCenter isReactUrlWithURL:action.URL]){
+        urlResolverClass = [KSConfigCenter getReactViewUrlResolverClassWithURL:action.URL];
     }else{
         NSString* classNamePath = [action isActionURLLegal] ? [action getURLPathWithoutSlash] : action.urlPath;
         urlResolverClass = [KSConfigCenter getUrlResolverClassWithName:classNamePath];

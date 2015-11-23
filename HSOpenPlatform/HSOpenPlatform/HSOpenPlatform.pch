@@ -43,6 +43,7 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 // 线上环境
 //#define ONLINE_ENVIEONMENT
+#define APP_DEFAULT_SCHEME @"https"
 #define USE_AsyncDisplayKit
 #define USE_ReactNative
 #ifndef ONLINE_ENVIEONMENT

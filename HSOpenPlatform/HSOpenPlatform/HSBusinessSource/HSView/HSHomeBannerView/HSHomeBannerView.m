@@ -168,7 +168,8 @@ static CFRunLoopObserverRef observer;
         if (componentItem && [componentItem isKindOfClass:[HSActivityInfoModel class]]) {
             HSActivityInfoModel* activityInfoModel = (HSActivityInfoModel*)componentItem;
             NSDictionary* params = @{@"activityInfoModel":activityInfoModel};
-            HSActivityInfoDetailOpenURLFromTargetWithNativeParams(self, nil, params,activityInfoModel);
+            TBOpenURLFromTargetWithNativeParams(@"reactNative://localhost:8081/index.ios.bundle?platform=ios&dev=true", self, nil, params);
+//            HSActivityInfoDetailOpenURLFromTargetWithNativeParams(self, nil, params,activityInfoModel);
         }
     }
 }
@@ -205,7 +206,6 @@ static CFRunLoopObserverRef observer;
         [self.bannerView setLocalData:array];
     }
     [self reloadData];
-//    [self.bannerView.bannerCycleScrollView.pageControl setOrigin:CGPointMake(_bannerView.frame.size.width - _bannerView.bannerCycleScrollView.pageControl.frame.size.width  - 25, _bannerView.bannerCycleScrollView.pageControl.origin.y)];
     [self.bannerView setAutoScrollEnabled:YES];
 }
 

@@ -157,14 +157,18 @@
 		5F17FFBD1BE0AE1F00670317 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F17FFBA1BE0AE1F00670317 /* libMobClickLibrary.a */; };
 		5F1E4FB81BFB2D2F0051997E /* HSBusinessUserInfoEditAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1E4FB71BFB2D2F0051997E /* HSBusinessUserInfoEditAlertView.m */; };
 		5F1E4FBB1BFC5BE60051997E /* HSServiceAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1E4FBA1BFC5BE60051997E /* HSServiceAlertView.m */; };
-		5F2CDAC81BFF2273007D03CF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDAC71BFF21C7007D03CF /* libReact.a */; };
-		5F2CDADD1C029F7C007D03CF /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDAD51C029E28007D03CF /* libRCTNetwork.a */; };
-		5F2CDADE1C029F7C007D03CF /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDADC1C029E4E007D03CF /* libRCTText.a */; };
-		5F2CDAE51C02A8A6007D03CF /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDAE41C02A866007D03CF /* libRCTImage.a */; };
-		5F2CDAFE1C02A9BA007D03CF /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDAF11C02A980007D03CF /* libRCTActionSheet.a */; };
-		5F2CDAFF1C02A9BA007D03CF /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDAF71C02A995007D03CF /* libRCTGeolocation.a */; };
-		5F2CDB001C02A9BA007D03CF /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDAFD1C02A9A9007D03CF /* libRCTLinking.a */; };
-		5F2CDB011C02A9BA007D03CF /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDAEB1C02A933007D03CF /* libRCTSettings.a */; };
+		5F2CDB051C02AB06007D03CF /* KSReactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2CDB041C02AB06007D03CF /* KSReactViewController.m */; };
+		5F2CDB081C02AF82007D03CF /* KSReactURLResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2CDB071C02AF82007D03CF /* KSReactURLResolver.m */; };
+		5F2CDB091C02B53B007D03CF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDAC71BFF21C7007D03CF /* libReact.a */; };
+		5F2CDB161C02CE56007D03CF /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDAF11C02A980007D03CF /* libRCTActionSheet.a */; };
+		5F2CDB171C02CE56007D03CF /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDAF71C02A995007D03CF /* libRCTGeolocation.a */; };
+		5F2CDB181C02CE56007D03CF /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDAE41C02A866007D03CF /* libRCTImage.a */; };
+		5F2CDB191C02CE56007D03CF /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDAFD1C02A9A9007D03CF /* libRCTLinking.a */; };
+		5F2CDB1A1C02CE56007D03CF /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDAD51C029E28007D03CF /* libRCTNetwork.a */; };
+		5F2CDB1B1C02CE56007D03CF /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDAEB1C02A933007D03CF /* libRCTSettings.a */; };
+		5F2CDB1C1C02CE56007D03CF /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDADC1C029E4E007D03CF /* libRCTText.a */; };
+		5F2CDB1D1C02CE56007D03CF /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDB151C02CE25007D03CF /* libRCTVibration.a */; };
+		5F2CDB1E1C02CE56007D03CF /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDB0F1C02CE1D007D03CF /* libRCTWebSocket.a */; };
 		5F2E22EF1BDA327B00F36DAF /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2E22EE1BDA327B00F36DAF /* TTTAttributedLabel.m */; };
 		5F2E22F21BDDB54D00F36DAF /* deleteFavrate.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F2E22F01BDDB54D00F36DAF /* deleteFavrate.png */; };
 		5F2E22F31BDDB54D00F36DAF /* unDeleteFavrate.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F2E22F11BDDB54D00F36DAF /* unDeleteFavrate.png */; };
@@ -881,6 +885,20 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RCTLinking;
 		};
+		5F2CDB0E1C02CE1D007D03CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5F2CDB0A1C02CE1C007D03CF /* RCTWebSocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3C86DF461ADF2C930047B81A;
+			remoteInfo = RCTWebSocket;
+		};
+		5F2CDB141C02CE25007D03CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5F2CDB101C02CE25007D03CF /* RCTVibration.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 832C81801AAF6DEF007FA2F7;
+			remoteInfo = RCTVibration;
+		};
 		5F42D44D1BF0326C001E7930 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5F42D4461BF0326C001E7930 /* AsyncDisplayKit.xcodeproj */;
@@ -1163,6 +1181,12 @@
 		5F2CDAEC1C02A980007D03CF /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = ActionSheetIOS/RCTActionSheet.xcodeproj; sourceTree = "<group>"; };
 		5F2CDAF21C02A995007D03CF /* RCTGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTGeolocation.xcodeproj; path = Geolocation/RCTGeolocation.xcodeproj; sourceTree = "<group>"; };
 		5F2CDAF81C02A9A9007D03CF /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = LinkingIOS/RCTLinking.xcodeproj; sourceTree = "<group>"; };
+		5F2CDB031C02AB06007D03CF /* KSReactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSReactViewController.h; sourceTree = "<group>"; };
+		5F2CDB041C02AB06007D03CF /* KSReactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSReactViewController.m; sourceTree = "<group>"; };
+		5F2CDB061C02AF82007D03CF /* KSReactURLResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSReactURLResolver.h; sourceTree = "<group>"; };
+		5F2CDB071C02AF82007D03CF /* KSReactURLResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSReactURLResolver.m; sourceTree = "<group>"; };
+		5F2CDB0A1C02CE1C007D03CF /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = WebSocket/RCTWebSocket.xcodeproj; sourceTree = "<group>"; };
+		5F2CDB101C02CE25007D03CF /* RCTVibration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVibration.xcodeproj; path = Vibration/RCTVibration.xcodeproj; sourceTree = "<group>"; };
 		5F2E22ED1BDA327B00F36DAF /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
 		5F2E22EE1BDA327B00F36DAF /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		5F2E22F01BDDB54D00F36DAF /* deleteFavrate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deleteFavrate.png; sourceTree = "<group>"; };
@@ -2289,14 +2313,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F2CDAFE1C02A9BA007D03CF /* libRCTActionSheet.a in Frameworks */,
-				5F2CDAFF1C02A9BA007D03CF /* libRCTGeolocation.a in Frameworks */,
-				5F2CDB001C02A9BA007D03CF /* libRCTLinking.a in Frameworks */,
-				5F2CDB011C02A9BA007D03CF /* libRCTSettings.a in Frameworks */,
-				5F2CDAE51C02A8A6007D03CF /* libRCTImage.a in Frameworks */,
-				5F2CDADD1C029F7C007D03CF /* libRCTNetwork.a in Frameworks */,
-				5F2CDADE1C029F7C007D03CF /* libRCTText.a in Frameworks */,
-				5F2CDAC81BFF2273007D03CF /* libReact.a in Frameworks */,
+				5F2CDB161C02CE56007D03CF /* libRCTActionSheet.a in Frameworks */,
+				5F2CDB171C02CE56007D03CF /* libRCTGeolocation.a in Frameworks */,
+				5F2CDB181C02CE56007D03CF /* libRCTImage.a in Frameworks */,
+				5F2CDB191C02CE56007D03CF /* libRCTLinking.a in Frameworks */,
+				5F2CDB1A1C02CE56007D03CF /* libRCTNetwork.a in Frameworks */,
+				5F2CDB1B1C02CE56007D03CF /* libRCTSettings.a in Frameworks */,
+				5F2CDB1C1C02CE56007D03CF /* libRCTText.a in Frameworks */,
+				5F2CDB1D1C02CE56007D03CF /* libRCTVibration.a in Frameworks */,
+				5F2CDB1E1C02CE56007D03CF /* libRCTWebSocket.a in Frameworks */,
+				5F2CDB091C02B53B007D03CF /* libReact.a in Frameworks */,
 				5F034E211BF2CF9F003A9741 /* JavaScriptCore.framework in Frameworks */,
 				5F42D45E1BF037EA001E7930 /* AssetsLibrary.framework in Frameworks */,
 				5F42D45C1BF037E2001E7930 /* Photos.framework in Frameworks */,
@@ -2793,6 +2819,8 @@
 		5F2CD9BA1BFF21BA007D03CF /* ReactNative */ = {
 			isa = PBXGroup;
 			children = (
+				5F2CDB0A1C02CE1C007D03CF /* RCTWebSocket.xcodeproj */,
+				5F2CDB101C02CE25007D03CF /* RCTVibration.xcodeproj */,
 				5F2CDAF81C02A9A9007D03CF /* RCTLinking.xcodeproj */,
 				5F2CDAF21C02A995007D03CF /* RCTGeolocation.xcodeproj */,
 				5F2CDAEC1C02A980007D03CF /* RCTActionSheet.xcodeproj */,
@@ -2865,6 +2893,33 @@
 			isa = PBXGroup;
 			children = (
 				5F2CDAFD1C02A9A9007D03CF /* libRCTLinking.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5F2CDB021C02AAE5007D03CF /* KSReactViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5F2CDB031C02AB06007D03CF /* KSReactViewController.h */,
+				5F2CDB041C02AB06007D03CF /* KSReactViewController.m */,
+				5F2CDB061C02AF82007D03CF /* KSReactURLResolver.h */,
+				5F2CDB071C02AF82007D03CF /* KSReactURLResolver.m */,
+			);
+			path = KSReactViewController;
+			sourceTree = "<group>";
+		};
+		5F2CDB0B1C02CE1C007D03CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5F2CDB0F1C02CE1D007D03CF /* libRCTWebSocket.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5F2CDB111C02CE25007D03CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5F2CDB151C02CE25007D03CF /* libRCTVibration.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3419,6 +3474,7 @@
 		5F66C0E01BBA5CC200CC21F7 /* viewController */ = {
 			isa = PBXGroup;
 			children = (
+				5F2CDB021C02AAE5007D03CF /* KSReactViewController */,
 				5F66C0E11BBA5CC200CC21F7 /* KSError */,
 				5F66C0E41BBA5CC300CC21F7 /* KSFoundationCommon.h */,
 				5F66C0E51BBA5CC300CC21F7 /* KSFoundationCommon.m */,
@@ -6028,6 +6084,14 @@
 					ProjectRef = 5F2CDAD71C029E4E007D03CF /* RCTText.xcodeproj */;
 				},
 				{
+					ProductGroup = 5F2CDB111C02CE25007D03CF /* Products */;
+					ProjectRef = 5F2CDB101C02CE25007D03CF /* RCTVibration.xcodeproj */;
+				},
+				{
+					ProductGroup = 5F2CDB0B1C02CE1C007D03CF /* Products */;
+					ProjectRef = 5F2CDB0A1C02CE1C007D03CF /* RCTWebSocket.xcodeproj */;
+				},
+				{
 					ProductGroup = 5F2CDAC31BFF21C7007D03CF /* Products */;
 					ProjectRef = 5F2CDAC21BFF21C7007D03CF /* React.xcodeproj */;
 				},
@@ -6095,6 +6159,20 @@
 			fileType = archive.ar;
 			path = libRCTLinking.a;
 			remoteRef = 5F2CDAFC1C02A9A9007D03CF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5F2CDB0F1C02CE1D007D03CF /* libRCTWebSocket.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTWebSocket.a;
+			remoteRef = 5F2CDB0E1C02CE1D007D03CF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5F2CDB151C02CE25007D03CF /* libRCTVibration.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTVibration.a;
+			remoteRef = 5F2CDB141C02CE25007D03CF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		5F42D44E1BF0326C001E7930 /* libAsyncDisplayKit.a */ = {
@@ -6712,6 +6790,7 @@
 				5F66C43D1BBA5CC500CC21F7 /* SSKeychain.m in Sources */,
 				5F66C4F41BBA5CC500CC21F7 /* SETextMagnifierRanged.m in Sources */,
 				5F66C5391BBA5CC600CC21F7 /* MJRefreshBackStateFooter.m in Sources */,
+				5F2CDB051C02AB06007D03CF /* KSReactViewController.m in Sources */,
 				5F66C5641BBA5CC600CC21F7 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				5F66C4E51BBA5CC500CC21F7 /* XHShareMenuItem.m in Sources */,
 				5FFDE7EB1BC7AA500087B9E0 /* EHUserPicFromPhotosViewController.m in Sources */,
@@ -6832,6 +6911,7 @@
 				5F66C43B1BBA5CC500CC21F7 /* WeAppBasicTextView.m in Sources */,
 				35C47CC81BCE4DF7004164F5 /* HSHomeServiceView.m in Sources */,
 				5F66C44C1BBA5CC500CC21F7 /* KSModifyPhoneView.m in Sources */,
+				5F2CDB081C02AF82007D03CF /* KSReactURLResolver.m in Sources */,
 				5F2E22EF1BDA327B00F36DAF /* TTTAttributedLabel.m in Sources */,
 				5FFDE7BE1BC7A26E0087B9E0 /* TBPageControl.m in Sources */,
 				5F66C4C61BBA5CC500CC21F7 /* NSString+XHMD5.m in Sources */,
@@ -7025,6 +7105,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/ThirdParty",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -7062,6 +7147,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/ThirdParty",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -7078,15 +7168,16 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/UMSocial_Sdk_4.2.3/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
-					"$(PROJECT_DIR)/eHome/ThirdParty/EIM_XMPP.framework",
-					"$(PROJECT_DIR)/eHome/ThirdParty/MessageDisplayKit",
-					"$(PROJECT_DIR)/eHome/ThirdParty/AsyncDisplayKit",
+					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/EIM_XMPP.framework",
+					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/MessageDisplayKit",
+					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/AsyncDisplayKit",
 				);
 				GCC_PREFIX_HEADER = HSOpenPlatform/HSOpenPlatform.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/include/libxml2,
+					"$(SRCROOT)/HSOpenPlatform/ThirdParty/ReactNative/React/Base",
 				);
 				INFOPLIST_FILE = HSOpenPlatform/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -7099,7 +7190,7 @@
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/UMSocial_Sdk_4.2.3/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/UMSocial_Sdk_4.2.3/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/WavToAmr",
-					"$(PROJECT_DIR)/eHome/ThirdParty",
+					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/UMAnalytics_Sdk_3.6.5",
 				);
 				OTHER_LDFLAGS = (
@@ -7121,15 +7212,16 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/UMSocial_Sdk_4.2.3/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
-					"$(PROJECT_DIR)/eHome/ThirdParty/EIM_XMPP.framework",
-					"$(PROJECT_DIR)/eHome/ThirdParty/MessageDisplayKit",
-					"$(PROJECT_DIR)/eHome/ThirdParty/AsyncDisplayKit",
+					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/EIM_XMPP.framework",
+					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/MessageDisplayKit",
+					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/AsyncDisplayKit",
 				);
 				GCC_PREFIX_HEADER = HSOpenPlatform/HSOpenPlatform.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/include/libxml2,
+					"$(SRCROOT)/HSOpenPlatform/ThirdParty/ReactNative/React/Base",
 				);
 				INFOPLIST_FILE = HSOpenPlatform/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -7142,7 +7234,7 @@
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/UMSocial_Sdk_4.2.3/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/UMSocial_Sdk_4.2.3/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/WavToAmr",
-					"$(PROJECT_DIR)/eHome/ThirdParty",
+					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/UMAnalytics_Sdk_3.6.5",
 				);
 				OTHER_LDFLAGS = (

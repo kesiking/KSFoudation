@@ -20,7 +20,7 @@
     #define DEFAULT_HOST @"192.168.7.245"
     #define DEFAULT_PORT @"8081"
 #else
-    #define DEFAULT_SCHEME @"https"
+    #define DEFAULT_SCHEME APP_DEFAULT_SCHEME
     #define DEFAULT_HOST @"112.54.207.12"
     #define DEFAULT_PORT @"9080"
 #endif

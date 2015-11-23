@@ -16,7 +16,11 @@
 
 +(Class)getWebViewUrlResolverClassWithURL:(NSURL*)url;
 
++(Class)getReactViewUrlResolverClassWithURL:(NSURL*)url;
+
 +(BOOL)isHttpUrlWithURL:(NSURL*)url;
+
++(BOOL)isReactUrlWithURL:(NSURL*)url;
 
 +(NSDictionary*)getViewContollerNameToClassDict;
 
