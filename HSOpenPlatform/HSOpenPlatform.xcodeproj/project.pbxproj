@@ -169,6 +169,7 @@
 		5F2CDB1C1C02CE56007D03CF /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDADC1C029E4E007D03CF /* libRCTText.a */; };
 		5F2CDB1D1C02CE56007D03CF /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDB151C02CE25007D03CF /* libRCTVibration.a */; };
 		5F2CDB1E1C02CE56007D03CF /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDB0F1C02CE1D007D03CF /* libRCTWebSocket.a */; };
+		5F2CDB211C0317CC007D03CF /* KSReactOpenURLAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2CDB201C0317CC007D03CF /* KSReactOpenURLAction.m */; };
 		5F2E22EF1BDA327B00F36DAF /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2E22EE1BDA327B00F36DAF /* TTTAttributedLabel.m */; };
 		5F2E22F21BDDB54D00F36DAF /* deleteFavrate.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F2E22F01BDDB54D00F36DAF /* deleteFavrate.png */; };
 		5F2E22F31BDDB54D00F36DAF /* unDeleteFavrate.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F2E22F11BDDB54D00F36DAF /* unDeleteFavrate.png */; };
@@ -1187,6 +1188,8 @@
 		5F2CDB071C02AF82007D03CF /* KSReactURLResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSReactURLResolver.m; sourceTree = "<group>"; };
 		5F2CDB0A1C02CE1C007D03CF /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = WebSocket/RCTWebSocket.xcodeproj; sourceTree = "<group>"; };
 		5F2CDB101C02CE25007D03CF /* RCTVibration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVibration.xcodeproj; path = Vibration/RCTVibration.xcodeproj; sourceTree = "<group>"; };
+		5F2CDB1F1C0317CC007D03CF /* KSReactOpenURLAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSReactOpenURLAction.h; sourceTree = "<group>"; };
+		5F2CDB201C0317CC007D03CF /* KSReactOpenURLAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSReactOpenURLAction.m; sourceTree = "<group>"; };
 		5F2E22ED1BDA327B00F36DAF /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
 		5F2E22EE1BDA327B00F36DAF /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		5F2E22F01BDDB54D00F36DAF /* deleteFavrate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deleteFavrate.png; sourceTree = "<group>"; };
@@ -2904,6 +2907,8 @@
 				5F2CDB041C02AB06007D03CF /* KSReactViewController.m */,
 				5F2CDB061C02AF82007D03CF /* KSReactURLResolver.h */,
 				5F2CDB071C02AF82007D03CF /* KSReactURLResolver.m */,
+				5F2CDB1F1C0317CC007D03CF /* KSReactOpenURLAction.h */,
+				5F2CDB201C0317CC007D03CF /* KSReactOpenURLAction.m */,
 			);
 			path = KSReactViewController;
 			sourceTree = "<group>";
@@ -6747,6 +6752,7 @@
 				5F66C4C31BBA5CC500CC21F7 /* ViewController+MASAdditions.m in Sources */,
 				5F1E4FB81BFB2D2F0051997E /* HSBusinessUserInfoEditAlertView.m in Sources */,
 				5F66C4761BBA5CC500CC21F7 /* KSAdapterService.m in Sources */,
+				5F2CDB211C0317CC007D03CF /* KSReactOpenURLAction.m in Sources */,
 				3566DE901BEB510B00F327C5 /* HSAMapPoiSearchService.m in Sources */,
 				5F0BCB6D1BBA6FBE00CFE4A4 /* EHLog.m in Sources */,
 				5F6CAD451BDB0CB1003C015E /* HSBasicListView.m in Sources */,

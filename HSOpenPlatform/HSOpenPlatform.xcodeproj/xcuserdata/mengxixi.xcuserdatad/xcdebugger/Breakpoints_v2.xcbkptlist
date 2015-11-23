@@ -9,13 +9,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HSOpenPlatform/Basic/Common/KSError/KSModelStatus/TBModelStatusHandler.m"
-            timestampString = "469091424.411601"
+            filePath = "HSOpenPlatform/ThirdParty/ReactNative/React/Views/RCTNavigator.m"
+            timestampString = "469957420.040526"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
-            landmarkName = "-showEmptyViewInView:frame:"
+            startingLineNumber = "549"
+            endingLineNumber = "549"
+            landmarkName = "-wrapperViewController:didMoveToNavigationController:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HSOpenPlatform/ThirdParty/ReactNative/React/Base/RCTTouchHandler.m"
+            timestampString = "469960829.330954"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "-_recordNewTouches:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

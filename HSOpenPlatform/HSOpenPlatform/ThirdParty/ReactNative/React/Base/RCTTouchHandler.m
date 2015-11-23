@@ -193,6 +193,7 @@ typedef NS_ENUM(NSInteger, RCTTouchEventType) {
   eventName = RCTNormalizeInputEventName(eventName);
   [_bridge enqueueJSCall:@"RCTEventEmitter.receiveTouches"
                     args:@[eventName, reactTouches, changedIndexes]];
+  
 }
 
 #pragma mark - Gesture Recognizer Delegate Callbacks

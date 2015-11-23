@@ -33,6 +33,7 @@
                                                         moduleName:@"AwesomeProject"
                                                  initialProperties:nil
                                                      launchOptions:nil];
+    _rootView.reactViewController = self;
     [self.view addSubview:_rootView];
     _rootView.frame = self.view.bounds;
 }
