@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "KSLoginMaroc.h"
 
+#define kAuthenticationCenterMarocExist
+
 #define kTestAccountName @"18888888888"  //  18867101652   18019437985
 
 @interface KSAuthenticationCenter : NSObject

@@ -293,11 +293,16 @@ RCT_EXPORT_MODULE()
 
 - (void)showErrorMessage:(NSString *)message withStack:(NSArray *)stack showIfHidden:(BOOL)shouldShow
 {
+#ifdef DEBUG
   dispatch_async(dispatch_get_main_queue(), ^{
     if (!_window) {
       _window = [[RCTRedBoxWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     }
     [_window showErrorMessage:message withStack:stack showIfHidden:shouldShow];
+  });
+#endif
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReactNativeErrorMessageNotification" object:nil userInfo:@{@"message":message?:@""}];
   });
 }
 

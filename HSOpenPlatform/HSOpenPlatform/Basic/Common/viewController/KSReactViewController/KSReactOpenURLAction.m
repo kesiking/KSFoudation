@@ -5,6 +5,7 @@
 //  Created by 孟希羲 on 15/11/23.
 //  Copyright (c) 2015年 孟希羲. All rights reserved.
 //
+#ifdef USE_ReactNative
 
 #import "KSReactOpenURLAction.h"
 
@@ -12,13 +13,13 @@
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(openURL:(NSString *)urlPath params:(NSDictionary *)params)
+RCT_EXPORT_METHOD(openURL:(NSString *)urlPath query:(NSDictionary *)query nativeParams:(NSDictionary *)nativeParams)
 {
     if ([NSThread isMainThread]) {
-        TBOpenURLFromSourceAndParams(urlPath, [[UIApplication sharedApplication] keyWindow].rootViewController, params);
+        TBOpenURLFromTargetWithNativeParams(urlPath, [[UIApplication sharedApplication] keyWindow].rootViewController, query, nativeParams);
     }else{
         dispatch_async(dispatch_get_main_queue(), ^{
-            TBOpenURLFromSourceAndParams(urlPath, [[UIApplication sharedApplication] keyWindow].rootViewController, params);
+            TBOpenURLFromTargetWithNativeParams(urlPath, [[UIApplication sharedApplication] keyWindow].rootViewController, query, nativeParams);
         });
     }
 }
@@ -29,3 +30,5 @@ RCT_EXPORT_METHOD(openURL:(NSString *)urlPath params:(NSDictionary *)params)
 }
 
 @end
+
+#endif

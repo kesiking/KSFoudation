@@ -9,8 +9,9 @@
 #ifdef USE_ReactNative
 
 #import "KSViewController.h"
+#import "RCTBridgeModule.h"
 
-@interface KSReactViewController : KSViewController
+@interface KSReactViewController : KSViewController<RCTBridgeModule>
 
 @end
 
