@@ -168,7 +168,7 @@ static CFRunLoopObserverRef observer;
         if (componentItem && [componentItem isKindOfClass:[HSActivityInfoModel class]]) {
             HSActivityInfoModel* activityInfoModel = (HSActivityInfoModel*)componentItem;
             NSDictionary* params = @{@"activityInfoModel":activityInfoModel};
-            TBOpenURLFromTargetWithNativeParams(@"reactNative://localhost:8081/index.ios.bundle?platform=ios&dev=true", self, nil, params);
+            TBOpenURLFromTargetWithNativeParams(@"reactNative://192.168.7.243:8081/index.ios.bundle?platform=ios&dev=true", self, nil, params);
 //            HSActivityInfoDetailOpenURLFromTargetWithNativeParams(self, nil, params,activityInfoModel);
         }
     }
