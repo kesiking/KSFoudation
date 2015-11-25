@@ -17,6 +17,16 @@ typedef struct
 
 @implementation WeAppUtils
 
+void ks_swizzleSelector(Class classType, SEL originalSelector, SEL swizzledSelector) {
+    Method originalMethod = class_getInstanceMethod(classType, originalSelector);
+    Method swizzledMethod = class_getInstanceMethod(classType, swizzledSelector);
+    if (class_addMethod(classType, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))) {
+        class_replaceMethod(classType, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
+    } else {
+        method_exchangeImplementations(originalMethod, swizzledMethod);
+    }
+}
+
 + (UIColor *)colorFromString:(NSString *)string{
     if (string == nil
         || ![string isKindOfClass:[NSString class]]

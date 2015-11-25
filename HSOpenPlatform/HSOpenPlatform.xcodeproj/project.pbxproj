@@ -759,6 +759,10 @@
 		5FDF1A361BD8BE5C0059B3F2 /* HSSubscribedBussinessBasicService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDF1A351BD8BE5C0059B3F2 /* HSSubscribedBussinessBasicService.m */; };
 		5FE602281BF1968900DA34EF /* KSASCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE602271BF1968900DA34EF /* KSASCollectionViewController.m */; };
 		5FE6022B1BF19A2A00DA34EF /* KSASCollectionViewCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE6022A1BF19A2A00DA34EF /* KSASCollectionViewCellNode.m */; };
+		5FFA36941C05542F00546790 /* RCTWrapperViewController+KSReactNativeViewControllerListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFA36931C05542F00546790 /* RCTWrapperViewController+KSReactNativeViewControllerListener.m */; };
+		5FFA36A51C05622E00546790 /* nav_Black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FFA36A31C05622E00546790 /* nav_Black@2x.png */; };
+		5FFA36A61C05622E00546790 /* nav_Black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FFA36A41C05622E00546790 /* nav_Black@3x.png */; };
+		5FFA36A91C056CA600546790 /* KSReactNavigationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFA36A81C056CA600546790 /* KSReactNavigationButton.m */; };
 		5FFBD0B11BF585AC00A252C8 /* HSBusinessUserInfoListService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFBD0B01BF585AC00A252C8 /* HSBusinessUserInfoListService.m */; };
 		5FFBD0C01BF59D1900A252C8 /* HSPopMenuListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFBD0B91BF59D1900A252C8 /* HSPopMenuListView.m */; };
 		5FFBD0C11BF59D1900A252C8 /* EHPopMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFBD0BC1BF59D1900A252C8 /* EHPopMenuCell.m */; };
@@ -2188,6 +2192,12 @@
 		5FE602271BF1968900DA34EF /* KSASCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSASCollectionViewController.m; sourceTree = "<group>"; };
 		5FE602291BF19A2A00DA34EF /* KSASCollectionViewCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSASCollectionViewCellNode.h; sourceTree = "<group>"; };
 		5FE6022A1BF19A2A00DA34EF /* KSASCollectionViewCellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSASCollectionViewCellNode.m; sourceTree = "<group>"; };
+		5FFA36921C05542F00546790 /* RCTWrapperViewController+KSReactNativeViewControllerListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RCTWrapperViewController+KSReactNativeViewControllerListener.h"; sourceTree = "<group>"; };
+		5FFA36931C05542F00546790 /* RCTWrapperViewController+KSReactNativeViewControllerListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RCTWrapperViewController+KSReactNativeViewControllerListener.m"; sourceTree = "<group>"; };
+		5FFA36A31C05622E00546790 /* nav_Black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_Black@2x.png"; sourceTree = "<group>"; };
+		5FFA36A41C05622E00546790 /* nav_Black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_Black@3x.png"; sourceTree = "<group>"; };
+		5FFA36A71C056CA600546790 /* KSReactNavigationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSReactNavigationButton.h; sourceTree = "<group>"; };
+		5FFA36A81C056CA600546790 /* KSReactNavigationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSReactNavigationButton.m; sourceTree = "<group>"; };
 		5FFBD0AF1BF585AC00A252C8 /* HSBusinessUserInfoListService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSBusinessUserInfoListService.h; sourceTree = "<group>"; };
 		5FFBD0B01BF585AC00A252C8 /* HSBusinessUserInfoListService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSBusinessUserInfoListService.m; sourceTree = "<group>"; };
 		5FFBD0B81BF59D1900A252C8 /* HSPopMenuListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSPopMenuListView.h; sourceTree = "<group>"; };
@@ -2914,6 +2924,10 @@
 				5F2CDB201C0317CC007D03CF /* KSReactOpenURLAction.m */,
 				5F2CDB221C042F88007D03CF /* KSReactShareInsance.h */,
 				5F2CDB231C042F88007D03CF /* KSReactShareInsance.m */,
+				5FFA36A71C056CA600546790 /* KSReactNavigationButton.h */,
+				5FFA36A81C056CA600546790 /* KSReactNavigationButton.m */,
+				5FFA36921C05542F00546790 /* RCTWrapperViewController+KSReactNativeViewControllerListener.h */,
+				5FFA36931C05542F00546790 /* RCTWrapperViewController+KSReactNativeViewControllerListener.m */,
 			);
 			path = KSReactViewController;
 			sourceTree = "<group>";
@@ -5804,6 +5818,8 @@
 				354D78F01BDA220500F6273B /* icon_Flow@3x.png */,
 				354D78F11BDA220500F6273B /* icon_Sim@2x.png */,
 				354D78F21BDA220500F6273B /* icon_Sim@3x.png */,
+				5FFA36A31C05622E00546790 /* nav_Black@2x.png */,
+				5FFA36A41C05622E00546790 /* nav_Black@3x.png */,
 				5FFDE7F61BC7AB590087B9E0 /* gz_image_loading.png */,
 			);
 			path = commonImages;
@@ -6222,6 +6238,7 @@
 			files = (
 				5F66C51B1BBA5CC500CC21F7 /* RecordingSignal001@2x.png in Resources */,
 				5F66C04C1BBA5B3600CC21F7 /* Main.storyboard in Resources */,
+				5FFA36A51C05622E00546790 /* nav_Black@2x.png in Resources */,
 				5FB743081BE075BB004D2743 /* nav_Message_prompt@2x.png in Resources */,
 				5FFDE7701BC65B720087B9E0 /* img_login@2x.png in Resources */,
 				5FFDE76B1BC6596C0087B9E0 /* btn_login_h@3x.png in Resources */,
@@ -6515,6 +6532,7 @@
 				5FC5AF011BFB258F0096CDDA /* icon_voice05_2@3x.png in Resources */,
 				3527ECBC1BE072E9007167A3 /* bg_address01@2x.png in Resources */,
 				5F53247C1BFB00420070D40B /* btn_Delete@2x.png in Resources */,
+				5FFA36A61C05622E00546790 /* nav_Black@3x.png in Resources */,
 				5FB743091BE075BB004D2743 /* nav_Message_prompt@3x.png in Resources */,
 				396494011BDF0E3D0031363B /* icon_mobaihe@3x.png in Resources */,
 				5F66C45E1BBA5CC500CC21F7 /* ico_input_password_press@2x.png in Resources */,
@@ -6586,6 +6604,7 @@
 				5FFDE8191BCB4D900087B9E0 /* HSActivityInfoListViewController.m in Sources */,
 				5F66C5451BBA5CC600CC21F7 /* PagedFlowView.m in Sources */,
 				5F66C4951BBA5CC500CC21F7 /* WeAppUtils.m in Sources */,
+				5FFA36A91C056CA600546790 /* KSReactNavigationButton.m in Sources */,
 				5F66C4531BBA5CC500CC21F7 /* KSResetView.m in Sources */,
 				5F66C4E81BBA5CC500CC21F7 /* LKBadgeView.m in Sources */,
 				5F66C53E1BBA5CC600CC21F7 /* MJRefreshConst.m in Sources */,
@@ -6758,6 +6777,7 @@
 				5F66C4C31BBA5CC500CC21F7 /* ViewController+MASAdditions.m in Sources */,
 				5F1E4FB81BFB2D2F0051997E /* HSBusinessUserInfoEditAlertView.m in Sources */,
 				5F66C4761BBA5CC500CC21F7 /* KSAdapterService.m in Sources */,
+				5FFA36941C05542F00546790 /* RCTWrapperViewController+KSReactNativeViewControllerListener.m in Sources */,
 				5F2CDB211C0317CC007D03CF /* KSReactOpenURLAction.m in Sources */,
 				3566DE901BEB510B00F327C5 /* HSAMapPoiSearchService.m in Sources */,
 				5F0BCB6D1BBA6FBE00CFE4A4 /* EHLog.m in Sources */,
@@ -7190,6 +7210,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/include/libxml2,
 					"$(SRCROOT)/HSOpenPlatform/ThirdParty/ReactNative/React/Base",
+					"$(SRCROOT)/HSOpenPlatform/ThirdParty/ReactNative/React/Views",
 				);
 				INFOPLIST_FILE = HSOpenPlatform/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -7234,6 +7255,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/include/libxml2,
 					"$(SRCROOT)/HSOpenPlatform/ThirdParty/ReactNative/React/Base",
+					"$(SRCROOT)/HSOpenPlatform/ThirdParty/ReactNative/React/Views",
 				);
 				INFOPLIST_FILE = HSOpenPlatform/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

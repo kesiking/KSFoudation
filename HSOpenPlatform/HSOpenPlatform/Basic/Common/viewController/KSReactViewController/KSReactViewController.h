@@ -11,7 +11,7 @@
 #import "KSViewController.h"
 #import "RCTBridgeModule.h"
 
-@interface KSReactViewController : KSViewController<RCTBridgeModule>
+@interface KSReactViewController : KSViewController
 
 @end
 
