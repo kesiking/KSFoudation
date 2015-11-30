@@ -382,8 +382,6 @@
 - (void)dealloc {
     self.view = nil;
     self.userInfo = nil;
-    
-
 }
 
 
@@ -409,7 +407,7 @@ static char KSCSLinearLayoutItem_Key;
 
 - (void)setLinearLayoutItem:(CSLinearLayoutItem *)linearLayoutItem
 {
-    objc_setAssociatedObject(self, &KSCSLinearLayoutItem_Key, linearLayoutItem, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, &KSCSLinearLayoutItem_Key, linearLayoutItem, OBJC_ASSOCIATION_ASSIGN);
 }
 
 - (CSLinearLayoutItem *)linearLayoutItem
