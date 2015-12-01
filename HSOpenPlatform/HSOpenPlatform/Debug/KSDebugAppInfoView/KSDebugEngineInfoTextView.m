@@ -7,7 +7,6 @@
 //
 
 #import "KSDebugEngineInfoTextView.h"
-#import "WeAppConstant.h"
 
 @implementation KSDebugEngineInfoTextView
 

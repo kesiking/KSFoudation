@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "KSServiceDebug_PlotsView.h"
 #import "KSDebugMemoryModel.h"
+#import "KSDebugMaroc.h"
 
 @interface KSDebugInfoBasicView : UIView<KSDebugMemoryModelProtocol>
 

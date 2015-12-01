@@ -32,7 +32,7 @@
 {
     self = [super init];
     if (self) {
-        [self setFrame:CGRectMake(0, 0, SCREEN_WIDTH, defaultHeight)];
+        [self setFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, defaultHeight)];
         [self setupView];
     }
     return self;

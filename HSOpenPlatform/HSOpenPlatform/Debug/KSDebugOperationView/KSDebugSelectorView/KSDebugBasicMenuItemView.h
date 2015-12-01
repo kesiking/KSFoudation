@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KSDebugMaroc.h"
 
 @protocol KSDebugBasicMenuItemProtocol <NSObject>
 

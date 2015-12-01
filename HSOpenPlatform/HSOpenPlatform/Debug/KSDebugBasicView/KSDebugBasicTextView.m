@@ -13,7 +13,7 @@
 #define kViewHeight 200
 #define navigationHeight (64)
 #define toolBarHeight (44)
-#define keyboardRemainHeight(keyboardHeight) (SCREEN_HEIGHT - keyboardHeight)
+#define keyboardRemainHeight(keyboardHeight) ([[UIScreen mainScreen] bounds].size.height - keyboardHeight)
 #define textViewHeight(viewHeight,keyboardHeight) MIN(viewHeight,keyboardRemainHeight(keyboardHeight))
 
 @interface KSDebugBasicTextView()

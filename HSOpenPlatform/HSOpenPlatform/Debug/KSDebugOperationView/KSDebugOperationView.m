@@ -11,6 +11,7 @@
 #import "KSDebugSelectorButton.h"
 #import "KSDebugGridView.h"
 #import "KSDebugPropertyButton.h"
+#import "KSDebugMaroc.h"
 
 #define button_width (44)
 #define button_height button_width
@@ -67,7 +68,7 @@ static NSMutableArray *debugViews;
         NSString* className = [dic objectForKey:@"className"];
         Class viewClass = NSClassFromString(className);
         if (viewClass) {
-            KSDebugBasicView *view = [[viewClass alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+            KSDebugBasicView *view = [[viewClass alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
             [_pageViews addObject:view];
         }
     }
@@ -101,8 +102,8 @@ static NSMutableArray *debugViews;
     if (_showAndHideButton == nil) {
         _showAndHideButton = [[KSDebugPropertyButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.frame) - button_width, 0, button_width, button_width)];
         [_showAndHideButton setDragEnable:YES];
-        [_showAndHideButton setBackgroundColor:RGB_A(0x00, 0x00, 0x00,0.4)];
-        _showAndHideButton.layer.borderColor = RGB_A(0xff, 0xff, 0xff, 1.0).CGColor;
+        [_showAndHideButton setBackgroundColor:KSDebugRGB_A(0x00, 0x00, 0x00,0.4)];
+        _showAndHideButton.layer.borderColor = KSDebugRGB_A(0xff, 0xff, 0xff, 1.0).CGColor;
         _showAndHideButton.layer.borderWidth = 1.0;
         _showAndHideButton.layer.masksToBounds = YES;
         _showAndHideButton.layer.cornerRadius = _showAndHideButton.frame.size.width / 2;
@@ -130,8 +131,8 @@ static NSMutableArray *debugViews;
 -(void)showAndHideButtonClickEvent{
     static BOOL showDebugViews = NO;
     if (showDebugViews) {
-        [_showAndHideButton setBackgroundColor:RGB_A(0x00, 0x00, 0x00,0.4)];
-        _showAndHideButton.layer.borderColor = RGB_A(0xff, 0xff, 0xff, 1.0).CGColor;
+        [_showAndHideButton setBackgroundColor:KSDebugRGB_A(0x00, 0x00, 0x00,0.4)];
+        _showAndHideButton.layer.borderColor = KSDebugRGB_A(0xff, 0xff, 0xff, 1.0).CGColor;
         [self.showAndHideButton setTitle:@"D" forState:UIControlStateNormal];
         [self.showAndHideButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [UIView animateWithDuration:0.3 animations:^{
@@ -140,8 +141,8 @@ static NSMutableArray *debugViews;
         }];
         showDebugViews = NO;
     }else{
-        [_showAndHideButton setBackgroundColor:RGB_A(0xff, 0xff, 0xff,0.4)];
-        _showAndHideButton.layer.borderColor = RGB_A(0x00, 0x00, 0x00, 1.0).CGColor;
+        [_showAndHideButton setBackgroundColor:KSDebugRGB_A(0xff, 0xff, 0xff,0.4)];
+        _showAndHideButton.layer.borderColor = KSDebugRGB_A(0x00, 0x00, 0x00, 1.0).CGColor;
         [self.showAndHideButton setTitle:@"D" forState:UIControlStateNormal];
         [self.showAndHideButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [UIView animateWithDuration:0.3 animations:^{
@@ -183,13 +184,13 @@ static NSMutableArray *debugViews;
     KSDebugSelectorButton * selectorView = (KSDebugSelectorButton*)[self.selectorView getSelectorWithIndex:index];
     if (selectorView && [selectorView isKindOfClass:[KSDebugSelectorButton class]]) {
         if (selectorView.isSelected) {
-            [selectorView.imageButton setBackgroundColor:RGB_A(0x00, 0x00, 0x00, 0.4)];
-            selectorView.imageButton.layer.borderColor = RGB_A(0xff, 0xff, 0xff, 1.0).CGColor;
+            [selectorView.imageButton setBackgroundColor:KSDebugRGB_A(0x00, 0x00, 0x00, 0.4)];
+            selectorView.imageButton.layer.borderColor = KSDebugRGB_A(0xff, 0xff, 0xff, 1.0).CGColor;
             [selectorView.imageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             selectorView.isSelected = NO;
         }else{
-            [selectorView.imageButton setBackgroundColor:RGB_A(0xff, 0xff, 0xff, 0.4)];
-            selectorView.imageButton.layer.borderColor = RGB_A(0x00, 0x00, 0x00, 1.0).CGColor;
+            [selectorView.imageButton setBackgroundColor:KSDebugRGB_A(0xff, 0xff, 0xff, 0.4)];
+            selectorView.imageButton.layer.borderColor = KSDebugRGB_A(0x00, 0x00, 0x00, 1.0).CGColor;
             [selectorView.imageButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             selectorView.isSelected = YES;
         }
@@ -220,8 +221,8 @@ static NSMutableArray *debugViews;
     if ([itemView isKindOfClass:[UIView class]]) {
         KSDebugSelectorButton * selectorView = (KSDebugSelectorButton*)itemView;
         [selectorView setBackgroundColor:[UIColor clearColor]];
-        [selectorView.imageButton setBackgroundColor:RGB_A(0x00, 0x00, 0x00, 0.4)];
-        selectorView.imageButton.layer.borderColor = RGB_A(0xff, 0xff, 0xff, 1.0).CGColor;
+        [selectorView.imageButton setBackgroundColor:KSDebugRGB_A(0x00, 0x00, 0x00, 0.4)];
+        selectorView.imageButton.layer.borderColor = KSDebugRGB_A(0xff, 0xff, 0xff, 1.0).CGColor;
         [selectorView.imageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         selectorView.imageButton.layer.masksToBounds = YES;
         selectorView.imageButton.layer.cornerRadius = 10;
@@ -237,13 +238,13 @@ static NSMutableArray *debugViews;
     if ([itemView isKindOfClass:[UIView class]]) {
         KSDebugSelectorButton * selectorView = (KSDebugSelectorButton*)itemView;
         if (!isSelect) {
-            [selectorView.imageButton setBackgroundColor:RGB_A(0x00, 0x00, 0x00, 0.4)];
-            selectorView.imageButton.layer.borderColor = RGB_A(0xff, 0xff, 0xff, 1.0).CGColor;
+            [selectorView.imageButton setBackgroundColor:KSDebugRGB_A(0x00, 0x00, 0x00, 0.4)];
+            selectorView.imageButton.layer.borderColor = KSDebugRGB_A(0xff, 0xff, 0xff, 1.0).CGColor;
             [selectorView.imageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             selectorView.isSelected = NO;
         }else{
-            [selectorView.imageButton setBackgroundColor:RGB_A(0xff, 0xff, 0xff, 0.4)];
-            selectorView.imageButton.layer.borderColor = RGB_A(0x00, 0x00, 0x00, 1.0).CGColor;
+            [selectorView.imageButton setBackgroundColor:KSDebugRGB_A(0xff, 0xff, 0xff, 0.4)];
+            selectorView.imageButton.layer.borderColor = KSDebugRGB_A(0x00, 0x00, 0x00, 1.0).CGColor;
             [selectorView.imageButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             selectorView.isSelected = YES;
         }

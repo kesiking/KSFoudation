@@ -42,7 +42,7 @@
 }
 
 -(void)setupView{
-    self.backgroundColor = RGB(0xfb, 0xfb, 0xfb);
+    self.backgroundColor = KSDebugRGB(0xfb, 0xfb, 0xfb);
     [self initButton];
     [self initLabelAndPoint];
     //    [self initSelectorIcon];

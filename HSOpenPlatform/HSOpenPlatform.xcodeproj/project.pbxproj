@@ -148,6 +148,7 @@
 		5F0BCB6C1BBA6FBE00CFE4A4 /* EHLoadingToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0BCB621BBA6FBE00CFE4A4 /* EHLoadingToast.m */; };
 		5F0BCB6D1BBA6FBE00CFE4A4 /* EHLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0BCB651BBA6FBE00CFE4A4 /* EHLog.m */; };
 		5F0BCB6E1BBA6FBE00CFE4A4 /* EHLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0BCB671BBA6FBE00CFE4A4 /* EHLogFormatter.m */; };
+		5F0C0B6E1C0DCB0B007DAB46 /* KSDebugSelectorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0C0B6D1C0DCB0B007DAB46 /* KSDebugSelectorButton.m */; };
 		5F0F91031BCE52590021006C /* KSPageControllerContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0F91021BCE52590021006C /* KSPageControllerContainer.m */; };
 		5F17FFAD1BE098A000670317 /* ico_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F17FFA91BE098A000670317 /* ico_camera@2x.png */; };
 		5F17FFAE1BE098A000670317 /* ico_camera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F17FFAA1BE098A000670317 /* ico_camera@3x.png */; };
@@ -696,6 +697,10 @@
 		5F7B875A1C0DC13E00D00CB3 /* KSDebugPropertyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B87481C0DC13E00D00CB3 /* KSDebugPropertyButton.m */; };
 		5F7B875B1C0DC13E00D00CB3 /* KSDebugRequestDataTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B874B1C0DC13E00D00CB3 /* KSDebugRequestDataTextView.m */; };
 		5F7B87781C0DC1C800D00CB3 /* KSDebugModifyComponentTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B87771C0DC1C800D00CB3 /* KSDebugModifyComponentTextView.m */; };
+		5F7B877C1C0DC5C200D00CB3 /* KSDebugSelectorBasicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B877B1C0DC5C200D00CB3 /* KSDebugSelectorBasicView.m */; };
+		5F7B877F1C0DC67F00D00CB3 /* KSDebugBasicMenuItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B877E1C0DC67F00D00CB3 /* KSDebugBasicMenuItemView.m */; };
+		5F7B87821C0DC70F00D00CB3 /* KSDebugButtonWidthAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B87811C0DC70F00D00CB3 /* KSDebugButtonWidthAlgorithm.m */; };
+		5F7B87891C0DC8CA00D00CB3 /* KSDebugSimpleSelectorScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B87881C0DC8CA00D00CB3 /* KSDebugSimpleSelectorScrollView.m */; };
 		5FA309D91BDFA00C00C2EC21 /* message_list_info_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FA309D71BDFA00C00C2EC21 /* message_list_info_background.png */; };
 		5FA309DA1BDFA00C00C2EC21 /* message_list_info_btn_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FA309D81BDFA00C00C2EC21 /* message_list_info_btn_background.png */; };
 		5FB52ACF1BE31B9100AA7D11 /* public_switch_set_track@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FB52ACD1BE31B9100AA7D11 /* public_switch_set_track@2x.png */; };
@@ -1192,6 +1197,9 @@
 		5F0BCB651BBA6FBE00CFE4A4 /* EHLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EHLog.m; sourceTree = "<group>"; };
 		5F0BCB661BBA6FBE00CFE4A4 /* EHLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EHLogFormatter.h; sourceTree = "<group>"; };
 		5F0BCB671BBA6FBE00CFE4A4 /* EHLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EHLogFormatter.m; sourceTree = "<group>"; };
+		5F0C0B6C1C0DCB0B007DAB46 /* KSDebugSelectorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugSelectorButton.h; sourceTree = "<group>"; };
+		5F0C0B6D1C0DCB0B007DAB46 /* KSDebugSelectorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugSelectorButton.m; sourceTree = "<group>"; };
+		5F0C0BFB1C0DCD52007DAB46 /* KSDebugMaroc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSDebugMaroc.h; sourceTree = "<group>"; };
 		5F0F91011BCE52590021006C /* KSPageControllerContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPageControllerContainer.h; sourceTree = "<group>"; };
 		5F0F91021BCE52590021006C /* KSPageControllerContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPageControllerContainer.m; sourceTree = "<group>"; };
 		5F17FFA91BE098A000670317 /* ico_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_camera@2x.png"; sourceTree = "<group>"; };
@@ -2153,6 +2161,15 @@
 		5F7B874B1C0DC13E00D00CB3 /* KSDebugRequestDataTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugRequestDataTextView.m; sourceTree = "<group>"; };
 		5F7B87761C0DC1C800D00CB3 /* KSDebugModifyComponentTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugModifyComponentTextView.h; sourceTree = "<group>"; };
 		5F7B87771C0DC1C800D00CB3 /* KSDebugModifyComponentTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugModifyComponentTextView.m; sourceTree = "<group>"; };
+		5F7B877A1C0DC5C200D00CB3 /* KSDebugSelectorBasicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugSelectorBasicView.h; sourceTree = "<group>"; };
+		5F7B877B1C0DC5C200D00CB3 /* KSDebugSelectorBasicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugSelectorBasicView.m; sourceTree = "<group>"; };
+		5F7B877D1C0DC67F00D00CB3 /* KSDebugBasicMenuItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugBasicMenuItemView.h; sourceTree = "<group>"; };
+		5F7B877E1C0DC67F00D00CB3 /* KSDebugBasicMenuItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugBasicMenuItemView.m; sourceTree = "<group>"; };
+		5F7B87801C0DC70F00D00CB3 /* KSDebugButtonWidthAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugButtonWidthAlgorithm.h; sourceTree = "<group>"; };
+		5F7B87811C0DC70F00D00CB3 /* KSDebugButtonWidthAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugButtonWidthAlgorithm.m; sourceTree = "<group>"; };
+		5F7B87861C0DC88400D00CB3 /* KSDebugSelectorViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSDebugSelectorViewDelegate.h; sourceTree = "<group>"; };
+		5F7B87871C0DC8CA00D00CB3 /* KSDebugSimpleSelectorScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugSimpleSelectorScrollView.h; sourceTree = "<group>"; };
+		5F7B87881C0DC8CA00D00CB3 /* KSDebugSimpleSelectorScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugSimpleSelectorScrollView.m; sourceTree = "<group>"; };
 		5FA221E21BE077780032336C /* EHNotificationConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EHNotificationConst.h; sourceTree = "<group>"; };
 		5FA309D71BDFA00C00C2EC21 /* message_list_info_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message_list_info_background.png; sourceTree = "<group>"; };
 		5FA309D81BDFA00C00C2EC21 /* message_list_info_btn_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message_list_info_btn_background.png; sourceTree = "<group>"; };
@@ -2929,6 +2946,7 @@
 				5F7B87751C0DC1C800D00CB3 /* KSDebugModifyInfoView */,
 				5F1A1B101C0DA11D00B72CFF /* KSDebugEnviroment.h */,
 				5F1A1B111C0DA11D00B72CFF /* KSDebugEnviroment.m */,
+				5F0C0BFB1C0DCD52007DAB46 /* KSDebugMaroc.h */,
 				5F1A1B141C0DA11D00B72CFF /* KSDebugManager.h */,
 				5F1A1B151C0DA11D00B72CFF /* KSDebugManager.m */,
 			);
@@ -5571,6 +5589,7 @@
 		5F7B87441C0DC13E00D00CB3 /* KSDebugOperationView */ = {
 			isa = PBXGroup;
 			children = (
+				5F7B87791C0DC56200D00CB3 /* KSDebugSelectorView */,
 				5F7B87451C0DC13E00D00CB3 /* KSDebugOperationView.h */,
 				5F7B87461C0DC13E00D00CB3 /* KSDebugOperationView.m */,
 				5F7B87471C0DC13E00D00CB3 /* KSDebugPropertyButton.h */,
@@ -5595,6 +5614,24 @@
 				5F7B87771C0DC1C800D00CB3 /* KSDebugModifyComponentTextView.m */,
 			);
 			path = KSDebugModifyInfoView;
+			sourceTree = "<group>";
+		};
+		5F7B87791C0DC56200D00CB3 /* KSDebugSelectorView */ = {
+			isa = PBXGroup;
+			children = (
+				5F7B877A1C0DC5C200D00CB3 /* KSDebugSelectorBasicView.h */,
+				5F7B877B1C0DC5C200D00CB3 /* KSDebugSelectorBasicView.m */,
+				5F7B877D1C0DC67F00D00CB3 /* KSDebugBasicMenuItemView.h */,
+				5F7B877E1C0DC67F00D00CB3 /* KSDebugBasicMenuItemView.m */,
+				5F7B87801C0DC70F00D00CB3 /* KSDebugButtonWidthAlgorithm.h */,
+				5F7B87811C0DC70F00D00CB3 /* KSDebugButtonWidthAlgorithm.m */,
+				5F0C0B6C1C0DCB0B007DAB46 /* KSDebugSelectorButton.h */,
+				5F0C0B6D1C0DCB0B007DAB46 /* KSDebugSelectorButton.m */,
+				5F7B87861C0DC88400D00CB3 /* KSDebugSelectorViewDelegate.h */,
+				5F7B87871C0DC8CA00D00CB3 /* KSDebugSimpleSelectorScrollView.h */,
+				5F7B87881C0DC8CA00D00CB3 /* KSDebugSimpleSelectorScrollView.m */,
+			);
+			path = KSDebugSelectorView;
 			sourceTree = "<group>";
 		};
 		5FA309DB1BDFB4FC00C2EC21 /* SVProgressHUD */ = {
@@ -6932,6 +6969,7 @@
 				5F66C3FC1BBA5CC500CC21F7 /* TBModelStatusInfo.m in Sources */,
 				5FDF19E11BD496370059B3F2 /* HSMyMessageModel.m in Sources */,
 				5FFBD0C01BF59D1900A252C8 /* HSPopMenuListView.m in Sources */,
+				5F7B87821C0DC70F00D00CB3 /* KSDebugButtonWidthAlgorithm.m in Sources */,
 				5F66C4C51BBA5CC500CC21F7 /* NSString+MessageInputView.m in Sources */,
 				3566DEE51BF4615200F327C5 /* HSAfterSaleListView.m in Sources */,
 				5F66C4A01BBA5CC500CC21F7 /* UIImage+Resize.m in Sources */,
@@ -7153,6 +7191,7 @@
 				5F66C5381BBA5CC600CC21F7 /* MJRefreshBackNormalFooter.m in Sources */,
 				5FFDE7CD1BC7AA1A0087B9E0 /* EHBigUserPicShowController.m in Sources */,
 				5F0BCB571BBA6EAC00CFE4A4 /* DDContextFilterLogFormatter.m in Sources */,
+				5F0C0B6E1C0DCB0B007DAB46 /* KSDebugSelectorButton.m in Sources */,
 				5F66C4CF1BBA5CC500CC21F7 /* XHMessageBubbleHelper.m in Sources */,
 				5FFBD0B11BF585AC00A252C8 /* HSBusinessUserInfoListService.m in Sources */,
 				5F66C3F51BBA5CC500CC21F7 /* KSErrorView.m in Sources */,
@@ -7166,6 +7205,7 @@
 				5FFDE7C71BC7A9160087B9E0 /* EHSwitch.m in Sources */,
 				35C47CCB1BCE4E13004164F5 /* HSHomeBusinessView.m in Sources */,
 				5F66C4BD1BBA5CC500CC21F7 /* MASLayoutConstraint.m in Sources */,
+				5F7B877C1C0DC5C200D00CB3 /* KSDebugSelectorBasicView.m in Sources */,
 				5F66C47E1BBA5CC500CC21F7 /* AFSecurityPolicy.m in Sources */,
 				5F66C4211BBA5CC500CC21F7 /* TBTradeSKUPropSelectControl.m in Sources */,
 				5F66C4F61BBA5CC500CC21F7 /* SETextSelectionView.m in Sources */,
@@ -7182,6 +7222,7 @@
 				5F66C4501BBA5CC500CC21F7 /* KSRegisterView.m in Sources */,
 				3566DEBB1BF035D800F327C5 /* HSLocalAfterSaleModel.m in Sources */,
 				5F66C4491BBA5CC500CC21F7 /* KSModifyPasswordView.m in Sources */,
+				5F7B87891C0DC8CA00D00CB3 /* KSDebugSimpleSelectorScrollView.m in Sources */,
 				5F66C48A1BBA5CC500CC21F7 /* KSCacheService.m in Sources */,
 				5F66C4EA1BBA5CC500CC21F7 /* SEConstants.m in Sources */,
 				5F66C4201BBA5CC500CC21F7 /* TBDetailSKUButton.m in Sources */,
@@ -7201,6 +7242,7 @@
 				5F66C43B1BBA5CC500CC21F7 /* WeAppBasicTextView.m in Sources */,
 				35C47CC81BCE4DF7004164F5 /* HSHomeServiceView.m in Sources */,
 				5F66C44C1BBA5CC500CC21F7 /* KSModifyPhoneView.m in Sources */,
+				5F7B877F1C0DC67F00D00CB3 /* KSDebugBasicMenuItemView.m in Sources */,
 				5F2CDB081C02AF82007D03CF /* KSReactURLResolver.m in Sources */,
 				5F2E22EF1BDA327B00F36DAF /* TTTAttributedLabel.m in Sources */,
 				5FFDE7BE1BC7A26E0087B9E0 /* TBPageControl.m in Sources */,

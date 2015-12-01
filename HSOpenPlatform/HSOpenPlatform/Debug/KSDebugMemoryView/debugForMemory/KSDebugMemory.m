@@ -68,7 +68,7 @@
         [UIView setAnimationRepeatAutoreverses:NO];
         [UIView setAnimationRepeatCount:1];
         
-        self.backgroundColor = RGB_A(0x00, 0x00, 0x00, 0.6);
+        self.backgroundColor = KSDebugRGB_A(0x00, 0x00, 0x00, 0.6);
         
         [UIView commitAnimations];
     }

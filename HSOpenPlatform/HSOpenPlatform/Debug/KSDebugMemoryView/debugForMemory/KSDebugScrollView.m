@@ -68,7 +68,7 @@
 -(KSDebugCPUView *)cpuView{
     if (_cpuView == nil) {
         _cpuView = [[KSDebugCPUView alloc] initWithFrame:CGRectMake(0, 20, self.scrollView.frame.size.width/2 - 55, 100)];
-        [_cpuView setBackgroundColor:RGB_A(0x00, 0x00, 0x00, 0.6)];
+        [_cpuView setBackgroundColor:KSDebugRGB_A(0x00, 0x00, 0x00, 0.6)];
     }
     return _cpuView;
 }
@@ -76,7 +76,7 @@
 -(KSDebugMemory *)memoryView{
     if (_memoryView == nil) {
         _memoryView = [[KSDebugMemory alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.cpuView.frame) + 1, CGRectGetMinY(self.cpuView.frame), CGRectGetWidth(self.scrollView.frame) - CGRectGetHeight(self.cpuView.frame) - 5, CGRectGetHeight(self.cpuView.frame))];
-        [_memoryView setBackgroundColor:RGB_A(0x00, 0x00, 0x00, 0.6)];
+        [_memoryView setBackgroundColor:KSDebugRGB_A(0x00, 0x00, 0x00, 0.6)];
     }
     return _memoryView;
 }
