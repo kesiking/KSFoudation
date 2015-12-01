@@ -29,13 +29,13 @@
  *  @since 1.0
  */
 
-- (BOOL)webViewController:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
+- (BOOL)webViewController:(IMYWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 
-- (void)webViewControllerDidStartLoad:(UIWebView *)webView;
+- (void)webViewControllerDidStartLoad:(IMYWebView *)webView;
 
-- (void)webViewControllerDidFinishLoad:(UIWebView *)webView;
+- (void)webViewControllerDidFinishLoad:(IMYWebView *)webView;
 
-- (void)webViewController:(UIWebView *)webView didFailLoadWithError:(NSError *)error;
+- (void)webViewController:(IMYWebView *)webView didFailLoadWithError:(NSError *)error;
 
 // override for subclass 可控制是否展示toolBar栏
 - (BOOL)needToolbarItems;

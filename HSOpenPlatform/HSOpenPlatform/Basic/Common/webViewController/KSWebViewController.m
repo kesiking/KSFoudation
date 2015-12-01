@@ -93,42 +93,42 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - UIWebViewDelegate
 
-- (void)webViewDidStartLoad:(UIWebView *)webView {
+- (void)webViewDidStartLoad:(IMYWebView *)webView {
     [super webViewDidStartLoad:webView];
     [self webViewControllerDidStartLoad:webView];
 }
 
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+- (void)webViewDidFinishLoad:(IMYWebView *)webView {
     [super webViewDidFinishLoad:webView];
     [self webViewControllerDidFinishLoad:webView];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+- (void)webView:(IMYWebView *)webView didFailLoadWithError:(NSError *)error {
     [super webView:webView didFailLoadWithError:error];
     [self webViewController:webView didFailLoadWithError:error];
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+- (BOOL)webView:(IMYWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     [super webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
     return [self webViewController:webView shouldStartLoadWithRequest:request navigationType:navigationType];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - KSWebViewController override method
-- (BOOL)webViewController:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+- (BOOL)webViewController:(IMYWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     return YES;
 }
 
-- (void)webViewControllerDidStartLoad:(UIWebView *)webView{
+- (void)webViewControllerDidStartLoad:(IMYWebView *)webView{
     [self showLoadingView];
 }
 
-- (void)webViewControllerDidFinishLoad:(UIWebView *)webView{
+- (void)webViewControllerDidFinishLoad:(IMYWebView *)webView{
     [self hideLoadingView];
 }
 
-- (void)webViewController:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+- (void)webViewController:(IMYWebView *)webView didFailLoadWithError:(NSError *)error{
     [self hideLoadingView];
 }
 

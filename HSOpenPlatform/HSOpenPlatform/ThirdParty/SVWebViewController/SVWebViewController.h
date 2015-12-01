@@ -5,8 +5,9 @@
 //  Copyright 2010 Sam Vermette. All rights reserved.
 //
 //  https://github.com/samvermette/SVWebViewController
+#import "IMYWebView.h"
 
-@interface SVWebViewController : UIViewController<UIWebViewDelegate>
+@interface SVWebViewController : UIViewController<IMYWebViewDelegate>
 
 - (instancetype)initWithAddress:(NSString*)urlString;
 - (instancetype)initWithURL:(NSURL*)URL;
@@ -14,7 +15,7 @@
 
 - (void)setWebUrlString:(NSString*)urlString;
 
-@property (nonatomic, weak) id<UIWebViewDelegate> delegate;
+@property (nonatomic, weak) id<IMYWebViewDelegate> delegate;
 
 - (BOOL)needToolbarItems;
 

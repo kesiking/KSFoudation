@@ -18,7 +18,7 @@
 @property (nonatomic, strong) UIBarButtonItem *stopBarButtonItem;
 @property (nonatomic, strong) UIBarButtonItem *actionBarButtonItem;
 
-@property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) IMYWebView *webView;
 @property (nonatomic, strong) NSURLRequest *request;
 
 @end
@@ -29,10 +29,20 @@
 #pragma mark - Initialization
 
 - (void)dealloc {
-    [self.webView stopLoading];
+    [_webView stopLoading];
+    [_webView loadHTMLString:@"" baseURL:nil];
+    _webView.delegate = nil;
+    [_webView removeFromSuperview];
+    _webView = nil;
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    self.webView.delegate = nil;
+    self.request = nil;
     self.delegate = nil;
+    _backBarButtonItem = nil;
+    _forwardBarButtonItem = nil;
+    _refreshBarButtonItem = nil;
+    _stopBarButtonItem = nil;
+    _actionBarButtonItem = nil;
 }
 
 - (instancetype)initWithAddress:(NSString *)urlString {
@@ -49,6 +59,14 @@
         self.request = request;
     }
     return self;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    [[NSURLCache sharedURLCache] setDiskCapacity:0];
+    [[NSURLCache sharedURLCache] setMemoryCapacity:0];
 }
 
 - (void)loadRequest:(NSURLRequest*)request {
@@ -123,9 +141,9 @@
 
 #pragma mark - Getters
 
-- (UIWebView*)webView {
+- (IMYWebView*)webView {
     if(!_webView) {
-        _webView = [[UIWebView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        _webView = [[IMYWebView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         _webView.delegate = self;
         _webView.scalesPageToFit = YES;
     }
@@ -236,7 +254,7 @@
 
 #pragma mark - UIWebViewDelegate
 
-- (void)webViewDidStartLoad:(UIWebView *)webView {
+- (void)webViewDidStartLoad:(IMYWebView *)webView {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [self updateToolbarItems];
     
@@ -246,11 +264,18 @@
 }
 
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+- (void)webViewDidFinishLoad:(IMYWebView *)webView {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"WebKitCacheModelPreferenceKey"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WebKitDiskImageCacheEnabled"];//自己添加的，原文没有提到。
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WebKitOfflineWebApplicationCacheEnabled"];//自己添加的，原文没有提到。
+    [[NSUserDefaults standardUserDefaults] synchronize];
     if (self.navigationItem.title == nil) {
-        self.navigationItem.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+        [webView evaluateJavaScript:@"document.title" completionHandler:^(id stringByEvaluating, NSError *error) {
+            if ([stringByEvaluating isKindOfClass:[NSString class]]) {
+                self.navigationItem.title = stringByEvaluating;
+            }
+        }];
     }
     
     [self updateToolbarItems];
@@ -260,7 +285,7 @@
     }
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+- (void)webView:(IMYWebView *)webView didFailLoadWithError:(NSError *)error {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     [self updateToolbarItems];
     
@@ -269,7 +294,7 @@
     }
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+- (BOOL)webView:(IMYWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if ([self.delegate respondsToSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)]) {
         return [self.delegate webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
     }

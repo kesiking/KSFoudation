@@ -175,6 +175,8 @@
 		5F2E22F21BDDB54D00F36DAF /* deleteFavrate.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F2E22F01BDDB54D00F36DAF /* deleteFavrate.png */; };
 		5F2E22F31BDDB54D00F36DAF /* unDeleteFavrate.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F2E22F11BDDB54D00F36DAF /* unDeleteFavrate.png */; };
 		5F2E22F61BDDB60700F36DAF /* KSDeleteBtnViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2E22F51BDDB60700F36DAF /* KSDeleteBtnViewCell.m */; };
+		5F2FD6211C0D463E00C7A397 /* IMYWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2FD61D1C0D463E00C7A397 /* IMYWebView.m */; };
+		5F2FD6221C0D463E00C7A397 /* IMY_NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2FD6201C0D463E00C7A397 /* IMY_NJKWebViewProgress.m */; };
 		5F34ABBA1BE076CE00B69C53 /* HSUpdateMessageNumberService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F34ABB91BE076CE00B69C53 /* HSUpdateMessageNumberService.m */; };
 		5F3B9CC11BF5A30900C61C9D /* public_arrow_tbar_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B9CBD1BF5A30900C61C9D /* public_arrow_tbar_down@2x.png */; };
 		5F3B9CC21BF5A30900C61C9D /* public_arrow_tbar_down@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B9CBE1BF5A30900C61C9D /* public_arrow_tbar_down@3x.png */; };
@@ -1203,6 +1205,10 @@
 		5F2E22F11BDDB54D00F36DAF /* unDeleteFavrate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unDeleteFavrate.png; sourceTree = "<group>"; };
 		5F2E22F41BDDB60700F36DAF /* KSDeleteBtnViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDeleteBtnViewCell.h; sourceTree = "<group>"; };
 		5F2E22F51BDDB60700F36DAF /* KSDeleteBtnViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDeleteBtnViewCell.m; sourceTree = "<group>"; };
+		5F2FD61C1C0D463E00C7A397 /* IMYWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMYWebView.h; sourceTree = "<group>"; };
+		5F2FD61D1C0D463E00C7A397 /* IMYWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMYWebView.m; sourceTree = "<group>"; };
+		5F2FD61F1C0D463E00C7A397 /* IMY_NJKWebViewProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMY_NJKWebViewProgress.h; sourceTree = "<group>"; };
+		5F2FD6201C0D463E00C7A397 /* IMY_NJKWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMY_NJKWebViewProgress.m; sourceTree = "<group>"; };
 		5F34ABB81BE076CE00B69C53 /* HSUpdateMessageNumberService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSUpdateMessageNumberService.h; sourceTree = "<group>"; };
 		5F34ABB91BE076CE00B69C53 /* HSUpdateMessageNumberService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSUpdateMessageNumberService.m; sourceTree = "<group>"; };
 		5F3B9CBD1BF5A30900C61C9D /* public_arrow_tbar_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "public_arrow_tbar_down@2x.png"; sourceTree = "<group>"; };
@@ -2955,6 +2961,25 @@
 				5F2E22EE1BDA327B00F36DAF /* TTTAttributedLabel.m */,
 			);
 			path = TTTAttributedLabel;
+			sourceTree = "<group>";
+		};
+		5F2FD61B1C0D463E00C7A397 /* KWWebView */ = {
+			isa = PBXGroup;
+			children = (
+				5F2FD61C1C0D463E00C7A397 /* IMYWebView.h */,
+				5F2FD61D1C0D463E00C7A397 /* IMYWebView.m */,
+				5F2FD61E1C0D463E00C7A397 /* UIWebViewProgress */,
+			);
+			path = KWWebView;
+			sourceTree = "<group>";
+		};
+		5F2FD61E1C0D463E00C7A397 /* UIWebViewProgress */ = {
+			isa = PBXGroup;
+			children = (
+				5F2FD61F1C0D463E00C7A397 /* IMY_NJKWebViewProgress.h */,
+				5F2FD6201C0D463E00C7A397 /* IMY_NJKWebViewProgress.m */,
+			);
+			path = UIWebViewProgress;
 			sourceTree = "<group>";
 		};
 		5F34ABB71BE076CE00B69C53 /* HSMessageNumberService */ = {
@@ -4981,6 +5006,7 @@
 		5F66C3951BBA5CC400CC21F7 /* SVWebViewController */ = {
 			isa = PBXGroup;
 			children = (
+				5F2FD61B1C0D463E00C7A397 /* KWWebView */,
 				5F66C3961BBA5CC400CC21F7 /* SVWebViewController.strings */,
 				5F66C39F1BBA5CC400CC21F7 /* SVModalWebViewController.h */,
 				5F66C3A01BBA5CC400CC21F7 /* SVModalWebViewController.m */,
@@ -7006,9 +7032,11 @@
 				5F66C53A1BBA5CC600CC21F7 /* MJRefreshGifHeader.m in Sources */,
 				5F66C4011BBA5CC500CC21F7 /* WeAppColorStyleSheet.m in Sources */,
 				5F66C5631BBA5CC600CC21F7 /* SevenSwitch.m in Sources */,
+				5F2FD6221C0D463E00C7A397 /* IMY_NJKWebViewProgress.m in Sources */,
 				5FFDE8461BCCEE2E0087B9E0 /* HSActivityInfoPageListService.m in Sources */,
 				5FCF28F31BF41F7A00432059 /* HSBussinessDetailVerticalContainer.m in Sources */,
 				396494061BDF13190031363B /* HSAppDetailInfoModel.m in Sources */,
+				5F2FD6211C0D463E00C7A397 /* IMYWebView.m in Sources */,
 				5F0BCB511BBA6EAC00CFE4A4 /* DDAbstractDatabaseLogger.m in Sources */,
 				5F66C4D31BBA5CC500CC21F7 /* XHDisplayEmotionViewController.m in Sources */,
 				5FFDE7CE1BC7AA1A0087B9E0 /* EHMyInfoViewController.m in Sources */,
