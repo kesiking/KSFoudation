@@ -108,7 +108,7 @@
 
 //隐藏键盘
 - (void)resignKeyboard {
-    [self.debugTextView resignFirstResponder];
+    [_debugTextView resignFirstResponder];
 }
 
 -(void)startDebug{

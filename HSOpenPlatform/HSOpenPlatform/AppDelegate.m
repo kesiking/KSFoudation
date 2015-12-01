@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "EHSocializedShareConfig.h"
 #import "EHTabBarViewController.h"
+#import "KSDebugManager.h"
 
 @interface AppDelegate ()
 
@@ -50,6 +51,7 @@
     [MobClick setLogEnabled:YES];
     #endif
 #endif
+    [[KSDebugManager shareInstance] setWeApp];
 }
 
 -(void)configUIContent{

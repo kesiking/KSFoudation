@@ -39,7 +39,7 @@ static NSMutableArray *debugViews;
 {
     self = [super init];
     if (self) {
-        [self setupView];
+        
     }
     return self;
 }
@@ -48,7 +48,7 @@ static NSMutableArray *debugViews;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setupView];
+        
     }
     return self;
 }
@@ -182,11 +182,13 @@ static NSMutableArray *debugViews;
     WeAppSelectorButton * selectorView = (WeAppSelectorButton*)[self.selectorView getSelectorWithIndex:index];
     if (selectorView && [selectorView isKindOfClass:[WeAppSelectorButton class]]) {
         if (selectorView.isSelected) {
-            [selectorView.imageButton setBackgroundColor:RGB_A(0x00, 0x00, 0x00, 0.7)];
+            [selectorView.imageButton setBackgroundColor:RGB_A(0x00, 0x00, 0x00, 0.4)];
+            selectorView.imageButton.layer.borderColor = RGB_A(0xff, 0xff, 0xff, 1.0).CGColor;
             [selectorView.imageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             selectorView.isSelected = NO;
         }else{
-            [selectorView.imageButton setBackgroundColor:RGB_A(0xff, 0xff, 0xff, 0.7)];
+            [selectorView.imageButton setBackgroundColor:RGB_A(0xff, 0xff, 0xff, 0.4)];
+            selectorView.imageButton.layer.borderColor = RGB_A(0x00, 0x00, 0x00, 1.0).CGColor;
             [selectorView.imageButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             selectorView.isSelected = YES;
         }
@@ -217,10 +219,12 @@ static NSMutableArray *debugViews;
     if ([itemView isKindOfClass:[UIView class]]) {
         WeAppSelectorButton * selectorView = (WeAppSelectorButton*)itemView;
         [selectorView setBackgroundColor:[UIColor clearColor]];
-        [selectorView.imageButton setBackgroundColor:RGB_A(0x00, 0x00, 0x00, 0.7)];
+        [selectorView.imageButton setBackgroundColor:RGB_A(0x00, 0x00, 0x00, 0.4)];
+        selectorView.imageButton.layer.borderColor = RGB_A(0xff, 0xff, 0xff, 1.0).CGColor;
         [selectorView.imageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         selectorView.imageButton.layer.masksToBounds = YES;
         selectorView.imageButton.layer.cornerRadius = 10;
+        selectorView.imageButton.layer.borderWidth = 1;
         [selectorView.textLabel setBackgroundColor:[UIColor clearColor]];
         NSDictionary* dic = [self.pageButtpns objectAtIndex:index];
         NSString* title = [dic objectForKey:@"title"];
@@ -232,11 +236,13 @@ static NSMutableArray *debugViews;
     if ([itemView isKindOfClass:[UIView class]]) {
         WeAppSelectorButton * selectorView = (WeAppSelectorButton*)itemView;
         if (!isSelect) {
-            [selectorView.imageButton setBackgroundColor:RGB_A(0x00, 0x00, 0x00, 0.7)];
+            [selectorView.imageButton setBackgroundColor:RGB_A(0x00, 0x00, 0x00, 0.4)];
+            selectorView.imageButton.layer.borderColor = RGB_A(0xff, 0xff, 0xff, 1.0).CGColor;
             [selectorView.imageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             selectorView.isSelected = NO;
         }else{
-            [selectorView.imageButton setBackgroundColor:RGB_A(0xff, 0xff, 0xff, 0.7)];
+            [selectorView.imageButton setBackgroundColor:RGB_A(0xff, 0xff, 0xff, 0.4)];
+            selectorView.imageButton.layer.borderColor = RGB_A(0x00, 0x00, 0x00, 1.0).CGColor;
             [selectorView.imageButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             selectorView.isSelected = YES;
         }

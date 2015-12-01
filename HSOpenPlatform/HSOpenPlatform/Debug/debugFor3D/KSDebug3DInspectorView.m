@@ -66,7 +66,7 @@
 }
 
 -(void)show3DInspectiorView{
-    [self.inspectior3DWindow prepareShow];
+    [self.inspectior3DWindow prepareShowWithView:[[UIApplication sharedApplication] keyWindow].rootViewController.view];
     
     [UIView beginAnimations:@"OPEN" context:nil];
     [UIView setAnimationBeginsFromCurrentState:YES];

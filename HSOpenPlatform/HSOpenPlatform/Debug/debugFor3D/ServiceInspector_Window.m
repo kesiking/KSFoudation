@@ -404,6 +404,9 @@
 
 	for ( UIView * subview in view.subviews )
 	{
+        if ([view isKindOfClass:[ServiceInspector_Window class]] || view == self) {
+            continue;
+        }
 		[self buildSublayersFor:subview depth:(depth + 1 + [view.subviews indexOfObject:subview] * 0.025f) origin:layer.rect.origin];
 	}
 }
