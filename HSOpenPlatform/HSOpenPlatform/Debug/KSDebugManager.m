@@ -34,11 +34,15 @@
     return shareInstance;
 }
 
++(void)setupDebugManager{
+    [[self shareInstance] setupDebugManager];
+}
+
 -(void)setupShareInstance{
     self.debugWindow = [[UIApplication sharedApplication] keyWindow];
 }
 
--(void)setWeApp{
+-(void)setupDebugManager{
     if (_operationView == nil) {
         _operationView = [[KSDebugOperationView alloc] initWithFrame:CGRectMake(0, 44, self.debugWindow.frame.size.width, 44)];
         _operationView.backgroundColor = [UIColor clearColor];

@@ -12,6 +12,6 @@
 
 +(KSDebugManager*)shareInstance;
 
--(void)setWeApp;
++(void)setupDebugManager;
 
 @end
