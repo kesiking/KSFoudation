@@ -7,20 +7,20 @@
 //
 
 #import "KSDebugOperationView.h"
-#import "WeAppTSimpleSelectorScrollView.h"
+#import "KSDebugSimpleSelectorScrollView.h"
+#import "KSDebugSelectorButton.h"
 #import "KSDebugGridView.h"
-#import "WeAppSelectorButton.h"
 #import "KSDebugPropertyButton.h"
 
 #define button_width (44)
 #define button_height button_width
 
-@interface KSDebugOperationView() <WeAppSelectorDelegate, WeAppSelectorSourceData>
+@interface KSDebugOperationView() <KSDebugSelectorDelegate, KSDebugSelectorSourceData>
 
-@property (nonatomic, retain) KSDebugPropertyButton       *showAndHideButton;
-@property (nonatomic, retain) WeAppTSimpleSelectorScrollView *selectorView;
-@property (nonatomic, retain) NSMutableArray                 *pageButtpns;
-@property (nonatomic, retain) NSMutableArray                 *pageViews;
+@property (nonatomic, retain) KSDebugPropertyButton             *showAndHideButton;
+@property (nonatomic, retain) KSDebugSimpleSelectorScrollView   *selectorView;
+@property (nonatomic, retain) NSMutableArray                    *pageButtpns;
+@property (nonatomic, retain) NSMutableArray                    *pageViews;
 
 @end
 
@@ -55,6 +55,7 @@ static NSMutableArray *debugViews;
 
 -(void)setupView{
     _pageButtpns = [NSMutableArray arrayWithObjects:
+                    [NSDictionary dictionaryWithObjectsAndKeys:@"工具介绍",@"title",@"KSDebugEngineInfoTextView",@"className", nil],
                     [NSDictionary dictionaryWithObjectsAndKeys:@"栅格",@"title",@"KSDebugGridView",@"className", nil],nil];
     if ([KSDebugOperationView getDebugViews]) {
         [_pageButtpns addObjectsFromArray:[KSDebugOperationView getDebugViews]];
@@ -113,9 +114,9 @@ static NSMutableArray *debugViews;
     return _showAndHideButton;
 }
 
--(WeAppTSimpleSelectorScrollView *)selectorView{
+-(KSDebugSimpleSelectorScrollView *)selectorView{
     if (!_selectorView) {
-        _selectorView = [[WeAppTSimpleSelectorScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width - button_width, button_width)];
+        _selectorView = [[KSDebugSimpleSelectorScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width - button_width, button_width)];
         _selectorView.backgroundColor = [UIColor clearColor];
         [(UIView*)[_selectorView valueForKey:@"_scrollView"] setBackgroundColor:[UIColor clearColor]];
         _selectorView.sourceDelegate = self;
@@ -179,8 +180,8 @@ static NSMutableArray *debugViews;
         return;
     }
     
-    WeAppSelectorButton * selectorView = (WeAppSelectorButton*)[self.selectorView getSelectorWithIndex:index];
-    if (selectorView && [selectorView isKindOfClass:[WeAppSelectorButton class]]) {
+    KSDebugSelectorButton * selectorView = (KSDebugSelectorButton*)[self.selectorView getSelectorWithIndex:index];
+    if (selectorView && [selectorView isKindOfClass:[KSDebugSelectorButton class]]) {
         if (selectorView.isSelected) {
             [selectorView.imageButton setBackgroundColor:RGB_A(0x00, 0x00, 0x00, 0.4)];
             selectorView.imageButton.layer.borderColor = RGB_A(0xff, 0xff, 0xff, 1.0).CGColor;
@@ -217,7 +218,7 @@ static NSMutableArray *debugViews;
         return;
     }
     if ([itemView isKindOfClass:[UIView class]]) {
-        WeAppSelectorButton * selectorView = (WeAppSelectorButton*)itemView;
+        KSDebugSelectorButton * selectorView = (KSDebugSelectorButton*)itemView;
         [selectorView setBackgroundColor:[UIColor clearColor]];
         [selectorView.imageButton setBackgroundColor:RGB_A(0x00, 0x00, 0x00, 0.4)];
         selectorView.imageButton.layer.borderColor = RGB_A(0xff, 0xff, 0xff, 1.0).CGColor;
@@ -234,7 +235,7 @@ static NSMutableArray *debugViews;
 
 -(void)changeSelectorViewProperty:(UIView *)selectView itemView:(id)itemView withIndex:(NSUInteger)index isSelect:(BOOL)isSelect{
     if ([itemView isKindOfClass:[UIView class]]) {
-        WeAppSelectorButton * selectorView = (WeAppSelectorButton*)itemView;
+        KSDebugSelectorButton * selectorView = (KSDebugSelectorButton*)itemView;
         if (!isSelect) {
             [selectorView.imageButton setBackgroundColor:RGB_A(0x00, 0x00, 0x00, 0.4)];
             selectorView.imageButton.layer.borderColor = RGB_A(0xff, 0xff, 0xff, 1.0).CGColor;

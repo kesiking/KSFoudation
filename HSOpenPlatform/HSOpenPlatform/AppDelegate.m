@@ -51,7 +51,7 @@
     [MobClick setLogEnabled:YES];
     #endif
 #endif
-    [[KSDebugManager shareInstance] setWeApp];
+    [KSDebugManager setupDebugManager];
 }
 
 -(void)configUIContent{
