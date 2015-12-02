@@ -18,6 +18,8 @@
 
 @property(nonatomic, strong)  KSDebugOperationView*  operationView;
 
+@property(nonatomic, assign)  BOOL                   debugToolsEnabel;
+
 @end
 
 @implementation KSDebugManager
@@ -38,6 +40,10 @@
     [[self shareInstance] setupDebugManager];
 }
 
++(void)setupDebugToolsEnable:(BOOL)debugToolsEnabel{
+    [[self shareInstance] setDebugToolsEnabel:debugToolsEnabel];
+}
+
 -(void)setupShareInstance{
     self.debugWindow = [[UIApplication sharedApplication] keyWindow];
 }
@@ -51,6 +57,18 @@
     
     [_operationView setDebugViewReference:self.debugWindow];
     [_operationView setDebugEnviromeng:self.debugEnviromeng];
+    _debugToolsEnabel = YES;
+}
+
+-(void)setDebugToolsEnabel:(BOOL)debugToolsEnabel{
+    _debugToolsEnabel = debugToolsEnabel;
+    if (!debugToolsEnabel) {
+        [self.operationView removeFromSuperview];
+        self.operationView = nil;
+        self.debugEnviromeng = nil;
+    }else{
+        [self setupDebugManager];
+    }
 }
 
 -(KSDebugEnviroment *)debugEnviromeng{

@@ -8,10 +8,11 @@
 
 #import "KSDebugRequestDataTextView.h"
 #import "KSDebugUtils.h"
+#import "KSDebugManager.h"
 
 @implementation KSDebugRequestDataTextView
 
-#ifdef DEBUG
+#ifdef KSDebugToolsEnable
 +(void)load{
     NSMutableArray* array = [KSDebugOperationView getDebugViews];
     [array addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"网络请求",@"title",NSStringFromClass([self class]),@"className", nil]];

@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "KSDebugEnviroment.h"
-
-#define KSDebugBasicViewDidClosedNotification @"KSDebugBasicViewDidClosedNotification"   
+#import "KSDebugMaroc.h"
 
 @protocol KSDebugProtocol <NSObject>
 

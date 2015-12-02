@@ -21,7 +21,7 @@
 
 @implementation KSDebug3DInspectorView
 
-#ifdef DEBUG
+#ifdef KSDebugToolsEnable
 +(void)load{
     NSMutableArray* array = [KSDebugOperationView getDebugViews];
     [array addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"3D渲染效果",@"title",NSStringFromClass([self class]),@"className", nil]];

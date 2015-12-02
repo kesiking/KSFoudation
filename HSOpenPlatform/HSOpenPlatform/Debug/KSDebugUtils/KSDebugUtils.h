@@ -10,6 +10,15 @@
 
 @interface KSDebugUtils : NSObject
 
+/*!
+ *  @author 孟希羲, 15-12-02 10:12:04
+ *
+ *  @brief  获取当前展示在屏幕上的viewController
+ *
+ *  @return CurrentAppearedViewController
+ *
+ *  @since  1.0
+ */
 + (UIViewController*)getCurrentAppearedViewController;
 
 @end
