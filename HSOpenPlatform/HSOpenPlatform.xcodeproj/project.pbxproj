@@ -189,6 +189,7 @@
 		5F2FD6211C0D463E00C7A397 /* IMYWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2FD61D1C0D463E00C7A397 /* IMYWebView.m */; };
 		5F2FD6221C0D463E00C7A397 /* IMY_NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2FD6201C0D463E00C7A397 /* IMY_NJKWebViewProgress.m */; };
 		5F34ABBA1BE076CE00B69C53 /* HSUpdateMessageNumberService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F34ABB91BE076CE00B69C53 /* HSUpdateMessageNumberService.m */; };
+		5F360A671C0ED9B5005F483A /* libMQTTKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F360A641C0ED994005F483A /* libMQTTKit.a */; };
 		5F3B9CC11BF5A30900C61C9D /* public_arrow_tbar_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B9CBD1BF5A30900C61C9D /* public_arrow_tbar_down@2x.png */; };
 		5F3B9CC21BF5A30900C61C9D /* public_arrow_tbar_down@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B9CBE1BF5A30900C61C9D /* public_arrow_tbar_down@3x.png */; };
 		5F3B9CC31BF5A30900C61C9D /* public_arrow_tbar_up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B9CBF1BF5A30900C61C9D /* public_arrow_tbar_up@2x.png */; };
@@ -939,6 +940,20 @@
 			remoteGlobalIDString = 832C81801AAF6DEF007FA2F7;
 			remoteInfo = RCTVibration;
 		};
+		5F360A631C0ED994005F483A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5F360A5E1C0ED994005F483A /* MQTTKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 93EEBC981816CAB00055100D;
+			remoteInfo = MQTTKit;
+		};
+		5F360A651C0ED994005F483A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5F360A5E1C0ED994005F483A /* MQTTKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 93EEBCA81816CAB00055100D;
+			remoteInfo = MQTTKitTests;
+		};
 		5F42D44D1BF0326C001E7930 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5F42D4461BF0326C001E7930 /* AsyncDisplayKit.xcodeproj */;
@@ -1266,6 +1281,7 @@
 		5F2FD6201C0D463E00C7A397 /* IMY_NJKWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMY_NJKWebViewProgress.m; sourceTree = "<group>"; };
 		5F34ABB81BE076CE00B69C53 /* HSUpdateMessageNumberService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSUpdateMessageNumberService.h; sourceTree = "<group>"; };
 		5F34ABB91BE076CE00B69C53 /* HSUpdateMessageNumberService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSUpdateMessageNumberService.m; sourceTree = "<group>"; };
+		5F360A5E1C0ED994005F483A /* MQTTKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MQTTKit.xcodeproj; sourceTree = "<group>"; };
 		5F3B9CBD1BF5A30900C61C9D /* public_arrow_tbar_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "public_arrow_tbar_down@2x.png"; sourceTree = "<group>"; };
 		5F3B9CBE1BF5A30900C61C9D /* public_arrow_tbar_down@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "public_arrow_tbar_down@3x.png"; sourceTree = "<group>"; };
 		5F3B9CBF1BF5A30900C61C9D /* public_arrow_tbar_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "public_arrow_tbar_up@2x.png"; sourceTree = "<group>"; };
@@ -2433,6 +2449,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F360A671C0ED9B5005F483A /* libMQTTKit.a in Frameworks */,
 				5F2CDB161C02CE56007D03CF /* libRCTActionSheet.a in Frameworks */,
 				5F2CDB171C02CE56007D03CF /* libRCTGeolocation.a in Frameworks */,
 				5F2CDB181C02CE56007D03CF /* libRCTImage.a in Frameworks */,
@@ -3138,6 +3155,23 @@
 				5F34ABB91BE076CE00B69C53 /* HSUpdateMessageNumberService.m */,
 			);
 			path = HSMessageNumberService;
+			sourceTree = "<group>";
+		};
+		5F360A5D1C0ED97E005F483A /* MQTTKit */ = {
+			isa = PBXGroup;
+			children = (
+				5F360A5E1C0ED994005F483A /* MQTTKit.xcodeproj */,
+			);
+			path = MQTTKit;
+			sourceTree = "<group>";
+		};
+		5F360A5F1C0ED994005F483A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5F360A641C0ED994005F483A /* libMQTTKit.a */,
+				5F360A661C0ED994005F483A /* MQTTKitTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		5F3B9CBC1BF5A30900C61C9D /* Resources */ = {
@@ -4220,6 +4254,7 @@
 		5F66C1941BBA5CC300CC21F7 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				5F360A5D1C0ED97E005F483A /* MQTTKit */,
 				5F2CD9BA1BFF21BA007D03CF /* ReactNative */,
 				5F42D08C1BF031F9001E7930 /* AsyncDisplayKit */,
 				5F17FFB91BE0AE1F00670317 /* UMAnalytics_Sdk_3.6.5 */,
@@ -6368,6 +6403,10 @@
 					ProjectRef = 5F42D4461BF0326C001E7930 /* AsyncDisplayKit.xcodeproj */;
 				},
 				{
+					ProductGroup = 5F360A5F1C0ED994005F483A /* Products */;
+					ProjectRef = 5F360A5E1C0ED994005F483A /* MQTTKit.xcodeproj */;
+				},
+				{
 					ProductGroup = 5F2CDAED1C02A980007D03CF /* Products */;
 					ProjectRef = 5F2CDAEC1C02A980007D03CF /* RCTActionSheet.xcodeproj */;
 				},
@@ -6485,6 +6524,20 @@
 			fileType = archive.ar;
 			path = libRCTVibration.a;
 			remoteRef = 5F2CDB141C02CE25007D03CF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5F360A641C0ED994005F483A /* libMQTTKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMQTTKit.a;
+			remoteRef = 5F360A631C0ED994005F483A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5F360A661C0ED994005F483A /* MQTTKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MQTTKitTests.xctest;
+			remoteRef = 5F360A651C0ED994005F483A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		5F42D44E1BF0326C001E7930 /* libAsyncDisplayKit.a */ = {
@@ -7523,6 +7576,7 @@
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/EIM_XMPP.framework",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/MessageDisplayKit",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/AsyncDisplayKit",
+					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/MQTTKit",
 				);
 				GCC_PREFIX_HEADER = HSOpenPlatform/HSOpenPlatform.pch;
 				HEADER_SEARCH_PATHS = (
@@ -7531,6 +7585,7 @@
 					/usr/include/libxml2,
 					"$(SRCROOT)/HSOpenPlatform/ThirdParty/ReactNative/React/Base",
 					"$(SRCROOT)/HSOpenPlatform/ThirdParty/ReactNative/React/Views",
+					"$(OBJROOT)/UninstalledProducts/include",
 				);
 				INFOPLIST_FILE = HSOpenPlatform/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -7545,6 +7600,7 @@
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/WavToAmr",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/UMAnalytics_Sdk_3.6.5",
+					"$(SRCROOT)/HSOpenPlatform/ThirdParty/MQTTKit/MQTTKit",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -7568,6 +7624,7 @@
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/EIM_XMPP.framework",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/MessageDisplayKit",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/AsyncDisplayKit",
+					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/MQTTKit",
 				);
 				GCC_PREFIX_HEADER = HSOpenPlatform/HSOpenPlatform.pch;
 				HEADER_SEARCH_PATHS = (
@@ -7576,6 +7633,7 @@
 					/usr/include/libxml2,
 					"$(SRCROOT)/HSOpenPlatform/ThirdParty/ReactNative/React/Base",
 					"$(SRCROOT)/HSOpenPlatform/ThirdParty/ReactNative/React/Views",
+					"$(OBJROOT)/UninstalledProducts/include",
 				);
 				INFOPLIST_FILE = HSOpenPlatform/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -7590,6 +7648,7 @@
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/WavToAmr",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/UMAnalytics_Sdk_3.6.5",
+					"$(SRCROOT)/HSOpenPlatform/ThirdParty/MQTTKit/MQTTKit",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

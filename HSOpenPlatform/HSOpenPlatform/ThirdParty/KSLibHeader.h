@@ -33,6 +33,7 @@
 #import "VoiceConverter.h"
 #import "View+MASAdditions.h"
 #import "GroupedTableView.h"
+#import <MQTTKit/MQTTKit.h>
 #ifdef USE_AsyncDisplayKit
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 #endif
