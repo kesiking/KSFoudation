@@ -165,6 +165,7 @@
 		5F1A1B281C0DA11D00B72CFF /* UIView+Screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1A1AF41C0DA11D00B72CFF /* UIView+Screenshot.m */; };
 		5F1A1B361C0DA11D00B72CFF /* KSDebugEnviroment.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1A1B111C0DA11D00B72CFF /* KSDebugEnviroment.m */; };
 		5F1A1B381C0DA11D00B72CFF /* KSDebugManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1A1B151C0DA11D00B72CFF /* KSDebugManager.m */; };
+		5F1A1B691C0E791F00B72CFF /* KSDebugUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1A1B681C0E791F00B72CFF /* KSDebugUtils.m */; };
 		5F1E4FB81BFB2D2F0051997E /* HSBusinessUserInfoEditAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1E4FB71BFB2D2F0051997E /* HSBusinessUserInfoEditAlertView.m */; };
 		5F1E4FBB1BFC5BE60051997E /* HSServiceAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1E4FBA1BFC5BE60051997E /* HSServiceAlertView.m */; };
 		5F2CDB051C02AB06007D03CF /* KSReactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2CDB041C02AB06007D03CF /* KSReactViewController.m */; };
@@ -1229,6 +1230,8 @@
 		5F1A1B111C0DA11D00B72CFF /* KSDebugEnviroment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugEnviroment.m; sourceTree = "<group>"; };
 		5F1A1B141C0DA11D00B72CFF /* KSDebugManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugManager.h; sourceTree = "<group>"; };
 		5F1A1B151C0DA11D00B72CFF /* KSDebugManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugManager.m; sourceTree = "<group>"; };
+		5F1A1B671C0E791F00B72CFF /* KSDebugUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugUtils.h; sourceTree = "<group>"; };
+		5F1A1B681C0E791F00B72CFF /* KSDebugUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugUtils.m; sourceTree = "<group>"; };
 		5F1E4FB61BFB2D2F0051997E /* HSBusinessUserInfoEditAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSBusinessUserInfoEditAlertView.h; sourceTree = "<group>"; };
 		5F1E4FB71BFB2D2F0051997E /* HSBusinessUserInfoEditAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSBusinessUserInfoEditAlertView.m; sourceTree = "<group>"; };
 		5F1E4FB91BFC5BE60051997E /* HSServiceAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSServiceAlertView.h; sourceTree = "<group>"; };
@@ -2936,6 +2939,7 @@
 		5F1A1AE51C0DA11D00B72CFF /* Debug */ = {
 			isa = PBXGroup;
 			children = (
+				5F1A1B581C0E78D200B72CFF /* KSDebugUtils */,
 				5F7B87251C0DC13E00D00CB3 /* KSDebugAppInfoView */,
 				5F7B87281C0DC13E00D00CB3 /* KSDebugBasicView */,
 				5F7B872D1C0DC13E00D00CB3 /* KSDebugGridView */,
@@ -2972,6 +2976,15 @@
 				5F1A1AF41C0DA11D00B72CFF /* UIView+Screenshot.m */,
 			);
 			path = debugFor3D;
+			sourceTree = "<group>";
+		};
+		5F1A1B581C0E78D200B72CFF /* KSDebugUtils */ = {
+			isa = PBXGroup;
+			children = (
+				5F1A1B671C0E791F00B72CFF /* KSDebugUtils.h */,
+				5F1A1B681C0E791F00B72CFF /* KSDebugUtils.m */,
+			);
+			path = KSDebugUtils;
 			sourceTree = "<group>";
 		};
 		5F2CD9BA1BFF21BA007D03CF /* ReactNative */ = {
@@ -7030,6 +7043,7 @@
 				5F66C4CC1BBA5CC500CC21F7 /* XHCaptureHelper.m in Sources */,
 				5F66C4931BBA5CC500CC21F7 /* WeAppServiceContext.m in Sources */,
 				5F53B8DD1BDF0C840045D7AC /* HSAppQRImageViewController.m in Sources */,
+				5F1A1B691C0E791F00B72CFF /* KSDebugUtils.m in Sources */,
 				5F7B87781C0DC1C800D00CB3 /* KSDebugModifyComponentTextView.m in Sources */,
 				5F66C5521BBA5CC600CC21F7 /* UIViewController+KSNavigator.m in Sources */,
 				5F66C4471BBA5CC500CC21F7 /* KSLoginView.m in Sources */,

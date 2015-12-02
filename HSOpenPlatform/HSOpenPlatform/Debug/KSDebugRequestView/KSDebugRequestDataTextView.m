@@ -7,6 +7,7 @@
 //
 
 #import "KSDebugRequestDataTextView.h"
+#import "KSDebugUtils.h"
 
 @implementation KSDebugRequestDataTextView
 
@@ -24,8 +25,8 @@
 
 -(void)startDebug{
     [super startDebug];
-   
-    self.debugTextView.text = @"数据请求";
+    UIViewController* currentAppearedVC = [KSDebugUtils getCurrentAppearedViewController];
+    self.debugTextView.text = [NSString stringWithFormat:@"当前展示viewController:%@,%@",NSStringFromClass([currentAppearedVC class]),currentAppearedVC];
 }
 
 -(void)endDebug{
