@@ -7,14 +7,15 @@
 //
 
 #import "KSDebugManager.h"
-#import "KSDebugEnviroment.h"
 #import "KSDebugOperationView.h"
 
-@interface KSDebugManager()
+@interface KSDebugManager(){
+    KSDebugEnviroment*     _debugEnviromeng;
+}
 
 @property(nonatomic, strong)  KSDebugEnviroment*     debugEnviromeng;
 
-@property(nonatomic, weak)    UIWindow*                 debugWindow;
+@property(nonatomic, weak)    UIView*                debugWindow;
 
 @property(nonatomic, strong)  KSDebugOperationView*  operationView;
 
@@ -37,6 +38,11 @@
 }
 
 +(void)setupDebugManager{
+    [[self shareInstance] setupDebugManager];
+}
+
++(void)setupDebugManagerWithDebugEnviroment:(KSDebugEnviroment*)debugEnviroment{
+    [[self shareInstance] setDebugEnviromeng:debugEnviroment];
     [[self shareInstance] setupDebugManager];
 }
 
@@ -76,6 +82,11 @@
         _debugEnviromeng = [[KSDebugEnviroment alloc] init];
     }
     return _debugEnviromeng;
+}
+
+-(void)setDebugEnviromeng:(KSDebugEnviroment *)debugEnviromeng{
+    _debugEnviromeng = debugEnviromeng;
+    self.debugWindow = debugEnviromeng.debugReferenceView?:self.debugWindow;
 }
 
 @end

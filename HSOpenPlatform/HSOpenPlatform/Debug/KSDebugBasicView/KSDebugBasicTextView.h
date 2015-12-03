@@ -13,6 +13,10 @@
 
 @property(nonatomic, strong)    UITextView*      debugTextView;
 
+@property(nonatomic, strong)    UILabel *        infoLabel;
+
+@property(nonatomic, assign)    CGRect           debugTextViewFrame;
+
 -(NSString*)generateStringWithDictionary:(NSDictionary*)dict;
 
 -(NSString*)generateStringWithArray:(NSArray*)array;

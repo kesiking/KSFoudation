@@ -13,7 +13,6 @@
 -(void)setupView{
     [super setupView];
     [self setTitleInfoText:@"工具介绍"];
-    [self.debugTextView setEditable:NO];
     [self.debugTextView setFont:[UIFont boldSystemFontOfSize:18]];
 }
 

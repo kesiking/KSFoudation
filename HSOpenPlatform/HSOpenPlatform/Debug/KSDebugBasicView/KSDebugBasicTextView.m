@@ -18,9 +18,6 @@
 
 @interface KSDebugBasicTextView()
 
-@property(nonatomic, strong)  UILabel *   infoLabel;
-@property(nonatomic, assign)  CGRect      debugTextViewFrame;
-
 @end
 
 @implementation KSDebugBasicTextView
@@ -55,7 +52,6 @@
         self.debugTextViewFrame = _debugTextView.frame;
         _debugTextView.layer.masksToBounds = YES;
         _debugTextView.layer.cornerRadius = 10;
-        _debugTextView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
         _debugTextView.backgroundColor = [UIColor whiteColor];
         //返回键的类型
@@ -202,7 +198,7 @@
     //定义动画时间
     [UIView setAnimationDuration:kAnimationDuration];
     
-    UIView* referenceView = [[UIApplication sharedApplication] keyWindow];
+    UIView* referenceView = [[[[UIApplication sharedApplication] keyWindow] rootViewController] view];
     CGRect visibleViewRect = [self.debugTextView convertRect:self.debugTextView.bounds toView:referenceView];
     CGFloat visibleOringeY = MAX(CGRectGetMinY(visibleViewRect), 0);
     CGFloat visibleHeight  = MAX(CGRectGetMaxY(visibleViewRect), 0);
@@ -215,14 +211,15 @@
     
     // 如果textView的真正窗口高度大于keyboard弹起后窗口剩余的高度(不等于self.frame.size.height)，则在可展示窗口展示全部textView，并在头部置于指定位置J
     if (textViewRealHeight != self.frame.size.height) {
-        [self.debugTextView setFrame:CGRectMake(self.infoLabel.frame.origin.x, 44 - visibleOringeY, self.frame.size.width, textViewRealHeight)];
+        [self.debugTextView setFrame:CGRectMake(self.infoLabel.frame.origin.x, self.debugTextView.origin.y - visibleOringeY + 10, self.debugTextView.frame.size.width, textViewRealHeight - 20)];
     }else if (offset > 0) {
         //设置view的frame，往上平移
-        [self.debugTextView setFrame:CGRectMake(self.infoLabel.frame.origin.x,  44 -offset, self.frame.size.width, textViewHeight(self.frame.size.height,keyboardRect.size.height))];
+        [self.debugTextView setFrame:CGRectMake(self.infoLabel.frame.origin.x,  44 -offset, self.debugTextView.frame.size.width, textViewHeight(self.frame.size.height,keyboardRect.size.height))];
     }else{
         //设置view的frame，往上平移
-        [self.debugTextView setFrame:CGRectMake(self.infoLabel.frame.origin.x, 44, self.frame.size.width, textViewHeight(self.frame.size.height,keyboardRect.size.height))];
+        [self.debugTextView setFrame:CGRectMake(self.infoLabel.frame.origin.x, 44, self.debugTextView.frame.size.width, textViewHeight(self.frame.size.height,keyboardRect.size.height))];
     }
+    [self bringSubviewToFront:self.debugTextView];
     [UIView commitAnimations];
 }
 

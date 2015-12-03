@@ -21,4 +21,17 @@
  */
 + (UIViewController*)getCurrentAppearedViewController;
 
+/*!
+ *  @author 孟希羲, 15-12-03 09:12:38
+ *
+ *  @brief  获取instance变量的属性名称及属性变量
+ *
+ *  @param  instanse 变量实例
+ *
+ *  @return property dict
+ *
+ *  @since  1.0
+ */
++(NSMutableDictionary*)getInstansePropertyWithInstanse:(id)instanse;
+
 @end

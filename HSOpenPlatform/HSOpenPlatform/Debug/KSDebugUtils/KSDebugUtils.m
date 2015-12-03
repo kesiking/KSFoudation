@@ -7,6 +7,7 @@
 //
 
 #import "KSDebugUtils.h"
+#import <objc/runtime.h>
 
 @implementation KSDebugUtils
 
@@ -103,6 +104,41 @@
             return;
         }
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -   获取 instance变量的属性名称及属性变量
++(NSMutableDictionary*)getInstansePropertyWithInstanse:(id)instanse{
+    if (instanse == nil) {
+        return nil;
+    }
+    unsigned int numIvars = 0;
+    NSString *key = nil;
+    id value = nil;
+    NSMutableDictionary* propertyDict = [NSMutableDictionary dictionary];
+    Ivar * ivars = class_copyIvarList([instanse class], &numIvars);
+    for(int i = 0; i < numIvars; i++) {
+        Ivar thisIvar = ivars[i];
+        const char *type = ivar_getTypeEncoding(thisIvar);
+        NSString *stringType =  [NSString stringWithCString:type encoding:NSUTF8StringEncoding];
+        if (![stringType hasPrefix:@"@"]) {
+            continue;
+        }
+        const char *charString = ivar_getName(thisIvar);
+        
+        if (charString != NULL) {
+            key = [NSString stringWithUTF8String:ivar_getName(thisIvar)];
+        }
+        
+        value = object_getIvar(instanse, thisIvar);
+        
+        if(key && value){
+            [propertyDict setObject:value forKey:key];
+        }
+    }
+    free(ivars);
+    
+    return propertyDict;
 }
 
 

@@ -22,7 +22,7 @@
 
 @end
 
-@interface KSDebugBasicView : UIView<KSDebugProtocol>
+@interface KSDebugBasicView : UIScrollView<KSDebugProtocol>
 
 @property(nonatomic, assign)    BOOL            needCancelBackgroundAction;
 
@@ -32,6 +32,21 @@
 
 -(void)setupView;
 
+-(void)closeButtonClick:(id)sender;
+
 -(void)closeButtonDidSelect;
+
+-(void)canceBackgroundlAction;
+
+/*!
+ *  @author 孟希羲, 15-12-03 09:12:57
+ *
+ *  @brief  当关闭按钮被点击时是否需要发出关闭的KSDebugBasicViewDidClosedNotification的通知，默认返回YES，发出通知后会将选择栏中的选中状态取消
+ *
+ *  @return YES or NO，default is YES
+ *
+ *  @since  1.0
+ */
+-(BOOL)shouldNotificationDidClosedMessage;
 
 @end

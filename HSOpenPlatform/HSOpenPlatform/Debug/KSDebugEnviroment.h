@@ -10,5 +10,6 @@
 
 @interface KSDebugEnviroment : NSObject
 
+@property(nonatomic, weak)    UIView*                 debugReferenceView;
 
 @end

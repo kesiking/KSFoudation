@@ -61,6 +61,9 @@ static NSMutableArray *debugViews;
     if ([KSDebugOperationView getDebugViews]) {
         [_pageButtpns addObjectsFromArray:[KSDebugOperationView getDebugViews]];
     }
+    
+    [_pageButtpns addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"关闭工具",@"title",@"KSDebugCloseView",@"className", nil]];
+    
     _pageViews   = [[NSMutableArray alloc] init];
     
     for (NSInteger index = 0; index < [_pageButtpns count]; index++) {

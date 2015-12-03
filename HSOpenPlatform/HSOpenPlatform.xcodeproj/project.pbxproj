@@ -190,6 +190,7 @@
 		5F2FD6221C0D463E00C7A397 /* IMY_NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2FD6201C0D463E00C7A397 /* IMY_NJKWebViewProgress.m */; };
 		5F34ABBA1BE076CE00B69C53 /* HSUpdateMessageNumberService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F34ABB91BE076CE00B69C53 /* HSUpdateMessageNumberService.m */; };
 		5F360A671C0ED9B5005F483A /* libMQTTKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F360A641C0ED994005F483A /* libMQTTKit.a */; };
+		5F360A6B1C0EE7B8005F483A /* MQTTClientShareInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F360A6A1C0EE7B8005F483A /* MQTTClientShareInstance.m */; };
 		5F3B9CC11BF5A30900C61C9D /* public_arrow_tbar_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B9CBD1BF5A30900C61C9D /* public_arrow_tbar_down@2x.png */; };
 		5F3B9CC21BF5A30900C61C9D /* public_arrow_tbar_down@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B9CBE1BF5A30900C61C9D /* public_arrow_tbar_down@3x.png */; };
 		5F3B9CC31BF5A30900C61C9D /* public_arrow_tbar_up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B9CBF1BF5A30900C61C9D /* public_arrow_tbar_up@2x.png */; };
@@ -1282,6 +1283,8 @@
 		5F34ABB81BE076CE00B69C53 /* HSUpdateMessageNumberService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSUpdateMessageNumberService.h; sourceTree = "<group>"; };
 		5F34ABB91BE076CE00B69C53 /* HSUpdateMessageNumberService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSUpdateMessageNumberService.m; sourceTree = "<group>"; };
 		5F360A5E1C0ED994005F483A /* MQTTKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MQTTKit.xcodeproj; sourceTree = "<group>"; };
+		5F360A691C0EE7B8005F483A /* MQTTClientShareInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQTTClientShareInstance.h; sourceTree = "<group>"; };
+		5F360A6A1C0EE7B8005F483A /* MQTTClientShareInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQTTClientShareInstance.m; sourceTree = "<group>"; };
 		5F3B9CBD1BF5A30900C61C9D /* public_arrow_tbar_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "public_arrow_tbar_down@2x.png"; sourceTree = "<group>"; };
 		5F3B9CBE1BF5A30900C61C9D /* public_arrow_tbar_down@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "public_arrow_tbar_down@3x.png"; sourceTree = "<group>"; };
 		5F3B9CBF1BF5A30900C61C9D /* public_arrow_tbar_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "public_arrow_tbar_up@2x.png"; sourceTree = "<group>"; };
@@ -3161,6 +3164,8 @@
 			isa = PBXGroup;
 			children = (
 				5F360A5E1C0ED994005F483A /* MQTTKit.xcodeproj */,
+				5F360A691C0EE7B8005F483A /* MQTTClientShareInstance.h */,
+				5F360A6A1C0EE7B8005F483A /* MQTTClientShareInstance.m */,
 			);
 			path = MQTTKit;
 			sourceTree = "<group>";
@@ -7310,6 +7315,7 @@
 				35C47CC81BCE4DF7004164F5 /* HSHomeServiceView.m in Sources */,
 				5F66C44C1BBA5CC500CC21F7 /* KSModifyPhoneView.m in Sources */,
 				5F7B877F1C0DC67F00D00CB3 /* KSDebugBasicMenuItemView.m in Sources */,
+				5F360A6B1C0EE7B8005F483A /* MQTTClientShareInstance.m in Sources */,
 				5F2CDB081C02AF82007D03CF /* KSReactURLResolver.m in Sources */,
 				5F2E22EF1BDA327B00F36DAF /* TTTAttributedLabel.m in Sources */,
 				5FFDE7BE1BC7A26E0087B9E0 /* TBPageControl.m in Sources */,

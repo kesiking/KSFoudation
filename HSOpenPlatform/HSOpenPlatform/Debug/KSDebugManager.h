@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KSDebugEnviroment.h"
 #import "KSDebugMaroc.h"
 
 @interface KSDebugManager : NSObject
@@ -14,6 +15,8 @@
 +(KSDebugManager*)shareInstance;
 
 +(void)setupDebugManager;
+
++(void)setupDebugManagerWithDebugEnviroment:(KSDebugEnviroment*)debugEnviroment;
 
 +(void)setupDebugToolsEnable:(BOOL)debugToolsEnabel;
 

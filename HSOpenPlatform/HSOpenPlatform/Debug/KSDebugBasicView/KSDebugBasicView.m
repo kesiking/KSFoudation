@@ -84,17 +84,25 @@
         self.cancelButton.hidden = YES;
     }
     [self endDebug];
-    [[NSNotificationCenter defaultCenter] postNotificationName:KSDebugBasicViewDidClosedNotification object:self userInfo:@{}];
+    if ([self shouldNotificationDidClosedMessage]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:KSDebugBasicViewDidClosedNotification object:self userInfo:@{}];
+    }
 }
 
 -(void)closeButtonClick:(id)sender{
     [self closeButtonDidSelect];
     [self endDebug];
-    [[NSNotificationCenter defaultCenter] postNotificationName:KSDebugBasicViewDidClosedNotification object:self userInfo:@{}];
+    if ([self shouldNotificationDidClosedMessage]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:KSDebugBasicViewDidClosedNotification object:self userInfo:@{}];
+    }
 }
 
 -(void)closeButtonDidSelect{
     
+}
+
+-(BOOL)shouldNotificationDidClosedMessage{
+    return YES;
 }
 
 -(void)startDebug{
