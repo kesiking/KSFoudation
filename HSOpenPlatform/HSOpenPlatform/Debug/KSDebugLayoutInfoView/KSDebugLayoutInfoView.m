@@ -56,8 +56,10 @@
 }
 
 -(void)recurSetBackgroundColorWithView:(UIView*)view isRandom:(BOOL)random{
-    if (view == nil || [view isKindOfClass:[KSDebugPropertyButton class]]
-        || [view isKindOfClass:NSClassFromString(@"MAMapView")]) {
+    if (view == nil
+        || [view isKindOfClass:[KSDebugPropertyButton class]]
+        || [view isKindOfClass:NSClassFromString(@"MAMapView")]
+        || [NSStringFromClass([view class]) hasPrefix:@"KSDebug"]) {
         return;
     }
 
@@ -207,7 +209,7 @@
     [UIView animateKeyframesWithDuration:0.8 delay:0.0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
         // 修正截图位置
         CGRect rect = view.bounds;
-        if (view.frame.size.width < self.infoLabel.width) {
+        if (view.frame.size.width < self.infoLabel.frame.size.width) {
             rect.origin.x = (self.frame.size.width - view.frame.size.width)/2;
         }else{
             rect.origin.x = CGRectGetMinX(self.infoLabel.frame);

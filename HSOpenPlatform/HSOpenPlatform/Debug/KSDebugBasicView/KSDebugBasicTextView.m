@@ -211,7 +211,7 @@
     
     // 如果textView的真正窗口高度大于keyboard弹起后窗口剩余的高度(不等于self.frame.size.height)，则在可展示窗口展示全部textView，并在头部置于指定位置J
     if (textViewRealHeight != self.frame.size.height) {
-        [self.debugTextView setFrame:CGRectMake(self.infoLabel.frame.origin.x, self.debugTextView.origin.y - visibleOringeY + 10, self.debugTextView.frame.size.width, textViewRealHeight - 20)];
+        [self.debugTextView setFrame:CGRectMake(self.infoLabel.frame.origin.x, self.debugTextView.frame.origin.y - visibleOringeY + 10, self.debugTextView.frame.size.width, textViewRealHeight - 20)];
     }else if (offset > 0) {
         //设置view的frame，往上平移
         [self.debugTextView setFrame:CGRectMake(self.infoLabel.frame.origin.x,  44 -offset, self.debugTextView.frame.size.width, textViewHeight(self.frame.size.height,keyboardRect.size.height))];

@@ -29,8 +29,6 @@
 //	IN THE SOFTWARE.
 //
 
-#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
-
 #import "UIView+Screenshot.h"
 #import "NSArray+BeeExtension.h"
 
@@ -310,6 +308,3 @@
 }
 
 @end
-
-
-#endif	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)

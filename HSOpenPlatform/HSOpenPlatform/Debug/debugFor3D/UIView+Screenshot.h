@@ -30,9 +30,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <objc/runtime.h>
-
-#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
 
 #pragma mark -
 
@@ -61,5 +60,3 @@
 - (NSArray *)viewWithTagMatchRegex:(NSString *)regex;
 
 @end
-
-#endif	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
