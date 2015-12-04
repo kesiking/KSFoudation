@@ -8,16 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
+#define MQTTClientDefaultClientID   @""
+
 #define MQTTClientDefaultHost       @"iot.eclipse.org"
 #define MQTTClientDefaultPort       1883
 #define MQTTClientDefaultUsername   @"kesiking"
 #define MQTTClientDefaultPassword   @"bt65jukeungeng"
 
+#define MQTTClientMessageTopic      @"MQTTExample/LED"
+
+
+typedef void (^MQTTGetTMessageBlock)(MQTTMessage *message, NSString* payloadString);
+
 @interface MQTTClientShareInstance : NSObject
 
-@property (nonatomic,strong) NSString                *clientID;
-
 @property (nonatomic,strong) MQTTClient              *client;
+
+@property (nonatomic,copy)   MQTTGetTMessageBlock     MQTTMessageBlock;
 
 + (instancetype)sharedCenter;
 
