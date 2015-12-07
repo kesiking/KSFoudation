@@ -21,8 +21,6 @@
  *
  *  @since  1.0
  */
-- (void)publishMessageToDefaultTopic:(NSString *)payload;
-
 - (void)publishMessageToDefaultTopic:(NSString *)payload completionHandler:(void (^)(int mid))completionHandler;
 
 - (void)subscribeMQTTMessageDefaultTopic;
@@ -77,10 +75,10 @@
     _kMQTTMessageTopicSubcribingSet = [NSMutableSet set];
     
     // 初始化MQTT实例
-    _client = [[MQTTClient alloc] initWithClientId:MQTTClientDefaultClientID];
+    _client = [[MQTTClient alloc] initWithClientId:MQTTClientDefaultClientID cleanSession:YES];
     [_client setPort:MQTTClientDefaultPort];
-    [_client setUsername:MQTTClientDefaultUsername];
-    [_client setPassword:MQTTClientDefaultPassword];
+//    [_client setUsername:MQTTClientDefaultUsername];
+//    [_client setPassword:MQTTClientDefaultPassword];
     [_client setKeepAlive:300];
     
     // 连接MQTT
@@ -101,6 +99,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidEnterBackground:)
                                                  name:UIApplicationDidEnterBackgroundNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillTerminate:)
+                                                 name:UIApplicationWillTerminateNotification
                                                object:nil];
 }
 
@@ -132,6 +135,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - 连接MQTT
 -(void)disconnectMQTT{
+    [self unsubscribeMQTTMessageDefaultTopic];
     [self disconnectMQTTWithCompletionHandler:^(NSUInteger code) {
         // The client is disconnected when this completion handler is called
         NSLog(@"MQTT client is disconnected");
@@ -244,7 +248,7 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma mark - notification method
+#pragma mark - applicationDidBecomeActive notification method
 -(void)applicationDidBecomeActive:(NSNotification*)notification{
     if (_client != nil && _client.host != nil && _client.clientID != nil) {
         [_client reconnect];
@@ -254,11 +258,17 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma mark - notification method
+#pragma mark - applicationDidEnterBackground notification method
 -(void)applicationDidEnterBackground:(NSNotification*)notification{
     if (_client != nil) {
         [self disconnectMQTT];
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark - applicationWillTerminate notification method
+-(void)applicationWillTerminate:(NSNotification*)notification{
+    [self disconnectMQTT];
 }
 
 @end

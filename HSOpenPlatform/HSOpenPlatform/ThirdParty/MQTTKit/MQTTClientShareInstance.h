@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#define MQTTClientDefaultClientID   @""
+#define MQTTClientDefaultClientID   [NSString stringWithFormat:@"%d",[[NSProcessInfo processInfo] processIdentifier]]
 
-#define MQTTClientDefaultHost       @"iot.eclipse.org"
+#define MQTTClientDefaultHost       @"172.20.0.122"
 #define MQTTClientDefaultPort       1883
 #define MQTTClientDefaultUsername   @"kesiking"
 #define MQTTClientDefaultPassword   @"bt65jukeungeng"
@@ -27,5 +27,7 @@ typedef void (^MQTTGetTMessageBlock)(MQTTMessage *message, NSString* payloadStri
 @property (nonatomic,copy)   MQTTGetTMessageBlock     MQTTMessageBlock;
 
 + (instancetype)sharedCenter;
+
+- (void)publishMessageToDefaultTopic:(NSString *)payload;
 
 @end

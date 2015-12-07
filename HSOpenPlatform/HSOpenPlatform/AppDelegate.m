@@ -10,6 +10,7 @@
 #import "EHSocializedShareConfig.h"
 #import "EHTabBarViewController.h"
 #import "KSDebugManager.h"
+#import "MQTTClientShareInstance.h"
 
 @interface AppDelegate ()
 
@@ -52,6 +53,8 @@
     #endif
 #endif
     [KSDebugManager setupDebugManager];
+    
+    [[MQTTClientShareInstance sharedCenter] publishMessageToDefaultTopic:@"contect"];
 }
 
 -(void)configUIContent{
