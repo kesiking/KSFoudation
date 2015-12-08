@@ -53,8 +53,6 @@
     #endif
 #endif
     [KSDebugManager setupDebugManager];
-    
-    [[MQTTClientShareInstance sharedCenter] publishMessageToDefaultTopic:@"contect"];
 }
 
 -(void)configUIContent{

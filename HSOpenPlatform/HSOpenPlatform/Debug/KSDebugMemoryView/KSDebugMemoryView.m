@@ -9,6 +9,8 @@
 #import "KSDebugMemoryView.h"
 #import "KSDebugOperationView.h"
 #import "KSDebugScrollView.h"
+#import "KSDebugToastView.h"
+#import "KSDebugUserDefault.h"
 
 @interface KSDebugMemoryView()
 
@@ -40,6 +42,11 @@
     [self.debugScrollView setHidden:NO];
     [self.closeButton setFrame:CGRectMake(self.frame.size.width - 110, CGRectGetMaxY(self.frame) - 50, 100, 40)];
     self.closeButton.hidden = YES;
+    
+    if (![KSDebugUserDefault getUserHadClicedMemoryBtn]) {
+        [KSDebugToastView toast:@"再点击“内存信息”可取消查看哦！^_^" toView:self.debugViewReference displaytime:5];
+        [KSDebugUserDefault setUserHadClicedMemoryBtn:YES];
+    }
 }
 
 -(void)endDebug{

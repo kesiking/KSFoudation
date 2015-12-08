@@ -131,6 +131,17 @@
 		39DB0EC01BE6F55700719253 /* icon_Family members@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DB0EBC1BE6F55700719253 /* icon_Family members@2x.png */; };
 		39DB0EC11BE6F55700719253 /* icon_Family members@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DB0EBD1BE6F55700719253 /* icon_Family members@3x.png */; };
 		5F034E211BF2CF9F003A9741 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F034E201BF2CF9F003A9741 /* JavaScriptCore.framework */; };
+		5F0910A91C1695E6009962BB /* YYCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0910A21C1695E6009962BB /* YYCache.m */; };
+		5F0910AA1C1695E6009962BB /* YYDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0910A41C1695E6009962BB /* YYDiskCache.m */; };
+		5F0910AB1C1695E6009962BB /* YYKVStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0910A61C1695E6009962BB /* YYKVStorage.m */; };
+		5F0910AC1C1695E6009962BB /* YYMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0910A81C1695E6009962BB /* YYMemoryCache.m */; };
+		5F0910AF1C1697C3009962BB /* KSMemoryCacheArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0910AE1C1697C3009962BB /* KSMemoryCacheArray.m */; };
+		5F0910C31C16B8C7009962BB /* KSDebugFPSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0910BF1C16B8C7009962BB /* KSDebugFPSLabel.m */; };
+		5F0910C41C16B8C7009962BB /* KSDebugFPSView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0910C21C16B8C7009962BB /* KSDebugFPSView.m */; };
+		5F0910DB1C16B8DB009962BB /* KSDebugToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0910D71C16B8DB009962BB /* KSDebugToastView.m */; };
+		5F0910DC1C16B8DB009962BB /* KSDebugUserTrackPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0910DA1C16B8DB009962BB /* KSDebugUserTrackPathView.m */; };
+		5F0910E11C16B8EC009962BB /* KSDebugDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0910DE1C16B8EC009962BB /* KSDebugDataCache.m */; };
+		5F0910E21C16B8EC009962BB /* KSDebugUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0910E01C16B8EC009962BB /* KSDebugUserDefault.m */; };
 		5F0A24BB1BF57B3100BD2948 /* HSBusinessUserInfoModifyService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0A24BA1BF57B3100BD2948 /* HSBusinessUserInfoModifyService.m */; };
 		5F0BCB301BBA6DAF00CFE4A4 /* EHSocializedShareConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0BCB2F1BBA6DAF00CFE4A4 /* EHSocializedShareConfig.m */; };
 		5F0BCB4F1BBA6EAC00CFE4A4 /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0BCB351BBA6EAC00CFE4A4 /* CLIColor.m */; };
@@ -1176,6 +1187,28 @@
 		39DB0EBC1BE6F55700719253 /* icon_Family members@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Family members@2x.png"; sourceTree = "<group>"; };
 		39DB0EBD1BE6F55700719253 /* icon_Family members@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Family members@3x.png"; sourceTree = "<group>"; };
 		5F034E201BF2CF9F003A9741 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		5F0910A11C1695E6009962BB /* YYCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYCache.h; sourceTree = "<group>"; };
+		5F0910A21C1695E6009962BB /* YYCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYCache.m; sourceTree = "<group>"; };
+		5F0910A31C1695E6009962BB /* YYDiskCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYDiskCache.h; sourceTree = "<group>"; };
+		5F0910A41C1695E6009962BB /* YYDiskCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYDiskCache.m; sourceTree = "<group>"; };
+		5F0910A51C1695E6009962BB /* YYKVStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYKVStorage.h; sourceTree = "<group>"; };
+		5F0910A61C1695E6009962BB /* YYKVStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYKVStorage.m; sourceTree = "<group>"; };
+		5F0910A71C1695E6009962BB /* YYMemoryCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYMemoryCache.h; sourceTree = "<group>"; };
+		5F0910A81C1695E6009962BB /* YYMemoryCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYMemoryCache.m; sourceTree = "<group>"; };
+		5F0910AD1C1697C3009962BB /* KSMemoryCacheArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSMemoryCacheArray.h; sourceTree = "<group>"; };
+		5F0910AE1C1697C3009962BB /* KSMemoryCacheArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSMemoryCacheArray.m; sourceTree = "<group>"; };
+		5F0910BE1C16B8C7009962BB /* KSDebugFPSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugFPSLabel.h; sourceTree = "<group>"; };
+		5F0910BF1C16B8C7009962BB /* KSDebugFPSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugFPSLabel.m; sourceTree = "<group>"; };
+		5F0910C11C16B8C7009962BB /* KSDebugFPSView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugFPSView.h; sourceTree = "<group>"; };
+		5F0910C21C16B8C7009962BB /* KSDebugFPSView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugFPSView.m; sourceTree = "<group>"; };
+		5F0910D61C16B8DB009962BB /* KSDebugToastView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugToastView.h; sourceTree = "<group>"; };
+		5F0910D71C16B8DB009962BB /* KSDebugToastView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugToastView.m; sourceTree = "<group>"; };
+		5F0910D91C16B8DB009962BB /* KSDebugUserTrackPathView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugUserTrackPathView.h; sourceTree = "<group>"; };
+		5F0910DA1C16B8DB009962BB /* KSDebugUserTrackPathView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugUserTrackPathView.m; sourceTree = "<group>"; };
+		5F0910DD1C16B8EC009962BB /* KSDebugDataCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugDataCache.h; sourceTree = "<group>"; };
+		5F0910DE1C16B8EC009962BB /* KSDebugDataCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugDataCache.m; sourceTree = "<group>"; };
+		5F0910DF1C16B8EC009962BB /* KSDebugUserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugUserDefault.h; sourceTree = "<group>"; };
+		5F0910E01C16B8EC009962BB /* KSDebugUserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugUserDefault.m; sourceTree = "<group>"; };
 		5F0A24B91BF57B3100BD2948 /* HSBusinessUserInfoModifyService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSBusinessUserInfoModifyService.h; sourceTree = "<group>"; };
 		5F0A24BA1BF57B3100BD2948 /* HSBusinessUserInfoModifyService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSBusinessUserInfoModifyService.m; sourceTree = "<group>"; };
 		5F0BCB2E1BBA6DAF00CFE4A4 /* EHSocializedShareConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EHSocializedShareConfig.h; sourceTree = "<group>"; };
@@ -2797,6 +2830,58 @@
 			path = HSApplicationService;
 			sourceTree = "<group>";
 		};
+		5F09109F1C1695E6009962BB /* YYKit */ = {
+			isa = PBXGroup;
+			children = (
+				5F0910A01C1695E6009962BB /* YYCache */,
+			);
+			path = YYKit;
+			sourceTree = "<group>";
+		};
+		5F0910A01C1695E6009962BB /* YYCache */ = {
+			isa = PBXGroup;
+			children = (
+				5F0910A11C1695E6009962BB /* YYCache.h */,
+				5F0910A21C1695E6009962BB /* YYCache.m */,
+				5F0910A31C1695E6009962BB /* YYDiskCache.h */,
+				5F0910A41C1695E6009962BB /* YYDiskCache.m */,
+				5F0910A51C1695E6009962BB /* YYKVStorage.h */,
+				5F0910A61C1695E6009962BB /* YYKVStorage.m */,
+				5F0910A71C1695E6009962BB /* YYMemoryCache.h */,
+				5F0910A81C1695E6009962BB /* YYMemoryCache.m */,
+				5F0910AD1C1697C3009962BB /* KSMemoryCacheArray.h */,
+				5F0910AE1C1697C3009962BB /* KSMemoryCacheArray.m */,
+			);
+			path = YYCache;
+			sourceTree = "<group>";
+		};
+		5F0910C01C16B8C7009962BB /* KSDebugFPSView */ = {
+			isa = PBXGroup;
+			children = (
+				5F0910C11C16B8C7009962BB /* KSDebugFPSView.h */,
+				5F0910C21C16B8C7009962BB /* KSDebugFPSView.m */,
+			);
+			path = KSDebugFPSView;
+			sourceTree = "<group>";
+		};
+		5F0910D51C16B8DB009962BB /* KSDebugToastView */ = {
+			isa = PBXGroup;
+			children = (
+				5F0910D61C16B8DB009962BB /* KSDebugToastView.h */,
+				5F0910D71C16B8DB009962BB /* KSDebugToastView.m */,
+			);
+			path = KSDebugToastView;
+			sourceTree = "<group>";
+		};
+		5F0910D81C16B8DB009962BB /* KSDebugUserTrackPath */ = {
+			isa = PBXGroup;
+			children = (
+				5F0910D91C16B8DB009962BB /* KSDebugUserTrackPathView.h */,
+				5F0910DA1C16B8DB009962BB /* KSDebugUserTrackPathView.m */,
+			);
+			path = KSDebugUserTrackPath;
+			sourceTree = "<group>";
+		};
 		5F0A24B21BF57AEA00BD2948 /* HSBusinessUserInfoService */ = {
 			isa = PBXGroup;
 			children = (
@@ -2965,6 +3050,11 @@
 		5F1A1AE51C0DA11D00B72CFF /* Debug */ = {
 			isa = PBXGroup;
 			children = (
+				5F0910D51C16B8DB009962BB /* KSDebugToastView */,
+				5F0910D81C16B8DB009962BB /* KSDebugUserTrackPath */,
+				5F0910BE1C16B8C7009962BB /* KSDebugFPSLabel.h */,
+				5F0910BF1C16B8C7009962BB /* KSDebugFPSLabel.m */,
+				5F0910C01C16B8C7009962BB /* KSDebugFPSView */,
 				5F1CF9141C102238006C82BF /* KSDebugCloseView */,
 				5F1CF9171C102238006C82BF /* KSDebugLayoutInfoView */,
 				5F1A1B581C0E78D200B72CFF /* KSDebugUtils */,
@@ -3009,6 +3099,10 @@
 		5F1A1B581C0E78D200B72CFF /* KSDebugUtils */ = {
 			isa = PBXGroup;
 			children = (
+				5F0910DD1C16B8EC009962BB /* KSDebugDataCache.h */,
+				5F0910DE1C16B8EC009962BB /* KSDebugDataCache.m */,
+				5F0910DF1C16B8EC009962BB /* KSDebugUserDefault.h */,
+				5F0910E01C16B8EC009962BB /* KSDebugUserDefault.m */,
 				5F1A1B671C0E791F00B72CFF /* KSDebugUtils.h */,
 				5F1A1B681C0E791F00B72CFF /* KSDebugUtils.m */,
 			);
@@ -4285,6 +4379,7 @@
 		5F66C1941BBA5CC300CC21F7 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				5F09109F1C1695E6009962BB /* YYKit */,
 				5F360A5D1C0ED97E005F483A /* MQTTKit */,
 				5F2CD9BA1BFF21BA007D03CF /* ReactNative */,
 				5F42D08C1BF031F9001E7930 /* AsyncDisplayKit */,
@@ -6978,6 +7073,7 @@
 				5FFA36A91C056CA600546790 /* KSReactNavigationButton.m in Sources */,
 				5F66C4531BBA5CC500CC21F7 /* KSResetView.m in Sources */,
 				5F66C4E81BBA5CC500CC21F7 /* LKBadgeView.m in Sources */,
+				5F0910AB1C1695E6009962BB /* YYKVStorage.m in Sources */,
 				5F66C53E1BBA5CC600CC21F7 /* MJRefreshConst.m in Sources */,
 				5FDF1A291BD8B08D0059B3F2 /* HSSubscribedBussinessViewCell.m in Sources */,
 				5F66C4961BBA5CC500CC21F7 /* BEMAverageLine.m in Sources */,
@@ -7058,6 +7154,7 @@
 				5FFDE8041BC7AF1F0087B9E0 /* EHModifyNickNameService.m in Sources */,
 				5F66C4C21BBA5CC500CC21F7 /* View+MASAdditions.m in Sources */,
 				5F66C5461BBA5CC600CC21F7 /* RDVTabBar.m in Sources */,
+				5F0910DC1C16B8DB009962BB /* KSDebugUserTrackPathView.m in Sources */,
 				5F66C4401BBA5CC500CC21F7 /* KSRegisterViewCtl.m in Sources */,
 				5F66C4C11BBA5CC500CC21F7 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				5F66C4C71BBA5CC500CC21F7 /* UIImage+Utility.m in Sources */,
@@ -7073,6 +7170,7 @@
 				5F66C4BB1BBA5CC500CC21F7 /* MASConstraint.m in Sources */,
 				5FBEDB321BF490A500C22188 /* HSBusinessUserAccountInfoModel.m in Sources */,
 				5F42D46B1BF07BC6001E7930 /* UIImageView+KSWebCache.m in Sources */,
+				5F0910AA1C1695E6009962BB /* YYDiskCache.m in Sources */,
 				5F0BCB6C1BBA6FBE00CFE4A4 /* EHLoadingToast.m in Sources */,
 				5F66C4E91BBA5CC500CC21F7 /* SECompatibility.m in Sources */,
 				5F66C5671BBA5CC600CC21F7 /* SVModalWebViewController.m in Sources */,
@@ -7128,6 +7226,7 @@
 				5F66C4CC1BBA5CC500CC21F7 /* XHCaptureHelper.m in Sources */,
 				5F66C4931BBA5CC500CC21F7 /* WeAppServiceContext.m in Sources */,
 				5F53B8DD1BDF0C840045D7AC /* HSAppQRImageViewController.m in Sources */,
+				5F0910C41C16B8C7009962BB /* KSDebugFPSView.m in Sources */,
 				5F1A1B691C0E791F00B72CFF /* KSDebugUtils.m in Sources */,
 				5F7B87781C0DC1C800D00CB3 /* KSDebugModifyComponentTextView.m in Sources */,
 				5F66C5521BBA5CC600CC21F7 /* UIViewController+KSNavigator.m in Sources */,
@@ -7142,6 +7241,7 @@
 				5F66C4E11BBA5CC500CC21F7 /* XHAnnotation.m in Sources */,
 				5F66C4C41BBA5CC500CC21F7 /* MBProgressHUD.m in Sources */,
 				5F66C5331BBA5CC600CC21F7 /* MJRefreshHeader.m in Sources */,
+				5F0910C31C16B8C7009962BB /* KSDebugFPSLabel.m in Sources */,
 				5F66C4221BBA5CC500CC21F7 /* TBDetailIconFont.m in Sources */,
 				5F0BCB591BBA6EAC00CFE4A4 /* DDMultiFormatter.m in Sources */,
 				5F66C4AF1BBA5CC500CC21F7 /* FMDatabasePool.m in Sources */,
@@ -7195,6 +7295,7 @@
 				5F66C4FF1BBA5CC500CC21F7 /* XHVoiceRecordHUD.m in Sources */,
 				5F66C4881BBA5CC500CC21F7 /* TBJSONModelProperty.m in Sources */,
 				5F66C4571BBA5CC500CC21F7 /* KSLoginService.m in Sources */,
+				5F0910E11C16B8EC009962BB /* KSDebugDataCache.m in Sources */,
 				5F66C4731BBA5CC500CC21F7 /* KSLoginUtils.m in Sources */,
 				5F66C4A81BBA5CC500CC21F7 /* DTTimePeriodCollection.m in Sources */,
 				5F66C4B51BBA5CC500CC21F7 /* NSObject+LKDBHelper.m in Sources */,
@@ -7205,6 +7306,7 @@
 				5F2E22F61BDDB60700F36DAF /* KSDeleteBtnViewCell.m in Sources */,
 				5FFDE84C1BCCFB190087B9E0 /* HSActivityInfoDetailService.m in Sources */,
 				5F66C5691BBA5CC600CC21F7 /* SVWebViewController.m in Sources */,
+				5F0910AF1C1697C3009962BB /* KSMemoryCacheArray.m in Sources */,
 				5F66C43D1BBA5CC500CC21F7 /* SSKeychain.m in Sources */,
 				5F66C4F41BBA5CC500CC21F7 /* SETextMagnifierRanged.m in Sources */,
 				5F66C5391BBA5CC600CC21F7 /* MJRefreshBackStateFooter.m in Sources */,
@@ -7243,6 +7345,7 @@
 				5F66C4371BBA5CC500CC21F7 /* EHAleatView.m in Sources */,
 				5F7B874D1C0DC13E00D00CB3 /* KSDebugBasicTextView.m in Sources */,
 				5F66C4BC1BBA5CC500CC21F7 /* MASConstraintMaker.m in Sources */,
+				5F0910AC1C1695E6009962BB /* YYMemoryCache.m in Sources */,
 				5F1A1B251C0DA11D00B72CFF /* NSArray+BeeExtension.mm in Sources */,
 				5F66C4751BBA5CC500CC21F7 /* KSAdapterNetWork.m in Sources */,
 				5FFDE7ED1BC7AA500087B9E0 /* EHPhotoBrowserCell.m in Sources */,
@@ -7250,6 +7353,7 @@
 				5F7B875B1C0DC13E00D00CB3 /* KSDebugRequestDataTextView.m in Sources */,
 				5F72EE081BDF3A7C00460ACD /* HSDateManagerCenter.m in Sources */,
 				39D96BAB1BD4D5F00028E7DB /* HSOtherAppInfoService.m in Sources */,
+				5F0910DB1C16B8DB009962BB /* KSDebugToastView.m in Sources */,
 				35C47CCF1BCFA8A9004164F5 /* HSMapViewManager.m in Sources */,
 				5F7B87521C0DC13E00D00CB3 /* KSDebugMemory.m in Sources */,
 				5F66C4F31BBA5CC500CC21F7 /* SETextMagnifierCaret.m in Sources */,
@@ -7318,6 +7422,7 @@
 				5FE602281BF1968900DA34EF /* KSASCollectionViewController.m in Sources */,
 				5F66C41F1BBA5CC500CC21F7 /* PAStepperDetail.m in Sources */,
 				5FCF28ED1BF41F1B00432059 /* HSBussinessComboInfoView.m in Sources */,
+				5F0910A91C1695E6009962BB /* YYCache.m in Sources */,
 				5F66C5571BBA5CC600CC21F7 /* SDWebImageDecoder.m in Sources */,
 				5F66C4501BBA5CC500CC21F7 /* KSRegisterView.m in Sources */,
 				3566DEBB1BF035D800F327C5 /* HSLocalAfterSaleModel.m in Sources */,
@@ -7336,6 +7441,7 @@
 				5F66C4291BBA5CC500CC21F7 /* KSView.m in Sources */,
 				5F66C55E1BBA5CC600CC21F7 /* UIImage+MultiFormat.m in Sources */,
 				5F66C4101BBA5CC500CC21F7 /* KSScrollViewServiceController.m in Sources */,
+				5F0910E21C16B8EC009962BB /* KSDebugUserDefault.m in Sources */,
 				5F66C4001BBA5CC500CC21F7 /* WeAppColorPageControl.m in Sources */,
 				5F66C4B91BBA5CC500CC21F7 /* WeAppToast.m in Sources */,
 				5F66C4851BBA5CC500CC21F7 /* NSDictionary+TBJSONModel.m in Sources */,

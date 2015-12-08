@@ -15,7 +15,9 @@
 
 @property(nonatomic, strong)  KSDebugEnviroment*     debugEnviromeng;
 
-@property(nonatomic, weak)    UIView*                debugWindow;
+@property(nonatomic, weak)    UIView*                debugRefereceView;
+
+@property(nonatomic, strong)  UIWindow*              debugWindow;
 
 @property(nonatomic, strong)  KSDebugOperationView*  operationView;
 
@@ -51,17 +53,20 @@
 }
 
 -(void)setupShareInstance{
-    self.debugWindow = [[UIApplication sharedApplication] keyWindow];
+    self.debugRefereceView = [[UIApplication sharedApplication] keyWindow];
+    if (self.debugRefereceView == nil && [[[UIApplication sharedApplication] windows] count] > 0) {
+        self.debugRefereceView = [[[UIApplication sharedApplication] windows] lastObject];
+    }
 }
 
 -(void)setupDebugManager{
     if (_operationView == nil) {
-        _operationView = [[KSDebugOperationView alloc] initWithFrame:CGRectMake(0, 44, self.debugWindow.frame.size.width, 44)];
+        _operationView = [[KSDebugOperationView alloc] initWithFrame:CGRectMake(0, 44, self.debugRefereceView.frame.size.width, 44)];
         _operationView.backgroundColor = [UIColor clearColor];
-        [self.debugWindow addSubview:_operationView];
+        [self.debugRefereceView addSubview:_operationView];
     }
     
-    [_operationView setDebugViewReference:self.debugWindow];
+    [_operationView setDebugViewReference:self.debugRefereceView];
     [_operationView setDebugEnviromeng:self.debugEnviromeng];
     _debugToolsEnabel = YES;
 }
@@ -86,7 +91,7 @@
 
 -(void)setDebugEnviromeng:(KSDebugEnviroment *)debugEnviromeng{
     _debugEnviromeng = debugEnviromeng;
-    self.debugWindow = debugEnviromeng.debugReferenceView?:self.debugWindow;
+    self.debugRefereceView = debugEnviromeng.debugReferenceView?:self.debugRefereceView;
 }
 
 @end

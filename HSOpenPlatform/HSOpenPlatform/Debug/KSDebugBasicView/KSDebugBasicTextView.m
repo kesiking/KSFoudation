@@ -7,6 +7,7 @@
 //
 
 #import "KSDebugBasicTextView.h"
+#import "KSDebugDataCache.h"
 
 #define kAnimationDuration 0.2
 
@@ -141,14 +142,9 @@
     if (dict == nil) {
         return nil;
     }
-    NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict
-                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
-                                                         error:&error];
+    NSData *jsonData = [self generateDataWithDictionary:dict];
     
-    if (! jsonData) {
-        NSLog(@"Got an error: %@", error);
-    } else {
+    if (jsonData) {
         return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     }
     return nil;
@@ -158,17 +154,56 @@
     if (array == nil) {
         return nil;
     }
-    NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:array
-                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
-                                                         error:&error];
+    NSData *jsonData = [self generateDataWithArray:array];
     
-    if (! jsonData) {
-        NSLog(@"Got an error: %@", error);
-    } else {
+    if (jsonData) {
         return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     }
     return nil;
+}
+
+-(void)saveArrayToKSDebugDiskWithArray:(NSArray*)array keyPath:(NSString*)path{
+    if (array && array.count > 0 && path && path.length > 0) {
+        NSData* data = [self generateDataWithArray:array];
+        [[KSDebugDataCache sharedAudioDataCache] storeAudioData:data forKey:path];
+    }
+}
+
+-(void)saveDictionaryToKSDebugDiskWithDictionary:(NSDictionary*)dictionary keyPath:(NSString*)path{
+    if (dictionary && dictionary.count > 0 && path && path.length > 0) {
+        NSData* data = [self generateDataWithDictionary:dictionary];
+        [[KSDebugDataCache sharedAudioDataCache] storeAudioData:data forKey:path];
+    }
+}
+
+- (NSData*)generateDataWithDictionary:(NSDictionary*)dictionary{
+    
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    
+    if ([jsonData length] > 0 && error == nil){
+        return jsonData;
+    }else{
+        NSLog(@"Got an error: %@", error);
+        return nil;
+    }
+}
+
+- (NSData*)generateDataWithArray:(NSArray*)array{
+    
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:array
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    
+    if ([jsonData length] > 0 && error == nil){
+        return jsonData;
+    }else{
+        NSLog(@"Got an error: %@", error);
+        return nil;
+    }
 }
 
 -(void)setTitleInfoText:(NSString*)titleInfoText{
@@ -209,18 +244,24 @@
     // 根据当前self.textView的底部位置映射到屏幕上后的位置与keyboardRemainHeight作比较，计算出偏移量
     CGFloat offset = visibleHeight - (keyboardRemainHeight(keyboardRect.size.height));
     
-    // 如果textView的真正窗口高度大于keyboard弹起后窗口剩余的高度(不等于self.frame.size.height)，则在可展示窗口展示全部textView，并在头部置于指定位置J
+    // 如果textView的真正窗口高度大于keyboard弹起后窗口剩余的高度(不等于self.frame.size.height)，则在可展示窗口展示全部textView，并在头部置于指定位置
+    CGFloat contentOffsetY = (CGFloat)([self respondsToSelector:@selector(contentOffset)]?self.contentOffset.y:0);
     if (textViewRealHeight != self.frame.size.height) {
-        [self.debugTextView setFrame:CGRectMake(self.infoLabel.frame.origin.x, self.debugTextView.frame.origin.y - visibleOringeY + 10, self.debugTextView.frame.size.width, textViewRealHeight - 20)];
+        CGFloat oringeY = self.debugTextView.frame.origin.y - visibleOringeY + 10;
+        if (CGRectGetMinY(visibleViewRect) < 0) {
+            oringeY = contentOffsetY + 10;
+        }
+        [self.debugTextView setFrame:CGRectMake(self.infoLabel.frame.origin.x, oringeY , self.debugTextView.frame.size.width, textViewRealHeight - 20)];
     }else if (offset > 0) {
         //设置view的frame，往上平移
-        [self.debugTextView setFrame:CGRectMake(self.infoLabel.frame.origin.x,  44 -offset, self.debugTextView.frame.size.width, textViewHeight(self.frame.size.height,keyboardRect.size.height))];
+        [self.debugTextView setFrame:CGRectMake(self.infoLabel.frame.origin.x,  self.debugTextView.frame.origin.y + contentOffsetY - offset + 10, self.debugTextView.frame.size.width, textViewHeight(self.frame.size.height,keyboardRect.size.height))];
     }else{
         //设置view的frame，往上平移
-        [self.debugTextView setFrame:CGRectMake(self.infoLabel.frame.origin.x, 44, self.debugTextView.frame.size.width, textViewHeight(self.frame.size.height,keyboardRect.size.height))];
+        [self.debugTextView setFrame:CGRectMake(self.infoLabel.frame.origin.x, contentOffsetY + 10 , self.debugTextView.frame.size.width, textViewHeight(self.frame.size.height,keyboardRect.size.height))];
     }
     [self bringSubviewToFront:self.debugTextView];
     [UIView commitAnimations];
+    [self keyboardDidShowWithTextView:self.debugTextView];
 }
 
 //键盘消失时
@@ -238,6 +279,15 @@
     //设置view的frame，往下平移
     [self.debugTextView setFrame:self.debugTextViewFrame];
     [UIView commitAnimations];
+    [self keyboardDidHideWithTextView:self.debugTextView];
+}
+
+-(void)keyboardDidShowWithTextView:(UITextView*)debugTextView{
+    
+}
+
+-(void)keyboardDidHideWithTextView:(UITextView*)debugTextView{
+    
 }
 
 -(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{

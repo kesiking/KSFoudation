@@ -10,6 +10,8 @@
 #import "KSDebugPropertyButton.h"
 #import "KSDebugUtils.h"
 #import "UIView+Screenshot.h"
+#import "KSDebugToastView.h"
+#import "KSDebugUserDefault.h"
 
 #define KSDEBUG_PROPERTY_BUTTON_TAG  (11002)
 
@@ -38,7 +40,6 @@
     [self setTitleInfoText:@"点击查看布局信息"];
     
     [self.debugTextView setSelectable:YES];
-    [self.debugTextView setScrollEnabled:NO];
     [self.debugTextView setFont:[UIFont boldSystemFontOfSize:15]];
 }
 
@@ -130,9 +131,19 @@
     NSString* componentStr = [NSString string];
     componentStr = [componentStr stringByAppendingFormat:@"-----------布局信息------------- \n"];
     /*
+     * 获取viewController的基本信息
+     */
+    /**********************/
+    UIViewController* currentViewController = [KSDebugUtils getCurrentAppearedViewController];
+    componentStr = [componentStr stringByAppendingFormat:@"\n-----------viewController的布局信息------------- \n"];
+    componentStr = [componentStr stringByAppendingFormat:@"描述信息 : %@ \n",[currentViewController description]];
+    /**********************/
+
+    /*
      * 获取view的基本信息
      */
     /**********************/
+    componentStr = [componentStr stringByAppendingFormat:@"\n-----------view的布局信息------------- \n"];
     componentStr = [componentStr stringByAppendingFormat:@"viewClass : %@ \n",NSStringFromClass([view class])];
     componentStr = [componentStr stringByAppendingFormat:@"位置宽高 : %@ \n",NSStringFromCGRect(view.frame)];
     componentStr = [componentStr stringByAppendingFormat:@"描述信息 : %@ \n",[view description]];
@@ -252,6 +263,11 @@
     [self recurSetBackgroundColorWithView:view isRandom:YES];
     self.hidden = YES;
     [self removeFromSuperview];
+    
+    if (![KSDebugUserDefault getUserHadClicedLayoutInfoBtn]) {
+        [KSDebugToastView toast:@"温馨提示：点击彩色框内区域试试！\n再点击“布局信息”可取消查看哦！^_^" toView:self.debugViewReference displaytime:5];
+        [KSDebugUserDefault setUserHadClicedLayoutInfoBtn:YES];
+    }
 }
 
 -(void)endDebug{
@@ -259,6 +275,14 @@
     UIView *view = [[[[UIApplication sharedApplication] keyWindow] rootViewController] view];
     [self recurSetBackgroundColorWithView:view isRandom:NO];
     [self recurRemovePropertyButtonWithView:view];
+}
+
+-(void)keyboardDidShowWithTextView:(UITextView*)debugTextView{
+    [self setScrollEnabled:NO];
+}
+
+-(void)keyboardDidHideWithTextView:(UITextView*)debugTextView{
+    [self setScrollEnabled:YES];
 }
 
 -(void)closeButtonClick:(id)sender{

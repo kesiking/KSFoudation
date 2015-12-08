@@ -21,6 +21,17 @@ static const char * kAssociatedPropertiesKey;
 
 @implementation WeAppComponentBaseItem
 
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    NSDictionary* dict = [self toDictionary];
+    [aCoder encodeObject:dict forKey:@"dict"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    NSDictionary* dict = [aDecoder decodeObjectForKey:@"dict"];
+    self = [self initWithDictionary:dict];
+    return self;
+}
+
 #pragma mark -
 #pragma mark Private
 

@@ -21,8 +21,16 @@
 
 -(NSString*)generateStringWithArray:(NSArray*)array;
 
+-(void)saveArrayToKSDebugDiskWithArray:(NSArray*)array keyPath:(NSString*)path;
+
+-(void)saveDictionaryToKSDebugDiskWithDictionary:(NSDictionary*)dictionary keyPath:(NSString*)path;
+
 -(void)generateStringToDebugTextViewWithDictionary:(NSDictionary*)dict;
 
 -(void)setTitleInfoText:(NSString*)titleInfoText;
+
+-(void)keyboardDidShowWithTextView:(UITextView*)debugTextView;
+
+-(void)keyboardDidHideWithTextView:(UITextView*)debugTextView;
 
 @end
