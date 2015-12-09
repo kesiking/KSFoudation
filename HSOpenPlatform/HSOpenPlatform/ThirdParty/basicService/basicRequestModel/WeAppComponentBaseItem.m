@@ -23,7 +23,9 @@ static const char * kAssociatedPropertiesKey;
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     NSDictionary* dict = [self toDictionary];
-    [aCoder encodeObject:dict forKey:@"dict"];
+    if (dict) {
+        [aCoder encodeObject:dict forKey:@"dict"];
+    }
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder{

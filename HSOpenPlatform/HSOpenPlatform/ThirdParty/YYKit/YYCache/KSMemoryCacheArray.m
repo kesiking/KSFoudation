@@ -27,7 +27,6 @@
     BOOL contains = CFDictionaryContainsValue(dict, (__bridge const void *)(value));
     OSSpinLockUnlock(&lock);
     return contains;
-     ;
 }
 
 -(OSSpinLock)getKSMemoryCacheLocked{
@@ -72,6 +71,7 @@
 @implementation KSMemoryCacheArray{
     NSMutableDictionary *_storage;
     YYCache             *_cache;
+    NSUInteger           _count;
 }
 
 - (instancetype)init
@@ -102,7 +102,48 @@
 }
 
 -(void)setupCache{
-    _cache.memoryCache.countLimit = 10;
+    self.memoryCacheArrayCountLimit = KSMemoryCacheArrayCountLimit;
+    _cache.memoryCache.countLimit =  self.memoryCacheArrayCountLimit;
+    _count = 0;
+    _needQueueBlock = YES;
+    
+    /*
+     [_cache.diskCache setCustomArchiveBlock:^NSData *(id obj) {
+     NSError *error = nil;
+     if([obj isKindOfClass:[NSData class]]){
+     return obj;
+     }else if ([obj isKindOfClass:[NSDictionary class]] || [obj isKindOfClass:[NSArray class]]) {
+     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:obj
+     options:0
+     error:&error];
+     if (jsonData && error == nil) {
+     return jsonData;
+     }
+     }else if ([obj isKindOfClass:[NSString class]]){
+     return [obj dataUsingEncoding:NSUTF8StringEncoding];
+     }else if (obj){
+     return [NSKeyedArchiver archivedDataWithRootObject:obj];
+     }
+     return nil;
+     }];
+     [_cache.diskCache setCustomUnarchiveBlock:^id(NSData *objData) {
+     if (objData) {
+     NSError *error = nil;
+     id jsonStr = [NSJSONSerialization JSONObjectWithData:objData options:NSJSONReadingMutableContainers error:&error];
+     if (jsonStr && error == nil) {
+     return jsonStr;
+     }
+     return [NSKeyedUnarchiver unarchiveObjectWithData:objData];
+     }
+     return nil;
+     }];
+    */
+
+}
+
+-(void)setMemoryCacheArrayCountLimit:(NSUInteger)memoryCacheArrayCountLimit{
+    _memoryCacheArrayCountLimit = memoryCacheArrayCountLimit;
+    _cache.memoryCache.countLimit = memoryCacheArrayCountLimit;
 }
 
 - (instancetype)initWithSparseArray:(KSMemoryCacheArray *)sparseArray
@@ -137,21 +178,18 @@
 - (id)objectAtIndexedSubscript:(NSUInteger)idx
 {
     NSString *key = [@(idx) stringValue];
-    id<NSCoding> object = [_cache.memoryCache objectForKey:key];
-    if (!object) {
-        object = [_cache.diskCache objectForKey:key];
-        if (object && [_cache.memoryCache totalCount] < [_cache.memoryCache countLimit]) {
-            [_cache.memoryCache setObject:object forKey:key];
-        }
-    }
+    id<NSCoding> object = [_cache objectForKey:key];
     return object;
+}
+
+- (void)objectAtIndexedSubscript:(NSUInteger)idx withBlock:(void (^)(NSString *key, id<NSCoding> object))block{
+    NSString *key = [@(idx) stringValue];
+    [_cache objectForKey:key withBlock:block];
 }
 
 - (void)setObject:(id<NSCoding>)obj atIndexedSubscript:(NSUInteger)idx
 {
-    if (obj != nil) {
-        [_cache setObject:obj forKey:[@(idx) stringValue]];
-    }
+    [self setObject:obj forKeyedSubscript:@(idx)];
 }
 
 - (id)objectForKeyedSubscript:(NSNumber *)key
@@ -162,9 +200,19 @@
 - (void)setObject:(id<NSCoding>)obj forKeyedSubscript:(NSNumber *)key
 {
     if (obj) {
-        [_cache setObject:obj forKey:[key stringValue]];
+        if (self.needQueueBlock) {
+            WEAKSELF
+            [_cache setObject:obj forKey:[key stringValue] withBlock:^{
+                STRONGSELF
+                strongSelf->_count++;
+            }];
+        }else{
+            [_cache setObject:obj forKey:[key stringValue]];
+            _count++;
+        }
     } else {
         [_cache removeObjectForKey:[key stringValue]];
+        _count--;
     }
 }
 
@@ -172,8 +220,7 @@
     if (!anObject) {
         return;
     }
-    NSUInteger count = [self count];
-    [self setObject:anObject atIndexedSubscript:count];
+    [self setObject:anObject atIndexedSubscript:_count + 1];
 }
 
 - (void)insertObject:(id<NSCoding>)anObject atIndex:(NSUInteger)index{
@@ -187,15 +234,21 @@
     NSUInteger count = [self count];
     if (count >= 1) {
         [_cache removeObjectForKey:[@(count - 1) stringValue]];
+        _count--;
     }
 }
 
 - (void)removeObjectAtIndex:(NSUInteger)index{
     [_cache removeObjectForKey:[@(index) stringValue]];
+    _count--;
 }
 
 - (id)objectAtIndex:(NSUInteger)index{
     return [self objectAtIndexedSubscript:index];
+}
+
+- (void)objectAtIndex:(NSUInteger)index withBlock:(void (^)(NSString *key, id<NSCoding> object))block{
+    [self objectAtIndexedSubscript:index withBlock:block];
 }
 
 - (NSUInteger)indexOfObject:(id)anObject{
@@ -224,7 +277,11 @@
 
 - (NSUInteger)count
 {
-    return MAX([_cache.diskCache totalCount], [_cache.memoryCache totalCount]);
+    NSUInteger count = MAX([_cache.diskCache totalCount], [_cache.memoryCache totalCount]);
+    if (_count != count) {
+        _count = count;
+    }
+    return _count;
 }
 
 - (void)enumerateObjectsUsingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block
