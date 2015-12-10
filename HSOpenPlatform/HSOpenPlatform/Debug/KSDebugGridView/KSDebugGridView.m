@@ -8,6 +8,8 @@
 
 #import "KSDebugGridView.h"
 #import "MQTTClientShareInstance.h"
+#import "KSDebugToastView.h"
+#import "KSDebugUserDefault.h"
 
 @implementation KSDebugGridView
 
@@ -24,6 +26,11 @@
     [super startDebug];
     self.hidden = NO;
     [self.debugViewReference addSubview:self];
+    
+    if (![KSDebugUserDefault getUserHadClicedGridBtn]) {
+        [KSDebugToastView toast:@"再点击“栅格”可取消查看哦！^_^" toView:self.debugViewReference displaytime:5];
+        [KSDebugUserDefault setUserHadClicedGridBtn:YES];
+    }
 }
 
 -(void)endDebug{

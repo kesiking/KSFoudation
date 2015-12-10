@@ -9,6 +9,19 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+/*!
+ *  @author 孟希羲, 15-12-07 10:12:52
+ *
+ *  @brief  钩子函数 swizzleSelector 将两个函数方法对调，其中对于同一个方法而言，先执行对调的方法先执行，后执行对调的方法后执行
+ *
+ *  @param class            传入类
+ *  @param originalSelector 原始的方法
+ *  @param swizzledSelector 对调的方法
+ *
+ *  @since 1.0
+ */
+void ks_debug_swizzleSelector(Class class, SEL originalSelector, SEL swizzledSelector);
+
 @interface KSDebugUtils : NSObject
 
 /*!

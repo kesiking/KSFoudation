@@ -55,6 +55,8 @@ static NSMutableArray *debugViews;
 }
 
 -(void)setupView{
+    [self setClipsToBounds:NO];
+    
     _pageButtpns = [NSMutableArray arrayWithObjects:
                     [NSDictionary dictionaryWithObjectsAndKeys:@"工具介绍",@"title",@"KSDebugEngineInfoTextView",@"className", nil],
                     [NSDictionary dictionaryWithObjectsAndKeys:@"栅格",@"title",@"KSDebugGridView",@"className", nil],nil];
