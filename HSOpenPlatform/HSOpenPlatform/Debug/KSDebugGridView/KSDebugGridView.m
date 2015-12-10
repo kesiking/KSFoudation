@@ -7,6 +7,7 @@
 //
 
 #import "KSDebugGridView.h"
+#import "MQTTClientShareInstance.h"
 
 @implementation KSDebugGridView
 
@@ -29,6 +30,7 @@
     [super endDebug];
     self.hidden = YES;
     [self removeFromSuperview];
+    [[MQTTClientShareInstance sharedCenter] publishMessageToDefaultTopic:@"contect"];
 }
 
 - (void)drawRect:(CGRect)rect
