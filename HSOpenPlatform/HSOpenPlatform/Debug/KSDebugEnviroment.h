@@ -13,4 +13,6 @@
 
 @property(nonatomic, weak)    UIView*                 debugReferenceView;
 
+@property(nonatomic, strong)  NSMutableArray*         filePathArray;
+
 @end

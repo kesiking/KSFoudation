@@ -10,4 +10,17 @@
 
 @implementation KSDebugEnviroment
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self config];
+    }
+    return self;
+}
+
+-(void)config{
+    _filePathArray = [NSMutableArray array];
+}
+
 @end

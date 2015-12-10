@@ -254,6 +254,8 @@
 		5F53B8DD1BDF0C840045D7AC /* HSAppQRImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F53B8DC1BDF0C840045D7AC /* HSAppQRImageViewController.m */; };
 		5F5C1DD01BCF4C3600CA911D /* HSPageViewControllerDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F5C1DCF1BCF4C3600CA911D /* HSPageViewControllerDemo.m */; };
 		5F5C1DD31BCF4D8D00CA911D /* WeAppSelectorItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F5C1DD21BCF4D8D00CA911D /* WeAppSelectorItem.m */; };
+		5F6331B51C196EE600E48E71 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F6331B41C196EE600E48E71 /* QuickLook.framework */; };
+		5F6331B81C196F6D00E48E71 /* KSDebugLogCollectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F6331B71C196F6D00E48E71 /* KSDebugLogCollectView.m */; };
 		5F66C0431BBA5B3600CC21F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F66C0421BBA5B3600CC21F7 /* main.m */; };
 		5F66C0461BBA5B3600CC21F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F66C0451BBA5B3600CC21F7 /* AppDelegate.m */; };
 		5F66C0491BBA5B3600CC21F7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F66C0481BBA5B3600CC21F7 /* ViewController.m */; };
@@ -1387,6 +1389,9 @@
 		5F5C1DCF1BCF4C3600CA911D /* HSPageViewControllerDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSPageViewControllerDemo.m; sourceTree = "<group>"; };
 		5F5C1DD11BCF4D8D00CA911D /* WeAppSelectorItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeAppSelectorItem.h; sourceTree = "<group>"; };
 		5F5C1DD21BCF4D8D00CA911D /* WeAppSelectorItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeAppSelectorItem.m; sourceTree = "<group>"; };
+		5F6331B41C196EE600E48E71 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		5F6331B61C196F6D00E48E71 /* KSDebugLogCollectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugLogCollectView.h; sourceTree = "<group>"; };
+		5F6331B71C196F6D00E48E71 /* KSDebugLogCollectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugLogCollectView.m; sourceTree = "<group>"; };
 		5F66C03D1BBA5B3600CC21F7 /* HSOpenPlatform.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HSOpenPlatform.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F66C0411BBA5B3600CC21F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F66C0421BBA5B3600CC21F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -2491,6 +2496,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F6331B51C196EE600E48E71 /* QuickLook.framework in Frameworks */,
 				5F360A671C0ED9B5005F483A /* libMQTTKit.a in Frameworks */,
 				5F2CDB161C02CE56007D03CF /* libRCTActionSheet.a in Frameworks */,
 				5F2CDB171C02CE56007D03CF /* libRCTGeolocation.a in Frameworks */,
@@ -3050,6 +3056,7 @@
 		5F1A1AE51C0DA11D00B72CFF /* Debug */ = {
 			isa = PBXGroup;
 			children = (
+				5F6331A01C19617C00E48E71 /* KSDebugLogCollectView */,
 				5F0910D51C16B8DB009962BB /* KSDebugToastView */,
 				5F0910D81C16B8DB009962BB /* KSDebugUserTrackPath */,
 				5F0910BE1C16B8C7009962BB /* KSDebugFPSLabel.h */,
@@ -3445,9 +3452,19 @@
 			path = HSPageContollerViewDemo;
 			sourceTree = "<group>";
 		};
+		5F6331A01C19617C00E48E71 /* KSDebugLogCollectView */ = {
+			isa = PBXGroup;
+			children = (
+				5F6331B61C196F6D00E48E71 /* KSDebugLogCollectView.h */,
+				5F6331B71C196F6D00E48E71 /* KSDebugLogCollectView.m */,
+			);
+			path = KSDebugLogCollectView;
+			sourceTree = "<group>";
+		};
 		5F66C0341BBA5B3600CC21F7 = {
 			isa = PBXGroup;
 			children = (
+				5F6331B41C196EE600E48E71 /* QuickLook.framework */,
 				5F034E201BF2CF9F003A9741 /* JavaScriptCore.framework */,
 				5F42D45D1BF037EA001E7930 /* AssetsLibrary.framework */,
 				5F42D45B1BF037E2001E7930 /* Photos.framework */,
@@ -7213,6 +7230,7 @@
 				5F5C1DD31BCF4D8D00CA911D /* WeAppSelectorItem.m in Sources */,
 				5F66C5721BBA5CC600CC21F7 /* SVWebViewControllerActivity.m in Sources */,
 				5F66C4561BBA5CC500CC21F7 /* KSCheckRegisterService.m in Sources */,
+				5F6331B81C196F6D00E48E71 /* KSDebugLogCollectView.m in Sources */,
 				5F66C48E1BBA5CC500CC21F7 /* WeAppBasicService.m in Sources */,
 				5FDF19FA1BD60D8B0059B3F2 /* HSAboutViewController.m in Sources */,
 				5F66C48C1BBA5CC500CC21F7 /* WeAppBasicPagedList.m in Sources */,
