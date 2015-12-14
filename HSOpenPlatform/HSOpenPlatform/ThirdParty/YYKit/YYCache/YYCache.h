@@ -69,7 +69,7 @@ FOUNDATION_EXPORT const unsigned char YYCacheVersionString[];
  @warning Multiple instances with the same path will make the storage unstable.
  */
 - (instancetype)initWithPath:(NSString *)path NS_DESIGNATED_INITIALIZER;
-
+- (instancetype)initWithPath:(NSString *)path inlineThreshold:(NSUInteger)threshold NS_DESIGNATED_INITIALIZER;
 - (instancetype)init UNAVAILABLE_ATTRIBUTE;
 + (instancetype)new UNAVAILABLE_ATTRIBUTE;
 
@@ -134,6 +134,8 @@ FOUNDATION_EXPORT const unsigned char YYCacheVersionString[];
  @param block  A block which will be invoked in background queue when finished.
  */
 - (void)setObject:(id<NSCoding>)object forKey:(NSString *)key withBlock:(void(^)(void))block;
+
+- (void)setObjects:(NSArray *)objects forKeys:(NSArray *)keys withBlock:(void (^)(void))block;
 
 /**
  Removes the value of the specified key in the cache.

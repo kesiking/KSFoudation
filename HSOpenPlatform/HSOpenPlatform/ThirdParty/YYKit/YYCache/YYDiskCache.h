@@ -222,6 +222,8 @@
  */
 - (void)setObject:(id<NSCoding>)object forKey:(NSString *)key;
 
+- (void)setObjects:(NSArray*)objects forKeys:(NSArray *)keys withBlock:(void(^)(void))block;
+
 /**
  Sets the value of the specified key in the cache.
  This method returns immediately and invoke the passed block in background queue

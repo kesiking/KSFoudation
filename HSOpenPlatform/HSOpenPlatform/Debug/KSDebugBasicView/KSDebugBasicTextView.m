@@ -165,6 +165,7 @@
 -(void)saveArrayToKSDebugDiskWithArray:(NSArray*)array keyPath:(NSString*)path{
     if (array && array.count > 0 && path && path.length > 0) {
         NSData* data = [self generateDataWithArray:array];
+        [[KSDebugDataCache sharedAudioDataCache] setSuffixText:@"txt"];
         [[KSDebugDataCache sharedAudioDataCache] storeAudioData:data forKey:path];
     }
 }
@@ -172,6 +173,7 @@
 -(void)saveDictionaryToKSDebugDiskWithDictionary:(NSDictionary*)dictionary keyPath:(NSString*)path{
     if (dictionary && dictionary.count > 0 && path && path.length > 0) {
         NSData* data = [self generateDataWithDictionary:dictionary];
+        [[KSDebugDataCache sharedAudioDataCache] setSuffixText:@"txt"];
         [[KSDebugDataCache sharedAudioDataCache] storeAudioData:data forKey:path];
     }
 }

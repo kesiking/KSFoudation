@@ -37,8 +37,8 @@
 - (void)removeObjectAtIndex:(NSUInteger)index;
 /*
  对于200000基数，获取某个key
- '直接使用NSMutableArray' measured [Time, seconds] average: 0.028, relative standard deviation: 4.578%, values: [0.030904, 0.026768, 0.026760, 0.027495, 0.027058, 0.027626, 0.026799, 0.028399, 0.029141, 0.028858],
- '使用KSMemoryCacheArray' measured [Time, seconds] average: 0.723, relative standard deviation: 9.389%, values: [0.723737, 0.698857, 0.701223, 0.693413, 0.699719, 0.701247, 0.719311, 0.922482, 0.687052, 0.678485],
+'直接使用NSMutableArray' measured [Time, seconds] average: 0.028, relative standard deviation: 4.578%, values: [0.030904, 0.026768, 0.026760, 0.027495, 0.027058, 0.027626, 0.026799, 0.028399, 0.029141, 0.028858],
+'使用KSMemoryCacheArray' measured [Time, seconds] average: 0.723, relative standard deviation: 9.389%, values: [0.723737, 0.698857, 0.701223, 0.693413, 0.699719, 0.701247, 0.719311, 0.922482, 0.687052, 0.678485],
  */
 - (id)objectAtIndex:(NSUInteger)index;
 
@@ -52,13 +52,19 @@
 /*
  对于20000基数
  
- '直接使用NSMutableArray' measured [Time, seconds] average: 0.000, relative standard deviation: 113.946%, values: [0.000002, 0.000001, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000],
+'直接使用NSMutableArray' measured [Time, seconds] average: 0.000, relative standard deviation: 113.946%, values: [0.000002, 0.000001, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000],
  
- '使用KSMemoryCacheArray' measured [Time, seconds] average: 2.531, relative standard deviation: 10.358%, values: [2.589457, 2.727221, 2.294212, 2.262713, 2.626776, 2.343007, 3.082039, 2.773024, 2.241870, 2.367270],
+'使用KSMemoryCacheArray' measured [Time, seconds] average: 2.531, relative standard deviation: 10.358%, values: [2.589457, 2.727221, 2.294212, 2.262713, 2.626776, 2.343007, 3.082039, 2.773024, 2.241870, 2.367270],
  
- '使用KSMemoryCacheArray异步操作' measured [Time, seconds] average: 0.147, relative standard deviation: 10.195%, values: [0.152234, 0.134376, 0.143487, 0.133621, 0.126686, 0.142715, 0.137410, 0.161241, 0.173981, 0.167627],
+'使用KSMemoryCacheArray异步操作' measured [Time, seconds] average: 0.147, relative standard deviation: 10.195%, values: [0.152234, 0.134376, 0.143487, 0.133621, 0.126686, 0.142715, 0.137410, 0.161241, 0.173981, 0.167627],
  */
 - (void)addObject:(id<NSCoding>)anObject;
+
+/*
+ 对于20000基数
+ ' 使用KSMemoryCacheArray addObjectsFromArray异步操作 ' measured [Time, seconds] average: 1.670, relative standard deviation: 17.757%, values: [1.246001, 1.153581, 1.492360, 2.244776, 1.857887, 1.770304, 1.688211, 1.808749, 1.742244, 1.692948],
+ */
+- (void)addObjectsFromArray:(NSArray *)otherArray withBlock:(void (^)(void))block;
 - (void)insertObject:(id<NSCoding>)anObject atIndex:(NSUInteger)index;
 
 @property (readonly, nonatomic) NSUInteger count;

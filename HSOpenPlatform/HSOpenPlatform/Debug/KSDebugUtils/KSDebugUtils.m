@@ -8,6 +8,7 @@
 
 #import "KSDebugUtils.h"
 #import <objc/runtime.h>
+#import <objc/message.h>
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -   钩子函数 swizzleSelector 将两个函数方法对调，其中对于同一个方法而言，先执行对调的方法先执行，后执行对调的方法后执行
@@ -23,16 +24,123 @@ void ks_debug_swizzleSelector(Class class, SEL originalSelector, SEL swizzledSel
 
 @implementation KSDebugUtils
 
++ (void)injectSwizzledSelector:(SEL)swizzledSelector withSelector:(SEL)selector withUndefinedBlock:(void (^)(id slf, id sender, id paramOne, id paramTwo, id paramThree))undefinedBlock withImplementationBlock:(void (^)(id slf, id sender, id paramOne, id paramTwo, id paramThree))implementationBlock intoTargetClass:(Class)cls{
+    [self replaceImplementationOfSelector:selector withSelector:swizzledSelector forClass:cls implementationBlock:implementationBlock undefinedBlock:undefinedBlock];
+}
+
+/// All swizzled delegate methods should make use of this guard.
+/// This will prevent duplicated sniffing when the original implementation calls up to a superclass implementation which we've also swizzled.
+/// The superclass implementation (and implementations in classes above that) will be executed without inteference if called from the original implementation.
++ (void)sniffWithoutDuplicationForObject:(NSObject *)object selector:(SEL)selector sniffingBlock:(void (^)(void))sniffingBlock originalImplementationBlock:(void (^)(void))originalImplementationBlock
+{
+    const void *key = selector;
+    
+    // Don't run the sniffing block if we're inside a nested call
+    if (!objc_getAssociatedObject(object, key)) {
+        sniffingBlock();
+    }
+    
+    // Mark that we're calling through to the original so we can detect nested calls
+    objc_setAssociatedObject(object, key, @YES, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    originalImplementationBlock();
+    objc_setAssociatedObject(object, key, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
++ (BOOL)instanceRespondsButDoesNotImplementSelector:(SEL)selector class:(Class)cls;
+{
+    if ([cls instancesRespondToSelector:selector]) {
+        unsigned int numMethods = 0;
+        Method *methods = class_copyMethodList(cls, &numMethods);
+        
+        BOOL implementsSelector = NO;
+        for (int index = 0; index < numMethods; index++) {
+            SEL methodSelector = method_getName(methods[index]);
+            if (selector == methodSelector) {
+                implementsSelector = YES;
+                break;
+            }
+        }
+        
+        free(methods);
+        
+        if (!implementsSelector) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
++ (void)replaceImplementationOfSelector:(SEL)selector withSelector:(SEL)swizzledSelector forClass:(Class)cls implementationBlock:(id)implementationBlock undefinedBlock:(id)undefinedBlock;
+{
+    if ([self instanceRespondsButDoesNotImplementSelector:selector class:cls]) {
+        return;
+    }
+    
+#ifdef __IPHONE_6_0
+    IMP implementation = imp_implementationWithBlock((id)([cls instancesRespondToSelector:selector] ? implementationBlock : undefinedBlock));
+#else
+    IMP implementation = imp_implementationWithBlock((__bridge void *)([cls instancesRespondToSelector:selector] ? implementationBlock : undefinedBlock));
+#endif
+    
+    Method oldMethod = class_getInstanceMethod(cls, selector);
+    if (oldMethod) {
+        class_addMethod(cls, swizzledSelector, implementation, method_getTypeEncoding(oldMethod));
+        
+        Method newMethod = class_getInstanceMethod(cls, swizzledSelector);
+        
+        method_exchangeImplementations(oldMethod, newMethod);
+    } else {
+        class_addMethod(cls, selector, implementation, method_getTypeEncoding(oldMethod));
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -   获取 当前展示的viewController
 + (UIViewController*)getCurrentAppearedViewController{
     UIView* leafView = [self getLeafSubView];
-    return [self getViewController:leafView];
+    
+    UIViewController* currentAppearedViewController = [self getViewController:leafView];
+
+    UIViewController* lastVC = [self getLastViewControllerFromCurrentNavigationVC:currentAppearedViewController];
+    
+    if (lastVC == nil || lastVC == currentAppearedViewController) {
+        return currentAppearedViewController;
+    }
+    
+    return lastVC;
 }
 
 + (UIViewController*)getCurrentAppearedViewController:(UIView*)view {
     UIView* leafView = [self getLeafSubViewFromView:view];
-    return [self getViewController:leafView];
+    
+    UIViewController* currentAppearedViewController = [self getViewController:leafView];
+    
+    UIViewController* lastVC = [self getLastViewControllerFromCurrentNavigationVC:currentAppearedViewController];
+    
+    if (lastVC == nil || lastVC == currentAppearedViewController) {
+        return currentAppearedViewController;
+    }
+    return lastVC;
+}
+
++(UIViewController*)getLastViewControllerFromCurrentNavigationVC:(UIViewController*)currentAppearedViewController{
+    UIViewController* lastVC = nil;
+
+    if (currentAppearedViewController.navigationController) {
+       lastVC = [[currentAppearedViewController.navigationController viewControllers] count] > 1 ? [[currentAppearedViewController.navigationController viewControllers] lastObject] : nil;
+    }
+    if (lastVC) {
+        return lastVC;
+    }
+    UIViewController* rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+    if (rootViewController && [rootViewController isKindOfClass:[UINavigationController class]]) {
+        lastVC = [[((UINavigationController*)rootViewController) viewControllers] count] > 1 ? [[((UINavigationController*)rootViewController) viewControllers] lastObject] : nil;
+    }else if (rootViewController && rootViewController.navigationController){
+        lastVC = [[((UINavigationController*)rootViewController.navigationController) viewControllers] count] > 1 ? [[((UINavigationController*)rootViewController.navigationController) viewControllers] lastObject] : nil;
+    }
+    
+    return lastVC;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

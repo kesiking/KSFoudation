@@ -61,6 +61,14 @@ static NSMutableArray *debugViews;
                     [NSDictionary dictionaryWithObjectsAndKeys:@"工具介绍",@"title",@"KSDebugEngineInfoTextView",@"className", nil],
                     [NSDictionary dictionaryWithObjectsAndKeys:@"栅格",@"title",@"KSDebugGridView",@"className", nil],nil];
     if ([KSDebugOperationView getDebugViews]) {
+        [[KSDebugOperationView getDebugViews] sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            if ([obj1 isKindOfClass:[NSDictionary class]] && [obj2 isKindOfClass:[NSDictionary class]]) {
+                NSString* objClassName1 = [(NSDictionary*)obj1 objectForKey:@"className"];
+                NSString* objClassName2 = [(NSDictionary*)obj2 objectForKey:@"className"];
+                return [objClassName1 compare:objClassName2];
+            }
+            return NSOrderedSame;
+        }];
         [_pageButtpns addObjectsFromArray:[KSDebugOperationView getDebugViews]];
     }
     
@@ -112,7 +120,7 @@ static NSMutableArray *debugViews;
         _showAndHideButton.layer.borderWidth = 1.0;
         _showAndHideButton.layer.masksToBounds = YES;
         _showAndHideButton.layer.cornerRadius = _showAndHideButton.frame.size.width / 2;
-        [_showAndHideButton setTitle:@"D" forState:UIControlStateNormal];
+        [_showAndHideButton setTitle:@"点" forState:UIControlStateNormal];
         [_showAndHideButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
         [_showAndHideButton addTarget:self action:@selector(showAndHideButtonClickEvent) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_showAndHideButton];
@@ -138,7 +146,7 @@ static NSMutableArray *debugViews;
     if (showDebugViews) {
         [_showAndHideButton setBackgroundColor:KSDebugRGB_A(0x00, 0x00, 0x00,0.4)];
         _showAndHideButton.layer.borderColor = KSDebugRGB_A(0xff, 0xff, 0xff, 1.0).CGColor;
-        [self.showAndHideButton setTitle:@"D" forState:UIControlStateNormal];
+        [self.showAndHideButton setTitle:@"点" forState:UIControlStateNormal];
         [self.showAndHideButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [UIView animateWithDuration:0.3 animations:^{
             [self.selectorView setAlpha:0];
@@ -148,7 +156,7 @@ static NSMutableArray *debugViews;
     }else{
         [_showAndHideButton setBackgroundColor:KSDebugRGB_A(0xff, 0xff, 0xff,0.4)];
         _showAndHideButton.layer.borderColor = KSDebugRGB_A(0x00, 0x00, 0x00, 1.0).CGColor;
-        [self.showAndHideButton setTitle:@"D" forState:UIControlStateNormal];
+        [self.showAndHideButton setTitle:@"点" forState:UIControlStateNormal];
         [self.showAndHideButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [UIView animateWithDuration:0.3 animations:^{
             [self.selectorView setAlpha:1];
@@ -256,19 +264,10 @@ static NSMutableArray *debugViews;
     }
 }
 
-//利用指针传递实现，该方法主要用于测试指针传值 -- 逸行 该方法有个好处不需要知道selectView的类型
--(void)setSelectorFrame:(UIView*)selectView buttonWidth:(void*)buttonWidth buttonHeight:(void*)buttonHeight{
-    if (buttonWidth == NULL || buttonHeight == NULL || selectView == nil) {
-        return;
-    }
-    
-    NSUInteger count = self.pageButtpns.count;
-    if (count >= 4) {
-        *((float*)buttonWidth) = self.selectorView.frame.size.width / 3.5;
-    }else if(count > 0){
-        *((float*)buttonWidth) = self.selectorView.frame.size.width / count;
-    }
-    
+-(void)setSelectorFrame:(UIView*)selectView{
+    KSDebugSimpleSelectorScrollView* simpleSelectorScrollView = (KSDebugSimpleSelectorScrollView*)selectView;
+    // 设置tabHeadView的每个tabItem的css
+    simpleSelectorScrollView.buttonWidth = simpleSelectorScrollView.frame.size.width / 3.5;
 }
 
 -(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{

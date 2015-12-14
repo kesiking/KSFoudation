@@ -219,6 +219,75 @@ static NSString *const kTrashDirectoryName = @"trash";
     return YES;
 }
 
+- (BOOL)_dbSaveWithKeys:(NSArray *)keys values:(NSArray *)values fileNames:(NSArray *)fileNames extendedDatas:(NSArray *)extendedDatas {
+    NSUInteger keyCount = [keys count];
+    NSUInteger valueCount = [values count];
+    NSUInteger fileNameCount = [fileNames count];
+    NSUInteger extendedDataCount = [extendedDatas count];
+
+    if (valueCount != keyCount
+        || fileNameCount != keyCount
+        || extendedDataCount != keyCount) {
+        return NO;
+    }
+    char *errorMsg;
+    if (sqlite3_exec(_db, "BEGIN", NULL, NULL, &errorMsg) == SQLITE_OK) {
+        NSLog(@"启动事务成功");
+        sqlite3_free(errorMsg);
+        BOOL isSuccess = YES;
+        for (NSString* key in keys) {
+            if (key == nil || ![key isKindOfClass:[NSString class]]) {
+                continue;
+            }
+            NSUInteger index = [keys indexOfObject:key];
+            id valueObj = [values objectAtIndex:index];
+            id fileNameObj = [fileNames objectAtIndex:index];
+            id extendedDataObj = [extendedDatas objectAtIndex:index];
+            
+            if ([valueObj isKindOfClass:[NSNull class]]) {
+                continue;
+            }
+            NSData* value = (NSData*)valueObj;
+            NSString* fileName = [fileNameObj isKindOfClass:[NSNull class]] ? nil : fileNameObj;
+            NSData* extendedData = [extendedDataObj isKindOfClass:[NSNull class]] ? nil : extendedDataObj;
+
+            NSString *sql = @"insert or replace into manifest (key, filename, size, inline_data, modification_time, last_access_time, extended_data) values (?1, ?2, ?3, ?4, ?5, ?6, ?7);";
+            sqlite3_stmt *stmt = [self _dbPrepareStmt:sql];
+            if (!stmt) return NO;
+            
+            int timestamp = (int)time(NULL);
+            sqlite3_bind_text(stmt, 1, key.UTF8String, -1, NULL);
+            sqlite3_bind_text(stmt, 2, fileName.UTF8String, -1, NULL);
+            sqlite3_bind_int(stmt, 3, (int)value.length);
+            if (fileName.length == 0) {
+                sqlite3_bind_blob(stmt, 4, value.bytes, (int)value.length, 0);
+            } else {
+                sqlite3_bind_blob(stmt, 4, NULL, 0, 0);
+            }
+            sqlite3_bind_int(stmt, 5, timestamp);
+            sqlite3_bind_int(stmt, 6, timestamp);
+            sqlite3_bind_blob(stmt, 7, extendedData.bytes, (int)extendedData.length, 0);
+            
+            int result = sqlite3_step(stmt);
+            if (result != SQLITE_DONE) {
+                if (_errorLogsEnabled) NSLog(@"%s line:%d sqlite insert error (%d): %s", __FUNCTION__, __LINE__, result, sqlite3_errmsg(_db));
+                isSuccess = NO;
+                break;
+            }
+        }
+        if (sqlite3_exec(_db, "COMMIT", NULL, NULL, &errorMsg) != SQLITE_OK) {
+            isSuccess = NO;
+        }
+        sqlite3_free(errorMsg);
+        return isSuccess;
+    }else{
+        sqlite3_free(errorMsg);
+        return NO;
+    }
+   
+    return YES;
+}
+
 - (BOOL)_dbUpdateAccessTimeWithKey:(NSString *)key {
     NSString *sql = @"update manifest set last_access_time = ?1 where key = ?2;";
     sqlite3_stmt *stmt = [self _dbPrepareStmt:sql];
@@ -718,6 +787,32 @@ static NSString *const kTrashDirectoryName = @"trash";
     return [self saveItemWithKey:item.key value:item.value filename:item.filename extendedData:item.extendedData];
 }
 
+- (BOOL)saveItems:(NSArray *)items {
+    NSMutableArray* keys = [NSMutableArray array];
+    NSMutableArray* values = [NSMutableArray array];
+    NSMutableArray* fileNames = [NSMutableArray array];
+    NSMutableArray* extendedDatas = [NSMutableArray array];
+    for (YYKVStorageItem* item in items) {
+        if (item.key) {
+            [keys addObject:item.key];
+        }
+        if (item.value) {
+            [values addObject:item.value];
+        }
+        if (item.filename) {
+            [fileNames addObject:item.filename];
+        }else{
+            [fileNames addObject:[NSNull null]];
+        }
+        if (item.extendedData) {
+            [extendedDatas addObject:item.extendedData];
+        }else{
+            [extendedDatas addObject:[NSNull null]];
+        }
+    }
+    return [self saveItemWithKeys:keys values:values fileNames:fileNames extendedDatas:extendedDatas];
+}
+
 - (BOOL)saveItemWithKey:(NSString *)key value:(NSData *)value {
     return [self saveItemWithKey:key value:value filename:nil extendedData:nil];
 }
@@ -746,6 +841,64 @@ static NSString *const kTrashDirectoryName = @"trash";
         }
         return [self _dbSaveWithKey:key value:value fileName:nil extendedData:extendedData];
     }
+}
+
+- (BOOL)saveItemWithKeys:(NSArray *)keys values:(NSArray *)values fileNames:(NSArray *)fileNames extendedDatas:(NSArray *)extendedDatas {
+    NSUInteger keyCount = [keys count];
+    NSUInteger valueCount = [values count];
+    NSUInteger fileNameCount = [fileNames count];
+    NSUInteger extendedDataCount = [extendedDatas count];
+    
+    if (valueCount != keyCount
+        || fileNameCount != keyCount
+        || extendedDataCount != keyCount) {
+        return NO;
+    }
+    
+    BOOL isSuccess = YES;
+    for (NSString* key in keys) {
+        if (key == nil || ![key isKindOfClass:[NSString class]]) {
+            continue;
+        }
+        NSUInteger index = [keys indexOfObject:key];
+        id valueObj = [values objectAtIndex:index];
+        id fileNameObj = [fileNames objectAtIndex:index];
+        
+        if ([valueObj isKindOfClass:[NSNull class]]) {
+            isSuccess = NO;
+            continue;
+        }
+        NSData* value = (NSData*)valueObj;
+        NSString* fileName = [fileNameObj isKindOfClass:[NSNull class]] ? nil : fileNameObj;
+        
+        if (key.length == 0 || value.length == 0){
+            isSuccess = NO;
+            break;
+        }
+        
+        if (_type == YYKVStorageTypeFile && fileName.length == 0) {
+            isSuccess = NO;
+            break;
+        }
+        
+        if (fileName.length) {
+            if (![self _fileWriteWithName:fileName data:value]) {
+                isSuccess = NO;
+                break;
+            }
+        } else {
+            if (_type != YYKVStorageTypeSQLite) {
+                NSString *filename = [self _dbGetFilenameWithKey:key];
+                if (filename) {
+                    [self _fileDeleteWithName:filename];
+                }
+            }
+        }
+    }
+    if (isSuccess) {
+        return [self _dbSaveWithKeys:keys values:values fileNames:fileNames extendedDatas:extendedDatas];
+    }
+    return NO;
 }
 
 - (BOOL)removeItemForKey:(NSString *)key {

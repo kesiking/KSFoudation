@@ -29,7 +29,22 @@
 
 - (instancetype)initWithPath:(NSString *)path {
     if (path.length == 0) return nil;
-    YYDiskCache *diskCache = [[YYDiskCache alloc] initWithPath:path];
+    YYDiskCache *diskCache = [[YYDiskCache alloc] initWithPath:path inlineThreshold:NSUIntegerMax];
+    if (!diskCache) return nil;
+    NSString *name = [path lastPathComponent];
+    YYMemoryCache *memoryCache = [YYMemoryCache new];
+    memoryCache.name = name;
+    
+    self = [super init];
+    _name = name;
+    _diskCache = diskCache;
+    _memoryCache = memoryCache;
+    return self;
+}
+
+- (instancetype)initWithPath:(NSString *)path inlineThreshold:(NSUInteger)threshold{
+    if (path.length == 0) return nil;
+    YYDiskCache *diskCache = [[YYDiskCache alloc] initWithPath:path inlineThreshold:threshold];
     if (!diskCache) return nil;
     NSString *name = [path lastPathComponent];
     YYMemoryCache *memoryCache = [YYMemoryCache new];
@@ -89,6 +104,19 @@
 - (void)setObject:(id<NSCoding>)object forKey:(NSString *)key withBlock:(void (^)(void))block {
     [_memoryCache setObject:object forKey:key];
     [_diskCache setObject:object forKey:key withBlock:block];
+}
+
+- (void)setObjects:(NSArray *)objects forKeys:(NSArray *)keys withBlock:(void (^)(void))block {
+    if ([keys count] != [objects count]) {
+        return;
+    }
+    for (NSString* key in keys) {
+        if (!key) continue;
+        NSUInteger index = [keys indexOfObject:key];
+        id object = [objects objectAtIndex:index];
+        [_memoryCache setObject:object forKey:key];
+    }
+    [_diskCache setObjects:objects forKeys:keys withBlock:block];
 }
 
 - (void)removeObjectForKey:(NSString *)key {

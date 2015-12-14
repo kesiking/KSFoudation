@@ -246,6 +246,71 @@ static NSString *_YYNSStringMD5(NSString *string) {
     Unlock();
 }
 
+- (void)setObjects:(NSArray*)objects forKeys:(NSArray *)keys withBlock:(void(^)(void))block {
+    if ([keys count] != [objects count]) {
+        return;
+    }
+    __weak typeof(self) _self = self;
+    dispatch_async(_queue, ^{
+        __strong typeof(_self) self = _self;
+        NSMutableArray* values = [NSMutableArray array];
+        NSMutableArray* fileNames = [NSMutableArray array];
+        NSMutableArray* extendedDatas = [NSMutableArray array];
+        BOOL isSuccess = YES;
+        for (NSString* key in keys) {
+            if (!key){
+                isSuccess = NO;
+                break;
+            }
+            NSUInteger index = [keys indexOfObject:key];
+            id object = [objects objectAtIndex:index];
+            if (!object) {
+                isSuccess = NO;
+                break;
+            }
+            NSData *extendedData = [YYDiskCache getExtendedDataFromObject:object];
+            NSData *value = nil;
+            if (_customArchiveBlock) {
+                value = _customArchiveBlock(object);
+            } else {
+                @try {
+                    value = [NSKeyedArchiver archivedDataWithRootObject:object];
+                }
+                @catch (NSException *exception) {
+                    // nothing to do...
+                }
+            }
+            if (!value){
+                isSuccess = NO;
+                break;
+            }
+            [values addObject:value];
+            NSString *filename = nil;
+            if (_kv.type != YYKVStorageTypeSQLite) {
+                if (value.length > _inlineThreshold) {
+                    filename = [self _filenameForKey:key];
+                }
+            }
+            if (filename) {
+                [fileNames addObject:filename];
+            }else{
+                [fileNames addObject:[NSNull null]];
+            }
+            if (extendedData) {
+                [extendedDatas addObject:extendedData];
+            }else{
+                [extendedDatas addObject:[NSNull null]];
+            }
+        }
+        if (isSuccess) {
+            Lock();
+            [_kv saveItemWithKeys:keys values:values fileNames:fileNames extendedDatas:extendedDatas];
+            Unlock();
+        }
+        if (block) block();
+    });
+}
+
 - (void)setObject:(id<NSCoding>)object forKey:(NSString *)key withBlock:(void(^)(void))block {
     __weak typeof(self) _self = self;
     dispatch_async(_queue, ^{

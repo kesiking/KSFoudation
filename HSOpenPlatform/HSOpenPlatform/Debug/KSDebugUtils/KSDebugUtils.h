@@ -24,6 +24,10 @@ void ks_debug_swizzleSelector(Class class, SEL originalSelector, SEL swizzledSel
 
 @interface KSDebugUtils : NSObject
 
++ (void)injectSwizzledSelector:(SEL)swizzledSelector withSelector:(SEL)selector withUndefinedBlock:(void (^)(id slf, id sender, id paramOne, id paramTwo, id paramThree))undefinedBlock withImplementationBlock:(void (^)(id slf, id sender, id paramOne, id paramTwo, id paramThree))implementationBlock intoTargetClass:(Class)cls;
+
++ (void)sniffWithoutDuplicationForObject:(NSObject *)object selector:(SEL)selector sniffingBlock:(void (^)(void))sniffingBlock originalImplementationBlock:(void (^)(void))originalImplementationBlock;
+
 /*!
  *  @author 孟希羲, 15-12-02 10:12:04
  *

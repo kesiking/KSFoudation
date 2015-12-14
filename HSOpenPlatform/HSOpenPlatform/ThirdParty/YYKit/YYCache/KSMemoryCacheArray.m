@@ -69,9 +69,8 @@
 @end
 
 @implementation KSMemoryCacheArray{
-    NSMutableDictionary *_storage;
+    NSMutableArray      *_storage;
     YYCache             *_cache;
-    NSUInteger           _count;
 }
 
 - (instancetype)init
@@ -82,7 +81,7 @@
 - (instancetype)initWithCapacity:(NSUInteger)capacity
 {
     if ((self = [super init])) {
-        _storage = [NSMutableDictionary dictionaryWithCapacity:capacity];
+        _storage = [NSMutableArray arrayWithCapacity:capacity];
         NSTimeInterval currentTimeInterval = [[NSDate date] timeIntervalSince1970];
         _cache = [[YYCache alloc] initWithName:[@(currentTimeInterval) stringValue]];
         [self setupCache];
@@ -94,7 +93,7 @@
 {
     self = [super init];
     if ((self = [super init])) {
-        _storage = [NSMutableDictionary dictionaryWithCapacity:0];
+        _storage = [NSMutableArray arrayWithCapacity:0];
         _cache = [[YYCache alloc] initWithName:name];
         [self setupCache];
     }
@@ -104,7 +103,6 @@
 -(void)setupCache{
     self.memoryCacheArrayCountLimit = KSMemoryCacheArrayCountLimit;
     _cache.memoryCache.countLimit =  self.memoryCacheArrayCountLimit;
-    _count = 0;
     _needQueueBlock = YES;
     
     /*
@@ -137,8 +135,7 @@
      }
      return nil;
      }];
-    */
-
+     */
 }
 
 -(void)setMemoryCacheArrayCountLimit:(NSUInteger)memoryCacheArrayCountLimit{
@@ -149,7 +146,7 @@
 - (instancetype)initWithSparseArray:(KSMemoryCacheArray *)sparseArray
 {
     if ((self = [super init])) {
-        _storage = [sparseArray->_storage copy];
+        _storage = [sparseArray->_storage mutableCopy];
         _cache = [[YYCache alloc] initWithName:sparseArray->_cache.name];
     }
     return self;
@@ -177,14 +174,21 @@
 
 - (id)objectAtIndexedSubscript:(NSUInteger)idx
 {
-    NSString *key = [@(idx) stringValue];
-    id<NSCoding> object = [_cache objectForKey:key];
+    if (idx >= [_storage count]) {
+        return nil;
+    }
+    NSString *numberKey = [_storage objectAtIndex:idx];
+    id<NSCoding> object = [_cache objectForKey:numberKey];
     return object;
 }
 
 - (void)objectAtIndexedSubscript:(NSUInteger)idx withBlock:(void (^)(NSString *key, id<NSCoding> object))block{
-    NSString *key = [@(idx) stringValue];
-    [_cache objectForKey:key withBlock:block];
+    if (idx >= [_storage count]) {
+        block(nil, nil);
+        return;
+    }
+    NSString *numberKey = [_storage objectAtIndex:idx];
+    [_cache objectForKey:numberKey withBlock:block];
 }
 
 - (void)setObject:(id<NSCoding>)obj atIndexedSubscript:(NSUInteger)idx
@@ -194,25 +198,32 @@
 
 - (id)objectForKeyedSubscript:(NSNumber *)key
 {
-    return [_cache objectForKey:[key stringValue]];
+    if ([key integerValue] >= [_storage count]) {
+        return nil;
+    }
+    NSString* numberKey = [_storage objectAtIndex:[key integerValue]];
+    return [_cache objectForKey:numberKey];
 }
 
 - (void)setObject:(id<NSCoding>)obj forKeyedSubscript:(NSNumber *)key
 {
     if (obj) {
-        if (self.needQueueBlock) {
-            WEAKSELF
-            [_cache setObject:obj forKey:[key stringValue] withBlock:^{
-                STRONGSELF
-                strongSelf->_count++;
-            }];
+        NSString* numberKey = [@([_storage count]) stringValue];
+        if ([key integerValue] >= [_storage count]) {
+            [_storage addObject:numberKey];
         }else{
-            [_cache setObject:obj forKey:[key stringValue]];
-            _count++;
+            [_storage insertObject:numberKey atIndex:[key integerValue]];
+        }
+        if (self.needQueueBlock) {
+            [_cache setObject:obj forKey:numberKey withBlock:nil];
+        }else{
+            [_cache setObject:obj forKey:numberKey];
         }
     } else {
+        if ([key integerValue] < _storage.count) {
+            [_storage removeObjectAtIndex:[key integerValue]];
+        }
         [_cache removeObjectForKey:[key stringValue]];
-        _count--;
     }
 }
 
@@ -220,7 +231,22 @@
     if (!anObject) {
         return;
     }
-    [self setObject:anObject atIndexedSubscript:_count + 1];
+    [self setObject:anObject atIndexedSubscript:[self count]];
+}
+
+- (void)addObjectsFromArray:(NSArray *)otherArray withBlock:(void (^)(void))block{
+    if (otherArray == nil || ![otherArray isKindOfClass:[NSArray class]]) {
+        return;
+    }
+    NSMutableArray* numberKeys = [NSMutableArray array];
+    __block NSUInteger count = [_storage count];
+    [otherArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL * stop) {
+        NSString* numberKey = [@(count) stringValue];
+        [numberKeys addObject:numberKey];
+        count++;
+    }];
+    [_storage addObjectsFromArray:numberKeys];
+    [_cache setObjects:otherArray forKeys:numberKeys withBlock:block];
 }
 
 - (void)insertObject:(id<NSCoding>)anObject atIndex:(NSUInteger)index{
@@ -231,16 +257,17 @@
 }
 
 - (void)removeLastObject{
-    NSUInteger count = [self count];
-    if (count >= 1) {
-        [_cache removeObjectForKey:[@(count - 1) stringValue]];
-        _count--;
+    NSString* numberKey = [_storage lastObject];
+    if (numberKey) {
+        [_cache removeObjectForKey:numberKey];
     }
 }
 
 - (void)removeObjectAtIndex:(NSUInteger)index{
-    [_cache removeObjectForKey:[@(index) stringValue]];
-    _count--;
+    if (index >= [_storage count]) {
+        return;
+    }
+    [_storage removeObjectAtIndex:index];
 }
 
 - (id)objectAtIndex:(NSUInteger)index{
@@ -252,42 +279,43 @@
 }
 
 - (NSUInteger)indexOfObject:(id)anObject{
-    NSUInteger index = NSNotFound;
+    NSString *indexKey = nil;
     if ([_cache.memoryCache containsObjectForValue:anObject]) {
         NSUInteger count = [_cache.memoryCache totalCount];
         for (NSUInteger indexWithMemory = 0; indexWithMemory < count; indexWithMemory++) {
-            id obj = [_cache.memoryCache objectForKey:[@(indexWithMemory) stringValue]];
+            NSString* numberKey = [@(indexWithMemory) stringValue];
+            id obj = [_cache.memoryCache objectForKey:numberKey];
             if (obj == anObject) {
-                index = indexWithMemory;
+                indexKey = numberKey;
                 break;
             }
         }
     }else{
         NSUInteger count = [_cache.diskCache totalCount];
         for (NSUInteger indexWithDisk = 0; indexWithDisk < count; indexWithDisk++) {
-            id obj = [_cache.memoryCache objectForKey:[@(indexWithDisk) stringValue]];
+            NSString* numberKey = [@(indexWithDisk) stringValue];
+            id obj = [_cache.memoryCache objectForKey:numberKey];
             if (obj == anObject) {
-                index = indexWithDisk;
+                indexKey = numberKey;
                 break;
             }
         }
     }
-    return index;
+    if (indexKey) {
+        return [_storage indexOfObject:indexKey];
+    }
+    return NSNotFound;
 }
 
 - (NSUInteger)count
 {
-    NSUInteger count = MAX([_cache.diskCache totalCount], [_cache.memoryCache totalCount]);
-    if (_count != count) {
-        _count = count;
-    }
-    return _count;
+    return [_storage count];
 }
 
 - (void)enumerateObjectsUsingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block
 {
     NSParameterAssert(block != nil);
-    NSUInteger count = [self count];
+    NSUInteger count = [_storage count];
     BOOL stop = NO;
     for (NSUInteger index = 0; index < count; index++) {
         id obj = [self objectAtIndex:index];
@@ -302,6 +330,7 @@
 
 - (void)removeAllObjects
 {
+    [_storage removeAllObjects];
     [_cache removeAllObjects];
 }
 

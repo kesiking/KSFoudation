@@ -15,10 +15,15 @@
 @interface KSDebugLogCollectView()<UITableViewDelegate, UITableViewDataSource, QLPreviewControllerDataSource,QLPreviewControllerDelegate,UIDocumentInteractionControllerDelegate>
 
 @property(nonatomic, strong) UILabel                         *infoLabel;
+@property(nonatomic, strong) UIButton                        *clearBtn;
 @property(nonatomic, strong) UITableView                     *readTable;
+
 @property(nonatomic, strong) NSMutableArray                  *dirArray;
+
 @property(nonatomic, strong) UIDocumentInteractionController *docInteractionController;
 @property(nonatomic, strong) NSString                        *diskCachePath;
+
+@property(nonatomic, assign) NSUInteger                       fileIndex;
 
 @end
 
@@ -33,17 +38,22 @@
 
 -(void)setupView{
     [super setupView];
+    [self initCustomView];
+    [self initDirection];
+}
+
+-(void)initCustomView{
+    [self.infoLabel setText:@"日志获取"];
+    [self.clearBtn setOpaque:YES];
+    
+    [self.closeButton setFrame:CGRectMake(self.readTable.frame.origin.x, CGRectGetMaxY(self.readTable.frame) + 2, CGRectGetWidth(self.readTable.frame), 40)];
+    [self.closeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.closeButton setTitle:@"关闭" forState:UIControlStateNormal];
+    [self.closeButton setBackgroundColor:[UIColor blackColor]];
+    [self.closeButton setHidden:NO];
     
     self.needCancelBackgroundAction = YES;
     self.hidden = YES;
-    [self.closeButton setHidden:NO];
-    [self.closeButton setFrame:CGRectMake(self.readTable.frame.origin.x, CGRectGetMaxY(self.readTable.frame) + 2, CGRectGetWidth(self.readTable.frame), 40)];
-    self.closeButton.backgroundColor = [UIColor blackColor];
-    [self.closeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.closeButton setTitle:@"关闭" forState:UIControlStateNormal];
-    
-    [self.infoLabel setText:@"日志获取"];
-    [self initDirection];
 }
 
 -(void)initDirection{
@@ -56,60 +66,12 @@
     [self moveFileDataToKSDebugLogCollectFilePath];
 }
 
--(void)moveFileDataToKSDebugLogCollectFilePath{
-    [self.dirArray removeAllObjects];
-
-    NSFileManager* fileManager = [NSFileManager defaultManager];
-
-    NSArray* fileDirectorPathArray = [self getFileDirectorPathArray];
-    for (NSString* fileDirectorPath in fileDirectorPathArray) {
-        NSError* error = nil;
-        NSArray *documentFileList = [fileManager contentsOfDirectoryAtPath:fileDirectorPath error:&error];
-        
-        for (NSString *file in documentFileList)
-        {
-            NSString *path = [fileDirectorPath stringByAppendingPathComponent:file];
-            if ([file rangeOfString:@"."].location == NSNotFound) {
-                NSString *newPath = [[self.diskCachePath stringByAppendingPathComponent:file] stringByAppendingString:@".txt"];
-                if (![fileManager fileExistsAtPath:newPath] && [fileManager copyItemAtPath:path toPath:newPath error:NULL]) {
-                    NSLog(@"----> copy successful");
-                }
-                path = newPath;
-            }
-            [self.dirArray addObject:path];
-        }
-    }
-}
-
--(NSArray*)getFileDirectorPathArray{
-    NSMutableArray* fileDirectorPathArray = [NSMutableArray new];
-    if (self.debugEnviromeng.filePathArray) {
-        [fileDirectorPathArray addObjectsFromArray:self.debugEnviromeng.filePathArray];
-    }
-    NSString* userTrackDiskCachePath = [[KSDebugDataCache sharedAudioDataCache] valueForKey:@"diskCachePath"];
-    if (userTrackDiskCachePath) {
-        [fileDirectorPathArray addObject:userTrackDiskCachePath];
-    }
-    return fileDirectorPathArray;
-}
-
--(UITableView*)readTable{
-    if (_readTable == nil) {
-        _readTable = [[UITableView alloc] initWithFrame:CGRectMake(self.infoLabel.frame.origin.x, CGRectGetMaxY(self.infoLabel.frame) + 2, self.infoLabel.frame.size.width, self.frame.size.height - 20 * 2 - 40 * 2) style:UITableViewStylePlain];
-        _readTable.layer.masksToBounds = YES;
-        _readTable.layer.cornerRadius = 10;
-        _readTable.rowHeight = 44;
-        _readTable.dataSource = self;
-        _readTable.delegate = self;
-        _readTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [self addSubview:_readTable];
-    }
-    return _readTable;
-}
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark 懒加载
 -(UILabel *)infoLabel{
     if (_infoLabel == nil) {
-        _infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, self.frame.size.width - 30 * 2, 30)];
+        _infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, self.frame.size.width - 30 * 2, 40)];
         [_infoLabel setBackgroundColor:[UIColor blackColor]];
         [_infoLabel setFont:[UIFont boldSystemFontOfSize:15]];
         [_infoLabel setTextColor:[UIColor whiteColor]];
@@ -122,6 +84,164 @@
     return _infoLabel;
 }
 
+- (UIButton *)clearBtn {
+    if (!_clearBtn) {
+        _clearBtn = [[UIButton alloc]initWithFrame:CGRectMake(self.infoLabel.frame.origin.x, self.infoLabel.frame.origin.y, 40, self.infoLabel.frame.size.height)];
+        [_clearBtn setTitle:@"清除" forState:UIControlStateNormal];
+        [_clearBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _clearBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        [_clearBtn addTarget:self action:@selector(clearBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_clearBtn];
+    }
+    return _clearBtn;
+}
+
+
+-(UITableView*)readTable{
+    if (_readTable == nil) {
+        _readTable = [[UITableView alloc] initWithFrame:CGRectMake(self.infoLabel.frame.origin.x, CGRectGetMaxY(self.infoLabel.frame) + 2, self.infoLabel.frame.size.width, self.frame.size.height - 20 * 2 - 40 * 2) style:UITableViewStylePlain];
+        _readTable.layer.masksToBounds = YES;
+        _readTable.layer.cornerRadius = 10;
+        _readTable.dataSource = self;
+        _readTable.delegate = self;
+        _readTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        
+        _readTable.rowHeight = 80;
+        
+        [self addSubview:_readTable];
+    }
+    return _readTable;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark public method
+-(void)setDebugEnviromeng:(KSDebugEnviroment *)debugEnviromeng{
+    [super setDebugEnviromeng:debugEnviromeng];
+    [self moveFileDataToKSDebugLogCollectFilePath];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark private method
+-(void)moveFileDataToKSDebugLogCollectFilePath{
+    [self.dirArray removeAllObjects];
+    
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    
+    NSArray* fileDirectorPathArray = [self getFileDirectorPathArray];
+    for (id fileDirector in fileDirectorPathArray) {
+        NSString* fileDirectorPath = nil;
+        NSString* fileType = nil;
+        if ([fileDirector isKindOfClass:[NSString class]]) {
+            fileDirectorPath = fileDirector;
+        }else if ([fileDirector isKindOfClass:[NSDictionary class]] && [(NSDictionary*)fileDirector objectForKey:@"filePath"]){
+            fileDirectorPath = [(NSDictionary*)fileDirector objectForKey:@"filePath"];
+            fileType = [(NSDictionary*)fileDirector objectForKey:@"fileType"];
+        }else{
+            continue;
+        }
+        NSError* error = nil;
+        NSArray *documentFileList = [fileManager contentsOfDirectoryAtPath:fileDirectorPath error:&error];
+        
+        for (NSString *file in documentFileList)
+        {
+            NSString *path = [fileDirectorPath stringByAppendingPathComponent:file];
+            if ([file rangeOfString:@"."].location == NSNotFound && fileType) {
+                NSString *newPath = [[self.diskCachePath stringByAppendingPathComponent:file] stringByAppendingFormat:@".%@",fileType];
+                if (![fileManager fileExistsAtPath:newPath] && [fileManager copyItemAtPath:path toPath:newPath error:NULL]) {
+                    NSLog(@"----> copy successful");
+                }
+                path = newPath;
+            }
+            [self.dirArray addObject:path];
+        }
+    }
+}
+
+-(void)removeFileDirector{
+    [self.dirArray removeAllObjects];
+    
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    
+    NSArray* fileDirectorPathArray = [self getFileDirectorPathArray];
+    for (id fileDirector in fileDirectorPathArray) {
+        NSString* fileDirectorPath = nil;
+        NSString* fileType = nil;
+        if ([fileDirector isKindOfClass:[NSString class]]) {
+            fileDirectorPath = fileDirector;
+        }else if ([fileDirector isKindOfClass:[NSDictionary class]] && [(NSDictionary*)fileDirector objectForKey:@"filePath"]){
+            fileDirectorPath = [(NSDictionary*)fileDirector objectForKey:@"filePath"];
+            fileType = [(NSDictionary*)fileDirector objectForKey:@"fileType"];
+        }else{
+            continue;
+        }
+        NSError* error = nil;
+        NSArray *documentFileList = [fileManager contentsOfDirectoryAtPath:fileDirectorPath error:&error];
+        
+        for (NSString *file in documentFileList)
+        {
+            NSString *path = [fileDirectorPath stringByAppendingPathComponent:file];
+            if ([fileManager fileExistsAtPath:path] && [fileManager removeItemAtPath:path error:NULL]) {
+                NSLog(@"----> remove successful");
+            }
+        }
+    }
+    
+    if ([fileManager fileExistsAtPath:self.diskCachePath]) {
+        NSError* error = nil;
+        NSArray *documentFileList = [fileManager contentsOfDirectoryAtPath:self.diskCachePath  error:&error];
+        for (NSString *file in documentFileList)
+        {
+            NSString *path = [self.diskCachePath stringByAppendingPathComponent:file];
+            if ([fileManager fileExistsAtPath:path] && [fileManager removeItemAtPath:path error:NULL]) {
+                NSLog(@"----> remove successful");
+            }
+        }
+    }
+    
+    [self.readTable reloadData];
+}
+
+-(NSArray*)getFileDirectorPathArray{
+    NSMutableArray* fileDirectorPathArray = [NSMutableArray new];
+    NSString* userTrackDiskCachePath = [[KSDebugDataCache sharedAudioDataCache] valueForKey:@"diskCachePath"];
+    if (userTrackDiskCachePath) {
+        [fileDirectorPathArray addObject:userTrackDiskCachePath];
+    }
+    if (self.debugEnviromeng.filePathArray) {
+        [fileDirectorPathArray addObjectsFromArray:self.debugEnviromeng.filePathArray];
+    }
+    return fileDirectorPathArray;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark gesture action method
+- (void)handleTapPress:(UILongPressGestureRecognizer *)tapPressGesture
+{
+    if (tapPressGesture.state == UIGestureRecognizerStateEnded)
+    {
+        NSIndexPath *cellIndexPath = [self.readTable indexPathForRowAtPoint:[tapPressGesture locationInView:self.readTable]];
+        
+        if (cellIndexPath.row >= [self.dirArray count]) {
+            return;
+        }
+        
+        NSString *path = [self.dirArray objectAtIndex:cellIndexPath.row];
+        self.docInteractionController.URL = [NSURL fileURLWithPath:path];
+        
+        [self.docInteractionController presentOptionsMenuFromRect:[KSDebugUtils getCurrentAppearedViewController].view.frame inView:[KSDebugUtils getCurrentAppearedViewController].view animated:YES];
+    }
+}
+
+- (void)clearBtnClick {
+    [self removeFileDirector];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark 开始 结束 method
 -(void)startDebug{
     [super startDebug];
     self.hidden = NO;
@@ -140,6 +260,9 @@
     [[KSDebugUtils getCurrentAppearedViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark tableView delegate and dataSource method
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -152,38 +275,42 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellName = @"CellName";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellName];
+    static NSString *debugLogCollectionViewCellName = @"KSDebugLogCollectionViewCellName";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:debugLogCollectionViewCellName];
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellName];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:debugLogCollectionViewCellName];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.textLabel.textColor = KSDebugRGB(0x33, 0x33, 0x33);
+        cell.textLabel.font = [UIFont systemFontOfSize:13];
+        cell.textLabel.numberOfLines = 2;
+        cell.detailTextLabel.textColor = KSDebugRGB(0x99, 0x99, 0x99);
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:11];
+        cell.detailTextLabel.numberOfLines = 2;
+        UITapGestureRecognizer *longPressGesture =
+        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapPress:)];
+        [cell.imageView addGestureRecognizer:longPressGesture];
+        cell.imageView.userInteractionEnabled = YES;    // this is by default NO, so we need to turn it on
+    }
+    
+    if (indexPath.row >= [self.dirArray count]) {
+        return cell;
     }
     
     NSString* path = [self.dirArray objectAtIndex:indexPath.row];
-    NSURL *fileURL= [NSURL fileURLWithPath:path];
+    NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
+    NSInteger fileSize = [[fileAttributes objectForKey:NSFileSize] intValue];
+    NSString* fileCreationDate = fileAttributes[@"NSFileCreationDate"];
+    NSString *fileSizeStr = [NSByteCountFormatter stringFromByteCount:fileSize countStyle:NSByteCountFormatterCountStyleFile];
     
+    [self setupDocumentControllerWithURL:[NSURL fileURLWithPath:path]];
+
     NSArray* pathComponents = [[NSFileManager defaultManager] componentsToDisplayForPath:path];
     NSString* pathComponent = [pathComponents lastObject];
     
-    [self setupDocumentControllerWithURL:fileURL];
+    cell.imageView.image = [self.docInteractionController.icons count] > 0 ? [self.docInteractionController.icons lastObject] : nil;
     cell.textLabel.text = pathComponent;
-    NSInteger iconCount = [self.docInteractionController.icons count];
-    if (iconCount > 0)
-    {
-        cell.imageView.image = [self.docInteractionController.icons lastObject];
-    }
-    
-    NSString *fileURLString = [self.docInteractionController.URL path];
-    NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:fileURLString error:nil];
-    NSInteger fileSize = [[fileAttributes objectForKey:NSFileSize] intValue];
-    NSString *fileSizeStr = [NSByteCountFormatter stringFromByteCount:fileSize
-                                                           countStyle:NSByteCountFormatterCountStyleFile];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", fileSizeStr, self.docInteractionController.UTI];
-    UITapGestureRecognizer *longPressGesture =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapPress:)];
-    [cell.imageView addGestureRecognizer:longPressGesture];
-    cell.imageView.userInteractionEnabled = YES;    // this is by default NO, so we need to turn it on
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"createTime:%@, fileSize:%@, fileType:%@",fileCreationDate, fileSizeStr, self.docInteractionController.UTI];
     
     return cell;
 }
@@ -198,7 +325,6 @@
     // start previewing the document at the current section index
     previewController.currentPreviewItemIndex = indexPath.row;
     [[KSDebugUtils getCurrentAppearedViewController] presentViewController:previewController animated:YES completion:nil];
-    //	[self presentViewController:previewController animated:YES completion:nil];
 }
 
 - (void)setupDocumentControllerWithURL:(NSURL *)url
@@ -214,33 +340,6 @@
     }
 }
 
-- (void)handleTapPress:(UILongPressGestureRecognizer *)tapPressGesture
-{
-    if (tapPressGesture.state == UIGestureRecognizerStateBegan)
-    {
-        NSIndexPath *cellIndexPath = [self.readTable indexPathForRowAtPoint:[tapPressGesture locationInView:self.readTable]];
-        
-        NSURL *fileURL;
-        if (cellIndexPath.section == 0)
-        {
-            // for section 0, we preview the docs built into our app
-            NSString *path = [self.dirArray objectAtIndex:cellIndexPath.row];
-            fileURL = [NSURL fileURLWithPath:path];
-        }
-        else
-        {
-            // for secton 1, we preview the docs found in the Documents folder
-            NSString *path = [self.dirArray objectAtIndex:cellIndexPath.row];
-            fileURL = [NSURL fileURLWithPath:path];
-        }
-        self.docInteractionController.URL = fileURL;
-        
-        [self.docInteractionController presentOptionsMenuFromRect:tapPressGesture.view.frame
-                                                           inView:tapPressGesture.view
-                                                         animated:YES];
-    }
-}
-
 #pragma mark - UIDocumentInteractionControllerDelegate
 
 - (NSString *)applicationDocumentsDirectory
@@ -252,6 +351,19 @@
 {
     return [KSDebugUtils getCurrentAppearedViewController];
 }
+
+- (void)documentInteractionControllerWillPresentOptionsMenu:(UIDocumentInteractionController *)controller{
+    self.hidden = YES;
+}
+
+- (void)documentInteractionControllerDidDismissOptionsMenu:(UIDocumentInteractionController *)controller{
+    self.hidden = NO;
+}
+
+- (BOOL)documentInteractionController:(UIDocumentInteractionController *)controller canPerformAction:(SEL)action NS_DEPRECATED_IOS(3_2, 6_0){
+    return YES;
+}
+
 
 
 #pragma mark - QLPreviewControllerDataSource
@@ -277,12 +389,14 @@
 {
     self.hidden = YES;
 
-    [previewController.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"click.png"] forBarMetrics:UIBarMetricsDefault];
+    [previewController.tabBarController.tabBar setTintColor:[UIColor blackColor]];
+    [[previewController navigationController].navigationBar setTintColor: [UIColor blackColor]];
     
-    NSURL *fileURL = nil;
+    self.fileIndex = idx;
+    
     NSString *path = [self.dirArray objectAtIndex:idx];
-    fileURL = [NSURL fileURLWithPath:path];
-    return fileURL;
+    
+    return [NSURL fileURLWithPath:path];
 }
 
 @end

@@ -7,17 +7,14 @@
 //
 
 #import "KSDebugBasicTextView.h"
-#import "KSMemoryCacheArray.h"
 
 #define KSDebug_UserTrackPaths_Key @"KSDebugUserTrackPaths"
 
 #define KSDebug_UserTrackPaths_MaxCount (1500)
 
-#define KSDebugUserTrackPathArrayClass KSMemoryCacheArray
-
 @interface KSDebugUserTrackPathView : KSDebugBasicTextView
 
-@property (nonatomic, strong)  KSDebugUserTrackPathArrayClass*   userTrackPaths;
+@property (nonatomic, strong)  NSMutableArray*   userTrackPaths;
 
 +(KSDebugUserTrackPathView*)shareUserTrackPath;
 

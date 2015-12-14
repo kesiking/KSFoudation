@@ -181,6 +181,17 @@
 		5F1CF91B1C102238006C82BF /* KSDebugLayoutInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1CF9191C102238006C82BF /* KSDebugLayoutInfoView.m */; };
 		5F1E4FB81BFB2D2F0051997E /* HSBusinessUserInfoEditAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1E4FB71BFB2D2F0051997E /* HSBusinessUserInfoEditAlertView.m */; };
 		5F1E4FBB1BFC5BE60051997E /* HSServiceAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1E4FBA1BFC5BE60051997E /* HSServiceAlertView.m */; };
+		5F1F1BDC1C1E606900425E21 /* KSDebugRequestDetailToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F1BC91C1E606900425E21 /* KSDebugRequestDetailToolBar.m */; };
+		5F1F1BDD1C1E606900425E21 /* KSDebugRequestListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F1BCB1C1E606900425E21 /* KSDebugRequestListCell.m */; };
+		5F1F1BDE1C1E606900425E21 /* KSDebugRequestListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F1BCD1C1E606900425E21 /* KSDebugRequestListHeaderView.m */; };
+		5F1F1BDF1C1E606900425E21 /* KSDebugRequestListToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F1BCF1C1E606900425E21 /* KSDebugRequestListToolBar.m */; };
+		5F1F1BE01C1E606900425E21 /* KSDebugRequestListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F1BD11C1E606900425E21 /* KSDebugRequestListView.m */; };
+		5F1F1BE11C1E606900425E21 /* KSDebugRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F1BD31C1E606900425E21 /* KSDebugRequestManager.m */; };
+		5F1F1BE21C1E606900425E21 /* KSDebugRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F1BD51C1E606900425E21 /* KSDebugRequestModel.m */; };
+		5F1F1BE31C1E606900425E21 /* KSDebugRequestVCModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F1BD71C1E606900425E21 /* KSDebugRequestVCModel.m */; };
+		5F1F1BE41C1E606900425E21 /* KSDebugURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F1BD91C1E606900425E21 /* KSDebugURLProtocol.m */; };
+		5F1F1BE51C1E606900425E21 /* KSDebugRequestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F1BDB1C1E606900425E21 /* KSDebugRequestView.m */; };
+		5F1F1BE91C1E607900425E21 /* KSDebugViewAppearDurationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F1BE81C1E607900425E21 /* KSDebugViewAppearDurationView.m */; };
 		5F2CDB051C02AB06007D03CF /* KSReactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2CDB041C02AB06007D03CF /* KSReactViewController.m */; };
 		5F2CDB081C02AF82007D03CF /* KSReactURLResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2CDB071C02AF82007D03CF /* KSReactURLResolver.m */; };
 		5F2CDB091C02B53B007D03CF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2CDAC71BFF21C7007D03CF /* libReact.a */; };
@@ -713,7 +724,6 @@
 		5F7B87581C0DC13E00D00CB3 /* KSDebugMemoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B87431C0DC13E00D00CB3 /* KSDebugMemoryView.m */; };
 		5F7B87591C0DC13E00D00CB3 /* KSDebugOperationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B87461C0DC13E00D00CB3 /* KSDebugOperationView.m */; };
 		5F7B875A1C0DC13E00D00CB3 /* KSDebugPropertyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B87481C0DC13E00D00CB3 /* KSDebugPropertyButton.m */; };
-		5F7B875B1C0DC13E00D00CB3 /* KSDebugRequestDataTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B874B1C0DC13E00D00CB3 /* KSDebugRequestDataTextView.m */; };
 		5F7B87781C0DC1C800D00CB3 /* KSDebugModifyComponentTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B87771C0DC1C800D00CB3 /* KSDebugModifyComponentTextView.m */; };
 		5F7B877C1C0DC5C200D00CB3 /* KSDebugSelectorBasicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B877B1C0DC5C200D00CB3 /* KSDebugSelectorBasicView.m */; };
 		5F7B877F1C0DC67F00D00CB3 /* KSDebugBasicMenuItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B877E1C0DC67F00D00CB3 /* KSDebugBasicMenuItemView.m */; };
@@ -1293,6 +1303,28 @@
 		5F1E4FB71BFB2D2F0051997E /* HSBusinessUserInfoEditAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSBusinessUserInfoEditAlertView.m; sourceTree = "<group>"; };
 		5F1E4FB91BFC5BE60051997E /* HSServiceAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSServiceAlertView.h; sourceTree = "<group>"; };
 		5F1E4FBA1BFC5BE60051997E /* HSServiceAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSServiceAlertView.m; sourceTree = "<group>"; };
+		5F1F1BC81C1E606900425E21 /* KSDebugRequestDetailToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugRequestDetailToolBar.h; sourceTree = "<group>"; };
+		5F1F1BC91C1E606900425E21 /* KSDebugRequestDetailToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugRequestDetailToolBar.m; sourceTree = "<group>"; };
+		5F1F1BCA1C1E606900425E21 /* KSDebugRequestListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugRequestListCell.h; sourceTree = "<group>"; };
+		5F1F1BCB1C1E606900425E21 /* KSDebugRequestListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugRequestListCell.m; sourceTree = "<group>"; };
+		5F1F1BCC1C1E606900425E21 /* KSDebugRequestListHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugRequestListHeaderView.h; sourceTree = "<group>"; };
+		5F1F1BCD1C1E606900425E21 /* KSDebugRequestListHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugRequestListHeaderView.m; sourceTree = "<group>"; };
+		5F1F1BCE1C1E606900425E21 /* KSDebugRequestListToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugRequestListToolBar.h; sourceTree = "<group>"; };
+		5F1F1BCF1C1E606900425E21 /* KSDebugRequestListToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugRequestListToolBar.m; sourceTree = "<group>"; };
+		5F1F1BD01C1E606900425E21 /* KSDebugRequestListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugRequestListView.h; sourceTree = "<group>"; };
+		5F1F1BD11C1E606900425E21 /* KSDebugRequestListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugRequestListView.m; sourceTree = "<group>"; };
+		5F1F1BD21C1E606900425E21 /* KSDebugRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugRequestManager.h; sourceTree = "<group>"; };
+		5F1F1BD31C1E606900425E21 /* KSDebugRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugRequestManager.m; sourceTree = "<group>"; };
+		5F1F1BD41C1E606900425E21 /* KSDebugRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugRequestModel.h; sourceTree = "<group>"; };
+		5F1F1BD51C1E606900425E21 /* KSDebugRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugRequestModel.m; sourceTree = "<group>"; };
+		5F1F1BD61C1E606900425E21 /* KSDebugRequestVCModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugRequestVCModel.h; sourceTree = "<group>"; };
+		5F1F1BD71C1E606900425E21 /* KSDebugRequestVCModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugRequestVCModel.m; sourceTree = "<group>"; };
+		5F1F1BD81C1E606900425E21 /* KSDebugURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugURLProtocol.h; sourceTree = "<group>"; };
+		5F1F1BD91C1E606900425E21 /* KSDebugURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugURLProtocol.m; sourceTree = "<group>"; };
+		5F1F1BDA1C1E606900425E21 /* KSDebugRequestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugRequestView.h; sourceTree = "<group>"; };
+		5F1F1BDB1C1E606900425E21 /* KSDebugRequestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugRequestView.m; sourceTree = "<group>"; };
+		5F1F1BE71C1E607900425E21 /* KSDebugViewAppearDurationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugViewAppearDurationView.h; sourceTree = "<group>"; };
+		5F1F1BE81C1E607900425E21 /* KSDebugViewAppearDurationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugViewAppearDurationView.m; sourceTree = "<group>"; };
 		5F2CDAC21BFF21C7007D03CF /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = React/React.xcodeproj; sourceTree = "<group>"; };
 		5F2CDACC1C029E28007D03CF /* RCTNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTNetwork.xcodeproj; path = Network/RCTNetwork.xcodeproj; sourceTree = "<group>"; };
 		5F2CDAD71C029E4E007D03CF /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = Text/RCTText.xcodeproj; sourceTree = "<group>"; };
@@ -2223,8 +2255,6 @@
 		5F7B87461C0DC13E00D00CB3 /* KSDebugOperationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugOperationView.m; sourceTree = "<group>"; };
 		5F7B87471C0DC13E00D00CB3 /* KSDebugPropertyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugPropertyButton.h; sourceTree = "<group>"; };
 		5F7B87481C0DC13E00D00CB3 /* KSDebugPropertyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugPropertyButton.m; sourceTree = "<group>"; };
-		5F7B874A1C0DC13E00D00CB3 /* KSDebugRequestDataTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugRequestDataTextView.h; sourceTree = "<group>"; };
-		5F7B874B1C0DC13E00D00CB3 /* KSDebugRequestDataTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugRequestDataTextView.m; sourceTree = "<group>"; };
 		5F7B87761C0DC1C800D00CB3 /* KSDebugModifyComponentTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugModifyComponentTextView.h; sourceTree = "<group>"; };
 		5F7B87771C0DC1C800D00CB3 /* KSDebugModifyComponentTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugModifyComponentTextView.m; sourceTree = "<group>"; };
 		5F7B877A1C0DC5C200D00CB3 /* KSDebugSelectorBasicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugSelectorBasicView.h; sourceTree = "<group>"; };
@@ -3056,6 +3086,8 @@
 		5F1A1AE51C0DA11D00B72CFF /* Debug */ = {
 			isa = PBXGroup;
 			children = (
+				5F1F1BE61C1E607900425E21 /* KSDebugViewAppearDurationView */,
+				5F1F1BC61C1E606900425E21 /* KSDebugRequestView */,
 				5F6331A01C19617C00E48E71 /* KSDebugLogCollectView */,
 				5F0910D51C16B8DB009962BB /* KSDebugToastView */,
 				5F0910D81C16B8DB009962BB /* KSDebugUserTrackPath */,
@@ -3070,7 +3102,6 @@
 				5F7B872D1C0DC13E00D00CB3 /* KSDebugGridView */,
 				5F7B87301C0DC13E00D00CB3 /* KSDebugMemoryView */,
 				5F7B87441C0DC13E00D00CB3 /* KSDebugOperationView */,
-				5F7B87491C0DC13E00D00CB3 /* KSDebugRequestView */,
 				5F1A1AE61C0DA11D00B72CFF /* debugFor3D */,
 				5F7B87751C0DC1C800D00CB3 /* KSDebugModifyInfoView */,
 				5F1A1B101C0DA11D00B72CFF /* KSDebugEnviroment.h */,
@@ -3132,6 +3163,50 @@
 				5F1CF9191C102238006C82BF /* KSDebugLayoutInfoView.m */,
 			);
 			path = KSDebugLayoutInfoView;
+			sourceTree = "<group>";
+		};
+		5F1F1BC61C1E606900425E21 /* KSDebugRequestView */ = {
+			isa = PBXGroup;
+			children = (
+				5F1F1BC71C1E606900425E21 /* debugForRequest */,
+				5F1F1BDA1C1E606900425E21 /* KSDebugRequestView.h */,
+				5F1F1BDB1C1E606900425E21 /* KSDebugRequestView.m */,
+			);
+			path = KSDebugRequestView;
+			sourceTree = "<group>";
+		};
+		5F1F1BC71C1E606900425E21 /* debugForRequest */ = {
+			isa = PBXGroup;
+			children = (
+				5F1F1BC81C1E606900425E21 /* KSDebugRequestDetailToolBar.h */,
+				5F1F1BC91C1E606900425E21 /* KSDebugRequestDetailToolBar.m */,
+				5F1F1BCA1C1E606900425E21 /* KSDebugRequestListCell.h */,
+				5F1F1BCB1C1E606900425E21 /* KSDebugRequestListCell.m */,
+				5F1F1BCC1C1E606900425E21 /* KSDebugRequestListHeaderView.h */,
+				5F1F1BCD1C1E606900425E21 /* KSDebugRequestListHeaderView.m */,
+				5F1F1BCE1C1E606900425E21 /* KSDebugRequestListToolBar.h */,
+				5F1F1BCF1C1E606900425E21 /* KSDebugRequestListToolBar.m */,
+				5F1F1BD01C1E606900425E21 /* KSDebugRequestListView.h */,
+				5F1F1BD11C1E606900425E21 /* KSDebugRequestListView.m */,
+				5F1F1BD21C1E606900425E21 /* KSDebugRequestManager.h */,
+				5F1F1BD31C1E606900425E21 /* KSDebugRequestManager.m */,
+				5F1F1BD41C1E606900425E21 /* KSDebugRequestModel.h */,
+				5F1F1BD51C1E606900425E21 /* KSDebugRequestModel.m */,
+				5F1F1BD61C1E606900425E21 /* KSDebugRequestVCModel.h */,
+				5F1F1BD71C1E606900425E21 /* KSDebugRequestVCModel.m */,
+				5F1F1BD81C1E606900425E21 /* KSDebugURLProtocol.h */,
+				5F1F1BD91C1E606900425E21 /* KSDebugURLProtocol.m */,
+			);
+			path = debugForRequest;
+			sourceTree = "<group>";
+		};
+		5F1F1BE61C1E607900425E21 /* KSDebugViewAppearDurationView */ = {
+			isa = PBXGroup;
+			children = (
+				5F1F1BE71C1E607900425E21 /* KSDebugViewAppearDurationView.h */,
+				5F1F1BE81C1E607900425E21 /* KSDebugViewAppearDurationView.m */,
+			);
+			path = KSDebugViewAppearDurationView;
 			sourceTree = "<group>";
 		};
 		5F2CD9BA1BFF21BA007D03CF /* ReactNative */ = {
@@ -5789,15 +5864,6 @@
 			path = KSDebugOperationView;
 			sourceTree = "<group>";
 		};
-		5F7B87491C0DC13E00D00CB3 /* KSDebugRequestView */ = {
-			isa = PBXGroup;
-			children = (
-				5F7B874A1C0DC13E00D00CB3 /* KSDebugRequestDataTextView.h */,
-				5F7B874B1C0DC13E00D00CB3 /* KSDebugRequestDataTextView.m */,
-			);
-			path = KSDebugRequestView;
-			sourceTree = "<group>";
-		};
 		5F7B87751C0DC1C800D00CB3 /* KSDebugModifyInfoView */ = {
 			isa = PBXGroup;
 			children = (
@@ -7068,6 +7134,7 @@
 				5F66C5611BBA5CC600CC21F7 /* UIImageView+WebCache.m in Sources */,
 				5F66C4241BBA5CC500CC21F7 /* TBDetailUIStyle.m in Sources */,
 				39AB6F391BE30830007B88BA /* HSMyInfoHeaderView.m in Sources */,
+				5F1F1BDF1C1E606900425E21 /* KSDebugRequestListToolBar.m in Sources */,
 				5F1A1B271C0DA11D00B72CFF /* ServiceInspector_Window.m in Sources */,
 				5F66C4031BBA5CC500CC21F7 /* DetailHUDActivityView.m in Sources */,
 				5F66C4281BBA5CC500CC21F7 /* KSToastView.m in Sources */,
@@ -7267,6 +7334,7 @@
 				3566DED01BF422CB00F327C5 /* HSAfterSaleForAppViewController.m in Sources */,
 				5F66C5561BBA5CC600CC21F7 /* SDWebImageCompat.m in Sources */,
 				5F66C4D81BBA5CC500CC21F7 /* XHCacheManager.m in Sources */,
+				5F1F1BE91C1E607900425E21 /* KSDebugViewAppearDurationView.m in Sources */,
 				5F7B87501C0DC13E00D00CB3 /* KSDebugCPUView.m in Sources */,
 				5F66C5851BBA5CC600CC21F7 /* amrFileCodec.mm in Sources */,
 				5F66C55B1BBA5CC600CC21F7 /* SDWebImagePrefetcher.m in Sources */,
@@ -7279,7 +7347,9 @@
 				5FFA36941C05542F00546790 /* RCTWrapperViewController+KSReactNativeViewControllerListener.m in Sources */,
 				5F2CDB211C0317CC007D03CF /* KSReactOpenURLAction.m in Sources */,
 				3566DE901BEB510B00F327C5 /* HSAMapPoiSearchService.m in Sources */,
+				5F1F1BE01C1E606900425E21 /* KSDebugRequestListView.m in Sources */,
 				5F0BCB6D1BBA6FBE00CFE4A4 /* EHLog.m in Sources */,
+				5F1F1BE51C1E606900425E21 /* KSDebugRequestView.m in Sources */,
 				5F6CAD451BDB0CB1003C015E /* HSBasicListView.m in Sources */,
 				39CCEA261BEB026F00A9B2FB /* HSCommonAppListCollectionView.m in Sources */,
 				5F1A1B381C0DA11D00B72CFF /* KSDebugManager.m in Sources */,
@@ -7344,6 +7414,7 @@
 				5F66C4861BBA5CC500CC21F7 /* NSString+ WeAppComponentBaseItem.m in Sources */,
 				5F66C4921BBA5CC500CC21F7 /* WeAppPaginationItem.m in Sources */,
 				5FFDE8131BC7B00B0087B9E0 /* NSString+TrimmingAdditions.m in Sources */,
+				5F1F1BDC1C1E606900425E21 /* KSDebugRequestDetailToolBar.m in Sources */,
 				5F66C4891BBA5CC500CC21F7 /* WeAppComponentBaseItem.m in Sources */,
 				5F66C3FB1BBA5CC500CC21F7 /* TBModelStatusHandler.m in Sources */,
 				5FFDE7C31BC7A8B50087B9E0 /* HSSettingViewController.m in Sources */,
@@ -7367,8 +7438,8 @@
 				5F1A1B251C0DA11D00B72CFF /* NSArray+BeeExtension.mm in Sources */,
 				5F66C4751BBA5CC500CC21F7 /* KSAdapterNetWork.m in Sources */,
 				5FFDE7ED1BC7AA500087B9E0 /* EHPhotoBrowserCell.m in Sources */,
+				5F1F1BE11C1E606900425E21 /* KSDebugRequestManager.m in Sources */,
 				5F66C0431BBA5B3600CC21F7 /* main.m in Sources */,
-				5F7B875B1C0DC13E00D00CB3 /* KSDebugRequestDataTextView.m in Sources */,
 				5F72EE081BDF3A7C00460ACD /* HSDateManagerCenter.m in Sources */,
 				39D96BAB1BD4D5F00028E7DB /* HSOtherAppInfoService.m in Sources */,
 				5F0910DB1C16B8DB009962BB /* KSDebugToastView.m in Sources */,
@@ -7430,6 +7501,7 @@
 				5F7B877C1C0DC5C200D00CB3 /* KSDebugSelectorBasicView.m in Sources */,
 				5F66C47E1BBA5CC500CC21F7 /* AFSecurityPolicy.m in Sources */,
 				5F66C4211BBA5CC500CC21F7 /* TBTradeSKUPropSelectControl.m in Sources */,
+				5F1F1BE21C1E606900425E21 /* KSDebugRequestModel.m in Sources */,
 				5F66C4F61BBA5CC500CC21F7 /* SETextSelectionView.m in Sources */,
 				5F66C4311BBA5CC500CC21F7 /* HSMyInfoTabViewController.m in Sources */,
 				5FDF19FB1BD60D8B0059B3F2 /* HSExemptionDescriptionViewController.m in Sources */,
@@ -7503,6 +7575,7 @@
 				5F66C55A1BBA5CC600CC21F7 /* SDWebImageManager.m in Sources */,
 				5F66C41A1BBA5CC500CC21F7 /* WeAppLoadingView.m in Sources */,
 				5F66C5471BBA5CC600CC21F7 /* RDVTabBarController.m in Sources */,
+				5F1F1BDD1C1E606900425E21 /* KSDebugRequestListCell.m in Sources */,
 				5F66C4F81BBA5CC500CC21F7 /* XHBaseTableViewCell.m in Sources */,
 				5F66C4E41BBA5CC500CC21F7 /* XHMessage.m in Sources */,
 				5FFDE8141BC7B00B0087B9E0 /* UIColor+Ext.m in Sources */,
@@ -7524,6 +7597,7 @@
 				5F66C40F1BBA5CC500CC21F7 /* KSScrollViewController.m in Sources */,
 				5FFDE8381BCB9C060087B9E0 /* LocationChange.m in Sources */,
 				5F66C4C81BBA5CC500CC21F7 /* UIImage+XHRounded.m in Sources */,
+				5F1F1BDE1C1E606900425E21 /* KSDebugRequestListHeaderView.m in Sources */,
 				5F66C4971BBA5CC500CC21F7 /* BEMCircle.m in Sources */,
 				5F66C4DD1BBA5CC500CC21F7 /* XHMessageBubbleFactory.m in Sources */,
 				5F66C4DB1BBA5CC500CC21F7 /* XHOperationNetworkKit.m in Sources */,
@@ -7543,7 +7617,9 @@
 				5F66C4D31BBA5CC500CC21F7 /* XHDisplayEmotionViewController.m in Sources */,
 				5FFDE7CE1BC7AA1A0087B9E0 /* EHMyInfoViewController.m in Sources */,
 				5F66C49C1BBA5CC500CC21F7 /* NSDictionary+JSONSerialize.m in Sources */,
+				5F1F1BE41C1E606900425E21 /* KSDebugURLProtocol.m in Sources */,
 				5F0BCB6A1BBA6FBE00CFE4A4 /* EHLoadingHud.m in Sources */,
+				5F1F1BE31C1E606900425E21 /* KSDebugRequestVCModel.m in Sources */,
 				5F66C4DC1BBA5CC500CC21F7 /* XHMessageAvatarFactory.m in Sources */,
 				5F66C4FB1BBA5CC500CC21F7 /* XHMessageTableView.m in Sources */,
 				5F66C4841BBA5CC500CC21F7 /* NSArray+TBJSONModel.m in Sources */,

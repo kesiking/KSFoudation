@@ -75,7 +75,7 @@ static const NSInteger kDefaultCacheMaxCacheAge = 60 * 60 * 24 * 7; // 1 week
 
 - (NSString *)cachePathForKey:(NSString *)key inPath:(NSString *)path {
     NSString *filename = [self cachedFileNameForKey:key];
-    return [path stringByAppendingPathComponent:filename];
+    return self.suffixText && self.suffixText.length > 0 ? [[path stringByAppendingPathComponent:filename] stringByAppendingFormat:@".%@",self.suffixText] : [path stringByAppendingPathComponent:filename];
 }
 
 - (NSString *)defaultCachePathForKey:(NSString *)key {

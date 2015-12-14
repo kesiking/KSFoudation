@@ -57,6 +57,11 @@ typedef void(^KSWebDebugDataNoParamsBlock)();
 @property (assign, nonatomic) NSUInteger maxCacheSize;
 
 /**
+ * 文件后缀，默认为nil
+ */
+@property (strong, nonatomic) NSString*  suffixText;
+
+/**
  * Returns global shared cache instance
  *
  * @return SDAudioDataCache global instance

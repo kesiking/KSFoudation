@@ -52,14 +52,7 @@
     [MobClick setLogEnabled:YES];
     #endif
 #endif
-    KSDebugEnviroment* debugEnroment = [KSDebugEnviroment new];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *baseDir = paths.firstObject;
-    NSString *logsDirectory = [baseDir stringByAppendingPathComponent:@"Logs"];
-    if (logsDirectory) {
-        [debugEnroment.filePathArray addObject:logsDirectory];
-    }
-    [KSDebugManager setupDebugManagerWithDebugEnviroment:debugEnroment];
+    [KSDebugManager setupDebugManager];
 }
 
 -(void)configUIContent{

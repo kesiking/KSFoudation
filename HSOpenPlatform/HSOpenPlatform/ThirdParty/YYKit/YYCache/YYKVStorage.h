@@ -123,6 +123,8 @@ typedef NS_ENUM(NSUInteger, YYKVStorageType) {
  */
 - (BOOL)saveItem:(YYKVStorageItem *)item;
 
+- (BOOL)saveItems:(NSArray *)items;
+
 /**
  Save an item or update the item with 'key' if it already exists.
  
@@ -155,6 +157,11 @@ typedef NS_ENUM(NSUInteger, YYKVStorageType) {
                   value:(NSData *)value
                filename:(NSString *)filename
            extendedData:(NSData *)extendedData;
+
+- (BOOL)saveItemWithKeys:(NSArray *)keys
+                  values:(NSArray *)values
+               fileNames:(NSArray *)fileNames
+           extendedDatas:(NSArray *)extendedDatas;
 
 #pragma mark - Remove Items
 ///=============================================================================

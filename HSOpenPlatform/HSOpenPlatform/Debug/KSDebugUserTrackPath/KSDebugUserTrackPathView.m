@@ -9,9 +9,11 @@
 #import "KSDebugUserTrackPathView.h"
 #import "KSDebugUtils.h"
 #import <objc/runtime.h>
+#import <objc/message.h>
 
 static char KSDebug_UserTrackPathViewKey;
 static char KSDebug_UserTrackStayTimeKey;
+static char KSDebug_ControlSelectorKey;
 
 @interface UIViewController (KSDebug_ViewDidAppear)
 
@@ -37,7 +39,7 @@ static char KSDebug_UserTrackStayTimeKey;
     if (userTrackPathView && [userTrackPathView userTrackPaths]) {
         NSDate* currentData = [NSDate date];
         [self setks_debug_userTrackStayTime:currentData];
-        [[userTrackPathView userTrackPaths] addObject:[NSString stringWithFormat:@"%lu、%@时，移入到 %@",[[userTrackPathView userTrackPaths] count], currentData, NSStringFromClass([self class])]];
+        [[userTrackPathView userTrackPaths] addObject:[NSString stringWithFormat:@"%lu、at %@ time, move in %@",[[userTrackPathView userTrackPaths] count], currentData, NSStringFromClass([self class])]];
         [userTrackPathView trimUserTrackPaths];
     }
 }
@@ -48,7 +50,7 @@ static char KSDebug_UserTrackStayTimeKey;
     if (userTrackPathView && [userTrackPathView userTrackPaths]) {
         NSDate* viewAppearDate = [self ks_debug_userTrackStayTime];
         NSTimeInterval timerBucket = [[NSDate date] timeIntervalSinceDate:viewAppearDate];
-        [[userTrackPathView userTrackPaths] addObject:[NSString stringWithFormat:@"%lu、从 %@ 移出，总停留时间为：%f",[[userTrackPathView userTrackPaths] count], NSStringFromClass([self class]), timerBucket]];
+        [[userTrackPathView userTrackPaths] addObject:[NSString stringWithFormat:@"%lu、from %@ move out，totle time is：%f",[[userTrackPathView userTrackPaths] count], NSStringFromClass([self class]), timerBucket]];
         [userTrackPathView trimUserTrackPaths];
     }
 }
@@ -75,6 +77,63 @@ static char KSDebug_UserTrackStayTimeKey;
 
 @end
 
+@interface UIControl (KSDebug_EndTrackingTouch)
+
+- (void)KSAddTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents;
+
+- (void)KSEndTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event;
+
+- (void)KSDebugActionSelectorWithTarget:(id)target sender:(id)sender;
+
+- (void)setks_debug_controlSelector:(NSString*)selector;
+
+- (NSString*)ks_debug_controlSelector;
+
+@end
+
+@implementation UIButton (KSDebug_EndTrackingTouch)
+
+- (void)KSAddTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents{
+    [self KSAddTarget:target action:action forControlEvents:controlEvents];
+    NSString* className = NSStringFromClass([target class]);
+    if (![className hasPrefix:@"KSDebug"]) {
+        [self setks_debug_controlSelector:NSStringFromSelector(action)];
+    }
+}
+
+- (void)KSEndTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
+    [self KSEndTrackingWithTouch:touch withEvent:event];
+    NSSet* sets = [self allTargets];
+    id target = [sets anyObject];
+    [self KSDebugActionSelectorWithTarget:target sender:self];
+}
+
+-(void)KSDebugActionSelectorWithTarget:(id)target sender:(id)sender{
+    if (sender == self && [self ks_debug_controlSelector]) {
+        KSDebugUserTrackPathView* ks_debug_userTrackPathView = [KSDebugUserTrackPathView shareUserTrackPath];
+        if (ks_debug_userTrackPathView) {
+            NSDate* currentData = [NSDate date];
+            [[ks_debug_userTrackPathView userTrackPaths] addObject:[NSString stringWithFormat:@"%lu、at %@ time, clickedd on ‘%@’ with selector: ‘%@’",[[ks_debug_userTrackPathView userTrackPaths] count], currentData, NSStringFromClass([self class]), [self ks_debug_controlSelector]]];
+            [ks_debug_userTrackPathView trimUserTrackPaths];
+        }
+    }
+}
+
+-(void)setks_debug_controlSelector:(NSString*)selector{
+    objc_setAssociatedObject(self, &KSDebug_ControlSelectorKey, selector, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+-(NSString*)ks_debug_controlSelector{
+    return objc_getAssociatedObject(self, &KSDebug_ControlSelectorKey);
+}
+
+- (SEL)swizzledSelectorForSelector:(SEL)selector;
+{
+    return NSSelectorFromString([NSString stringWithFormat:@"_ks_debug_swizzle_%x_%@", arc4random(), NSStringFromSelector(selector)]);
+}
+
+@end
+
 @interface KSDebugUserTrackPathView()
 
 @end
@@ -97,6 +156,8 @@ static char KSDebug_UserTrackStayTimeKey;
     dispatch_once(&onceToken, ^{
         ks_debug_swizzleSelector([UIViewController class], @selector(viewDidAppear:), @selector(KSDebug_ViewDidAppear:));
         ks_debug_swizzleSelector([UIViewController class], @selector(viewDidDisappear:), @selector(KSDebug_ViewDidDisappear:));
+        ks_debug_swizzleSelector([UIButton class], @selector(addTarget:action:forControlEvents:), @selector(KSAddTarget:action:forControlEvents:));
+        ks_debug_swizzleSelector([UIButton class], @selector(endTrackingWithTouch:withEvent:), @selector(KSEndTrackingWithTouch:withEvent:));
     });
 }
 
@@ -115,7 +176,7 @@ static __weak KSDebugUserTrackPathView* userTrackPathView = nil;
     [super setupView];
     [self setTitleInfoText:@"用户轨迹"];
     [self.debugTextView setFont:[UIFont boldSystemFontOfSize:15]];
-    _userTrackPaths = [[KSDebugUserTrackPathArrayClass alloc] init];
+    _userTrackPaths = [NSMutableArray array];
     [KSDebugUserTrackPathView setShareUserTrackPath:self];
     [self addNotification];
     [self setupExceptionHandler];
@@ -178,7 +239,7 @@ void KSDebug_uncaughtExceptionHandler(NSException *exception){
 
 -(void)startDebug{
     [super startDebug];
-    self.debugTextView.text = [self generateStringWithDebugUserTrackPathArray:self.userTrackPaths];
+    self.debugTextView.text = [self generateStringWithArray:self.userTrackPaths];
 }
 
 -(void)endDebug{
@@ -202,37 +263,7 @@ void KSDebug_uncaughtExceptionHandler(NSException *exception){
 
 -(void)saveKSDebugUserTrackPaths{
     if (self.userTrackPaths) {
-        [self saveArrayToKSDebugDiskWithDebugUserTrackPathArray:self.userTrackPaths keyPath:[NSString stringWithFormat:@"%@_%@",KSDebug_UserTrackPaths_Key,[NSDate date]]];
-    }
-}
-
--(NSString*)generateStringWithDebugUserTrackPathArray:(KSDebugUserTrackPathArrayClass*)array{
-    if ([array isKindOfClass:[NSArray class]]) {
-        return [self generateStringWithArray:(NSArray*)array];
-    }else if ([array respondsToSelector:@selector(enumerateObjectsUsingBlock:)]){
-        NSMutableArray* mutableArray = [NSMutableArray array];
-        [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            if (obj) {
-                [mutableArray addObject:obj];
-            }
-        }];
-        return [self generateStringWithArray:mutableArray];
-    }
-    return nil;
-}
-
--(void)saveArrayToKSDebugDiskWithDebugUserTrackPathArray:(KSDebugUserTrackPathArrayClass*)array keyPath:(NSString*)path{
-    if ([array isKindOfClass:[NSArray class]]) {
-        [self saveArrayToKSDebugDiskWithArray:(NSArray*)array keyPath:path];
-        return;
-    }else if ([array respondsToSelector:@selector(enumerateObjectsUsingBlock:)]){
-        NSMutableArray* mutableArray = [NSMutableArray array];
-        [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            if (obj) {
-                [mutableArray addObject:obj];
-            }
-        }];
-        [self saveArrayToKSDebugDiskWithArray:mutableArray keyPath:path];
+        [self saveArrayToKSDebugDiskWithArray:self.userTrackPaths keyPath:[NSString stringWithFormat:@"%@_%@",KSDebug_UserTrackPaths_Key,[NSDate date]]];
     }
 }
 
