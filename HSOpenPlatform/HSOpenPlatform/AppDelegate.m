@@ -52,6 +52,8 @@
     [MobClick setLogEnabled:YES];
     #endif
 #endif
+//    [[MQTTClientShareInstance sharedCenter] publishMessageToDefaultTopic:@"test"];
+
     [KSDebugManager setupDebugManager];
 }
 
