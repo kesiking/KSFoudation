@@ -63,6 +63,7 @@
         || [NSStringFromClass([view class]) hasPrefix:@"KSDebug"]) {
         return;
     }
+    
     if ([view isKindOfClass:NSClassFromString(@"RCTScrollView")]) {
         [KSDebugToastView toast:@"不能在RCTScrollView上添加子view，否则会crash" toView:self.debugViewReference displaytime:3];
         return;
