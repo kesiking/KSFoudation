@@ -342,9 +342,11 @@
 
 	if ( [view isKindOfClass:[UIScrollView class]] || [view isKindOfClass:[UITableView class]] )
 	{
-		CGPoint viewOrigin = [self convertPoint:CGPointZero toView:view];
-		viewFrame.origin.x -= viewOrigin.x;
-		viewFrame.origin.y -= viewOrigin.y;
+        if (![view isKindOfClass:NSClassFromString(@"UITableViewWrapperView")]) {
+            CGPoint viewOrigin = [self convertPoint:CGPointZero toView:view];
+            viewFrame.origin.x -= viewOrigin.x;
+            viewFrame.origin.y -= viewOrigin.y;
+        }
 	}
 		
 	viewFrame.size.width = view.bounds.size.width;
