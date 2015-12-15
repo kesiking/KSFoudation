@@ -32,7 +32,7 @@
 
 -(void)setupView{
     [super setupView];
-
+    
     self.backgroundColor = [UIColor clearColor];
     self.needCancelBackgroundAction = YES;
     [[self __getCancelButton] setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.8]];
@@ -59,11 +59,15 @@
 -(void)recurSetBackgroundColorWithView:(UIView*)view isRandom:(BOOL)random{
     if (view == nil
         || [view isKindOfClass:[KSDebugPropertyButton class]]
-        || [view isKindOfClass:NSClassFromString(@"MAMapView")]
+        //|| [view isKindOfClass:NSClassFromString(@"MAMapView")]
         || [NSStringFromClass([view class]) hasPrefix:@"KSDebug"]) {
         return;
     }
-
+    if ([view isKindOfClass:NSClassFromString(@"RCTScrollView")]) {
+        [KSDebugToastView toast:@"不能在RCTScrollView上添加子view，否则会crash" toView:self.debugViewReference displaytime:3];
+        return;
+    }
+    
     KSDebugPropertyButton *propertyButton = (KSDebugPropertyButton*)[view viewWithTag:KSDEBUG_PROPERTY_BUTTON_TAG];
     if (propertyButton == nil) {
         propertyButton = [[KSDebugPropertyButton alloc] initWithFrame:view.bounds];
@@ -120,7 +124,7 @@
     if (view == nil) {
         return;
     }
-
+    
     NSString* componentStr = [self getComponentViewInfoWithView:view];
     self.debugTextView.text = componentStr;
     [self showComponentViewWithAnimation:view];
@@ -138,7 +142,7 @@
     componentStr = [componentStr stringByAppendingFormat:@"\n-----------viewController的布局信息------------- \n"];
     componentStr = [componentStr stringByAppendingFormat:@"描述信息 : %@ \n",[currentViewController description]];
     /**********************/
-
+    
     /*
      * 获取view的基本信息
      */
@@ -260,7 +264,13 @@
 -(void)startDebug{
     [super startDebug];
     UIView *view = [[[[UIApplication sharedApplication] keyWindow] rootViewController] view];
-    [self recurSetBackgroundColorWithView:view isRandom:YES];
+    @try {
+        [self recurSetBackgroundColorWithView:view isRandom:YES];
+    }
+    @catch (NSException *exception) {
+        [KSDebugToastView toast:[NSString stringWithFormat:@"startDebug crash because of %@",exception.reason] toView:self.debugViewReference displaytime:3];
+    }
+    
     self.hidden = YES;
     [self removeFromSuperview];
     
@@ -273,8 +283,13 @@
 -(void)endDebug{
     [super endDebug];
     UIView *view = [[[[UIApplication sharedApplication] keyWindow] rootViewController] view];
-    [self recurSetBackgroundColorWithView:view isRandom:NO];
-    [self recurRemovePropertyButtonWithView:view];
+    @try {
+        [self recurSetBackgroundColorWithView:view isRandom:NO];
+        [self recurRemovePropertyButtonWithView:view];
+    }
+    @catch (NSException *exception) {
+        [KSDebugToastView toast:[NSString stringWithFormat:@"endDebug crash because of %@",exception.reason] toView:self.debugViewReference displaytime:3];
+    }
 }
 
 -(void)keyboardDidShowWithTextView:(UITextView*)debugTextView{

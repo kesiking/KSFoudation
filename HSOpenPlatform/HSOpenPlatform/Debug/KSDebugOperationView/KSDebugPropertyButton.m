@@ -7,6 +7,7 @@
 //
 
 #import "KSDebugPropertyButton.h"
+#import "KSDebugToastView.h"
 
 @interface KSDebugPropertyButton()
 
@@ -92,6 +93,26 @@
                          self.superview.frame = CGRectMake(self.superview.frame.origin.x, point.y, self.superview.frame.size.width, self.superview.frame.size.height);
                          self.frame = CGRectMake(self.frame.origin.x,0,self.frame.size.width,self.frame.size.height);
                      }];
+}
+
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
+{
+    if ([self respondsToSelector:aSelector]) {
+        return [super methodSignatureForSelector:aSelector];
+    }
+    else {
+        return [NSMethodSignature signatureWithObjCTypes:"v@:"];
+    }
+}
+
+- (void)forwardInvocation:(NSInvocation *)anInvocation
+{
+    if ([self respondsToSelector:[anInvocation selector]]){
+        [super forwardInvocation:anInvocation];
+    }else{
+        NSLog(@"selector %@ unreconginized selector!", NSStringFromSelector([anInvocation selector]));
+        [KSDebugToastView toast:[NSString stringWithFormat:@"%@ crash because of doesNotRecognizeSelector %@", NSStringFromClass([self class]),NSStringFromSelector([anInvocation selector])] toView:self displaytime:3];
+    }
 }
 
 @end
