@@ -148,6 +148,12 @@
 		5F039CDC1C24020700100B5E /* PNScatterChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CCB1C24020700100B5E /* PNScatterChartData.m */; };
 		5F039CDD1C24020700100B5E /* PNScatterChartDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CCD1C24020700100B5E /* PNScatterChartDataItem.m */; };
 		5F039CF11C2403DF00100B5E /* UICountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CF01C2403DF00100B5E /* UICountingLabel.m */; };
+		5F039CF71C24059400100B5E /* KSDebugChangeRequestHostView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CF41C24059400100B5E /* KSDebugChangeRequestHostView.m */; };
+		5F039CF81C24059400100B5E /* KSDebugRequestHostCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CF61C24059400100B5E /* KSDebugRequestHostCenter.m */; };
+		5F039CFB1C2405A100100B5E /* wax.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F039CFA1C2405A100100B5E /* wax.framework */; };
+		5F039D011C2405BF00100B5E /* KSDebugViewLoadDurationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CFE1C2405BF00100B5E /* KSDebugViewLoadDurationView.m */; };
+		5F039D021C2405BF00100B5E /* KSDebugViewLoadModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039D001C2405BF00100B5E /* KSDebugViewLoadModel.m */; };
+		5F039D051C2405D400100B5E /* KSDebugLayoutInfoView.lua in Resources */ = {isa = PBXBuildFile; fileRef = 5F039D041C2405D400100B5E /* KSDebugLayoutInfoView.lua */; };
 		5F0910A91C1695E6009962BB /* YYCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0910A21C1695E6009962BB /* YYCache.m */; };
 		5F0910AA1C1695E6009962BB /* YYDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0910A41C1695E6009962BB /* YYDiskCache.m */; };
 		5F0910AB1C1695E6009962BB /* YYKVStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0910A61C1695E6009962BB /* YYKVStorage.m */; };
@@ -1249,6 +1255,16 @@
 		5F039CCD1C24020700100B5E /* PNScatterChartDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNScatterChartDataItem.m; sourceTree = "<group>"; };
 		5F039CEF1C2403DF00100B5E /* UICountingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICountingLabel.h; sourceTree = "<group>"; };
 		5F039CF01C2403DF00100B5E /* UICountingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICountingLabel.m; sourceTree = "<group>"; };
+		5F039CF31C24059400100B5E /* KSDebugChangeRequestHostView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugChangeRequestHostView.h; sourceTree = "<group>"; };
+		5F039CF41C24059400100B5E /* KSDebugChangeRequestHostView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugChangeRequestHostView.m; sourceTree = "<group>"; };
+		5F039CF51C24059400100B5E /* KSDebugRequestHostCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugRequestHostCenter.h; sourceTree = "<group>"; };
+		5F039CF61C24059400100B5E /* KSDebugRequestHostCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugRequestHostCenter.m; sourceTree = "<group>"; };
+		5F039CFA1C2405A100100B5E /* wax.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = wax.framework; sourceTree = "<group>"; };
+		5F039CFD1C2405BF00100B5E /* KSDebugViewLoadDurationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugViewLoadDurationView.h; sourceTree = "<group>"; };
+		5F039CFE1C2405BF00100B5E /* KSDebugViewLoadDurationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugViewLoadDurationView.m; sourceTree = "<group>"; };
+		5F039CFF1C2405BF00100B5E /* KSDebugViewLoadModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDebugViewLoadModel.h; sourceTree = "<group>"; };
+		5F039D001C2405BF00100B5E /* KSDebugViewLoadModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDebugViewLoadModel.m; sourceTree = "<group>"; };
+		5F039D041C2405D400100B5E /* KSDebugLayoutInfoView.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KSDebugLayoutInfoView.lua; sourceTree = "<group>"; };
 		5F0910A11C1695E6009962BB /* YYCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYCache.h; sourceTree = "<group>"; };
 		5F0910A21C1695E6009962BB /* YYCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYCache.m; sourceTree = "<group>"; };
 		5F0910A31C1695E6009962BB /* YYDiskCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYDiskCache.h; sourceTree = "<group>"; };
@@ -2596,6 +2612,7 @@
 				35C47CAE1BCDE7C5004164F5 /* libz.tbd in Frameworks */,
 				35C47CA91BCDE53D004164F5 /* AMapSearchKit.framework in Frameworks */,
 				35C47CAA1BCDE53D004164F5 /* MAMapKit.framework in Frameworks */,
+				5F039CFB1C2405A100100B5E /* wax.framework in Frameworks */,
 				5F66C5B61BBA5E2400CC21F7 /* CoreGraphics.framework in Frameworks */,
 				5F66C5B31BBA5E1100CC21F7 /* CoreTelephony.framework in Frameworks */,
 				5F66C5B41BBA5E1100CC21F7 /* CoreText.framework in Frameworks */,
@@ -2965,6 +2982,42 @@
 			path = UICountingLabel;
 			sourceTree = "<group>";
 		};
+		5F039CF21C24059400100B5E /* KSDebugChangeRequestHostView */ = {
+			isa = PBXGroup;
+			children = (
+				5F039CF31C24059400100B5E /* KSDebugChangeRequestHostView.h */,
+				5F039CF41C24059400100B5E /* KSDebugChangeRequestHostView.m */,
+			);
+			path = KSDebugChangeRequestHostView;
+			sourceTree = "<group>";
+		};
+		5F039CF91C2405A100100B5E /* KSDebugFramework */ = {
+			isa = PBXGroup;
+			children = (
+				5F039CFA1C2405A100100B5E /* wax.framework */,
+			);
+			path = KSDebugFramework;
+			sourceTree = "<group>";
+		};
+		5F039CFC1C2405BF00100B5E /* KSDebugViewLoadDurationView */ = {
+			isa = PBXGroup;
+			children = (
+				5F039CFD1C2405BF00100B5E /* KSDebugViewLoadDurationView.h */,
+				5F039CFE1C2405BF00100B5E /* KSDebugViewLoadDurationView.m */,
+				5F039CFF1C2405BF00100B5E /* KSDebugViewLoadModel.h */,
+				5F039D001C2405BF00100B5E /* KSDebugViewLoadModel.m */,
+			);
+			path = KSDebugViewLoadDurationView;
+			sourceTree = "<group>";
+		};
+		5F039D031C2405D400100B5E /* KSDebugWaxScript */ = {
+			isa = PBXGroup;
+			children = (
+				5F039D041C2405D400100B5E /* KSDebugLayoutInfoView.lua */,
+			);
+			path = KSDebugWaxScript;
+			sourceTree = "<group>";
+		};
 		5F09109F1C1695E6009962BB /* YYKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -3185,6 +3238,11 @@
 		5F1A1AE51C0DA11D00B72CFF /* Debug */ = {
 			isa = PBXGroup;
 			children = (
+				5F039CFC1C2405BF00100B5E /* KSDebugViewLoadDurationView */,
+				5F039CF91C2405A100100B5E /* KSDebugFramework */,
+				5F039CF21C24059400100B5E /* KSDebugChangeRequestHostView */,
+				5F039CF51C24059400100B5E /* KSDebugRequestHostCenter.h */,
+				5F039CF61C24059400100B5E /* KSDebugRequestHostCenter.m */,
 				5F1F1BE61C1E607900425E21 /* KSDebugViewAppearDurationView */,
 				5F1F1BC61C1E606900425E21 /* KSDebugRequestView */,
 				5F6331A01C19617C00E48E71 /* KSDebugLogCollectView */,
@@ -3260,6 +3318,7 @@
 			children = (
 				5F1CF9181C102238006C82BF /* KSDebugLayoutInfoView.h */,
 				5F1CF9191C102238006C82BF /* KSDebugLayoutInfoView.m */,
+				5F039D031C2405D400100B5E /* KSDebugWaxScript */,
 			);
 			path = KSDebugLayoutInfoView;
 			sourceTree = "<group>";
@@ -7036,6 +7095,7 @@
 				5FC5AF041BFB258F0096CDDA /* icon_voice05_4@2x.png in Resources */,
 				5FC5AEF31BFB258F0096CDDA /* icon_voice02@3x.png in Resources */,
 				5F66C5171BBA5CC500CC21F7 /* ReceiverVoiceNodePlaying003@2x.png in Resources */,
+				5F039D051C2405D400100B5E /* KSDebugLayoutInfoView.lua in Resources */,
 				5F72EE041BDF355000460ACD /* KSNetworkDataMock.plist in Resources */,
 				5F66C5CE1BBA637300CC21F7 /* tabitem_healthy_normal@3x.png in Resources */,
 				5FC5AEE51BFB258F0096CDDA /* icon_keyboard_h@3x.png in Resources */,
@@ -7312,6 +7372,7 @@
 				5F7AF6841BDB6C6F00488148 /* HSMessageListDeleteBottom.m in Sources */,
 				5F66C4451BBA5CC500CC21F7 /* KSDoneResetViewController.m in Sources */,
 				5F6760491BF48FD1003FB4D0 /* HSBusinessUserListInfoViewCell.m in Sources */,
+				5F039D011C2405BF00100B5E /* KSDebugViewLoadDurationView.m in Sources */,
 				5FDF1A321BD8BA4D0059B3F2 /* HSSubscribedBussinessBasicModel.m in Sources */,
 				5F66C52F1BBA5CC500CC21F7 /* MJRefreshAutoFooter.m in Sources */,
 				5FFBD0CA1BF59E2100A252C8 /* HSNavBarTitleCustomView.m in Sources */,
@@ -7409,6 +7470,7 @@
 				5F66C5301BBA5CC600CC21F7 /* MJRefreshBackFooter.m in Sources */,
 				5F039CD71C24020700100B5E /* PNPieChart.m in Sources */,
 				5FE6022B1BF19A2A00DA34EF /* KSASCollectionViewCellNode.m in Sources */,
+				5F039D021C2405BF00100B5E /* KSDebugViewLoadModel.m in Sources */,
 				5F66C4CE1BBA5CC500CC21F7 /* XHLocationHelper.m in Sources */,
 				354D789E1BD4956900F6273B /* HSBusinessHallMapViewController.m in Sources */,
 				5F66C4A31BBA5CC500CC21F7 /* UIViewController+BackButtonHandler.m in Sources */,
@@ -7504,6 +7566,7 @@
 				5F66C5691BBA5CC600CC21F7 /* SVWebViewController.m in Sources */,
 				5F0910AF1C1697C3009962BB /* KSMemoryCacheArray.m in Sources */,
 				5F66C43D1BBA5CC500CC21F7 /* SSKeychain.m in Sources */,
+				5F039CF81C24059400100B5E /* KSDebugRequestHostCenter.m in Sources */,
 				5F66C4F41BBA5CC500CC21F7 /* SETextMagnifierRanged.m in Sources */,
 				5F66C5391BBA5CC600CC21F7 /* MJRefreshBackStateFooter.m in Sources */,
 				5F2CDB051C02AB06007D03CF /* KSReactViewController.m in Sources */,
@@ -7679,6 +7742,7 @@
 				39D96BA61BD4D4240028E7DB /* HSFamilyAppInfoService.m in Sources */,
 				5F1A1B221C0DA11D00B72CFF /* KSDebug3DInspectorView.m in Sources */,
 				5F17FFB31BE0993400670317 /* EHBasicService.m in Sources */,
+				5F039CF71C24059400100B5E /* KSDebugChangeRequestHostView.m in Sources */,
 				5F66C4EC1BBA5CC500CC21F7 /* SELinkText.m in Sources */,
 				5FDF1A111BD62DEE0059B3F2 /* KSTouchEvent.m in Sources */,
 				5F66C5031BBA5CC500CC21F7 /* XHEmotionSectionBar.m in Sources */,
@@ -7926,6 +7990,7 @@
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/MessageDisplayKit",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/AsyncDisplayKit",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/MQTTKit",
+					"$(PROJECT_DIR)/HSOpenPlatform/Debug/KSDebugFramework",
 				);
 				GCC_PREFIX_HEADER = HSOpenPlatform/HSOpenPlatform.pch;
 				HEADER_SEARCH_PATHS = (
@@ -7973,6 +8038,7 @@
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/MessageDisplayKit",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/AsyncDisplayKit",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/MQTTKit",
+					"$(PROJECT_DIR)/HSOpenPlatform/Debug/KSDebugFramework",
 				);
 				GCC_PREFIX_HEADER = HSOpenPlatform/HSOpenPlatform.pch;
 				HEADER_SEARCH_PATHS = (

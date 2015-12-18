@@ -124,12 +124,10 @@ static char KSDebug_ViewAppearDurationKey;
 
 @implementation KSDebugViewAppearDurationView
 
-#ifdef KSDebugToolsEnable
-+(void)load{
-    NSMutableArray* array = [KSDebugOperationView getDebugViews];
-    [array addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"页面初始化用时",@"title",NSStringFromClass([self class]), @"className", nil]];
-}
-#endif
+//+(void)load{
+//    NSMutableArray* array = [KSDebugOperationView getDebugViews];
+//    [array addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"页面初始化用时",@"title",NSStringFromClass([self class]), @"className", nil]];
+//}
 
 +(void)initialize{
     [self configTouch];

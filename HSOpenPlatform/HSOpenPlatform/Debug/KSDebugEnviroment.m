@@ -7,6 +7,7 @@
 //
 
 #import "KSDebugEnviroment.h"
+#import "KSDebugRequestHostCenter.h"
 
 @implementation KSDebugEnviroment
 
@@ -35,6 +36,25 @@
         [_filePathArray addObject:@{@"filePath":sdImageDirectory,@"fileType":@"png"}];
     }
     
+}
+-(void)setOrignalHost:(NSString *)orignalHost{
+    _orignalHost = orignalHost;
+    [[KSDebugRequestHostCenter sharedInstance] setOrignalHost:orignalHost];
+}
+
+-(void)setOrignalPort:(NSString *)orignalPort{
+    _orignalPort = orignalPort;
+    [[KSDebugRequestHostCenter sharedInstance] setOrignalPort:orignalPort];
+}
+
+-(void)setRedirectHost:(NSString *)redirectHost{
+    _redirectHost = redirectHost;
+    [[KSDebugRequestHostCenter sharedInstance] setRedirectHost:redirectHost];
+}
+
+-(void)setRedirectPort:(NSString *)redirectPort{
+    _redirectPort = redirectPort;
+    [[KSDebugRequestHostCenter sharedInstance] setRedirectPort:redirectPort];
 }
 
 

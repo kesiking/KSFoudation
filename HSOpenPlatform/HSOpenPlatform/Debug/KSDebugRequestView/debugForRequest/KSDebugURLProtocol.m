@@ -9,6 +9,7 @@
 #import "KSDebugURLProtocol.h"
 #import "KSDebugRequestManager.h"
 #import "KSDebugRequestModel.h"
+#import "KSDebugRequestHostCenter.h"
 
 static NSString * const URLProtocolHandledKey = @"URLProtocolHandledKey";
 
@@ -55,7 +56,11 @@ static NSString * const URLProtocolHandledKey = @"URLProtocolHandledKey";
  */
 + (NSURLRequest *)canonicalRequestForRequest:(NSURLRequest *)request
 {
-    return request;
+    if (![KSDebugRequestHostCenter needRedirectInRequset]) {
+        return request;
+    }
+    NSMutableURLRequest *mutableReqeust = [request mutableCopy];
+    return [KSDebugRequestHostCenter redirectHostInRequset:mutableReqeust];
 }
 
 /**

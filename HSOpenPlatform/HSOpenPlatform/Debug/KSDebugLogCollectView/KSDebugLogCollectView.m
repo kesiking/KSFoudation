@@ -29,12 +29,10 @@
 
 @implementation KSDebugLogCollectView
 
-#ifdef KSDebugToolsEnable
 +(void)load{
     NSMutableArray* array = [KSDebugOperationView getDebugViews];
     [array addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"日志获取",@"title",NSStringFromClass([self class]), @"className", nil]];
 }
-#endif
 
 -(void)setupView{
     [super setupView];

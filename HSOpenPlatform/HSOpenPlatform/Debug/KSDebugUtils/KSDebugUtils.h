@@ -52,4 +52,30 @@ void ks_debug_swizzleSelector(Class class, SEL originalSelector, SEL swizzledSel
  */
 +(NSMutableDictionary*)getInstansePropertyWithInstanse:(id)instanse;
 
+/*!
+ *  @author 孟希羲, 15-12-15 16:12:18
+ *
+ *  @brief  根据view获取其所有的父view列表，也包括自身
+ *
+ *  @param  view 给定一个view
+ *
+ *  @return array 存储了所有的父view列表，也包括自身
+ *
+ *  @since 1.0
+ */
++(NSArray*)getAllSuperViewArrayWithView:(UIView*)view;
+
+/*!
+ *  @author 孟希羲, 15-12-15 17:12:26
+ *
+ *  @brief  根据view获取viewController
+ *
+ *  @param  view 给定一个view
+ *
+ *  @return viewController
+ *
+ *  @since 1.0
+ */
++(UIViewController*)getViewController:(UIView*)view;
+
 @end

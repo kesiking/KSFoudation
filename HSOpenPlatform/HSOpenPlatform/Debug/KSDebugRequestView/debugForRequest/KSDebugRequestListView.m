@@ -179,7 +179,19 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    KSDebugRequestModel *model = self.requestArray[indexPath.row];
+    KSDebugRequestModel *model;
+    switch (self.showType) {
+        case KSDebugRequestListShowTypeDefault:{
+            model = self.requestArray[indexPath.row];
+        }
+            break;
+        case KSDebugRequestListShowTypeSortByVC: {
+            KSDebugRequestVCModel *VCModel = self.sortedRequestArray[indexPath.section];
+            model = VCModel.requestArray[indexPath.row];
+        }
+        default:
+            break;
+    }
     !self.selectedRequestModelBlock?:self.selectedRequestModelBlock(model);
 }
 

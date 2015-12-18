@@ -37,9 +37,12 @@ static char KSDebug_ControlSelectorKey;
     [self KSDebug_ViewDidAppear:animated];
     KSDebugUserTrackPathView* userTrackPathView = [self ks_debug_userTrackPathView];
     if (userTrackPathView && [userTrackPathView userTrackPaths]) {
-        NSDate* currentData = [NSDate date];
-        [self setks_debug_userTrackStayTime:currentData];
-        [[userTrackPathView userTrackPaths] addObject:[NSString stringWithFormat:@"%lu、at %@ time, move in %@",[[userTrackPathView userTrackPaths] count], currentData, NSStringFromClass([self class])]];
+        NSDate* currentDate = [NSDate date];
+        NSTimeZone *zone = [NSTimeZone systemTimeZone];
+        NSInteger interval = [zone secondsFromGMTForDate: currentDate];
+        currentDate = [currentDate  dateByAddingTimeInterval: interval];
+        [self setks_debug_userTrackStayTime:currentDate];
+        [[userTrackPathView userTrackPaths] addObject:[NSString stringWithFormat:@"%lu.at %@ time, move in %@",[[userTrackPathView userTrackPaths] count], currentDate, NSStringFromClass([self class])]];
         [userTrackPathView trimUserTrackPaths];
     }
 }
@@ -49,8 +52,12 @@ static char KSDebug_ControlSelectorKey;
     KSDebugUserTrackPathView* userTrackPathView = [self ks_debug_userTrackPathView];
     if (userTrackPathView && [userTrackPathView userTrackPaths]) {
         NSDate* viewAppearDate = [self ks_debug_userTrackStayTime];
-        NSTimeInterval timerBucket = [[NSDate date] timeIntervalSinceDate:viewAppearDate];
-        [[userTrackPathView userTrackPaths] addObject:[NSString stringWithFormat:@"%lu、from %@ move out，totle time is：%f",[[userTrackPathView userTrackPaths] count], NSStringFromClass([self class]), timerBucket]];
+        NSDate* currentDate = [NSDate date];
+        NSTimeZone *zone = [NSTimeZone systemTimeZone];
+        NSInteger interval = [zone secondsFromGMTForDate: currentDate];
+        currentDate = [currentDate  dateByAddingTimeInterval: interval];
+        NSTimeInterval timerBucket = [currentDate timeIntervalSinceDate:viewAppearDate];
+        [[userTrackPathView userTrackPaths] addObject:[NSString stringWithFormat:@"%lu.from %@ move out,totle time is:%f",[[userTrackPathView userTrackPaths] count], NSStringFromClass([self class]), timerBucket]];
         [userTrackPathView trimUserTrackPaths];
     }
 }
@@ -112,8 +119,11 @@ static char KSDebug_ControlSelectorKey;
     if (sender == self && [self ks_debug_controlSelector]) {
         KSDebugUserTrackPathView* ks_debug_userTrackPathView = [KSDebugUserTrackPathView shareUserTrackPath];
         if (ks_debug_userTrackPathView) {
-            NSDate* currentData = [NSDate date];
-            [[ks_debug_userTrackPathView userTrackPaths] addObject:[NSString stringWithFormat:@"%lu、at %@ time, clickedd on ‘%@’ with selector: ‘%@’",[[ks_debug_userTrackPathView userTrackPaths] count], currentData, NSStringFromClass([self class]), [self ks_debug_controlSelector]]];
+            NSDate* currentDate = [NSDate date];
+            NSTimeZone *zone = [NSTimeZone systemTimeZone];
+            NSInteger interval = [zone secondsFromGMTForDate: currentDate];
+            currentDate = [currentDate  dateByAddingTimeInterval: interval];
+            [[ks_debug_userTrackPathView userTrackPaths] addObject:[NSString stringWithFormat:@"%lu.button is clickedd at %@ time, on '%@' with selector: '%@'",[[ks_debug_userTrackPathView userTrackPaths] count], currentDate, NSStringFromClass([self class]), [self ks_debug_controlSelector]]];
             [ks_debug_userTrackPathView trimUserTrackPaths];
         }
     }
@@ -140,12 +150,10 @@ static char KSDebug_ControlSelectorKey;
 
 @implementation KSDebugUserTrackPathView
 
-#ifdef KSDebugToolsEnable
 +(void)load{
     NSMutableArray* array = [KSDebugOperationView getDebugViews];
     [array addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"用户轨迹",@"title",NSStringFromClass([self class]), @"className", nil]];
 }
-#endif
 
 +(void)initialize{
     [self configTouch];
@@ -215,7 +223,7 @@ void KSDebug_uncaughtExceptionHandler(NSException *exception){
         [[[KSDebugUserTrackPathView shareUserTrackPath] userTrackPaths] addObject:url];
     }
     [[KSDebugUserTrackPathView shareUserTrackPath] saveKSDebugUserTrackPaths];
-
+    
     if (exceptionHandler) {
         exceptionHandler(exception);
     }
@@ -270,20 +278,20 @@ void KSDebug_uncaughtExceptionHandler(NSException *exception){
 -(void)dealloc{
     [self removeNotification];
     [KSDebugUserTrackPathView setShareUserTrackPath:nil];
-//    [self saveKSDebugUserTrackPaths];
+    //    [self saveKSDebugUserTrackPaths];
     [self resetExceptionHandler];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - notification method
 -(void)applicationWillTerminate:(NSNotification*)notification{
-//    [self saveKSDebugUserTrackPaths];
+    //    [self saveKSDebugUserTrackPaths];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - notification method
 -(void)applicationDidEnterBackground:(NSNotification*)notification{
-//    [self saveKSDebugUserTrackPaths];
+    //    [self saveKSDebugUserTrackPaths];
 }
 
 @end

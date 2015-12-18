@@ -27,12 +27,10 @@
 
 @implementation KSDebugRequestView
 
-#ifdef KSDebugToolsEnable
 +(void)load{
     NSMutableArray* array = [KSDebugOperationView getDebugViews];
     [array addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"网络请求",@"title",NSStringFromClass([self class]),@"className", nil]];
 }
-#endif
 
 -(void)setupView{
     [super setupView];

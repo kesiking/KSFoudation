@@ -12,23 +12,136 @@
 #import "UIView+Screenshot.h"
 #import "KSDebugToastView.h"
 #import "KSDebugUserDefault.h"
+#import <objc/runtime.h>
+#import <objc/message.h>
+#import <wax/wax.h>
+
+static char KSDebug_CALayerDisplayTimeKey;
+
+@interface CALayer (KSDebug_CALayerDisplayTime)
+
+-(void)KSDebug_CALayerDrawInContext:(CGContextRef)ctx;
+
+-(void)KSDebug_CALayerRenderInContext:(CGContextRef)ctx;
+
+-(void)KSDebug_drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx;
+
+-(void)setks_debug_CALayerDisplayTime:(NSNumber*)CALayerDisplayTime;
+
+-(NSNumber*)ks_debug_CALayerDisplayTime;
+
+@end
+
+@implementation CALayer (KSDebug_CALayerDisplayTime)
+
+-(void)KSDebug_CALayerRenderInContext:(CGContextRef)ctx{
+    NSDate* currentDate = [NSDate date];
+    [self KSDebug_CALayerRenderInContext:ctx];
+    NSTimeInterval timerBucket = [[NSDate date] timeIntervalSinceDate:currentDate] * 1000;
+    [self setks_debug_CALayerDisplayTime:[NSNumber numberWithDouble:timerBucket]];
+}
+
+-(void)KSDebug_CALayerDrawInContext:(CGContextRef)ctx{
+    NSDate* currentDate = [NSDate date];
+    [self KSDebug_CALayerDrawInContext:ctx];
+    NSTimeInterval timerBucket = [[NSDate date] timeIntervalSinceDate:currentDate] * 1000;
+    [self setks_debug_CALayerDisplayTime:[NSNumber numberWithDouble:timerBucket]];
+}
+
+- (void)KSDebug_drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx{
+    NSDate* currentDate = [NSDate date];
+    [self KSDebug_drawLayer:layer inContext:ctx];
+    NSTimeInterval timerBucket = [[NSDate date] timeIntervalSinceDate:currentDate] * 1000;
+    [self setks_debug_CALayerDisplayTime:[NSNumber numberWithDouble:timerBucket]];
+}
+
+-(void)setks_debug_CALayerDisplayTime:(NSNumber*)CALayerDisplayTime{
+    objc_setAssociatedObject(self, &KSDebug_CALayerDisplayTimeKey, CALayerDisplayTime, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+-(NSNumber*)ks_debug_CALayerDisplayTime{
+    return objc_getAssociatedObject(self, &KSDebug_CALayerDisplayTimeKey);
+}
+
+@end
+
+static char KSDebug_UIViewDisplayTimeKey;
+
+@interface UIView (KSDebug_UIViewDisplayTimeKey)
+
+-(void)KSDebug_UIViewDrawRect:(CGRect)rect;
+
+-(void)setks_debug_UIViewDisplayTime:(NSNumber*)CALayerDisplayTime;
+
+-(NSNumber*)ks_debug_UIViewDisplayTime;
+
+@end
+
+@implementation UIView (KSDebug_UIViewDisplayTimeKey)
+
+-(void)KSDebug_UIViewDrawRect:(CGRect)rect{
+    NSDate* currentDate = [NSDate date];
+    [self KSDebug_UIViewDrawRect:rect];
+    NSTimeInterval timerBucket = [[NSDate date] timeIntervalSinceDate:currentDate] * 1000;
+    [self setks_debug_UIViewDisplayTime:[NSNumber numberWithDouble:timerBucket]];
+}
+
+- (void)KSDebug_drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx{
+    NSDate* currentDate = [NSDate date];
+    [self KSDebug_drawLayer:layer inContext:ctx];
+    NSTimeInterval timerBucket = [[NSDate date] timeIntervalSinceDate:currentDate] * 1000;
+    [self setks_debug_UIViewDisplayTime:[NSNumber numberWithDouble:timerBucket]];
+}
+
+-(void)setks_debug_UIViewDisplayTime:(NSNumber*)CALayerDisplayTime{
+    objc_setAssociatedObject(self, &KSDebug_UIViewDisplayTimeKey, CALayerDisplayTime, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+-(NSNumber*)ks_debug_UIViewDisplayTime{
+    return objc_getAssociatedObject(self, &KSDebug_UIViewDisplayTimeKey)?:[self.layer ks_debug_CALayerDisplayTime];
+}
+
+@end
 
 #define KSDEBUG_PROPERTY_BUTTON_TAG  (11002)
 
-@interface KSDebugLayoutInfoView()
+@interface KSDebugLayoutInfoView()<UIActionSheetDelegate>
 
 @property(nonatomic, strong)  UIImageView           *   selectViewTranslateToImageView;
+
+@property(nonatomic, strong)  UITextField           *   scriptDebutTextView;
+
+@property(nonatomic, strong)  UITextView            *   scriptOperationShowTextView;
+
+@property(nonatomic, weak)    UIView                *   selectView;
+
+@property(nonatomic, strong)  NSArray               *   viewArray;
 
 @end
 
 @implementation KSDebugLayoutInfoView
 
-#ifdef KSDebugToolsEnable
 +(void)load{
     NSMutableArray* array = [KSDebugOperationView getDebugViews];
     [array addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"布局信息",@"title",NSStringFromClass([self class]),@"className", nil]];
 }
-#endif
+
++(void)initialize{
+    [self configTouch];
+}
+
++(void)configTouch{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        ks_debug_swizzleSelector([UIView class], @selector(drawRect:), @selector(KSDebug_UIViewDrawRect:));
+        ks_debug_swizzleSelector([UIView class], @selector(drawLayer:inContext:), @selector(KSDebug_drawLayer:inContext:));
+        ks_debug_swizzleSelector([CALayer class], @selector(drawInContext:), @selector(KSDebug_CALayerDrawInContext:));
+        ks_debug_swizzleSelector([CALayer class], @selector(renderInContext:), @selector(KSDebug_CALayerRenderInContext:));
+        ks_debug_swizzleSelector([CALayer class], @selector(drawLayer:inContext:), @selector(KSDebug_drawLayer:inContext:));
+        wax_start(nil, nil);
+    });
+}
+
 
 -(void)setupView{
     [super setupView];
@@ -56,6 +169,69 @@
     return _selectViewTranslateToImageView;
 }
 
+-(UITextField *)scriptDebutTextView{
+    if (_scriptDebutTextView == nil) {
+        _scriptDebutTextView = [[UITextField alloc] initWithFrame:CGRectMake(self.debugTextView.frame.origin.x, CGRectGetMaxY(self.debugTextView.frame) + 2, self.debugTextView.frame.size.width, 44)];
+        _scriptDebutTextView.layer.masksToBounds = YES;
+        _scriptDebutTextView.layer.cornerRadius = 10;
+        _scriptDebutTextView.placeholder = @"请输入wax脚本，如sv:setBackgroundColor(UIColor:redColor())";
+        //        _scriptDebutTextView.text = @"selectView:setBackgroundColor(UIColor:redColor())";
+        _scriptDebutTextView.backgroundColor = [UIColor whiteColor];
+        //返回键的类型
+        _scriptDebutTextView.returnKeyType = UIReturnKeyDefault;
+        
+        //键盘类型
+        _scriptDebutTextView.keyboardType = UIKeyboardTypeDefault;
+        
+        //定义一个toolBar
+        UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+        
+        //设置style
+        [topView setBarStyle:UIBarStyleDefault];
+        
+        //定义两个flexibleSpace的button，放在toolBar上，这样完成按钮就会在最右边
+        UIBarButtonItem * button1 =[[UIBarButtonItem  alloc]initWithBarButtonSystemItem:                                        UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+        
+        UIBarButtonItem * button2 = [[UIBarButtonItem  alloc]initWithBarButtonSystemItem:                                        UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+        
+        //定义完成按钮
+        UIBarButtonItem * doneButton = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone  target:self action:@selector(resignScriptDebutTextView)];
+        
+        //在toolBar上加上这些按钮
+        NSArray * buttonsArray = [NSArray arrayWithObjects:button1,button2,doneButton,nil];
+        [topView setItems:buttonsArray];
+        
+        [_scriptDebutTextView setInputAccessoryView:topView];
+        
+        [self addSubview:_scriptDebutTextView];
+    }
+    return _scriptDebutTextView;
+}
+
+-(UITextView *)scriptOperationShowTextView{
+    if (_scriptOperationShowTextView == nil) {
+        _scriptOperationShowTextView = [[UITextView alloc] initWithFrame:CGRectMake(self.scriptDebutTextView.frame.origin.x, CGRectGetMaxY(self.scriptDebutTextView.frame) + 2, self.scriptDebutTextView.frame.size.width, 44)];
+        _scriptOperationShowTextView.layer.masksToBounds = YES;
+        _scriptOperationShowTextView.layer.cornerRadius = 10;
+        _scriptOperationShowTextView.editable = NO;
+        _scriptOperationShowTextView.text = @"脚本结果输出框";
+        _scriptOperationShowTextView.backgroundColor = [UIColor whiteColor];
+        //返回键的类型
+        _scriptOperationShowTextView.returnKeyType = UIReturnKeyDefault;
+        
+        //键盘类型
+        _scriptOperationShowTextView.keyboardType = UIKeyboardTypeDefault;
+        
+        [self addSubview:_scriptOperationShowTextView];
+    }
+    return _scriptOperationShowTextView;
+}
+
+-(void)resignScriptDebutTextView{
+    [self.scriptDebutTextView resignFirstResponder];
+    [self runLuaStringWithScriptText:self.scriptDebutTextView.text withSelectView:self.selectView];
+}
+
 -(void)recurSetBackgroundColorWithView:(UIView*)view isRandom:(BOOL)random{
     if (view == nil
         || [view isKindOfClass:[KSDebugPropertyButton class]]
@@ -76,6 +252,9 @@
         propertyButton.exclusiveTouch = YES;
         propertyButton.tag = KSDEBUG_PROPERTY_BUTTON_TAG;
         [propertyButton addTarget:self action:@selector(checkComponentInfo:) forControlEvents:UIControlEventTouchUpInside];
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(propertyButtonLongClicked:)];
+        longPress.minimumPressDuration = 0.8; //定义按的时间
+        [propertyButton addGestureRecognizer:longPress];
         propertyButton.referenceView = view;
         [propertyButton.dictObject setObject:@(view.userInteractionEnabled) forKey:@"userInteractionEnabled"];
         view.userInteractionEnabled = YES;
@@ -120,6 +299,8 @@
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -   KSDebugPropertyButton clicked action method
 -(void)checkComponentInfo:(KSDebugPropertyButton*)button{
     UIView* view = button.referenceView;
     if (view == nil) {
@@ -132,14 +313,48 @@
     [self showCurrentView:YES];
 }
 
+-(void)propertyButtonLongClicked:(UILongPressGestureRecognizer *)gestureRecognizer{
+    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
+        NSLog(@"长按事件");
+        UIView* selectView = gestureRecognizer.view;
+        self.viewArray = [KSDebugUtils getAllSuperViewArrayWithView:selectView];
+        
+        UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择想看的视图" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:nil];
+        
+        __block BOOL isViewArrayLegal = YES;
+        
+        [self.viewArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            if ([obj isKindOfClass:[UIView class]]) {
+                [actionSheet addButtonWithTitle:[NSString stringWithFormat:@"%@_%p",NSStringFromClass([obj class]), obj]];
+            }else{
+                isViewArrayLegal = NO;
+            }
+        }];
+        
+        actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
+        
+        if (isViewArrayLegal) {
+            [actionSheet showFromRect:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 100) inView:[[UIApplication sharedApplication] keyWindow] animated:YES];
+        }else{
+            [KSDebugToastView toast:@"视图列表出错啦，请找程序员查看！"];
+        }
+        
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -   component view 信息
 -(NSString*)getComponentViewInfoWithView:(UIView*)view{
+    if (view != self.selectView) {
+        self.selectView = view;
+    }
     NSString* componentStr = [NSString string];
     componentStr = [componentStr stringByAppendingFormat:@"-----------布局信息------------- \n"];
     /*
      * 获取viewController的基本信息
      */
     /**********************/
-    UIViewController* currentViewController = [KSDebugUtils getCurrentAppearedViewController];
+    UIViewController* currentViewController = [KSDebugUtils getViewController:view];
     componentStr = [componentStr stringByAppendingFormat:@"\n-----------viewController的布局信息------------- \n"];
     componentStr = [componentStr stringByAppendingFormat:@"描述信息 : %@ \n",[currentViewController description]];
     /**********************/
@@ -150,7 +365,11 @@
     /**********************/
     componentStr = [componentStr stringByAppendingFormat:@"\n-----------view的布局信息------------- \n"];
     componentStr = [componentStr stringByAppendingFormat:@"viewClass : %@ \n",NSStringFromClass([view class])];
+    if ([view ks_debug_UIViewDisplayTime]) {
+        componentStr = [componentStr stringByAppendingFormat:@"渲染时间 : %@ ms \n",[view ks_debug_UIViewDisplayTime]];
+    }
     componentStr = [componentStr stringByAppendingFormat:@"位置宽高 : %@ \n",NSStringFromCGRect(view.frame)];
+    componentStr = [componentStr stringByAppendingFormat:@"背景颜色 : %@ \n",view.backgroundColor];
     componentStr = [componentStr stringByAppendingFormat:@"描述信息 : %@ \n",[view description]];
     /**********************/
     
@@ -162,6 +381,7 @@
     if (view.superview) {
         componentStr = [componentStr stringByAppendingFormat:@"superviewClass : %@ \n",NSStringFromClass([view.superview class])];
         componentStr = [componentStr stringByAppendingFormat:@"superview的位置宽高 : %@ \n",NSStringFromCGRect(view.superview.frame)];
+        componentStr = [componentStr stringByAppendingFormat:@"superview的背景颜色 : %@ \n",view.superview.backgroundColor];
         componentStr = [componentStr stringByAppendingFormat:@"superview的描述信息 : %@ \n",[view.superview description]];
     }
     /**********************/
@@ -180,6 +400,7 @@
             componentStr = [componentStr stringByAppendingFormat:@"%lu、 \n", index];
             componentStr = [componentStr stringByAppendingFormat:@"subViewClass : %@ \n",NSStringFromClass([subView class])];
             componentStr = [componentStr stringByAppendingFormat:@"subView的位置宽高 : %@ \n",NSStringFromCGRect(subView.frame)];
+            componentStr = [componentStr stringByAppendingFormat:@"subView的背景颜色 : %@ \n",subView.backgroundColor];
             componentStr = [componentStr stringByAppendingFormat:@"subView的描述信息 : %@ \n",[subView description]];
         }
     }
@@ -235,10 +456,20 @@
         rect.origin.y = CGRectGetMaxY(self.infoLabel.frame) + 10;
         [self.selectViewTranslateToImageView setFrame:rect];
         
+        // 修正scriptDebutTextView脚本输入框位置
+        rect = self.scriptDebutTextView.frame;
+        rect.origin.y = CGRectGetMaxY(self.selectViewTranslateToImageView.frame) + 10;
+        [self.scriptDebutTextView setFrame:rect];
+        
+        // 修正scriptOperationShowTextView脚本响应框位置
+        rect = self.scriptOperationShowTextView.frame;
+        rect.origin.y = CGRectGetMaxY(self.scriptDebutTextView.frame) + 10;
+        [self.scriptOperationShowTextView setFrame:rect];
+        
         // 修正文本textView位置
         rect = self.debugTextViewFrame;
-        rect.origin.y = CGRectGetMaxY(self.selectViewTranslateToImageView.frame) + 10;
-        rect.size.height = [self.debugTextView.text boundingRectWithSize:CGSizeMake(CGRectGetWidth(rect), CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.debugTextView.font,NSFontAttributeName, nil] context:nil].size.height + 5 * self.debugTextView.font.pointSize;
+        rect.origin.y = CGRectGetMaxY(self.scriptOperationShowTextView.frame) + 10;
+        rect.size.height = [self.debugTextView.text boundingRectWithSize:CGSizeMake(CGRectGetWidth(rect), CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.debugTextView.font,NSFontAttributeName, nil] context:nil].size.height + 5 * self.debugTextView.font.pointSize + 10;
         if (rect.size.height > 8000) {
             rect.size.height = 8000;
         }
@@ -262,6 +493,56 @@
     }];
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -   wax script method
+
+-(id)getWaxScriptWithView:(UIView*)selectView{
+    return nil;
+}
+
+-(NSString*)getWaxScriptWithScriptText:(NSString*)scriptText{
+    if (scriptText == nil || scriptText.length == 0) {
+        return nil;
+    }
+    NSMutableString* waxScript = [NSMutableString string];
+    [waxScript appendString:@"waxClass{\"KSDebugLayoutInfoView\"}\n"];
+    [waxScript appendString:@"function getWaxScriptWithView(self, sv)\n"];
+    [waxScript appendString:[NSString stringWithFormat:@"%@\n",scriptText]];
+    [waxScript appendString:@"end"];
+    
+    return waxScript;
+}
+
+-(void)runLuaStringWithScriptText:(NSString*)scriptText withSelectView:(UIView*)selectView{
+    if (selectView == nil) {
+        return;
+    }
+    if (scriptText == nil || scriptText.length == 0) {
+        return;
+    }
+    NSString* waxScript = [self getWaxScriptWithScriptText:scriptText];
+    if (waxScript) {
+        @try {
+            NSInteger i = wax_runLuaString([waxScript UTF8String]);
+            if (i != 0) {
+                [self.scriptOperationShowTextView setText:[NSString stringWithFormat:@"error=%s", lua_tostring(wax_currentLuaState(), -1) ]];
+                NSLog(@"error=%s",lua_tostring(wax_currentLuaState(), -1));
+            }else{
+                [self.scriptOperationShowTextView setText:@"执行成功"];
+            }
+        }
+        @catch (NSException *exception) {
+            NSLog(@"----> crash because of %@", exception.reason);
+        }
+    }
+    id scriptValue = [self getWaxScriptWithView:selectView];
+    if (scriptValue) {
+        [self.scriptOperationShowTextView setText:[scriptValue description]];
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -   override method
 -(void)startDebug{
     [super startDebug];
     UIView *view = [[[[UIApplication sharedApplication] keyWindow] rootViewController] view];
@@ -321,6 +602,24 @@
         self.hidden = YES;
         self.userInteractionEnabled = NO;
         [self removeFromSuperview];
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -   actionSheet delegate
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        return;
+    }
+    if (self.viewArray != nil
+        && buttonIndex >= 1
+        && buttonIndex - 1 < [self.viewArray count]) {
+        UIView* view = [self.viewArray objectAtIndex:buttonIndex - 1];
+        NSString* componentStr = [self getComponentViewInfoWithView:view];
+        self.debugTextView.text = componentStr;
+        [self showComponentViewWithAnimation:view];
+        [self showCurrentView:YES];
     }
 }
 

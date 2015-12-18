@@ -47,15 +47,20 @@
 - (UIImage *)screenshotOneLayer
 {
 	NSMutableArray * temp = [NSMutableArray nonRetainingArray];
-	
+    NSMutableArray * tempAlpha = [NSMutableArray nonRetainingArray];
+
 	for ( UIView * subview in self.subviews )
 	{
 		if ( NO == subview.hidden )
 		{
 			subview.hidden = YES;
-            subview.alpha = 0;
 			[temp addObject:subview];
 		}
+        
+        if (subview.alpha != 0) {
+            subview.alpha = 0;
+            [tempAlpha addObject:subview];
+        }
 	}
     
     int red = arc4random() % (255 - 128) + 128;
@@ -73,8 +78,12 @@
 	for ( UIView * subview in temp )
 	{
 		subview.hidden = NO;
-        subview.alpha = 1;
 	}
+    
+    for ( UIView * subview in tempAlpha )
+    {
+        subview.alpha = 1;
+    }
 	
 	return image;
 }

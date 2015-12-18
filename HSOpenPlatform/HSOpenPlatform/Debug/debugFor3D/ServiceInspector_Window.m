@@ -328,7 +328,7 @@
 	if ( depth >= MAX_DEPTH )
 		return;
 	
-	if ( view.hidden )
+	if ( view.hidden || view.alpha <= 0.0001)
 		return;
 
 	if ( 0 == view.frame.size.width || 0 == view.frame.size.height )

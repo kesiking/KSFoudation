@@ -23,8 +23,6 @@
         frame.size = kSize;
     }
     self = [super initWithFrame:frame];
-    self.layer.cornerRadius = 5;
-    self.clipsToBounds = YES;
     self.textAlignment = NSTextAlignmentCenter;
     self.userInteractionEnabled = NO;
     //self.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.700];
@@ -35,7 +33,7 @@
     self.layer.cornerRadius = 5;
     self.layer.borderWidth = 1;
     [self setFont:[UIFont systemFontOfSize:15]];
-    //self.text = @"帧率显示中...";
+    self.text = @"Loading";
      _link = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick:)];
     [_link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     return self;

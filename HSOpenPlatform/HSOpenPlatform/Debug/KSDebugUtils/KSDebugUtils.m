@@ -7,6 +7,7 @@
 //
 
 #import "KSDebugUtils.h"
+#import <objc/objc.h>
 #import <objc/runtime.h>
 #import <objc/message.h>
 
@@ -144,6 +145,26 @@ void ks_debug_swizzleSelector(Class class, SEL originalSelector, SEL swizzledSel
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -   获取 所有的父view列表，包括其自身
++(NSArray*)getAllSuperViewArrayWithView:(UIView*)view{
+    NSMutableArray* array = [NSMutableArray array];
+    if (view == nil) {
+        return array;
+    }
+    if (![view isKindOfClass:NSClassFromString(@"KSDebugPropertyButton")]) {
+        [array addObject:view];
+    }
+    for (UIView* next = view; next; next = next.superview) {
+        if ([next isKindOfClass:[UIView class]]
+            && ![next isKindOfClass:NSClassFromString(@"KSDebugPropertyButton")]
+            && ![next isKindOfClass:[UIWindow class]]) {
+            [array addObject:next];
+        }
+    }
+    return array;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -   获取 最深叶子节点
 + (UIView*)getLeafSubView{
     return [self getLeafSubViewFromView:[[[[UIApplication sharedApplication] keyWindow] rootViewController] view]];
@@ -240,23 +261,44 @@ void ks_debug_swizzleSelector(Class class, SEL originalSelector, SEL swizzledSel
     for(int i = 0; i < numIvars; i++) {
         Ivar thisIvar = ivars[i];
         const char *type = ivar_getTypeEncoding(thisIvar);
+        /*
+         * object_getIvar获取时如果不是对象类型会crash
+         */
+        /*
         NSString *stringType =  [NSString stringWithCString:type encoding:NSUTF8StringEncoding];
+         
         if (![stringType hasPrefix:@"@"]) {
             continue;
         }
+         
+        value = object_getIvar(instanse, thisIvar);
+         */
+
         const char *charString = ivar_getName(thisIvar);
         
         if (charString != NULL) {
             key = [NSString stringWithUTF8String:ivar_getName(thisIvar)];
         }
-        
-        value = object_getIvar(instanse, thisIvar);
+        if (key) {
+            value = [instanse valueForKey:key];
+        }
         
         if(key && value){
             [propertyDict setObject:value forKey:key];
         }
     }
     free(ivars);
+    
+    if ([instanse respondsToSelector:NSSelectorFromString(@"sd_imageURL")]) {
+        id instanseImageUrl = [instanse performSelector:NSSelectorFromString(@"sd_imageURL") withObject:nil];
+        if (instanseImageUrl && [instanseImageUrl isKindOfClass:[NSString class]]) {
+            [propertyDict setObject:instanseImageUrl forKey:@"sd_imageURL"];
+        }else if (instanseImageUrl && [instanseImageUrl isKindOfClass:[NSURL class]]){
+            [propertyDict setObject:((NSURL*)instanseImageUrl).absoluteString forKey:@"sd_imageURL"];
+        }else if (instanseImageUrl){
+            [propertyDict setObject:instanseImageUrl forKey:@"sd_imageURL"];
+        }
+    }
     
     return propertyDict;
 }

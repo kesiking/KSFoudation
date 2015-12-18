@@ -20,12 +20,10 @@
 
 @implementation KSDebugMemoryView
 
-#ifdef KSDebugToolsEnable
 +(void)load{
     NSMutableArray* array = [KSDebugOperationView getDebugViews];
     [array addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"内存信息",@"title",NSStringFromClass([self class]),@"className", nil]];
 }
-#endif
 
 -(void)setupView{
     [super setupView];

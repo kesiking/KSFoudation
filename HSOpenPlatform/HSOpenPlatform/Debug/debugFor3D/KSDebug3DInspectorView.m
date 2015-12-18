@@ -21,12 +21,10 @@
 
 @implementation KSDebug3DInspectorView
 
-#ifdef KSDebugToolsEnable
 +(void)load{
     NSMutableArray* array = [KSDebugOperationView getDebugViews];
     [array addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"3D渲染效果",@"title",NSStringFromClass([self class]),@"className", nil]];
 }
-#endif
 
 -(void)setupView{
     [super setupView];
