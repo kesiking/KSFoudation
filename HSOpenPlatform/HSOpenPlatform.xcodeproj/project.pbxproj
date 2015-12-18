@@ -131,6 +131,23 @@
 		39DB0EC01BE6F55700719253 /* icon_Family members@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DB0EBC1BE6F55700719253 /* icon_Family members@2x.png */; };
 		39DB0EC11BE6F55700719253 /* icon_Family members@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DB0EBD1BE6F55700719253 /* icon_Family members@3x.png */; };
 		5F034E211BF2CF9F003A9741 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F034E201BF2CF9F003A9741 /* JavaScriptCore.framework */; };
+		5F039CCE1C24020700100B5E /* PNBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CAD1C24020700100B5E /* PNBar.m */; };
+		5F039CCF1C24020700100B5E /* PNBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CAF1C24020700100B5E /* PNBarChart.m */; };
+		5F039CD01C24020700100B5E /* PNChartLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CB31C24020700100B5E /* PNChartLabel.m */; };
+		5F039CD11C24020700100B5E /* PNCircleChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CB51C24020700100B5E /* PNCircleChart.m */; };
+		5F039CD21C24020700100B5E /* PNColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CB71C24020700100B5E /* PNColor.m */; };
+		5F039CD31C24020700100B5E /* PNGenericChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CB91C24020700100B5E /* PNGenericChart.m */; };
+		5F039CD41C24020700100B5E /* PNLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CBB1C24020700100B5E /* PNLineChart.m */; };
+		5F039CD51C24020700100B5E /* PNLineChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CBD1C24020700100B5E /* PNLineChartData.m */; };
+		5F039CD61C24020700100B5E /* PNLineChartDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CBF1C24020700100B5E /* PNLineChartDataItem.m */; };
+		5F039CD71C24020700100B5E /* PNPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CC11C24020700100B5E /* PNPieChart.m */; };
+		5F039CD81C24020700100B5E /* PNPieChartDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CC31C24020700100B5E /* PNPieChartDataItem.m */; };
+		5F039CD91C24020700100B5E /* PNRadarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CC51C24020700100B5E /* PNRadarChart.m */; };
+		5F039CDA1C24020700100B5E /* PNRadarChartDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CC71C24020700100B5E /* PNRadarChartDataItem.m */; };
+		5F039CDB1C24020700100B5E /* PNScatterChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CC91C24020700100B5E /* PNScatterChart.m */; };
+		5F039CDC1C24020700100B5E /* PNScatterChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CCB1C24020700100B5E /* PNScatterChartData.m */; };
+		5F039CDD1C24020700100B5E /* PNScatterChartDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CCD1C24020700100B5E /* PNScatterChartDataItem.m */; };
+		5F039CF11C2403DF00100B5E /* UICountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F039CF01C2403DF00100B5E /* UICountingLabel.m */; };
 		5F0910A91C1695E6009962BB /* YYCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0910A21C1695E6009962BB /* YYCache.m */; };
 		5F0910AA1C1695E6009962BB /* YYDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0910A41C1695E6009962BB /* YYDiskCache.m */; };
 		5F0910AB1C1695E6009962BB /* YYKVStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0910A61C1695E6009962BB /* YYKVStorage.m */; };
@@ -438,7 +455,6 @@
 		5F66C4A81BBA5CC500CC21F7 /* DTTimePeriodCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F66C1FC1BBA5CC300CC21F7 /* DTTimePeriodCollection.m */; };
 		5F66C4A91BBA5CC500CC21F7 /* DTTimePeriodGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F66C1FE1BBA5CC300CC21F7 /* DTTimePeriodGroup.m */; };
 		5F66C4AA1BBA5CC500CC21F7 /* NSDate+DateTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F66C2001BBA5CC300CC21F7 /* NSDate+DateTools.m */; };
-		5F66C4AB1BBA5CC500CC21F7 /* EIM_XMPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F66C2011BBA5CC300CC21F7 /* EIM_XMPP.framework */; };
 		5F66C4AC1BBA5CC500CC21F7 /* FMDatabase+InMemoryOnDiskIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F66C2051BBA5CC300CC21F7 /* FMDatabase+InMemoryOnDiskIO.m */; };
 		5F66C4AD1BBA5CC500CC21F7 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F66C2081BBA5CC300CC21F7 /* FMDatabase.m */; };
 		5F66C4AE1BBA5CC500CC21F7 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F66C20A1BBA5CC300CC21F7 /* FMDatabaseAdditions.m */; };
@@ -655,7 +671,6 @@
 		5F66C5861BBA5CC600CC21F7 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F66C3EB1BBA5CC500CC21F7 /* libopencore-amrnb.a */; };
 		5F66C5871BBA5CC600CC21F7 /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F66C3EC1BBA5CC500CC21F7 /* libopencore-amrwb.a */; };
 		5F66C5881BBA5CC600CC21F7 /* VoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F66C3F41BBA5CC500CC21F7 /* VoiceConverter.mm */; };
-		5F66C58B1BBA5D4000CC21F7 /* EIM_XMPP.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5F66C2011BBA5CC300CC21F7 /* EIM_XMPP.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5F66C58E1BBA5D5900CC21F7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F66C58D1BBA5D5900CC21F7 /* libsqlite3.dylib */; };
 		5F66C5901BBA5D6A00CC21F7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F66C58F1BBA5D6A00CC21F7 /* libz.dylib */; };
 		5F66C5921BBA5D8700CC21F7 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F66C5911BBA5D8700CC21F7 /* libstdc++.6.0.9.dylib */; };
@@ -1024,7 +1039,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5F66C58B1BBA5D4000CC21F7 /* EIM_XMPP.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1199,6 +1213,42 @@
 		39DB0EBC1BE6F55700719253 /* icon_Family members@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Family members@2x.png"; sourceTree = "<group>"; };
 		39DB0EBD1BE6F55700719253 /* icon_Family members@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Family members@3x.png"; sourceTree = "<group>"; };
 		5F034E201BF2CF9F003A9741 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		5F039CAC1C24020700100B5E /* PNBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNBar.h; sourceTree = "<group>"; };
+		5F039CAD1C24020700100B5E /* PNBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNBar.m; sourceTree = "<group>"; };
+		5F039CAE1C24020700100B5E /* PNBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNBarChart.h; sourceTree = "<group>"; };
+		5F039CAF1C24020700100B5E /* PNBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNBarChart.m; sourceTree = "<group>"; };
+		5F039CB01C24020700100B5E /* PNChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNChart.h; sourceTree = "<group>"; };
+		5F039CB11C24020700100B5E /* PNChartDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNChartDelegate.h; sourceTree = "<group>"; };
+		5F039CB21C24020700100B5E /* PNChartLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNChartLabel.h; sourceTree = "<group>"; };
+		5F039CB31C24020700100B5E /* PNChartLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNChartLabel.m; sourceTree = "<group>"; };
+		5F039CB41C24020700100B5E /* PNCircleChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNCircleChart.h; sourceTree = "<group>"; };
+		5F039CB51C24020700100B5E /* PNCircleChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNCircleChart.m; sourceTree = "<group>"; };
+		5F039CB61C24020700100B5E /* PNColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNColor.h; sourceTree = "<group>"; };
+		5F039CB71C24020700100B5E /* PNColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNColor.m; sourceTree = "<group>"; };
+		5F039CB81C24020700100B5E /* PNGenericChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNGenericChart.h; sourceTree = "<group>"; };
+		5F039CB91C24020700100B5E /* PNGenericChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNGenericChart.m; sourceTree = "<group>"; };
+		5F039CBA1C24020700100B5E /* PNLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNLineChart.h; sourceTree = "<group>"; };
+		5F039CBB1C24020700100B5E /* PNLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNLineChart.m; sourceTree = "<group>"; };
+		5F039CBC1C24020700100B5E /* PNLineChartData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNLineChartData.h; sourceTree = "<group>"; };
+		5F039CBD1C24020700100B5E /* PNLineChartData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNLineChartData.m; sourceTree = "<group>"; };
+		5F039CBE1C24020700100B5E /* PNLineChartDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNLineChartDataItem.h; sourceTree = "<group>"; };
+		5F039CBF1C24020700100B5E /* PNLineChartDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNLineChartDataItem.m; sourceTree = "<group>"; };
+		5F039CC01C24020700100B5E /* PNPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPieChart.h; sourceTree = "<group>"; };
+		5F039CC11C24020700100B5E /* PNPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPieChart.m; sourceTree = "<group>"; };
+		5F039CC21C24020700100B5E /* PNPieChartDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPieChartDataItem.h; sourceTree = "<group>"; };
+		5F039CC31C24020700100B5E /* PNPieChartDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPieChartDataItem.m; sourceTree = "<group>"; };
+		5F039CC41C24020700100B5E /* PNRadarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNRadarChart.h; sourceTree = "<group>"; };
+		5F039CC51C24020700100B5E /* PNRadarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNRadarChart.m; sourceTree = "<group>"; };
+		5F039CC61C24020700100B5E /* PNRadarChartDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNRadarChartDataItem.h; sourceTree = "<group>"; };
+		5F039CC71C24020700100B5E /* PNRadarChartDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNRadarChartDataItem.m; sourceTree = "<group>"; };
+		5F039CC81C24020700100B5E /* PNScatterChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNScatterChart.h; sourceTree = "<group>"; };
+		5F039CC91C24020700100B5E /* PNScatterChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNScatterChart.m; sourceTree = "<group>"; };
+		5F039CCA1C24020700100B5E /* PNScatterChartData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNScatterChartData.h; sourceTree = "<group>"; };
+		5F039CCB1C24020700100B5E /* PNScatterChartData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNScatterChartData.m; sourceTree = "<group>"; };
+		5F039CCC1C24020700100B5E /* PNScatterChartDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNScatterChartDataItem.h; sourceTree = "<group>"; };
+		5F039CCD1C24020700100B5E /* PNScatterChartDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNScatterChartDataItem.m; sourceTree = "<group>"; };
+		5F039CEF1C2403DF00100B5E /* UICountingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICountingLabel.h; sourceTree = "<group>"; };
+		5F039CF01C2403DF00100B5E /* UICountingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICountingLabel.m; sourceTree = "<group>"; };
 		5F0910A11C1695E6009962BB /* YYCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYCache.h; sourceTree = "<group>"; };
 		5F0910A21C1695E6009962BB /* YYCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYCache.m; sourceTree = "<group>"; };
 		5F0910A31C1695E6009962BB /* YYDiskCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYDiskCache.h; sourceTree = "<group>"; };
@@ -1754,7 +1804,6 @@
 		5F66C1FE1BBA5CC300CC21F7 /* DTTimePeriodGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTimePeriodGroup.m; sourceTree = "<group>"; };
 		5F66C1FF1BBA5CC300CC21F7 /* NSDate+DateTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateTools.h"; sourceTree = "<group>"; };
 		5F66C2001BBA5CC300CC21F7 /* NSDate+DateTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateTools.m"; sourceTree = "<group>"; };
-		5F66C2011BBA5CC300CC21F7 /* EIM_XMPP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = EIM_XMPP.framework; sourceTree = "<group>"; };
 		5F66C2041BBA5CC300CC21F7 /* FMDatabase+InMemoryOnDiskIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMDatabase+InMemoryOnDiskIO.h"; sourceTree = "<group>"; };
 		5F66C2051BBA5CC300CC21F7 /* FMDatabase+InMemoryOnDiskIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMDatabase+InMemoryOnDiskIO.m"; sourceTree = "<group>"; };
 		5F66C2071BBA5CC300CC21F7 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
@@ -2576,7 +2625,6 @@
 				5F66C5861BBA5CC600CC21F7 /* libopencore-amrnb.a in Frameworks */,
 				5F66C5421BBA5CC600CC21F7 /* libMWQREncode.a in Frameworks */,
 				5F66C5871BBA5CC600CC21F7 /* libopencore-amrwb.a in Frameworks */,
-				5F66C4AB1BBA5CC500CC21F7 /* EIM_XMPP.framework in Frameworks */,
 				5F66C57E1BBA5CC600CC21F7 /* libSocialSina.a in Frameworks */,
 				5F66C5821BBA5CC600CC21F7 /* libSocialWechat.a in Frameworks */,
 			);
@@ -2864,6 +2912,57 @@
 				39D96BA51BD4D4240028E7DB /* HSOtherAppListService.m */,
 			);
 			path = HSApplicationService;
+			sourceTree = "<group>";
+		};
+		5F039CAB1C24020700100B5E /* PNChart */ = {
+			isa = PBXGroup;
+			children = (
+				5F039CAC1C24020700100B5E /* PNBar.h */,
+				5F039CAD1C24020700100B5E /* PNBar.m */,
+				5F039CAE1C24020700100B5E /* PNBarChart.h */,
+				5F039CAF1C24020700100B5E /* PNBarChart.m */,
+				5F039CB01C24020700100B5E /* PNChart.h */,
+				5F039CB11C24020700100B5E /* PNChartDelegate.h */,
+				5F039CB21C24020700100B5E /* PNChartLabel.h */,
+				5F039CB31C24020700100B5E /* PNChartLabel.m */,
+				5F039CB41C24020700100B5E /* PNCircleChart.h */,
+				5F039CB51C24020700100B5E /* PNCircleChart.m */,
+				5F039CB61C24020700100B5E /* PNColor.h */,
+				5F039CB71C24020700100B5E /* PNColor.m */,
+				5F039CB81C24020700100B5E /* PNGenericChart.h */,
+				5F039CB91C24020700100B5E /* PNGenericChart.m */,
+				5F039CBA1C24020700100B5E /* PNLineChart.h */,
+				5F039CBB1C24020700100B5E /* PNLineChart.m */,
+				5F039CBC1C24020700100B5E /* PNLineChartData.h */,
+				5F039CBD1C24020700100B5E /* PNLineChartData.m */,
+				5F039CBE1C24020700100B5E /* PNLineChartDataItem.h */,
+				5F039CBF1C24020700100B5E /* PNLineChartDataItem.m */,
+				5F039CC01C24020700100B5E /* PNPieChart.h */,
+				5F039CC11C24020700100B5E /* PNPieChart.m */,
+				5F039CC21C24020700100B5E /* PNPieChartDataItem.h */,
+				5F039CC31C24020700100B5E /* PNPieChartDataItem.m */,
+				5F039CC41C24020700100B5E /* PNRadarChart.h */,
+				5F039CC51C24020700100B5E /* PNRadarChart.m */,
+				5F039CC61C24020700100B5E /* PNRadarChartDataItem.h */,
+				5F039CC71C24020700100B5E /* PNRadarChartDataItem.m */,
+				5F039CC81C24020700100B5E /* PNScatterChart.h */,
+				5F039CC91C24020700100B5E /* PNScatterChart.m */,
+				5F039CCA1C24020700100B5E /* PNScatterChartData.h */,
+				5F039CCB1C24020700100B5E /* PNScatterChartData.m */,
+				5F039CCC1C24020700100B5E /* PNScatterChartDataItem.h */,
+				5F039CCD1C24020700100B5E /* PNScatterChartDataItem.m */,
+				5F039CEE1C2403DF00100B5E /* UICountingLabel */,
+			);
+			path = PNChart;
+			sourceTree = "<group>";
+		};
+		5F039CEE1C2403DF00100B5E /* UICountingLabel */ = {
+			isa = PBXGroup;
+			children = (
+				5F039CEF1C2403DF00100B5E /* UICountingLabel.h */,
+				5F039CF01C2403DF00100B5E /* UICountingLabel.m */,
+			);
+			path = UICountingLabel;
 			sourceTree = "<group>";
 		};
 		5F09109F1C1695E6009962BB /* YYKit */ = {
@@ -4471,6 +4570,7 @@
 		5F66C1941BBA5CC300CC21F7 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				5F039CAB1C24020700100B5E /* PNChart */,
 				5F09109F1C1695E6009962BB /* YYKit */,
 				5F360A5D1C0ED97E005F483A /* MQTTKit */,
 				5F2CD9BA1BFF21BA007D03CF /* ReactNative */,
@@ -4484,7 +4584,6 @@
 				5F66C1D21BBA5CC300CC21F7 /* BEMSimpleLineGraph */,
 				5F66C1DD1BBA5CC300CC21F7 /* Category */,
 				5F66C1F11BBA5CC300CC21F7 /* DateTools */,
-				5F66C2011BBA5CC300CC21F7 /* EIM_XMPP.framework */,
 				5F66C2021BBA5CC300CC21F7 /* FMDB */,
 				5F66C2111BBA5CC300CC21F7 /* FMDBHelper */,
 				5F66C21C1BBA5CC300CC21F7 /* GroupedTableView */,
@@ -7136,6 +7235,7 @@
 				39AB6F391BE30830007B88BA /* HSMyInfoHeaderView.m in Sources */,
 				5F1F1BDF1C1E606900425E21 /* KSDebugRequestListToolBar.m in Sources */,
 				5F1A1B271C0DA11D00B72CFF /* ServiceInspector_Window.m in Sources */,
+				5F039CD11C24020700100B5E /* PNCircleChart.m in Sources */,
 				5F66C4031BBA5CC500CC21F7 /* DetailHUDActivityView.m in Sources */,
 				5F66C4281BBA5CC500CC21F7 /* KSToastView.m in Sources */,
 				5FCF28EA1BF41EC400432059 /* HSBusinessUserListView.m in Sources */,
@@ -7148,6 +7248,7 @@
 				5F66C4061BBA5CC500CC21F7 /* TBDetailSimplePhotoView.m in Sources */,
 				5FFBD0C21BF59D1900A252C8 /* EHPopMenuModel.m in Sources */,
 				398DD6F81BF30CEB0038A963 /* HSBasicCollectionViewCell.m in Sources */,
+				5F039CD41C24020700100B5E /* PNLineChart.m in Sources */,
 				5FFDE8121BC7B00B0087B9E0 /* NSString+StringSize.m in Sources */,
 				5F66C5011BBA5CC500CC21F7 /* XHEmotionCollectionViewFlowLayout.m in Sources */,
 				5F66C5531BBA5CC600CC21F7 /* MKAnnotationView+WebCache.m in Sources */,
@@ -7254,6 +7355,7 @@
 				5F66C4BB1BBA5CC500CC21F7 /* MASConstraint.m in Sources */,
 				5FBEDB321BF490A500C22188 /* HSBusinessUserAccountInfoModel.m in Sources */,
 				5F42D46B1BF07BC6001E7930 /* UIImageView+KSWebCache.m in Sources */,
+				5F039CD81C24020700100B5E /* PNPieChartDataItem.m in Sources */,
 				5F0910AA1C1695E6009962BB /* YYDiskCache.m in Sources */,
 				5F0BCB6C1BBA6FBE00CFE4A4 /* EHLoadingToast.m in Sources */,
 				5F66C4E91BBA5CC500CC21F7 /* SECompatibility.m in Sources */,
@@ -7286,6 +7388,7 @@
 				5F66C4041BBA5CC500CC21F7 /* TBDetailBigPhotoBrowerController.m in Sources */,
 				5F66C4EB1BBA5CC500CC21F7 /* SELineLayout.m in Sources */,
 				5F66C4FC1BBA5CC500CC21F7 /* XHMessageTableViewCell.m in Sources */,
+				5F039CCF1C24020700100B5E /* PNBarChart.m in Sources */,
 				5F66C4091BBA5CC500CC21F7 /* KSCollectionViewCell.m in Sources */,
 				5F66C3FD1BBA5CC500CC21F7 /* UIColor+WeAppColor.m in Sources */,
 				5F66C4341BBA5CC500CC21F7 /* KSTabbarURLResolver.m in Sources */,
@@ -7304,6 +7407,7 @@
 				3566DEBF1BF08DEF00F327C5 /* HSNationalAfterSaleCell.m in Sources */,
 				5F66C5361BBA5CC600CC21F7 /* MJRefreshAutoStateFooter.m in Sources */,
 				5F66C5301BBA5CC600CC21F7 /* MJRefreshBackFooter.m in Sources */,
+				5F039CD71C24020700100B5E /* PNPieChart.m in Sources */,
 				5FE6022B1BF19A2A00DA34EF /* KSASCollectionViewCellNode.m in Sources */,
 				5F66C4CE1BBA5CC500CC21F7 /* XHLocationHelper.m in Sources */,
 				354D789E1BD4956900F6273B /* HSBusinessHallMapViewController.m in Sources */,
@@ -7319,6 +7423,7 @@
 				5F66C5601BBA5CC600CC21F7 /* UIImageView+HighlightedWebCache.m in Sources */,
 				39D96BA81BD4D4240028E7DB /* HSOtherAppListService.m in Sources */,
 				39D96B9E1BD4D3680028E7DB /* HSApplicationModel.m in Sources */,
+				5F039CD01C24020700100B5E /* PNChartLabel.m in Sources */,
 				5FDF1A361BD8BE5C0059B3F2 /* HSSubscribedBussinessBasicService.m in Sources */,
 				5FFDE7FD1BC7AD830087B9E0 /* HSUserPicUrl.m in Sources */,
 				5FDF1A141BD630E40059B3F2 /* UIButton+KSTouchEvent.m in Sources */,
@@ -7330,6 +7435,7 @@
 				5F66C4221BBA5CC500CC21F7 /* TBDetailIconFont.m in Sources */,
 				5F0BCB591BBA6EAC00CFE4A4 /* DDMultiFormatter.m in Sources */,
 				5F66C4AF1BBA5CC500CC21F7 /* FMDatabasePool.m in Sources */,
+				5F039CCE1C24020700100B5E /* PNBar.m in Sources */,
 				5F7B87551C0DC13E00D00CB3 /* KSServiceDebug_CPUModel.m in Sources */,
 				3566DED01BF422CB00F327C5 /* HSAfterSaleForAppViewController.m in Sources */,
 				5F66C5561BBA5CC600CC21F7 /* SDWebImageCompat.m in Sources */,
@@ -7354,6 +7460,7 @@
 				39CCEA261BEB026F00A9B2FB /* HSCommonAppListCollectionView.m in Sources */,
 				5F1A1B381C0DA11D00B72CFF /* KSDebugManager.m in Sources */,
 				5F66C5021BBA5CC500CC21F7 /* XHEmotionManagerView.m in Sources */,
+				5F039CD31C24020700100B5E /* PNGenericChart.m in Sources */,
 				5F66C49A1BBA5CC500CC21F7 /* BEMSimpleLineGraphView.m in Sources */,
 				5F1A1B281C0DA11D00B72CFF /* UIView+Screenshot.m in Sources */,
 				5FFDE85B1BCE44A20087B9E0 /* HSActivityInfoDetailView.m in Sources */,
@@ -7378,6 +7485,7 @@
 				5FDF1A1F1BD89FD20059B3F2 /* HSSubscribedBussinessViewController.m in Sources */,
 				5FFDE7B41BC78C200087B9E0 /* WeAppTSimpleSelectorScrollView.m in Sources */,
 				5FFDE7E51BC7AA500087B9E0 /* EHUserPicFetcherView.m in Sources */,
+				5F039CF11C2403DF00100B5E /* UICountingLabel.m in Sources */,
 				5F66C4D11BBA5CC500CC21F7 /* XHVoiceCommonHelper.m in Sources */,
 				5F66C5341BBA5CC600CC21F7 /* MJRefreshAutoGifFooter.m in Sources */,
 				5F66C4FF1BBA5CC500CC21F7 /* XHVoiceRecordHUD.m in Sources */,
@@ -7472,6 +7580,7 @@
 				39D96BA71BD4D4240028E7DB /* HSFamilyAppListService.m in Sources */,
 				5F66C54F1BBA5CC600CC21F7 /* TBNavigationParams.m in Sources */,
 				5F66C4801BBA5CC500CC21F7 /* AFURLRequestSerialization.m in Sources */,
+				5F039CD61C24020700100B5E /* PNLineChartDataItem.m in Sources */,
 				5F66C4D71BBA5CC500CC21F7 /* XHMessageTableViewController.m in Sources */,
 				5FFDE7E61BC7AA500087B9E0 /* EHImageMagicMoveInverseTransition.m in Sources */,
 				5F66C4FE1BBA5CC500CC21F7 /* XHMessageTextView.m in Sources */,
@@ -7495,6 +7604,7 @@
 				5F66C4EE1BBA5CC500CC21F7 /* SETextAttachment.m in Sources */,
 				5F66C4DE1BBA5CC500CC21F7 /* XHMessageVideoConverPhotoFactory.m in Sources */,
 				5F66C4481BBA5CC500CC21F7 /* KSLoginViewController.m in Sources */,
+				5F039CDC1C24020700100B5E /* PNScatterChartData.m in Sources */,
 				5FFDE7C71BC7A9160087B9E0 /* EHSwitch.m in Sources */,
 				35C47CCB1BCE4E13004164F5 /* HSHomeBusinessView.m in Sources */,
 				5F66C4BD1BBA5CC500CC21F7 /* MASLayoutConstraint.m in Sources */,
@@ -7502,6 +7612,7 @@
 				5F66C47E1BBA5CC500CC21F7 /* AFSecurityPolicy.m in Sources */,
 				5F66C4211BBA5CC500CC21F7 /* TBTradeSKUPropSelectControl.m in Sources */,
 				5F1F1BE21C1E606900425E21 /* KSDebugRequestModel.m in Sources */,
+				5F039CD51C24020700100B5E /* PNLineChartData.m in Sources */,
 				5F66C4F61BBA5CC500CC21F7 /* SETextSelectionView.m in Sources */,
 				5F66C4311BBA5CC500CC21F7 /* HSMyInfoTabViewController.m in Sources */,
 				5FDF19FB1BD60D8B0059B3F2 /* HSExemptionDescriptionViewController.m in Sources */,
@@ -7539,6 +7650,7 @@
 				35C47CC81BCE4DF7004164F5 /* HSHomeServiceView.m in Sources */,
 				5F66C44C1BBA5CC500CC21F7 /* KSModifyPhoneView.m in Sources */,
 				5F7B877F1C0DC67F00D00CB3 /* KSDebugBasicMenuItemView.m in Sources */,
+				5F039CD21C24020700100B5E /* PNColor.m in Sources */,
 				5F360A6B1C0EE7B8005F483A /* MQTTClientShareInstance.m in Sources */,
 				5F2CDB081C02AF82007D03CF /* KSReactURLResolver.m in Sources */,
 				5F2E22EF1BDA327B00F36DAF /* TTTAttributedLabel.m in Sources */,
@@ -7558,6 +7670,7 @@
 				5F66C4F01BBA5CC500CC21F7 /* SETextGeometry.m in Sources */,
 				5F66C4351BBA5CC500CC21F7 /* KSTabBasicViewController.m in Sources */,
 				5F66C4B01BBA5CC500CC21F7 /* FMDatabaseQueue.m in Sources */,
+				5F039CD91C24020700100B5E /* PNRadarChart.m in Sources */,
 				5F66C5591BBA5CC600CC21F7 /* SDWebImageDownloaderOperation.m in Sources */,
 				5F66C5321BBA5CC600CC21F7 /* MJRefreshFooter.m in Sources */,
 				5FFDE7B21BC78C200087B9E0 /* WeAppButtonWidthAlgorithm.m in Sources */,
@@ -7599,6 +7712,7 @@
 				5F66C4C81BBA5CC500CC21F7 /* UIImage+XHRounded.m in Sources */,
 				5F1F1BDE1C1E606900425E21 /* KSDebugRequestListHeaderView.m in Sources */,
 				5F66C4971BBA5CC500CC21F7 /* BEMCircle.m in Sources */,
+				5F039CDD1C24020700100B5E /* PNScatterChartDataItem.m in Sources */,
 				5F66C4DD1BBA5CC500CC21F7 /* XHMessageBubbleFactory.m in Sources */,
 				5F66C4DB1BBA5CC500CC21F7 /* XHOperationNetworkKit.m in Sources */,
 				5FDF19F01BD4A9C10059B3F2 /* HSMyMessageInfoViewController.m in Sources */,
@@ -7624,8 +7738,10 @@
 				5F66C4FB1BBA5CC500CC21F7 /* XHMessageTableView.m in Sources */,
 				5F66C4841BBA5CC500CC21F7 /* NSArray+TBJSONModel.m in Sources */,
 				5FFDE7E71BC7AA500087B9E0 /* EHImageMagicMoveTransition.m in Sources */,
+				5F039CDA1C24020700100B5E /* PNRadarChartDataItem.m in Sources */,
 				5F66C4A21BBA5CC500CC21F7 /* UIImage+SplitImageIntoTwoParts.m in Sources */,
 				5F7B87541C0DC13E00D00CB3 /* KSDebugScrollView.m in Sources */,
+				5F039CDB1C24020700100B5E /* PNScatterChart.m in Sources */,
 				5FFDE8231BCB544E0087B9E0 /* HSActivityInfoCell.m in Sources */,
 				5FFBD0C11BF59D1900A252C8 /* EHPopMenuCell.m in Sources */,
 				5F66C4071BBA5CC500CC21F7 /* TBBlurView.m in Sources */,
@@ -7807,7 +7923,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/UMSocial_Sdk_4.2.3/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
-					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/EIM_XMPP.framework",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/MessageDisplayKit",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/AsyncDisplayKit",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/MQTTKit",
@@ -7855,7 +7970,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/UMSocial_Sdk_4.2.3/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
-					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/EIM_XMPP.framework",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/MessageDisplayKit",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/AsyncDisplayKit",
 					"$(PROJECT_DIR)/HSOpenPlatform/ThirdParty/MQTTKit",
