@@ -609,7 +609,6 @@
 		5F66C5401BBA5CC600CC21F7 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F66C33B1BBA5CC400CC21F7 /* UIScrollView+MJRefresh.m */; };
 		5F66C5411BBA5CC600CC21F7 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F66C33D1BBA5CC400CC21F7 /* UIView+MJExtension.m */; };
 		5F66C5421BBA5CC600CC21F7 /* libMWQREncode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F66C33F1BBA5CC400CC21F7 /* libMWQREncode.a */; };
-		5F66C5451BBA5CC600CC21F7 /* PagedFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F66C34A1BBA5CC400CC21F7 /* PagedFlowView.m */; };
 		5F66C5461BBA5CC600CC21F7 /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F66C34D1BBA5CC400CC21F7 /* RDVTabBar.m */; };
 		5F66C5471BBA5CC600CC21F7 /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F66C34F1BBA5CC400CC21F7 /* RDVTabBarController.m */; };
 		5F66C5481BBA5CC600CC21F7 /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F66C3511BBA5CC400CC21F7 /* RDVTabBarItem.m */; };
@@ -2087,8 +2086,6 @@
 		5F66C33D1BBA5CC400CC21F7 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		5F66C33F1BBA5CC400CC21F7 /* libMWQREncode.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMWQREncode.a; sourceTree = "<group>"; };
 		5F66C3401BBA5CC400CC21F7 /* MWQREncode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWQREncode.h; sourceTree = "<group>"; };
-		5F66C3491BBA5CC400CC21F7 /* PagedFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagedFlowView.h; sourceTree = "<group>"; };
-		5F66C34A1BBA5CC400CC21F7 /* PagedFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PagedFlowView.m; sourceTree = "<group>"; };
 		5F66C34C1BBA5CC400CC21F7 /* RDVTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBar.h; sourceTree = "<group>"; };
 		5F66C34D1BBA5CC400CC21F7 /* RDVTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBar.m; sourceTree = "<group>"; };
 		5F66C34E1BBA5CC400CC21F7 /* RDVTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarController.h; sourceTree = "<group>"; };
@@ -4653,7 +4650,6 @@
 				5F66C2431BBA5CC300CC21F7 /* MessageDisplayKit */,
 				5F66C3111BBA5CC400CC21F7 /* MJRefresh */,
 				5F66C33E1BBA5CC400CC21F7 /* MWQREncode */,
-				5F66C3481BBA5CC400CC21F7 /* PagedFlowView */,
 				5F66C34B1BBA5CC400CC21F7 /* RDVTabBarController */,
 				5F66C3521BBA5CC400CC21F7 /* RMActionController */,
 				5F66C3591BBA5CC400CC21F7 /* Routable */,
@@ -5443,15 +5439,6 @@
 				5F66C3401BBA5CC400CC21F7 /* MWQREncode.h */,
 			);
 			path = MWQREncode;
-			sourceTree = "<group>";
-		};
-		5F66C3481BBA5CC400CC21F7 /* PagedFlowView */ = {
-			isa = PBXGroup;
-			children = (
-				5F66C3491BBA5CC400CC21F7 /* PagedFlowView.h */,
-				5F66C34A1BBA5CC400CC21F7 /* PagedFlowView.m */,
-			);
-			path = PagedFlowView;
 			sourceTree = "<group>";
 		};
 		5F66C34B1BBA5CC400CC21F7 /* RDVTabBarController */ = {
@@ -7313,7 +7300,6 @@
 				5F66C5011BBA5CC500CC21F7 /* XHEmotionCollectionViewFlowLayout.m in Sources */,
 				5F66C5531BBA5CC600CC21F7 /* MKAnnotationView+WebCache.m in Sources */,
 				5FFDE8191BCB4D900087B9E0 /* HSActivityInfoListViewController.m in Sources */,
-				5F66C5451BBA5CC600CC21F7 /* PagedFlowView.m in Sources */,
 				5F66C4951BBA5CC500CC21F7 /* WeAppUtils.m in Sources */,
 				5FFA36A91C056CA600546790 /* KSReactNavigationButton.m in Sources */,
 				5F66C4531BBA5CC500CC21F7 /* KSResetView.m in Sources */,
