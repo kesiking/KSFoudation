@@ -186,7 +186,7 @@
     
     if ([self isRefresh]) {
         //如果是刷新就将老数据清除掉
-        if (self.isForceRecordAllObject && newDataList.count < self.pageSize) {
+        if (self.isForceRecordAllObject && newDataList.count < self.pagination.pageSize) {
             self.isForceRecordAllObject = NO;
             NSRange range = NSMakeRange(0, [newDataList count]);
             [self insertObjects:newDataList atIndexes:[NSIndexSet indexSetWithIndexesInRange:range]];
