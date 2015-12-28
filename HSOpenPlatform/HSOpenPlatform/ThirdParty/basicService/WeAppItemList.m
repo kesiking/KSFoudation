@@ -88,10 +88,21 @@
         || [indexes count] <= 0) {
         return;
     }
-    if ([self.realItemList count] <= [indexes count]) {
+    if ([self.realItemList count] < [indexes count]) {
         return;
     }
-    [self.realItemList removeObjectsAtIndexes:indexes];
+    __block BOOL isArrayIndexOverBoundary = NO;
+    [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        if (idx >= [self.realItemList count]) {
+            *stop = YES;
+            isArrayIndexOverBoundary = YES;
+        }
+    }];
+    if (!isArrayIndexOverBoundary) {
+        [self.realItemList removeObjectsAtIndexes:indexes];
+    }else{
+        NSLog(@"-----> Array Indexs Over Boundary with indexes: %@ and realItemList: %@",indexes, self.realItemList);
+    }
 }
 
 - (NSArray *)sortedArrayUsingComparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0){
