@@ -9,9 +9,13 @@
 #import "KSCollectionViewController.h"
 #import "KSCollectionViewCell.h"
 
-@interface KSCollectionViewController ()
+@interface KSCollectionViewController (){
+    NSIndexPath *lastAccessed;
+}
 
 @property (nonatomic, strong) UICollectionView*    collectionView;
+
+@property (nonatomic, strong) UIPanGestureRecognizer* panGestureRecognizer;
 
 @property (nonatomic, strong) Class                viewCellClass;
 
@@ -79,6 +83,18 @@
         _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
+        
+        WEAKSELF
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (((KSCollectionViewConfigObject*)weakSelf.configObject).allowsPanGestureSelection
+                && weakSelf.collectionView.superview
+                && [weakSelf.collectionView.superview gestureRecognizerShouldBegin:weakSelf.panGestureRecognizer]) {
+                if (weakSelf.panGestureRecognizer.view == nil || weakSelf.panGestureRecognizer.view != weakSelf.collectionView.superview) {
+                    [weakSelf.collectionView.superview removeGestureRecognizer:weakSelf.panGestureRecognizer];
+                    [weakSelf.collectionView.superview addGestureRecognizer:weakSelf.panGestureRecognizer];
+                }
+            }
+        });
         
         [self configPullToRefresh:_collectionView];
         self.canImageRefreshed = YES;
@@ -457,5 +473,65 @@
         }
     }
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark - 横扫选中手势相关
+- (void)handleGesture:(UIPanGestureRecognizer *)gestureRecognizer
+{
+    if (!((KSCollectionViewConfigObject*)self.configObject).isEditModel) {
+        return;
+    }
+    float pointerX = [gestureRecognizer locationInView:self.collectionView].x;
+    float pointerY = [gestureRecognizer locationInView:self.collectionView].y;
+    
+    for (UICollectionViewCell *cell in self.collectionView.visibleCells) {
+        float cellSX = cell.frame.origin.x;
+        float cellEX = cell.frame.origin.x + cell.frame.size.width;
+        float cellSY = cell.frame.origin.y;
+        float cellEY = cell.frame.origin.y + cell.frame.size.height;
+        
+        if (pointerX >= cellSX && pointerX <= cellEX && pointerY >= cellSY && pointerY <= cellEY){
+            NSIndexPath *touchOver = [self.collectionView indexPathForCell:cell];
+            
+            if (lastAccessed != touchOver){
+                if (cell.selected)
+                    [self deselectCellForCollectionView:self.collectionView atIndexPath:touchOver];
+                else
+                    [self selectCellForCollectionView:self.collectionView atIndexPath:touchOver];
+            }
+            
+            lastAccessed = touchOver;
+        }
+    }
+    
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded)
+    {
+        lastAccessed = nil;
+        self.collectionView.scrollEnabled = YES;
+    }
+}
+
+- (void) selectCellForCollectionView:(UICollectionView *)collection atIndexPath:(NSIndexPath *)indexPath
+{
+    [collection selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+    [self collectionView:collection didSelectItemAtIndexPath:indexPath];
+}
+
+- (void) deselectCellForCollectionView:(UICollectionView *)collection atIndexPath:(NSIndexPath *)indexPath
+{
+    [collection deselectItemAtIndexPath:indexPath animated:YES];
+    [self collectionView:collection didDeselectItemAtIndexPath:indexPath];
+}
+
+-(UIPanGestureRecognizer *)panGestureRecognizer{
+    if (_panGestureRecognizer == nil) {
+        _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+        [_panGestureRecognizer setMinimumNumberOfTouches:1];
+        [_panGestureRecognizer setMaximumNumberOfTouches:1];
+    }
+    return _panGestureRecognizer;
+}
+
 
 @end

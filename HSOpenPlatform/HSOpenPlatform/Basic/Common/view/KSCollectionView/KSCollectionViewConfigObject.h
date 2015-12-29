@@ -19,5 +19,6 @@
 @property (nonatomic, assign) BOOL                 autoAdjustFrameSize;
 @property (nonatomic, assign) BOOL                 isEditModel;
 @property (nonatomic, assign) BOOL                 isTableViewCellEditingStyleDelete;
+@property (nonatomic, assign) BOOL                 allowsPanGestureSelection;
 
 @end
