@@ -538,6 +538,34 @@ void ks_swizzleSelector(Class classType, SEL originalSelector, SEL swizzledSelec
     return [self abbreviationWithString:intStr];
 }
 
++(NSNumber*)getNumberWithFloatValue:(double)value withScale:(NSUInteger)scale{
+    return [self getNumberWithFloatValue:value withScale:scale scaleMinus:YES];
+}
+
++(NSNumber*)getNumberWithFloatValue:(double)value withScale:(NSUInteger)scale scaleMinus:(BOOL)isScaleMinus{
+    // 获取位数
+    NSUInteger numCount = [self getValueDigitCountWithValue:value];
+    NSInteger scaleNumCountDelt = scale - numCount;
+    NSDecimalNumberHandler* roundingBehavior = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundPlain
+                                                                                                      scale:(NSUInteger)(isScaleMinus?scaleNumCountDelt:(scaleNumCountDelt > 0?scaleNumCountDelt:0)) raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    
+    NSDecimalNumber *ouncesDecimal;
+    NSDecimalNumber *roundedOunces;
+    
+    ouncesDecimal = [NSDecimalNumber decimalNumberWithDecimal:[@(value) decimalValue]];
+    roundedOunces = [ouncesDecimal decimalNumberByRoundingAccordingToBehavior:roundingBehavior];
+    
+    return roundedOunces;
+}
+
++(NSUInteger)getValueDigitCountWithValue:(double)value{
+    NSUInteger numCount = 0;
+    for (NSUInteger abcInt = lround(value); abcInt >= 1; abcInt = abcInt / 10) {
+        numCount++;
+    }
+    return numCount;
+}
+
 +(NSString *)longAbbreviation:(long)longValue {
     NSString *longStr = [self longToString:longValue];
     

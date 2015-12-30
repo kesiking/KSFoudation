@@ -97,6 +97,10 @@ void ks_swizzleSelector(Class classType, SEL originalSelector, SEL swizzledSelec
 // number缩写
 +(NSString*)intAbbreviation:(int)intValue;
 
++(NSNumber*)getNumberWithFloatValue:(double)value withScale:(NSUInteger)scale;
+
++(NSNumber*)getNumberWithFloatValue:(double)value withScale:(NSUInteger)scale scaleMinus:(BOOL)isScaleMinus;
+
 // 数字超过999显示为“999+”
 +(NSString*)longNumberAbbreviation:(LongIdType)longValue;
 // 数字超过num位数，如num为3，则显示为“999+”
