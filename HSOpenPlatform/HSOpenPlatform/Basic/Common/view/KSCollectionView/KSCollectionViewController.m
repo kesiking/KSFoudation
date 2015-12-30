@@ -233,7 +233,9 @@
     if (self.colletionFooterView != view) {
         self.colletionFooterView = view;
         self.colletionFooterSize = self.colletionFooterView.size;
-        [self.collectionView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData];
+        });
     }
 }
 
