@@ -10,6 +10,7 @@
 #import "WeAppLoadingView.h"
 #import "KSAdapterService.h"
 #import "UIImage+GIF.h"
+#import "MJRefresh.h"
 
 #define errorViewTag 1001
 
@@ -26,6 +27,9 @@
 @property (nonatomic, assign) BOOL                   isFirstLoadingView;
 
 @property (nonatomic, strong) WeAppLoadingView       *refreshPageLoadingView;
+
+// 翻页展示
+@property (nonatomic, strong) UIView                 *nextFootView;
 
 @property (nonatomic, strong) WeAppLoadingView       *nextPageLoadingView;
 
@@ -122,6 +126,13 @@
     self.scrollView = nil;
 }
 
+-(void)setScrollView:(UIScrollView *)scrollView{
+    [super setScrollView:scrollView];
+    if (scrollView) {
+        [self setupFootRefreshView];
+    }
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
 #pragma mark errorView
@@ -191,26 +202,29 @@
 #pragma mark nextFootView
 
 -(void)updateFootView{
-    UILabel* label = (UILabel*)[self.nextFootView viewWithTag:labelViewTag];
-    if (label != nil && [label isMemberOfClass:[UILabel class]]) {
-        BOOL hasMore = self.service && [self.service.pagedList hasMore] && self.service.serviceSuccess;
-        if (hasMore) {
-            if (![self isNetReachable]) {
-                label.text = self.nextFootViewTitle?:@"网络异常，请稍候再试";
+    if (self.scrollView.footer == nil) {
+        return;
+    }
+    if (self.scrollView.footer.isRefreshing) {
+        [self.scrollView.footer endRefreshing];
+    }else{
+        UILabel* label = (UILabel*)[self.nextFootView viewWithTag:labelViewTag];
+        if (label != nil && [label isMemberOfClass:[UILabel class]]) {
+            BOOL hasMore = self.service && [self.service.pagedList hasMore] && self.service.serviceSuccess;
+            if (hasMore) {
+                if (![self isNetReachable]) {
+                    label.text = self.nextFootViewTitle?:@"网络异常，请稍候再试";
+                }else{
+                    label.text = self.nextFootViewTitle?:@"正在加载，请稍候";
+                }
+                [self.nextPageLoadingView startAnimating];
+                [self.nextPageLoadingView setHidden:NO];
             }else{
-                label.text = self.nextFootViewTitle?:@"正在加载，请稍候";
+                label.text = self.hasNoDataFootViewTitle?:@"没有更多数据了";
+                [self.nextPageLoadingView stopAnimating];
+                [self.nextPageLoadingView setHidden:YES];
+                [self.scrollView.footer noticeNoMoreData];
             }
-            [self.nextPageLoadingView startAnimating];
-            [self.nextPageLoadingView setHidden:NO];
-            self.nextFootView.height = 30;
-        }else{
-            label.text = self.hasNoDataFootViewTitle?:nil;
-            [self.nextPageLoadingView stopAnimating];
-            [self.nextPageLoadingView setHidden:YES];
-            self.nextFootView.height = self.hasNoDataFootViewTitle?76:0;
-        }
-        if([self needFootView] && [self needNextPage]){
-            [self setFootView:self.nextFootView];
         }
     }
 }
@@ -286,8 +300,6 @@
 -(void)hideLodingView {
     self.isLoading = NO;
     [self updateFootView];
-    self.nextPageLoadingView.hidden = YES;
-    [self.nextPageLoadingView stopAnimating];
     [self.refreshPageLoadingView stopAnimating];
     if (self.configObject.needLoadingView) {
         [self.hud hide:YES];
@@ -302,11 +314,9 @@
 }
 
 -(void)showNextPageLoadingView {
-    if (!self.isLoading || self.nextPageLoadingView.hidden) {
+    if (!self.isLoading) {
         self.isLoading = YES;
         [self updateFootView];
-        self.nextPageLoadingView.hidden = NO;
-        [self.nextPageLoadingView startAnimating];
     }
 }
 
@@ -349,6 +359,23 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
 #pragma mark override method
+
+-(void)setupFootRefreshView{
+    if([self needFootView] && [self needNextPage]){
+        // 使用nextPageLoadingView作为footView
+        MJRefreshAutoFooter *footer = [MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+        [footer addSubview:self.nextFootView];
+        self.scrollView.footer = footer;
+    }
+}
+
+-(void)loadMoreData{
+    if ([self loadMoreDataWithScrollView]) {
+        if ([self canNextPage]) {
+            [self nextPage];
+        }
+    }
+}
 
 -(void)setFootView:(UIView*)view{
     
@@ -393,6 +420,10 @@
 
 -(BOOL)needRefresh {
     return self.configObject.needRefreshView;
+}
+
+-(BOOL)loadMoreDataWithScrollView{
+    return YES;
 }
 
 -(BOOL)isNetReachable{
