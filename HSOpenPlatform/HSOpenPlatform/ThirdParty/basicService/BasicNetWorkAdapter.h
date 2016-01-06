@@ -13,7 +13,12 @@ typedef void(^NetworkSuccessBlock)(NSDictionary* json);
 typedef void(^NetworkErrorBlock)(NSDictionary* json);
 typedef void(^NetworkCancelBlock)(NSDictionary* json);
 
+typedef void (^NetworkProgressBlock)(NSUInteger currentSendBytes, long long currentSendTotleBytes, long long totalBytes);
+
 @interface BasicNetWorkAdapter : NSObject
+
+@property (nonatomic, copy) NetworkProgressBlock        uploadProgress;
+@property (nonatomic, copy) NetworkProgressBlock        downloadProgress;
 
 -(void)request:(NSString*)apiName
      withParam:(NSMutableDictionary*)param
@@ -30,5 +35,8 @@ serviceContext:(WeAppServiceContext*)serviceContext
         onSuccess:(NetworkSuccessBlock)successBlock
           onError:(NetworkErrorBlock)errorBlock
          onCancel:(NetworkCancelBlock)cancelBlock;
+
+-(void)cancelRequest:(NSString*)apiName
+           withParam:(NSDictionary*)param;
 
 @end

@@ -442,7 +442,11 @@
 #pragma mark Mock TBURLRequestDelegate
 
 - (void)cancel {
-    _network = nil;
+    self.isLoading = NO;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(modelDidCancelLoad:)]) {
+        [self.delegate performSelector:@selector(modelDidCancelLoad:) withObject:self];
+    }
+    [_network cancelRequest:self.apiName withParam:self.params];
 }
 
 - (void)requestDidStartLoad:(id)request {

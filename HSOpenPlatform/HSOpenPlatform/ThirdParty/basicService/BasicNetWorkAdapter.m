@@ -11,15 +11,27 @@
 @implementation BasicNetWorkAdapter
 
 -(void)request:(NSString*)apiName
-     withParam:(NSDictionary*)param
+     withParam:(NSMutableDictionary*)param
+serviceContext:(WeAppServiceContext*)serviceContext
      onSuccess:(NetworkSuccessBlock)successBlock
        onError:(NetworkErrorBlock)errorBlock
       onCancel:(NetworkCancelBlock)cancelBlock{
     
 }
 
--(void)uploadfile:(NSString *)apiName withFileName:(NSString*)fileName withFileContent: (NSData*)fileContent withParam:(NSDictionary *)param onSuccess:(NetworkSuccessBlock)successBlock onError:(NetworkErrorBlock)errorBlock onCancel:(NetworkCancelBlock)cancelBlock
-{
+-(void)uploadfile:(NSString *)apiName
+     withFileName:(NSString*)fileName
+  withFileContent:(NSData*)fileContent
+        withParam:(NSMutableDictionary *)param
+   serviceContext:(WeAppServiceContext*)serviceContext
+        onSuccess:(NetworkSuccessBlock)successBlock
+          onError:(NetworkErrorBlock)errorBlock
+         onCancel:(NetworkCancelBlock)cancelBlock{
+    
+}
+
+-(void)cancelRequest:(NSString*)apiName
+           withParam:(NSDictionary*)param{
     
 }
 

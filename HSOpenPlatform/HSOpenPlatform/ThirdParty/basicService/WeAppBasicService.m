@@ -409,6 +409,13 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
+#pragma mark cancelService
+-(void)cancelService{
+    [self.requestModel cancel];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
 #pragma mark TBRequestModelDelegate
 -(void)modelDidCancelLoad:(WeAppBasicRequestModel *)model {
     if (self.delegate && [self.delegate respondsToSelector:@selector(serviceDidCancelLoad:)]) {

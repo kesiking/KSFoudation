@@ -36,7 +36,26 @@ typedef NS_ENUM(NSInteger, KSAdapterNetWorkResponseStatus) {
     KSAdapterNetWorkResponseStatus_Fail    = 0,       // 失败
 };
 
+@interface KSAdapterNetWork()
+
+@property(nonatomic, strong) NSMutableDictionary         *networkOperation;
+
+@end
+
 @implementation KSAdapterNetWork
+
+-(instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self config];
+    }
+    return self;
+}
+
+-(void)config{
+    _networkOperation = [NSMutableDictionary new];
+}
 
 -(void)request:(NSString *)apiName withParam:(NSMutableDictionary *)param serviceContext:(WeAppServiceContext*)serviceContext onSuccess:(NetworkSuccessBlock)successBlock onError:(NetworkErrorBlock)errorBlock onCancel:(NetworkCancelBlock)cancelBlock{
     // mock 数据
@@ -93,10 +112,19 @@ typedef NS_ENUM(NSInteger, KSAdapterNetWorkResponseStatus) {
                 errorCompleteBlock(operation, error);
             }
         }];
+        if (self.downloadProgress) {
+            [requestOperation setDownloadProgressBlock:self.downloadProgress];
+        }
+        if (apiName && requestOperation) {
+            [self.networkOperation setObject:requestOperation forKey:apiName];
+        }
         EHLogInfo(@"\n 请求参数 -----> requestURL : %@ \n requestParams :%@",requestOperation.request.URL , newParams?:@{});
     } onError:errorBlock];
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark network 配置
 -(NSMutableDictionary*)getMutableParamWithParam:(NSMutableDictionary*)param{
     NSMutableDictionary* newParams = nil;
     if (param && [param isKindOfClass:[NSMutableDictionary class]]) {
@@ -154,6 +182,9 @@ typedef NS_ENUM(NSInteger, KSAdapterNetWorkResponseStatus) {
     return httpRequestOM;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark network block
 -(void(^)(AFHTTPRequestOperation *operation, id responseObject))getSuccessCompleteBlockWithApiName:(NSString *)apiName withParam:(NSDictionary *)param jsonTopKey:(NSString*)jsonTopKey serviceContext:(WeAppServiceContext*)serviceContext onSuccess:(NetworkSuccessBlock)successBlock onError:(NetworkErrorBlock)errorBlock onCancel:(NetworkCancelBlock)cancelBlock{
     return ^void(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
@@ -182,6 +213,9 @@ typedef NS_ENUM(NSInteger, KSAdapterNetWorkResponseStatus) {
             errorBlock(errorDic);
         }
         [self hideNetworkActivityIndicatorVisible];
+        if (apiName) {
+            [self.networkOperation removeObjectForKey:apiName];
+        }
     };
 }
 
@@ -194,9 +228,15 @@ typedef NS_ENUM(NSInteger, KSAdapterNetWorkResponseStatus) {
         }
         errorBlock(errorDic);
         [self hideNetworkActivityIndicatorVisible];
+        if (apiName) {
+            [self.networkOperation removeObjectForKey:apiName];
+        }
     };
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark network uploadfile:withFileName:withFileContent:withParam:serviceContext:onSuccess:onError:onCancel:cancelBlock
 -(void)uploadfile:(NSString *)apiName withFileName:(NSString*)fileName withFileContent: (NSData*)fileContent withParam:(NSMutableDictionary *)param serviceContext:(WeAppServiceContext*)serviceContext onSuccess:(NetworkSuccessBlock)successBlock onError:(NetworkErrorBlock)errorBlock onCancel:(NetworkCancelBlock)cancelBlock{
     if (![self isNetReachable]) {
         // 没有网络 直接返回错误
@@ -229,7 +269,7 @@ typedef NS_ENUM(NSInteger, KSAdapterNetWorkResponseStatus) {
         AFHTTPRequestOperationManager *httpRequestOM = [self getAFHTTPRequestOperationManagerWithServiceContext:serviceContext];
         [httpRequestOM.requestSerializer setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
         
-        [httpRequestOM POST:path parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        AFHTTPRequestOperation * requestOperation = [httpRequestOM POST:path parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             for (NSString*key in [newParams allKeys]) {
                 [formData appendPartWithFormData:[NSData dataWithBytes:[[newParams objectForKey:key] UTF8String]  length:[[newParams objectForKey:key] length]] name:key];
             }
@@ -244,9 +284,18 @@ typedef NS_ENUM(NSInteger, KSAdapterNetWorkResponseStatus) {
                 errorCompleteBlock(operation, error);
             }
         }];
+        if (self.uploadProgress) {
+            [requestOperation setUploadProgressBlock:self.uploadProgress];
+        }
+        if (apiName && requestOperation) {
+            [self.networkOperation setObject:requestOperation forKey:apiName];
+        }
     } onError:errorBlock];
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark network callWithAuthCheck
 // 判断是否需要登陆才能操作，如果需要登陆，则先登陆，登陆成功后在回调接口；否则直接访问
 -(void)callWithAuthCheck:(NSString*) apiName method:(CallMethod)callMethod onError:(NetworkErrorBlock)errorBlock{
     
@@ -308,6 +357,19 @@ typedef NS_ENUM(NSInteger, KSAdapterNetWorkResponseStatus) {
 
 -(void)hideNetworkActivityIndicatorVisible{
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark network cancelRequest
+-(void)cancelRequest:(NSString*)apiName
+           withParam:(NSDictionary*)param{
+    if (apiName) {
+        AFHTTPRequestOperation* requestOperation = [self.networkOperation objectForKey:apiName];
+        if (requestOperation) {
+            [requestOperation cancel];
+        }
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

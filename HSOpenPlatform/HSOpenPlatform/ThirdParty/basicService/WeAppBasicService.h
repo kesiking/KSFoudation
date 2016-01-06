@@ -264,6 +264,9 @@ _##customService.serviceCacheDidLoadBlock = ^(WeAppBasicService* service, NSArra
 
 -(void)readCache;
 
+// 取消service请求
+-(void)cancelService;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
 #pragma mark Service Context 调用方式
