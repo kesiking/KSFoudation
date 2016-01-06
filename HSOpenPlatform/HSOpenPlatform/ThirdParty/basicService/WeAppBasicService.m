@@ -176,7 +176,6 @@
 -(void)nextPage {
     if (![self.pagedList hasMore]) {
         [self modelDidCancelLoad:nil];
-        [self.delegate serviceDidCancelLoad:self];
         return;
     }
     
@@ -187,7 +186,6 @@
     if (isObjectEnableBlock == nil) {
         if (![self.pagedList hasMore]) {
             [self modelDidCancelLoad:nil];
-            [self.delegate serviceDidCancelLoad:self];
             return;
         }
         
@@ -195,7 +193,6 @@
     }else{
         if (![self.pagedList hasMore]) {
             [self modelDidCancelLoad:nil];
-            [self.delegate serviceDidCancelLoad:self];
             return;
         }
         
