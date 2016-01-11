@@ -766,6 +766,7 @@
 		5FB7430C1BE0762C004D2743 /* HSMessageNavBarRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB7430B1BE0762C004D2743 /* HSMessageNavBarRightView.m */; };
 		5FBEDB321BF490A500C22188 /* HSBusinessUserAccountInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FBEDB311BF490A500C22188 /* HSBusinessUserAccountInfoModel.m */; };
 		5FBEDB3B1BF5768300C22188 /* HSBusinessUserInfoEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FBEDB3A1BF5768300C22188 /* HSBusinessUserInfoEditViewController.m */; };
+		5FBFF5861C43384900A37E36 /* AFDownloadRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FBFF5851C43384900A37E36 /* AFDownloadRequestOperation.m */; };
 		5FC5AEB21BFB24200096CDDA /* ehome_server.cer in Resources */ = {isa = PBXBuildFile; fileRef = 5FC5AEB11BFB24200096CDDA /* ehome_server.cer */; };
 		5FC5AEE21BFB258F0096CDDA /* icon_cancel send@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FC5AEB81BFB258F0096CDDA /* icon_cancel send@2x.png */; };
 		5FC5AEE31BFB258F0096CDDA /* icon_cancel send@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FC5AEB91BFB258F0096CDDA /* icon_cancel send@3x.png */; };
@@ -2349,6 +2350,8 @@
 		5FBEDB311BF490A500C22188 /* HSBusinessUserAccountInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSBusinessUserAccountInfoModel.m; sourceTree = "<group>"; };
 		5FBEDB391BF5768300C22188 /* HSBusinessUserInfoEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSBusinessUserInfoEditViewController.h; sourceTree = "<group>"; };
 		5FBEDB3A1BF5768300C22188 /* HSBusinessUserInfoEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSBusinessUserInfoEditViewController.m; sourceTree = "<group>"; };
+		5FBFF5841C43384900A37E36 /* AFDownloadRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDownloadRequestOperation.h; sourceTree = "<group>"; };
+		5FBFF5851C43384900A37E36 /* AFDownloadRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDownloadRequestOperation.m; sourceTree = "<group>"; };
 		5FC5AEB11BFB24200096CDDA /* ehome_server.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = ehome_server.cer; sourceTree = "<group>"; };
 		5FC5AEB81BFB258F0096CDDA /* icon_cancel send@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_cancel send@2x.png"; sourceTree = "<group>"; };
 		5FC5AEB91BFB258F0096CDDA /* icon_cancel send@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_cancel send@3x.png"; sourceTree = "<group>"; };
@@ -4667,6 +4670,7 @@
 		5F66C1951BBA5CC300CC21F7 /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
+				5FBFF5831C43384900A37E36 /* AFDownloadRequestOperation */,
 				5F66C1961BBA5CC300CC21F7 /* AFHTTPRequestOperation.h */,
 				5F66C1971BBA5CC300CC21F7 /* AFHTTPRequestOperation.m */,
 				5F66C1981BBA5CC300CC21F7 /* AFHTTPRequestOperationManager.h */,
@@ -6061,6 +6065,15 @@
 				5F1E4FB71BFB2D2F0051997E /* HSBusinessUserInfoEditAlertView.m */,
 			);
 			path = HSBusinessUserInfoEditViewController;
+			sourceTree = "<group>";
+		};
+		5FBFF5831C43384900A37E36 /* AFDownloadRequestOperation */ = {
+			isa = PBXGroup;
+			children = (
+				5FBFF5841C43384900A37E36 /* AFDownloadRequestOperation.h */,
+				5FBFF5851C43384900A37E36 /* AFDownloadRequestOperation.m */,
+			);
+			path = AFDownloadRequestOperation;
 			sourceTree = "<group>";
 		};
 		5FC5AEB71BFB258F0096CDDA /* SingleChat */ = {
@@ -7673,6 +7686,7 @@
 				5F66C41F1BBA5CC500CC21F7 /* PAStepperDetail.m in Sources */,
 				5FCF28ED1BF41F1B00432059 /* HSBussinessComboInfoView.m in Sources */,
 				5F0910A91C1695E6009962BB /* YYCache.m in Sources */,
+				5FBFF5861C43384900A37E36 /* AFDownloadRequestOperation.m in Sources */,
 				5F66C5571BBA5CC600CC21F7 /* SDWebImageDecoder.m in Sources */,
 				5F66C4501BBA5CC500CC21F7 /* KSRegisterView.m in Sources */,
 				3566DEBB1BF035D800F327C5 /* HSLocalAfterSaleModel.m in Sources */,
