@@ -133,9 +133,9 @@
     return self.collectionView;
 }
 
--(NSMutableArray *)collectionDeleteItems{
+-(KSCollectionMutableArrayClass *)collectionDeleteItems{
     if (_collectionDeleteItems == nil) {
-        _collectionDeleteItems = [[NSMutableArray alloc] initWithCapacity:10];
+        _collectionDeleteItems = [[KSCollectionMutableArrayClass alloc] initWithCapacity:10];
     }
     return _collectionDeleteItems;
 }
@@ -153,8 +153,9 @@
         if (isCollectionDeleteItemValuable) {
             [self.collectionView performBatchUpdates:^{
                 // Delete the items with proccessBlock.
+                NSArray* collectionDeleteItems = [self.collectionDeleteItems respondsToSelector:@selector(getItemList)] ? [self.collectionDeleteItems performSelector:@selector(getItemList) withObject:nil] : self.collectionDeleteItems;
                 if (proccessBlock) {
-                    proccessBlock(self.collectionDeleteItems,self.dataSourceRead);
+                    proccessBlock(collectionDeleteItems,self.dataSourceRead);
                 }
                 // Delete the items from the data source.
                 NSMutableIndexSet* indexSet = [NSMutableIndexSet indexSet];
@@ -164,7 +165,7 @@
                 }];
                 [self deleteItemAtIndexs:indexSet];
                 // Now delete the items from the collection view.
-                [self.collectionView deleteItemsAtIndexPaths:self.collectionDeleteItems];
+                [self.collectionView deleteItemsAtIndexPaths:collectionDeleteItems];
                 
                 
             } completion:^(BOOL finished) {
@@ -178,6 +179,26 @@
         if (completeBlock) {
             completeBlock();
         }
+    }
+}
+
+-(void)collectionSelectAllCells{
+    if (((KSCollectionViewConfigObject*)self.configObject).isEditModel
+        && self.dataSourceRead
+        && [self.dataSourceRead count] > 0) {
+        [self.collectionDeleteItems removeAllObjects];
+        [[self.dataSourceRead getDataList] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSIndexPath* indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
+            [self.collectionDeleteItems addObject:indexPath];
+        }];
+    }
+}
+
+-(void)collectionUnSelectAllCells{
+    if (((KSCollectionViewConfigObject*)self.configObject).isEditModel
+        && self.dataSourceRead
+        && [self.dataSourceRead count] > 0) {
+        [self.collectionDeleteItems removeAllObjects];
     }
 }
 

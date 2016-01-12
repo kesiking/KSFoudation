@@ -8,6 +8,7 @@
 
 #import "KSScrollViewServiceController.h"
 #import "KSCollectionViewConfigObject.h"
+#import "KSMutableArray.h"
 
 /*!
  *  @author 孟希羲, 15-11-19 09:11:13
@@ -55,7 +56,7 @@ typedef void(^tableViewDeleteCompleteBlock)(void);
 @property (nonatomic, strong) tableViewDeleteCompleteBlock  tableViewDeleteCompleteBlock;
 
 // tableView的删除操作时使用
-@property (nonatomic, strong) NSMutableArray*   collectionDeleteItems;
+@property (nonatomic, strong) KSCollectionMutableArrayClass*   collectionDeleteItems;
 
 // init method
 -(instancetype)initWithFrame:(CGRect)frame withConfigObject:(KSCollectionViewConfigObject*)configObject;
@@ -71,6 +72,12 @@ typedef void(^tableViewDeleteCompleteBlock)(void);
 
 // 删除tableViewCell
 -(void)deleteCollectionCellProccessBlock:(tableViewDeleteProgressBlock)proccessBlock completeBolck:(tableViewDeleteCompleteBlock)completeBlock;
+
+// 选中当前dataSource中所有的cell（全选）
+-(void)collectionSelectAllCells;
+
+// 去除选中当前dataSource中所有的cell（全不选）
+-(void)collectionUnSelectAllCells;
 
 // method used by subclass
 // 公用函数 在子类的- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath中调用

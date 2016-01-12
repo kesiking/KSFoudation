@@ -12,6 +12,8 @@
 
 + (id)array;
 
+- (instancetype)initWithCapacity:(NSUInteger)numItems;
+
 @optional
 - (NSUInteger)count;
 - (id)objectAtIndex:(NSUInteger)index;
@@ -25,10 +27,13 @@
 - (void)removeObjectAtIndex:(NSUInteger)index;
 - (void)removeObjectsAtIndexes:(NSIndexSet *)indexes;
 - (void)removeObjectsInArray:(NSArray *)otherArray;
+- (BOOL)containsObject:(id)anObject;
 
 - (NSArray *)sortedArrayUsingComparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0);
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained [])buffer count:(NSUInteger)len;
+
+- (void)enumerateObjectsUsingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block;
 
 @end
 

@@ -102,9 +102,9 @@
     return self.tableView;
 }
 
--(NSMutableArray *)collectionDeleteItems{
+-(KSCollectionMutableArrayClass *)collectionDeleteItems{
     if (_collectionDeleteItems == nil) {
-        _collectionDeleteItems = [[NSMutableArray alloc] initWithCapacity:10];
+        _collectionDeleteItems = [[KSCollectionMutableArrayClass alloc] initWithCapacity:10];
     }
     return _collectionDeleteItems;
 }
@@ -122,8 +122,9 @@
         if (isCollectionDeleteItemValuable) {
             [self.tableView beginUpdates];
             // Delete the items with proccessBlock.
+            NSArray* collectionDeleteItems = [self.collectionDeleteItems respondsToSelector:@selector(getItemList)] ? [self.collectionDeleteItems performSelector:@selector(getItemList) withObject:nil] : self.collectionDeleteItems;
             if (proccessBlock) {
-                proccessBlock(self.collectionDeleteItems,self.dataSourceRead);
+                proccessBlock(collectionDeleteItems,self.dataSourceRead);
             }
             // Delete the items from the data source.
             NSMutableIndexSet* indexSet = [NSMutableIndexSet indexSet];
@@ -133,7 +134,7 @@
             }];
             [self deleteItemAtIndexs:indexSet];
             // Now delete the items from the collection view.
-            [self.tableView deleteRowsAtIndexPaths:self.collectionDeleteItems withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView deleteRowsAtIndexPaths:collectionDeleteItems withRowAnimation:UITableViewRowAnimationFade];
             [self.tableView endUpdates];
             if (completeBlock) {
                 completeBlock();
@@ -144,6 +145,26 @@
         if (completeBlock) {
             completeBlock();
         }
+    }
+}
+
+-(void)collectionSelectAllCells{
+    if (((KSCollectionViewConfigObject*)self.configObject).isEditModel
+        && self.dataSourceRead
+        && [self.dataSourceRead count] > 0) {
+        [self.collectionDeleteItems removeAllObjects];
+        [[self.dataSourceRead getDataList] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSIndexPath* indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
+            [self.collectionDeleteItems addObject:indexPath];
+        }];
+    }
+}
+
+-(void)collectionUnSelectAllCells{
+    if (((KSCollectionViewConfigObject*)self.configObject).isEditModel
+        && self.dataSourceRead
+        && [self.dataSourceRead count] > 0) {
+        [self.collectionDeleteItems removeAllObjects];
     }
 }
 
@@ -292,9 +313,9 @@
     /**************************/
 }
 
-//-(BOOL)loadMoreDataWithScrollView{
-//    return NO;
-//}
+-(BOOL)loadMoreDataWithScrollView{
+    return YES;
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -

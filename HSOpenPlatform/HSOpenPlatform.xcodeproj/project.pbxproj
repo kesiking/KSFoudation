@@ -757,6 +757,7 @@
 		5FB52AD61BE31BA300AA7D11 /* public_radiobox_set_off@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FB52AD21BE31BA300AA7D11 /* public_radiobox_set_off@3x.png */; };
 		5FB52AD71BE31BA300AA7D11 /* public_radiobox_set_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FB52AD31BE31BA300AA7D11 /* public_radiobox_set_on@2x.png */; };
 		5FB52AD81BE31BA300AA7D11 /* public_radiobox_set_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FB52AD41BE31BA300AA7D11 /* public_radiobox_set_on@3x.png */; };
+		5FB550221C44A1D00076BAA7 /* KSMutableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB550211C44A1D00076BAA7 /* KSMutableArray.m */; };
 		5FB742FD1BE0739C004D2743 /* icon_nonews@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FB742FB1BE0739C004D2743 /* icon_nonews@2x.png */; };
 		5FB742FE1BE0739C004D2743 /* icon_nonews@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FB742FC1BE0739C004D2743 /* icon_nonews@3x.png */; };
 		5FB743061BE075BB004D2743 /* nav_Message_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FB743021BE075BB004D2743 /* nav_Message_normal@2x.png */; };
@@ -2338,6 +2339,8 @@
 		5FB52AD21BE31BA300AA7D11 /* public_radiobox_set_off@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "public_radiobox_set_off@3x.png"; sourceTree = "<group>"; };
 		5FB52AD31BE31BA300AA7D11 /* public_radiobox_set_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "public_radiobox_set_on@2x.png"; sourceTree = "<group>"; };
 		5FB52AD41BE31BA300AA7D11 /* public_radiobox_set_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "public_radiobox_set_on@3x.png"; sourceTree = "<group>"; };
+		5FB550201C44A1D00076BAA7 /* KSMutableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSMutableArray.h; sourceTree = "<group>"; };
+		5FB550211C44A1D00076BAA7 /* KSMutableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSMutableArray.m; sourceTree = "<group>"; };
 		5FB742FB1BE0739C004D2743 /* icon_nonews@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_nonews@2x.png"; sourceTree = "<group>"; };
 		5FB742FC1BE0739C004D2743 /* icon_nonews@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_nonews@3x.png"; sourceTree = "<group>"; };
 		5FB743021BE075BB004D2743 /* nav_Message_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_Message_normal@2x.png"; sourceTree = "<group>"; };
@@ -3916,6 +3919,8 @@
 				5F66C09A1BBA5CC200CC21F7 /* KSCollectionViewConfigObject.m */,
 				5F66C09B1BBA5CC200CC21F7 /* KSCollectionViewController.h */,
 				5F66C09C1BBA5CC200CC21F7 /* KSCollectionViewController.m */,
+				5FB550201C44A1D00076BAA7 /* KSMutableArray.h */,
+				5FB550211C44A1D00076BAA7 /* KSMutableArray.m */,
 				5F66C09D1BBA5CC200CC21F7 /* KSViewCell.h */,
 				5F66C09E1BBA5CC200CC21F7 /* KSViewCell.m */,
 				5F2E22F41BDDB60700F36DAF /* KSDeleteBtnViewCell.h */,
@@ -7383,6 +7388,7 @@
 				5FFDE8361BCB9C060087B9E0 /* HSMapManagerActionSheet.m in Sources */,
 				5F66C4741BBA5CC500CC21F7 /* KSAdapterCacheService.m in Sources */,
 				5F0BCB6E1BBA6FBE00CFE4A4 /* EHLogFormatter.m in Sources */,
+				5FB550221C44A1D00076BAA7 /* KSMutableArray.m in Sources */,
 				5F66C4AC1BBA5CC500CC21F7 /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				5F66C4911BBA5CC500CC21F7 /* WeAppPagedList.m in Sources */,
 				5F66C4B21BBA5CC500CC21F7 /* LKDB+Mapping.m in Sources */,
