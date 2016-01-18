@@ -425,6 +425,7 @@
         self.serviceDidCancelLoadBlock(self);
     }
     
+    self.serviceSuccess = NO;
     self.canceled = YES;
     if (self.executing) self.executing = NO;
     if (!self.finished) self.finished = YES;

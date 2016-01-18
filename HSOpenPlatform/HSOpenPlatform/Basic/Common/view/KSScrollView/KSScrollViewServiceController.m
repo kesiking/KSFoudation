@@ -490,6 +490,7 @@
         // 设置信号量，refreshData异步线程开始时设置为YES，在此阶段中调用reloadData都会被无视
         self.isRefreshDataSignal = YES;
         BOOL isRefresh = self.service && [self.service.pagedList isRefresh];
+        NSUInteger startIndex = self.service.pagedList.newDataCount;
         dispatch_async(_serialQueue, ^{
             @try {
                 __strong __typeof(self) sself = wself;
@@ -503,7 +504,7 @@
                     [sself.dataSourceWrite removeAllCellitems];
                 }
                 
-                for (NSInteger i = 0; i < [sself.dataSourceWrite count]; i++) {
+                for (NSInteger i = isRefresh ? 0 : MAX(0, [sself.dataSourceWrite count] - startIndex); i < [sself.dataSourceWrite count]; i++) {
                     [sself.dataSourceWrite setupComponentItemWithIndex:i];
                 }
                 if (wself == nil) {
@@ -596,7 +597,9 @@
 - (void)serviceDidFinishLoad:(WeAppBasicService *)service{
     if (service && service.apiName) {
         if (service.pagedList) {
-            [self setupDataList:[service.pagedList getItemList]];
+            if ([self needRefreshDataWithService:self.service]) {
+                [self setupDataList:[service.pagedList getItemList]];
+            }
         }else if(service.dataList){
             [self setupDataList:service.dataList];
         }else{
@@ -670,7 +673,9 @@
 }
 
 - (void)requestDidLoad{
-    [self refreshData];
+    if ([self needRefreshDataWithService:self.service]) {
+        [self refreshData];
+    }
     [self hideLodingView];
     [self performSelector:@selector(setErrerView) withObject:nil afterDelay:0];
 }
@@ -683,6 +688,14 @@
     }
     [self hideLodingView];
     [self performSelector:@selector(setErrerView) withObject:nil afterDelay:0];
+}
+
+// 用于优化requestDidLoad中对refreshData的调用，如果是service获取成功，service获取数据为pageList情况并且此次获取请求为翻页逻辑时，如果获取到的翻页数据为0（没有新数据）就不做刷新
+- (BOOL)needRefreshDataWithService:(WeAppBasicService*)service{
+    if (service && service.serviceSuccess && service.pagedList && ![service.pagedList isRefresh] && service.pagedList.newDataCount == 0) {
+        return NO;
+    }
+    return YES;
 }
 
 @end
