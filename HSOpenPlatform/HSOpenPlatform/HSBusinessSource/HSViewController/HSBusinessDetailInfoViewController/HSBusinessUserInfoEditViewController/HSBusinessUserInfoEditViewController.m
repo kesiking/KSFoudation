@@ -134,7 +134,7 @@
 }
 
 - (void)modifyUserNickName:(NSString*)nickName{
-    [self.businessUserInfoModifyService modifyBusinessUserInfoWithUserPhone:self.userPhone appId:self.appId nickName:nickName userTrueName:self.userTrueName];
+    [self.businessUserInfoModifyService modifyBusinessUserInfoWithUserPhone:self.userPhone memberPhone:nil deviceId:self.appId nickName:nickName];
 }
 
 @end

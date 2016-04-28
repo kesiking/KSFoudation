@@ -93,7 +93,7 @@
     }
     NSString* userFeedback = [WeAppUtils getJSONStringWithDictionary:userFeedbackDict];
     
-    [self.service loadItemWithAPIName:kHSSendFeedbackApiName params:@{@"userPhone":[KSAuthenticationCenter userPhone],@"userFeedback":userFeedback?:@""} version:nil];
+    [self.service loadItemWithAPIName:kHSSendFeedbackApiName params:@{@"userPhone":[KSAuthenticationCenter userPhone],@"userFeedback":userFeedback?:@"",@"currentAppVersion":[HSDeviceDataCenter appVersion]?:@"v1.0"} version:nil];
 }
 
 -(void)textViewDidChange:(UITextView *)textView {

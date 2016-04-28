@@ -61,8 +61,10 @@
         }
     }else if ([mapDescription isEqualToString:@"百度地图"]) {
         double bdNowLat,bdNowLon,bdLat,bdLon;
-        bd_encrypt(currentCoordinate.latitude, currentCoordinate.longitude, &bdNowLat, &bdNowLon);
-        bd_encrypt(naviCoordinate.latitude, naviCoordinate.longitude, &bdLat, &bdLon);
+        [LocationChange eh_home_bd_encrypt:currentCoordinate.latitude gg_lon:currentCoordinate.longitude bd_lat:&bdNowLat bd_lon:&bdNowLon];
+        [LocationChange eh_home_bd_encrypt:naviCoordinate.latitude gg_lon:naviCoordinate.longitude bd_lat:&bdLat bd_lon:&bdLon];
+//        bd_encrypt(currentCoordinate.latitude, currentCoordinate.longitude, &bdNowLat, &bdNowLon);
+//        bd_encrypt(naviCoordinate.latitude, naviCoordinate.longitude, &bdLat, &bdLon);
         NSString *stringURL = [NSString stringWithFormat:@"baidumap://map/direction?origin=%.8f,%.8f&destination=%.8f,%.8f&&mode=driving",bdNowLat,bdNowLon,bdLat,bdLon];
         NSURL *url = [NSURL URLWithString:stringURL];
         [[UIApplication sharedApplication] openURL:url];

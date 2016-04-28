@@ -11,8 +11,6 @@
 
 #define ACTION_ANIMATION_KEY @"ACTION_ANIMATION_KEY"
 
-#define ACTION_NEEDLOGIN_KEY @"needLogin"
-
 @class TBURLAction;
 
 @interface KSBasicURLResolver : NSObject<TBURLActionHandler>

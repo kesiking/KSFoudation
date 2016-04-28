@@ -29,8 +29,11 @@
 //    self.resetViewCtl.text_renewPwd.hidden = NO;
     self.resetViewCtl.text_newPwd.hidden = NO;
 //    self.resetViewCtl.btn_done.hidden = YES;
-    self.resetViewCtl.btn_finish.hidden = NO;
-    self.resetViewCtl.btn_finish.enabled = NO;
+    
+    self.resetViewCtl.btn_nextStep.hidden = NO;
+    self.resetViewCtl.btn_nextStep.enabled = NO;
+    [self.resetViewCtl.btn_nextStep setTitle:@"完成" forState:UIControlStateNormal];
+    
     WEAKSELF
     self.resetViewCtl.text_oldPwd.textValueDidChanged = ^(UITextField* textView){
         STRONGSELF

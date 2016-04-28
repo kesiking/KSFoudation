@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HSApplicationModel.h"
+#import "HSBasicCollectionViewCell.h"
+#import "HSProductInfoModel.h"
 
 #define home_businessListCell_height               (caculateNumber(124))
 
-@interface HSHomeBusinessListCell : UICollectionViewCell
-
-- (void)setupCollectionItem:(HSApplicationModel *)item;
+@interface HSHomeBusinessListCell : HSBasicCollectionViewCell
 
 @end

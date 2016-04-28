@@ -10,13 +10,13 @@
 
 @implementation HSBusinessUserInfoModifyService
 
--(void)modifyBusinessUserInfoWithUserPhone:(NSString *)userPhone appId:(NSString*)appId nickName:(NSString*)nickName userTrueName:(NSString*)tureName{
+-(void)modifyBusinessUserInfoWithUserPhone:(NSString *)userPhone memberPhone:(NSString *)memberPhone deviceId:(NSNumber*)deviceId nickName:(NSString*)nickName{
     if ([EHUtils isEmptyString:userPhone]) {
         EHLogError(@"userPhone is nil!");
         return;
     }
-    if ([EHUtils isEmptyString:appId]) {
-        EHLogError(@"appId is nil!");
+    if (deviceId == nil) {
+        EHLogError(@"deviceId is nil!");
         return;
     }
     if ([EHUtils isEmptyString:nickName]) {
@@ -29,20 +29,17 @@
     if (userPhone) {
         [params setObject:userPhone forKey:@"userPhone"];
     }
-    if (appId) {
-        [params setObject:appId forKey:@"appId"];
-    }
-    if (nickName) {
-        [params setObject:nickName forKey:@"nickname"];
-    }
-    if (tureName) {
-        [params setObject:tureName forKey:@"realname"];
+    if (deviceId) {
+        [params setObject:deviceId forKey:@"deviceId"];
     }
     
-    NSString* paramStr = [WeAppUtils getJSONStringWithDictionary:params];
+    if (memberPhone && nickName) {
+        NSArray* member = @[@{@"memberPhone":memberPhone,@"nickname":nickName}];
+        [params setObject:member forKey:@"member"];
+    }
     
-    if (paramStr) {
-        [self loadItemWithAPIName:kHSModifyBusinessUserNickNameApiName params:@{@"UserNickname":paramStr} version:nil];
+    if (params) {
+        [self loadItemWithAPIName:kHSModifyBusinessUserNickNameApiName params:params version:nil];
     }else{
         EHLogError(@"getJSONStringWithDictionary is failed!");
     }

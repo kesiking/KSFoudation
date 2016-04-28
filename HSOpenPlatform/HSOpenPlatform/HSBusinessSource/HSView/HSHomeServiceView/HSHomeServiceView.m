@@ -7,16 +7,19 @@
 //
 
 #import "HSHomeServiceView.h"
-#import "HSHomeServiceButton.h"
+#import "HSHomeServiceActivityButton.h"
 
-static NSString *const kHSActivityStr              = @"最新活动";
-static NSString *const kHSActivityImageName        = @"img_new_Activity";
+static NSString *const kHSActivityStr                    = @"最新活动";
+static NSString *const kHSActivityImageName              = @"icon_活动";//@"img_new_activity";
+static NSString *const kHSActivityHighlightedImageName      = @"icon_活动_点击";
 
-static NSString *const kHSBusinessHallStr          = @"附近营业厅";
-static NSString *const kHSBusinessHallImageName    = @"img_Nearby";
+static NSString *const kHSBusinessHallStr                = @"附近营业厅";
+static NSString *const kHSBusinessHallImageName          = @"icon_营业厅";//@"img_nearby";
+static NSString *const kHSBusinessHallHighlightedImageName  = @"icon_营业厅_点击";
 
-static NSString *const kHSLocalDiscountStr         = @"售后服务";
-static NSString *const kHSLocalDiscountImageName   = @"img_After_sale service";
+static NSString *const kHSAfterSaleServiceStr               = @"售后服务";
+static NSString *const kHSAfterSaleServiceImageName         = @"icon_售后服务";//@"img_after_sale-service";
+static NSString *const kHSAfterSaleServiceHighlightedImageName = @"icon_售后服务_点击";
 
 
 @interface HSHomeServiceView ()
@@ -25,7 +28,7 @@ static NSString *const kHSLocalDiscountImageName   = @"img_After_sale service";
 
 @property (nonatomic, strong)HSHomeServiceButton *nearbyBusinessHallView;
 
-@property (nonatomic, strong)HSHomeServiceButton *localDiscountView;
+@property (nonatomic, strong)HSHomeServiceButton *AfterSaleServiceView;
 
 @end
 
@@ -35,8 +38,8 @@ static NSString *const kHSLocalDiscountImageName   = @"img_After_sale service";
     [super setupView];
     [self addSubview:self.latestActivitiesView];
     [self addSubview:self.nearbyBusinessHallView];
-    [self addSubview:self.localDiscountView];
-    [self addSeparatorLines];
+    [self addSubview:self.AfterSaleServiceView];
+    [self addTopLine];
 }
 
 #pragma mark - Events Response
@@ -48,7 +51,7 @@ static NSString *const kHSLocalDiscountImageName   = @"img_After_sale service";
     TBOpenURLFromSourceAndParams(internalURL(@"HSBusinessHallListViewController"), self, nil);
 }
 
-- (void)showLocalDiscount {
+- (void)showAfterSaleService {
     TBOpenURLFromSourceAndParams(internalURL(@"HSAfterSaleViewController"), self, nil);
 }
 
@@ -56,16 +59,20 @@ static NSString *const kHSLocalDiscountImageName   = @"img_After_sale service";
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.latestActivitiesView.frame = CGRectMake(0, 0, caculateNumber(215), home_serviceView_height);
-    self.nearbyBusinessHallView.frame = CGRectMake(self.latestActivitiesView.width, 0, self.width - self.latestActivitiesView.width, home_serviceView_height/2.0);
-    self.localDiscountView.frame = CGRectMake(self.latestActivitiesView.width, home_serviceView_height/2.0, self.nearbyBusinessHallView.width, home_serviceView_height/2.0);
+    CGFloat sideSpace = caculateNumber(40)-20;
+    CGSize btnSize = CGSizeMake(50+20+20, home_serviceView_height);
+    self.latestActivitiesView.frame = CGRectMake(sideSpace, 0, btnSize.width, btnSize.height);
+    self.nearbyBusinessHallView.frame = self.latestActivitiesView.frame;
+    self.nearbyBusinessHallView.center = CGPointMake(self.width/2.0, self.height/2.0);
+    self.AfterSaleServiceView.frame = CGRectMake(self.width-sideSpace-btnSize.width, 0, btnSize.width, btnSize.height);
 }
 
 #pragma mark - Getters And Setters
 - (HSHomeServiceButton *)latestActivitiesView {
     if (!_latestActivitiesView) {
         _latestActivitiesView = [[HSHomeServiceButton alloc]init];
-        [_latestActivitiesView setBackgroundImage:[UIImage imageNamed:kHSActivityImageName] forState:UIControlStateNormal];
+        [_latestActivitiesView setImage:[UIImage imageNamed:kHSActivityImageName] forState:UIControlStateNormal];
+        [_latestActivitiesView setImage:[UIImage imageNamed:kHSActivityHighlightedImageName] forState:UIControlStateHighlighted];
         [_latestActivitiesView setTitle:kHSActivityStr forState:UIControlStateNormal];
         [_latestActivitiesView addTarget:self action:@selector(showLatestActivities) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -75,38 +82,30 @@ static NSString *const kHSLocalDiscountImageName   = @"img_After_sale service";
 - (HSHomeServiceButton *)nearbyBusinessHallView {
     if (!_nearbyBusinessHallView) {
         _nearbyBusinessHallView = [[HSHomeServiceButton alloc]init];
-        [_nearbyBusinessHallView setBackgroundImage:[UIImage imageNamed:kHSBusinessHallImageName] forState:UIControlStateNormal];
+        [_nearbyBusinessHallView setImage:[UIImage imageNamed:kHSBusinessHallImageName] forState:UIControlStateNormal];
+        [_nearbyBusinessHallView setImage:[UIImage imageNamed:kHSBusinessHallHighlightedImageName] forState:UIControlStateHighlighted];
         [_nearbyBusinessHallView setTitle:kHSBusinessHallStr forState:UIControlStateNormal];
         [_nearbyBusinessHallView addTarget:self action:@selector(showNearbyBusinessHall) forControlEvents:UIControlEventTouchUpInside];
     }
     return _nearbyBusinessHallView;
 }
 
-- (HSHomeServiceButton *)localDiscountView {
-    if (!_localDiscountView) {
-        _localDiscountView = [[HSHomeServiceButton alloc]init];
-        [_localDiscountView setBackgroundImage:[UIImage imageNamed:kHSLocalDiscountImageName] forState:UIControlStateNormal];
-        [_localDiscountView setTitle:kHSLocalDiscountStr forState:UIControlStateNormal];
-        [_localDiscountView addTarget:self action:@selector(showLocalDiscount) forControlEvents:UIControlEventTouchUpInside];
+- (HSHomeServiceButton *)AfterSaleServiceView {
+    if (!_AfterSaleServiceView) {
+        _AfterSaleServiceView = [[HSHomeServiceButton alloc]init];
+        [_AfterSaleServiceView setImage:[UIImage imageNamed:kHSAfterSaleServiceImageName] forState:UIControlStateNormal];
+        [_AfterSaleServiceView setImage:[UIImage imageNamed:kHSAfterSaleServiceHighlightedImageName] forState:UIControlStateHighlighted];
+        [_AfterSaleServiceView setTitle:kHSAfterSaleServiceStr forState:UIControlStateNormal];
+        [_AfterSaleServiceView addTarget:self action:@selector(showAfterSaleService) forControlEvents:UIControlEventTouchUpInside];
     }
-    return _localDiscountView;
+    return _AfterSaleServiceView;
 }
 
-- (void)addSeparatorLines {
-    CGRect frame1 = CGRectMake(caculateNumber(215), 0, 0.5, self.height);
-    CGRect frame2 = CGRectMake(caculateNumber(215), self.height/2.0, self.width - caculateNumber(215), 0.5);
-    
-    NSMutableArray *muArr = [[NSMutableArray alloc]init];
-    [muArr addObject:[NSValue valueWithCGRect:frame1]];
-    [muArr addObject:[NSValue valueWithCGRect:frame2]];
-    
-    for (NSInteger i = 0; i<2; i++) {
-        CALayer *layer = [CALayer layer];
-        layer.backgroundColor = EHLinecor1.CGColor;
-        layer.frame = [muArr[i] CGRectValue];
-        [self.layer addSublayer:layer];
-    }
+- (void)addTopLine {
+    CALayer *layer = [CALayer layer];
+    layer.backgroundColor = HS_linecor1.CGColor;
+    layer.frame = CGRectMake(0, 0, self.width, 0.5);
+    [self.layer addSublayer:layer];
 }
-
 
 @end

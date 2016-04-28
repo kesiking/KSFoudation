@@ -23,6 +23,7 @@
 
 @property (nonatomic, strong) WeAppUIScrollViewSpeed *scrollViewSpeed;
 
+@property (nonatomic, strong) NSHashTable            *scrollViewDelegateTargets;
 
 @end
 
@@ -31,7 +32,7 @@
 -(id)init{
     self = [super init];
     if (self) {
-        
+        self.scrollViewDelegateTargets = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
     }
     return self;
 }
@@ -44,6 +45,8 @@
     self.scrollView = nil;
     self.dataSourceRead = nil;
     self.dataSourceWrite = nil;
+    [self.scrollViewDelegateTargets removeAllObjects];
+    self.scrollViewDelegateTargets = nil;
 }
 
 -(void)setFrame:(CGRect)frame{
@@ -99,6 +102,17 @@
         return;
     }
     [self.scrollView setContentOffset:self.scrollViewOffset animated:animated];
+}
+
+-(void)addScrollViewDelegateObserve:(id<UIScrollViewDelegate> )observe{
+    if (observe == nil) {
+        return;
+    }
+    if ([self.scrollViewDelegateTargets containsObject:observe]) {
+        EHLogInfo(@"-----> %@ had added observe on scrollView, don not add again",observe);
+        return;
+    }
+    [self.scrollViewDelegateTargets addObject:observe];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -157,15 +171,25 @@
 #pragma mark -
 #pragma mark UIScrollViewDelegate method
 
-- (void)scrollViewDidScroll: (UIScrollView*)scroll {
-    self.scrollViewOffset = scroll.contentOffset;
-    [self.scrollViewSpeed calculateSpeedWithScrollView:scroll];
+- (void)scrollViewDidScroll: (UIScrollView*)scrollView {
+    self.scrollViewOffset = scrollView.contentOffset;
+    [self.scrollViewSpeed calculateSpeedWithScrollView:scrollView];
+    for (id obj in self.scrollViewDelegateTargets) {
+        if ([obj conformsToProtocol:@protocol(UIScrollViewDelegate)] && [obj respondsToSelector:@selector(scrollViewDidScroll:)]) {
+            [(id<UIScrollViewDelegate>)obj scrollViewDidScroll:scrollView];
+        }
+    }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     // 1
     //scollview滑动则将图片下载的线程暂停下载
     [self suspendAllOperations];
+    for (id obj in self.scrollViewDelegateTargets) {
+        if ([obj conformsToProtocol:@protocol(UIScrollViewDelegate)] && [obj respondsToSelector:@selector(scrollViewWillBeginDragging:)]) {
+            [(id<UIScrollViewDelegate>)obj scrollViewWillBeginDragging:scrollView];
+        }
+    }
 }
 
 
@@ -175,6 +199,11 @@
         //scollview停止滑动则将图片下载的线程启动下载
         [self loadImages];
     }
+    for (id obj in self.scrollViewDelegateTargets) {
+        if ([obj conformsToProtocol:@protocol(UIScrollViewDelegate)] && [obj respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)]) {
+            [(id<UIScrollViewDelegate>)obj scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+        }
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -182,6 +211,11 @@
     //scollview停止滑动则将图片下载的线程启动下载
     self.isScrollViewCannotRefreshImage = YES;
     [self loadImages];
+    for (id obj in self.scrollViewDelegateTargets) {
+        if ([obj conformsToProtocol:@protocol(UIScrollViewDelegate)] && [obj respondsToSelector:@selector(scrollViewDidEndDecelerating:)]) {
+            [(id<UIScrollViewDelegate>)obj scrollViewDidEndDecelerating:scrollView];
+        }
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////

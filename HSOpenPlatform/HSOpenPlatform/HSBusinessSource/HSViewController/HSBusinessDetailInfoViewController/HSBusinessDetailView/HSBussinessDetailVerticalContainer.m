@@ -36,31 +36,46 @@
     [self addSubview:self.container];
 }
 
--(void)setBussinessDetailModel:(WeAppComponentBaseItem *)bussinessDetailModel{
+-(void)setBussinessDetailModel:(HSDeviceInfoModel *)bussinessDetailModel{
     _bussinessDetailModel = bussinessDetailModel;
     if (bussinessDetailModel != nil) {
+        [self setDeviceId:bussinessDetailModel.deviceId];
         [self reloadDataAndContaier];
     }
 }
 
--(void)setAppModel:(HSApplicationModel *)appModel{
-    _appModel = appModel;
-    [self.businessInfoHeaderView setAppModel:appModel];
-    [self.businessUserListView setAppModel:appModel];
-    [self.businessComboInfoView setAppModel:appModel];
-    [self.businessAfterSaleLinkView setAppModel:appModel];
+-(void)setDeviceModel:(HSDeviceModel *)deviceModel{
+    _deviceModel = deviceModel;
+    [self.businessInfoHeaderView setDeviceModel:deviceModel];
+    [self.businessUserListView setDeviceModel:deviceModel];
+    [self.businessComboInfoView setDeviceModel:deviceModel];
+    [self.businessAfterSaleLinkView setDeviceModel:deviceModel];
 }
 
--(void)setAppId:(NSString *)appId{
-    _appId = appId;
-    [self.businessInfoHeaderView setAppId:appId];
-    [self.businessUserListView setAppId:appId];
-    [self.businessComboInfoView setAppId:appId];
-    [self.businessAfterSaleLinkView setAppId:appId];
+-(void)setProductId:(NSNumber *)productId{
+    _productId = productId;
+    [self.businessInfoHeaderView setProductId:productId];
+    [self.businessUserListView setProductId:productId];
+    [self.businessComboInfoView setProductId:productId];
+    [self.businessAfterSaleLinkView setProductId:productId];
+}
+
+-(void)setDeviceId:(NSNumber *)deviceId{
+    _deviceId = deviceId;
+    [self.businessInfoHeaderView setDeviceId:deviceId];
+    [self.businessUserListView setDeviceId:deviceId];
+    [self.businessComboInfoView setDeviceId:deviceId];
+    [self.businessAfterSaleLinkView setDeviceId:deviceId];
 }
 
 -(void)dealloc{
-    
+    [self.container removeAllItems];
+    [self.container removeAllSubviews];
+    self.container = nil;
+    self.businessInfoHeaderView = nil;
+    self.businessUserListView = nil;
+    self.businessComboInfoView = nil;
+    self.businessAfterSaleLinkView = nil;
 }
 
 -(void)layoutSubviews{
@@ -166,7 +181,7 @@ KSPropertyInitCustomView(container,CSLinearLayoutView,{
     CGRect frame = CGRectMake(0, 0, self.frame.size.width, containerHeight);
     _container = [[CSLinearLayoutView alloc] initWithFrame:frame];
     _container.alwaysBounceVertical = YES;
-    _container.backgroundColor = EHBgcor1;
+    _container.backgroundColor = EH_cor1;
 })
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "HSBussinessAfterSaleLInkView.h"
+#import "HSProductInfoModel.h"
 
 @interface HSBussinessAfterSaleLInkView()
 
@@ -24,6 +25,10 @@
     [self.businessAfterSaleArrowView setOpaque:YES];
     [self.endline setOpaque:YES];
     [self.topline setOpaque:YES];
+}
+
+-(void)dealloc{
+    
 }
 
 -(void)reloadData{
@@ -49,14 +54,11 @@ KSPropertyInitImageView(businessAfterSaleArrowView,{
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - clicked action method
 -(void)businessAfterSaleLinkBtnClicked:(id)sender{
-    HSApplicationModel* appModel = nil;
-    if (self.appModel) {
-        appModel = self.appModel;
-    }else{
-        appModel = [HSApplicationModel new];
-        appModel.appId = self.appId;
-    }
-    TBOpenURLFromTargetWithNativeParams(@"HSAfterSaleForAppViewController", self, nil, @{@"appModel":appModel});
+    HSProductInfoModel* productModel = [HSProductInfoModel new];
+    productModel.productId = self.deviceModel.productId?:self.bussinessDetailModel.productId;
+    productModel.productLogo = self.deviceModel.productLogo?:self.bussinessDetailModel.productLogo;
+    productModel.productName = self.deviceModel.productName?:self.bussinessDetailModel.productName;
+    TBOpenURLFromTargetWithNativeParams(@"HSAfterSaleForAppViewController", self, nil, @{@"productModel":productModel});
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

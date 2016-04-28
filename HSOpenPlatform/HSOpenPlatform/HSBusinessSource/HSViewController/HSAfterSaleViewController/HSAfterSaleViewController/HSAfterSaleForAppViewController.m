@@ -17,10 +17,10 @@
 - (id)initWithNavigatorURL:(NSURL *)URL query:(NSDictionary *)query nativeParams:(NSDictionary *)nativeParams {
     self = [super initWithNavigatorURL:URL query:query nativeParams:nativeParams];
     if (self) {
-        HSApplicationModel *appModel = [nativeParams objectForKey:@"appModel"];
-        NSLog(@"HSApplicationModel appModel = %@",appModel);
-        if (appModel) {
-            [self refreshDataWithAppModel:appModel];
+        HSProductInfoModel *productModel = [nativeParams objectForKey:@"productModel"];
+        NSLog(@"HSProductInfoModel productModel = %@",productModel);
+        if (productModel) {
+            [self refreshDataWithProductModel:productModel];
         }
     }
     return self;
@@ -41,8 +41,8 @@
     [self.afterSaleForAppView beginRefreshing];
 }
 
-- (void)refreshDataWithAppModel:(HSApplicationModel*)appModel {
-    [self.afterSaleForAppView refreshDataWithAppModel:appModel];
+- (void)refreshDataWithProductModel:(HSProductInfoModel*)productModel {
+    [self.afterSaleForAppView refreshDataWithProductModel:productModel];
 }
 
 - (HSAfterSaleForAppView *)afterSaleForAppView {

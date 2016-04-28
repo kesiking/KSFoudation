@@ -31,6 +31,10 @@ static NSString *const kHSArrorImageName        = @"icon_Arrow";
 
 @property (nonatomic, strong)CALayer *lineLayer;
 
+@property (nonatomic, strong)CALayer *bottomBgLayer;
+
+@property (nonatomic, strong)CALayer *bottomVLineLayer;
+
 @end
 
 @implementation HSHomeServicLocationCell
@@ -38,6 +42,10 @@ static NSString *const kHSArrorImageName        = @"icon_Arrow";
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        [self.contentView.layer addSublayer:self.bottomBgLayer];
+        [self.contentView.layer addSublayer:self.bottomVLineLayer];
+        [self.contentView.layer addSublayer:self.lineLayer];
+
         [self.contentView addSubview:self.positionImv];
         [self.contentView addSubview:self.phoneImv];
         [self.contentView addSubview:self.arrorImv];
@@ -46,7 +54,6 @@ static NSString *const kHSArrorImageName        = @"icon_Arrow";
         [self.contentView addSubview:self.addressLabel];
         [self.contentView addSubview:self.phoneLabel];
         [self.contentView addSubview:self.distanceLabel];
-        [self.contentView.layer addSublayer:self.lineLayer];
     }
     return self;
 }
@@ -60,7 +67,10 @@ static NSString *const kHSArrorImageName        = @"icon_Arrow";
 }
 
 - (NSString *)transformDistance:(NSInteger)distance {
-    if (distance/1000 == 0) {
+    if (distance == 0) {
+        return @"";
+    }
+    else if (distance/1000 == 0) {
         return [NSString stringWithFormat:@"%ld米",distance];
     }
     else {
@@ -72,15 +82,18 @@ static NSString *const kHSArrorImageName        = @"icon_Arrow";
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.positionImv.frame = CGRectMake(caculateNumber(25), caculateNumber(14), caculateNumber(14), caculateNumber(14));
-    self.phoneImv.frame = CGRectMake(caculateNumber(25), caculateNumber(60 + 15), caculateNumber(14), caculateNumber(14));
-    self.arrorImv.frame = CGRectMake(self.width - caculateNumber(12 + 9), caculateNumber(47/2.0), caculateNumber(9), caculateNumber(14));
-    self.lineLayer.frame = CGRectMake(caculateNumber(25), caculateNumber(60), self.width - caculateNumber(25), 0.5);
+    self.bottomBgLayer.frame = CGRectMake(0, self.height - caculateNumber(44), self.width, caculateNumber(44));
+    self.bottomVLineLayer.frame = CGRectMake(self.width/2.0, self.height - caculateNumber(44), 0.5, caculateNumber(44));
+    self.lineLayer.frame = CGRectMake(0, self.height - caculateNumber(44), self.width, 0.5);
+
+    self.positionImv.frame = CGRectMake(caculateNumber(15), caculateNumber(15), caculateNumber(14), caculateNumber(14));
+    self.phoneImv.frame = CGRectMake(caculateNumber(15), self.height - caculateNumber(14 + 15), caculateNumber(14), caculateNumber(14));
+    self.arrorImv.frame = CGRectMake(self.width - caculateNumber(15 + 9), (self.height-caculateNumber(44+14))/2.0, caculateNumber(9), caculateNumber(14));
     
-    self.nameLabel.frame = CGRectMake(self.positionImv.right + caculateNumber(10), caculateNumber(14), self.width - self.positionImv.width - self.arrorImv.width - caculateNumber(10 + 12), caculateNumber(14));
-    self.addressLabel.frame = CGRectMake(caculateNumber(25), self.positionImv.bottom + caculateNumber(8), self.width - caculateNumber(25) - caculateNumber(12) - self.arrorImv.width, caculateNumber(12));
-    self.phoneLabel.frame = CGRectMake(self.phoneImv.right + caculateNumber(10), caculateNumber(60 + 16), caculateNumber(270) - self.phoneImv.right - caculateNumber(10), caculateNumber(12));
-    self.distanceLabel.frame = CGRectMake(caculateNumber(270), caculateNumber(60 + 16), self.width - caculateNumber(270), caculateNumber(12));
+    self.nameLabel.frame = CGRectMake(self.positionImv.right + caculateNumber(10), caculateNumber(15), self.width - self.positionImv.width - self.arrorImv.width - caculateNumber(15+10+15), caculateNumber(15));
+    self.addressLabel.frame = CGRectMake(caculateNumber(15), self.nameLabel.bottom + caculateNumber(10), self.width - caculateNumber(15+15) - self.arrorImv.width, caculateNumber(12));
+    self.phoneLabel.frame = CGRectMake(self.phoneImv.right + caculateNumber(10), self.phoneImv.top, caculateNumber(270) - self.phoneImv.right - caculateNumber(10), caculateNumber(14));
+    self.distanceLabel.frame = CGRectMake(self.width/2.0+caculateNumber(85), self.phoneImv.top, self.width/2.0 - caculateNumber(85), caculateNumber(14));
 }
 
 #pragma mark - Subviews
@@ -108,8 +121,8 @@ static NSString *const kHSArrorImageName        = @"icon_Arrow";
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        _nameLabel.textColor = EHCor5;
-        _nameLabel.font = EHFont2;
+        _nameLabel.textColor = HS_FontCor2;
+        _nameLabel.font = HS_font3;
     }
     return _nameLabel;
 }
@@ -117,8 +130,8 @@ static NSString *const kHSArrorImageName        = @"icon_Arrow";
 - (UILabel *)addressLabel {
     if (!_addressLabel) {
         _addressLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        _addressLabel.textColor = EHCor4;
-        _addressLabel.font = EHFont5;
+        _addressLabel.textColor = HS_FontCor4;
+        _addressLabel.font = HS_font4;
     }
     return _addressLabel;
 }
@@ -126,8 +139,8 @@ static NSString *const kHSArrorImageName        = @"icon_Arrow";
 - (UILabel *)phoneLabel {
     if (!_phoneLabel) {
         _phoneLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        _phoneLabel.textColor = EHCor5;
-        _phoneLabel.font = EHFont5;
+        _phoneLabel.textColor = HS_FontCor3;
+        _phoneLabel.font = HS_font4;
     }
     return _phoneLabel;
 }
@@ -135,8 +148,8 @@ static NSString *const kHSArrorImageName        = @"icon_Arrow";
 - (UILabel *)distanceLabel {
     if (!_distanceLabel) {
         _distanceLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        _distanceLabel.textColor = EHCor5;
-        _distanceLabel.font = EHFont5;
+        _distanceLabel.textColor = HS_FontCor3;
+        _distanceLabel.font = HS_font4;
     }
     return _distanceLabel;
 }
@@ -144,9 +157,25 @@ static NSString *const kHSArrorImageName        = @"icon_Arrow";
 - (CALayer *)lineLayer {
     if (!_lineLayer) {
         _lineLayer = [CALayer layer];
-        _lineLayer.backgroundColor = EHLinecor1.CGColor;
+        _lineLayer.backgroundColor = HS_linecor1.CGColor;
     }
     return _lineLayer;
+}
+
+- (CALayer *)bottomBgLayer {
+    if (!_bottomBgLayer) {
+        _bottomBgLayer = [CALayer layer];
+        _bottomBgLayer.backgroundColor = HS_bgcor2.CGColor;
+    }
+    return _bottomBgLayer;
+}
+
+- (CALayer *)bottomVLineLayer {
+    if (!_bottomVLineLayer) {
+        _bottomVLineLayer = [CALayer layer];
+        _bottomVLineLayer.backgroundColor = HS_linecor1.CGColor;
+    }
+    return _bottomVLineLayer;
 }
 
 @end

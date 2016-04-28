@@ -36,6 +36,8 @@
         [_filePathArray addObject:@{@"filePath":sdImageDirectory,@"fileType":@"png"}];
     }
     
+    _classPrefixesToRecord = [NSMutableArray array];
+    
 }
 -(void)setOrignalHost:(NSString *)orignalHost{
     _orignalHost = orignalHost;

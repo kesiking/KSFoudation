@@ -11,7 +11,7 @@
 #import "HSFamilyAppInfoService.h"
 #import "HSApplicationIntroModel.h"
 #import "HSApplicationModel.h"
-#import "HSCommonAppListCollectionView.h"
+#import "HSHomeCustomerServiceCollectionView.h"
 #import "HSAppCollectionViewCell.h"
 #import "WeAppLoadingView.h"
 #import "MJRefresh.h"
@@ -22,17 +22,11 @@
 
 @interface HSServiceTabViewContioller ()
 
-{
-    HSFamilyAppListService *_familyAppListService;
-    //HSFamilyAppInfoService *_familyAppInfoService;
-    //NSMutableArray* _functionCollectionItemList;
-    
-}
 
 @property (strong, nonatomic) HSApplicationIntroModel *appIntro;
 //@property (strong, nonatomic) HSAppCollectionView *collectionTableView;
 //@property (strong, nonatomic) HSAppListCollectionView *collectionView;
-@property (strong, nonatomic) HSCommonAppListCollectionView *collectionView;
+@property (strong, nonatomic) HSHomeCustomerServiceCollectionView *collectionView;
 
 @property (strong, nonatomic) HSFamilyAppInfoService *familyAppInfoService;
 
@@ -52,18 +46,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"应用";
-    [self configGetFamilyAppList];
+    //[self configGetFamilyAppList];
     [self configGetFamilyAppIntro];
     
     [self.view addSubview:self.collectionView];
-    [self.view addSubview:self.refreshPageLoadingView];
+//    [self.view addSubview:self.refreshPageLoadingView];
 
-    self.nameStringArr = @[@"icon_lushang",@"icon_heluyou",@"icon_hemu",@"icon_zhaota",@"icon_mobaihe",@"icon_migu"];
+//    self.nameStringArr = @[@"icon_lushang",@"icon_heluyou",@"icon_hemu",@"icon_zhaota",@"icon_mobaihe",@"icon_migu",@"icon_gansu"];
     self.emptyDataTitle     = @"暂无数据";
     self.loadFailTitle      = @"下拉刷新";
     [self setRefreshHeaderOnCollectionView:self.collectionView];
     [self.collectionView.header beginRefreshing];
     [self setLoadMoreFooterOnCollectionView:self.collectionView];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -74,7 +69,7 @@
 #pragma mark - Common Methods
 
 - (void)refreshData {
-    [self configGetFamilyAppList];
+    [self.collectionView refreshDataRequest];
 }
 
 - (void)reloadFail {
@@ -87,40 +82,40 @@
     }
 }
 
-- (void)configGetFamilyAppList
-{
-    _familyAppListService = [HSFamilyAppListService new];
-    
-    WEAKSELF
-    _familyAppListService.serviceDidFinishLoadBlock = ^(WeAppBasicService* service){
-        EHLogInfo(@"getfamilyAppList完成！");
-        STRONGSELF
-        EHLogInfo(@"%@",service.dataList);
-        strongSelf.collectionView.dataArray = service.dataList;
-        for (NSInteger i=0; i<strongSelf.collectionView.dataArray.count; i++) {
-            HSApplicationModel *item = service.dataList[i];
-            item.placeholderImageStr = strongSelf.nameStringArr[i];
-        }
-        [strongSelf.collectionView reloadData];
-        [strongSelf.collectionView.header endRefreshing];
-        if (service.dataList.count == 0) {
-            [(MJRefreshAutoNormalFooter *)strongSelf.collectionView.footer setTitle:strongSelf.emptyDataTitle forState:MJRefreshStateNoMoreData];
-        }
-        else{
-            [(MJRefreshAutoNormalFooter *)strongSelf.collectionView.footer setTitle:@"" forState:MJRefreshStateNoMoreData];
-        }
-        
-    };
-    _familyAppListService.serviceDidFailLoadBlock = ^(WeAppBasicService* service,NSError* error){
-        STRONGSELF
-        //[strongSelf hideLoadingView];
-        [strongSelf reloadFail];
-        [WeAppToast toast:@"获取数据失败"];
-    };
-    
-    [_familyAppListService loadFamilyAppListData];
-    
-}
+//- (void)configGetFamilyAppList
+//{
+//    _familyAppListService = [HSFamilyAppListService new];
+//    
+//    WEAKSELF
+//    _familyAppListService.serviceDidFinishLoadBlock = ^(WeAppBasicService* service){
+//        EHLogInfo(@"getfamilyAppList完成！");
+//        STRONGSELF
+//        EHLogInfo(@"%@",service.dataList);
+//        strongSelf.collectionView.dataArray = service.dataList;
+//        for (NSInteger i=0; i<strongSelf.collectionView.dataArray.count; i++) {
+//            HSApplicationModel *item = service.dataList[i];
+//            item.placeholderImageStr = strongSelf.nameStringArr[i];
+//        }
+//        [strongSelf.collectionView reloadData];
+//        [strongSelf.collectionView.header endRefreshing];
+//        if (service.dataList.count == 0) {
+//            [(MJRefreshAutoNormalFooter *)strongSelf.collectionView.footer setTitle:strongSelf.emptyDataTitle forState:MJRefreshStateNoMoreData];
+//        }
+//        else{
+//            [(MJRefreshAutoNormalFooter *)strongSelf.collectionView.footer setTitle:@"" forState:MJRefreshStateNoMoreData];
+//        }
+//        
+//    };
+//    _familyAppListService.serviceDidFailLoadBlock = ^(WeAppBasicService* service,NSError* error){
+//        STRONGSELF
+//        //[strongSelf hideLoadingView];
+//        [strongSelf reloadFail];
+//        [WeAppToast toast:@"获取数据失败"];
+//    };
+//    
+//    [_familyAppListService loadFamilyAppListData];
+//    
+//}
 
 - (void)configGetFamilyAppIntro
 {
@@ -132,14 +127,20 @@
         STRONGSELF
         EHLogInfo(@"%@",service.dataList);
         strongSelf.appIntro = (HSApplicationIntroModel *)service.item;
-        NSLog(@"strongSelf.appIntro.appDetailIos = %@",strongSelf.appIntro.appDetailIos.appIOSURLScheme);
-        NSURL *appURLScheme = [NSURL URLWithString:strongSelf.appIntro.appDetailIos.appIOSURLScheme];
+//        NSLog(@"strongSelf.appIntro.appDetailIos = %@",strongSelf.appIntro.appDetailIos.appIOSURLScheme);
+        NSURL *appURLScheme = [NSURL URLWithString:strongSelf.appIntro.appURLScheme];
         BOOL isAppInstalled = [[UIApplication sharedApplication] canOpenURL:appURLScheme];
         if (isAppInstalled) {
             [[UIApplication sharedApplication] openURL:appURLScheme];
         }
         else{
-            TBOpenURLFromSourceAndParams(internalURL(@"HSFamilyAppIntroViewController"), strongSelf,@{WEB_REQUEST_URL_ADDRESS_KEY:strongSelf.appIntro.appExtUrl,WEB_VIEW_TITLE_KEY:strongSelf.appIntro.appName,});
+            if (strongSelf.appIntro.platUrl) {
+                TBOpenURLFromSourceAndParams(internalURL(@"HSFamilyAppIntroParentViewController"), strongSelf,@{WEB_REQUEST_URL_ADDRESS_KEY:strongSelf.appIntro.platUrl,@"appIntro":strongSelf.appIntro,@"appName":strongSelf.appIntro.appName,});
+            }
+            else{
+                TBOpenURLFromSourceAndParams(@"HSFamilyAppIntroCustomViewController", strongSelf, @{@"appIntro":strongSelf.appIntro,});
+            }
+            
             
         }
     };
@@ -154,30 +155,52 @@
 
 #pragma mark - setter and getter
 
--(HSCommonAppListCollectionView *)collectionView{
+-(HSHomeCustomerServiceCollectionView *)collectionView{
     if (!_collectionView) {
         UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc] init];
         [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-        //        flowLayout.itemSize = CGSizeMake(SCREEN_WIDTH/3,150*SCREEN_SCALE);
-        //        flowLayout.sectionInset = UIEdgeInsetsZero;
-        //        flowLayout.minimumInteritemSpacing = 0.;
-        //        flowLayout.minimumLineSpacing = 0.;
-//        _collectionView = [[HSCommonAppListCollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
-        _collectionView = [[HSCommonAppListCollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:flowLayout cellClass:[HSAppCollectionViewCell class]];
-        _collectionView.cellWidth = SCREEN_WIDTH/3;
-        _collectionView.cellHeight = 150;
+        flowLayout.minimumLineSpacing = 0;
+        flowLayout.minimumInteritemSpacing = 0;
+        _collectionView = [[HSHomeCustomerServiceCollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:flowLayout cellClass:[HSAppCollectionViewCell class]];
+        _collectionView.cellWidth = SCREEN_WIDTH/4;
+        _collectionView.cellHeight = 111;
+        
         CALayer *topLine = [CALayer layer];
         [topLine setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.5)];
         topLine.backgroundColor = EHLinecor1.CGColor;
         [_collectionView.layer addSublayer:topLine];
+        
+        [_collectionView refreshDataRequest];
+
         WEAKSELF
         _collectionView.itemIndexBlock = ^(NSIndexPath *appIndexPath){
             STRONGSELF
             HSApplicationModel *appModel = strongSelf.collectionView.dataArray[appIndexPath.row];
-            [strongSelf configGetFamilyAppIntro];
-            [strongSelf.familyAppInfoService loadFamilyAppInfoWithAppId:appModel.appId];
+            if (appModel.appId) {
+                [strongSelf configGetFamilyAppIntro];
+                [strongSelf.familyAppInfoService loadFamilyAppInfoWithAppId:appModel.appId];
+            }
+            
         };
-        return _collectionView;
+        _collectionView.serviceDidFinishLoadBlock = ^(){
+            STRONGSELF
+            //[strongSelf.collectionView reloadData];
+//            [strongSelf.collectionView refreshDataRequest];
+            [strongSelf.collectionView.header endRefreshing];
+            if (strongSelf.collectionView.dataArray.count == 0) {
+                [(MJRefreshAutoNormalFooter *)strongSelf.collectionView.footer setTitle:strongSelf.emptyDataTitle forState:MJRefreshStateNoMoreData];
+            }
+            else{
+                [(MJRefreshAutoNormalFooter *)strongSelf.collectionView.footer setTitle:@"" forState:MJRefreshStateNoMoreData];
+            }
+        };
+        _collectionView.serviceDidFailLoadBlock = ^(){
+            STRONGSELF
+            [strongSelf reloadFail];
+            [WeAppToast toast:@"获取数据失败"];
+            
+        };
+        //return _collectionView;
     }
     return _collectionView;
 }
@@ -191,7 +214,7 @@
     return _refreshPageLoadingView;
 }
 
-- (void)setRefreshHeaderOnCollectionView:(HSCommonAppListCollectionView *)collectionView {
+- (void)setRefreshHeaderOnCollectionView:(HSHomeCustomerServiceCollectionView *)collectionView {
     MJRefreshHeader *header = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
     // 设置文字
     //    [header setTitle:@"下拉加载更多" forState:MJRefreshStateIdle];
@@ -204,7 +227,7 @@
     collectionView.header = header;
 }
 
-- (void)setLoadMoreFooterOnCollectionView:(HSCommonAppListCollectionView *)collectionView {
+- (void)setLoadMoreFooterOnCollectionView:(HSHomeCustomerServiceCollectionView *)collectionView {
     collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:nil];
     [(MJRefreshAutoNormalFooter *)self.collectionView.footer setTitle:@"" forState:MJRefreshStateNoMoreData];
     //不再触发动画过程，显示加载完毕的效果，只显示文本

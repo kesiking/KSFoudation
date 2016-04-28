@@ -7,6 +7,8 @@
 //  https://github.com/samvermette/SVWebViewController
 #import "IMYWebView.h"
 
+#define SVWebViewToolBarColor ([UIColor colorWithWhite:0.4 alpha:1])
+
 @interface SVWebViewController : UIViewController<IMYWebViewDelegate>
 
 - (instancetype)initWithAddress:(NSString*)urlString;

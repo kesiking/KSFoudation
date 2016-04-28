@@ -11,7 +11,7 @@
 #define kHSAfterSaleViewHeaderHeight     caculateNumber(44.0)
 #define kHSAfterSaleViewFooterHeight     caculateNumber(15)
 #define kHSNationalAfterSaleCellHeight   caculateNumber(88)
-#define kHSLocalAfterSaleCellHeight      caculateNumber(105)
+#define kHSLocalAfterSaleCellHeight      caculateNumber(110)
 
 @interface HSAfterSaleListView ()
 
@@ -32,7 +32,6 @@
         if ([self respondsToSelector:@selector(setLayoutMargins:)]) {
             [self setLayoutMargins: UIEdgeInsetsZero];
         }
-        self.nationalAfterSaleModel = [[HSNationalAfterSaleModel alloc]init];
     }
     return self;
 }
@@ -43,7 +42,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return (section == 1?self.dataArray.count:1);
+    return (section == 1?self.dataArray.count:(!self.nationalAfterSaleModel?0:1));
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -64,8 +63,6 @@
         return cell;
     }
 }
-
-
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

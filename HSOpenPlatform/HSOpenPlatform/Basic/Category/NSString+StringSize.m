@@ -10,12 +10,15 @@
 
 @implementation NSString (StringSize)
 
-- (CGSize)sizeWithFontSize:(float)fontSize Width:(float)width{
-    UIFont *font = [UIFont systemFontOfSize:fontSize];
-    
+- (CGSize)sizeWithFont:(UIFont *)font Width:(float)width {
     NSDictionary *attribute = [NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName, nil];
     CGRect rect = [self boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:attribute context:nil];
     return rect.size;
+}
+
+- (CGSize)sizeWithFontSize:(float)fontSize Width:(float)width{
+    UIFont *font = [UIFont systemFontOfSize:fontSize];
+    return [self sizeWithFont:font Width:width];
 }
 
 @end

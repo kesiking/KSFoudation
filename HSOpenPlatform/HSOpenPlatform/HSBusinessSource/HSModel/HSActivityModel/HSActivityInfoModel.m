@@ -10,4 +10,17 @@
 
 @implementation HSActivityInfoModel
 
++(TBJSONModelKeyMapper*)modelKeyMapper{
+    NSDictionary* dict = @{@"id":@"activityId",
+                           @"startTime":@"activityStartTime",
+                           @"endTime":@"activityEndTime",
+                           @"targetDesc":@"activityTargetDesc",
+                           @"status":@"activityStatus"};
+    return [[TBJSONModelKeyMapper alloc] initWithDictionary:dict];
+}
+
+-(NSString *)activityImageUrlForList{
+    return self.activityBanner;
+}
+
 @end

@@ -9,6 +9,8 @@
 #import "EHUtils.h"
 #import "NSString+TrimmingAdditions.h"
 #import "AFNetworkReachabilityManager.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <Security/Security.h>
 
 @implementation EHUtils
 
@@ -282,6 +284,82 @@
 + (BOOL)networkReachable
 {
     return [[AFNetworkReachabilityManager sharedManager] isReachable];
+}
+
+#define DESKEY @"chenjian@chinamobile.com"
+
++ (NSString*)tripleDES:(NSString*)plainText encryptOrDecrypt:(CCOperation)encryptOrDecrypt
+{
+    if ([EHUtils isEmptyString:plainText]) {
+        return nil;
+    }
+    
+    const void *vplainText;
+    size_t plainTextBufferSize;
+    
+    if (encryptOrDecrypt == kCCDecrypt)//解密
+    {
+        
+        NSData *EncryptData = [[NSData alloc] initWithBase64EncodedString:plainText options:0];
+        plainTextBufferSize = [EncryptData length];
+        vplainText = [EncryptData bytes];
+    }
+    else //加密
+    {
+        NSData* data = [plainText dataUsingEncoding:NSUTF8StringEncoding];
+        plainTextBufferSize = [data length];
+        vplainText = (const void *)[data bytes];
+    }
+    
+    CCCryptorStatus ccStatus;
+    uint8_t *bufferPtr = NULL;
+    size_t bufferPtrSize = 0;
+    size_t movedBytes = 0;
+    
+    bufferPtrSize = (plainTextBufferSize + kCCBlockSize3DES) & ~(kCCBlockSize3DES - 1);
+    bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
+    memset((void *)bufferPtr, 0x0, bufferPtrSize);
+    // memset((void *) iv, 0x0, (size_t) sizeof(iv));
+    
+    const void *vkey = (const void *)[DESKEY UTF8String];
+    // NSString *initVec = @"init Vec";
+    //const void *vinitVec = (const void *) [initVec UTF8String];
+    //  Byte iv[] = {0x12, 0x34, 0x56, 0x78, 0x90, 0xAB, 0xCD, 0xEF};
+    ccStatus = CCCrypt(encryptOrDecrypt,
+                       kCCAlgorithm3DES,
+                       kCCOptionPKCS7Padding | kCCOptionECBMode,
+                       vkey,
+                       kCCKeySize3DES,
+                       nil,
+                       vplainText,
+                       plainTextBufferSize,
+                       (void *)bufferPtr,
+                       bufferPtrSize,
+                       &movedBytes);
+    if (ccStatus == kCCSuccess) EHLogInfo(@"SUCCESS");
+    else if (ccStatus == kCCParamError) EHLogInfo(@"PARAM ERROR");
+    else if (ccStatus == kCCBufferTooSmall) EHLogInfo(@"BUFFER TOO SMALL");
+    else if (ccStatus == kCCMemoryFailure) EHLogInfo(@"MEMORY FAILURE");
+    else if (ccStatus == kCCAlignmentError) EHLogInfo(@"ALIGNMENT");
+    else if (ccStatus == kCCDecodeError) EHLogInfo(@"DECODE ERROR");
+    else if (ccStatus == kCCUnimplemented) EHLogInfo(@"UNIMPLEMENTED");
+    
+    NSString *result;
+    
+    if (encryptOrDecrypt == kCCDecrypt)
+    {
+        result = [[NSString alloc] initWithData:[NSData dataWithBytes:(const void *)bufferPtr
+                                                               length:(NSUInteger)movedBytes]
+                                       encoding:NSUTF8StringEncoding];
+    }
+    else
+    {
+        NSData *myData = [NSData dataWithBytes:(const void *)bufferPtr length:(NSUInteger)movedBytes];
+        result = [myData base64EncodedStringWithOptions:0];
+    }
+    
+    free(bufferPtr);
+    return result;
 }
 
 @end

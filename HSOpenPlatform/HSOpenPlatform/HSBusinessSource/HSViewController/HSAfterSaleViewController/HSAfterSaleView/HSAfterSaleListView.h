@@ -10,11 +10,11 @@
 #import "HSApplicationModel.h"
 #import "HSHomeServicLocationCell.h"
 #import "HSNationalAfterSaleCell.h"
+#import "HSAfterSaleModel.h"
+#import "HSProductInfoModel.h"
 
 @interface HSAfterSaleListView : HSBaseTableView
 
-@property (nonatomic, strong) HSNationalAfterSaleModel *nationalAfterSaleModel;
-
-@property (nonatomic, strong) HSApplicationModel *appModel;
+@property (nonatomic, strong) HSAfterSaleModel *nationalAfterSaleModel;
 
 @end

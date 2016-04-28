@@ -7,7 +7,6 @@
 //
 
 #import "HSBaseTableView.h"
-#import "MJRefresh.h"
 #import "WeAppLoadingView.h"
 
 @interface HSBaseTableView ()
@@ -107,41 +106,48 @@
     if ([self.header isRefreshing]) {
         [self.header endRefreshing];
         self.currentPage = 1;
-        if (self.dataArray.count == 0) {
-            [(MJRefreshAutoNormalFooter *)self.footer setTitle:self.emptyDataTitle forState:MJRefreshStateNoMoreData];
-            [self.footer noticeNoMoreData];
-        }
-        else {
-            if (self.dataArray.count % self.offset == 0) {
-                if (self.needLoadMoreFooter) {
-                    [self.footer endRefreshing];
-                }
-            }
-            else {
-                if (self.needLoadMoreFooter) {
-                    [(MJRefreshAutoNormalFooter *)self.footer setTitle:self.noMoreDataTitle forState:MJRefreshStateNoMoreData];
-                }
-                else {
-                    [(MJRefreshAutoNormalFooter *)self.footer setTitle:@"" forState:MJRefreshStateNoMoreData];
-                }
-                [self.footer noticeNoMoreData];
-            }
-        }
         
+        [self updateFooterStateAfterRefreshing];
     }
     
     else if ([self.footer isRefreshing]) {
-        if (self.dataArray.count == self.offset || self.dataArray.count % self.offset != 0) {
-            [(MJRefreshAutoNormalFooter *)self.footer setTitle:self.noMoreDataTitle forState:MJRefreshStateNoMoreData];
-            [self.footer noticeNoMoreData];
-        }
-        else {
-            [self.footer endRefreshing];
-        }
+        [self updateFooterStateAfterLoadingMore];
     }
     self.previousPage = self.currentPage;
 }
 
+- (void)updateFooterStateAfterRefreshing {
+    if (self.dataArray.count == 0) {
+        [(MJRefreshAutoNormalFooter *)self.footer setTitle:self.emptyDataTitle forState:MJRefreshStateNoMoreData];
+        [self.footer noticeNoMoreData];
+    }
+    else {
+        if (self.dataArray.count % self.offset == 0) {
+            if (self.needLoadMoreFooter) {
+                [self.footer endRefreshing];
+            }
+        }
+        else {
+            if (self.needLoadMoreFooter) {
+                [(MJRefreshAutoNormalFooter *)self.footer setTitle:self.noMoreDataTitle forState:MJRefreshStateNoMoreData];
+            }
+            else {
+                [(MJRefreshAutoNormalFooter *)self.footer setTitle:@"" forState:MJRefreshStateNoMoreData];
+            }
+            [self.footer noticeNoMoreData];
+        }
+    }
+}
+
+- (void)updateFooterStateAfterLoadingMore {
+    if (self.dataArray.count == self.offset || self.dataArray.count % self.offset != 0) {
+        [(MJRefreshAutoNormalFooter *)self.footer setTitle:self.noMoreDataTitle forState:MJRefreshStateNoMoreData];
+        [self.footer noticeNoMoreData];
+    }
+    else {
+        [self.footer endRefreshing];
+    }
+}
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

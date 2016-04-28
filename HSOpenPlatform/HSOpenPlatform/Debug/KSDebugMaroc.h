@@ -14,4 +14,8 @@
 
 #define KSDebugBasicViewDidClosedNotification @"KSDebugBasicViewDidClosedNotification"
 
+#define KSDebugBasicViewHideOperationViewNotification @"KSDebugBasicViewHideOperationViewNotification"
+
+#define KSDebugBasicViewShowOperationViewNotification @"KSDebugBasicViewShowOperationViewNotification"
+
 #endif /* KSDebugMaroc_h */

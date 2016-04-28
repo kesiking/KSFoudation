@@ -189,7 +189,7 @@
         [strongSelf.checkRegister checkRegisterWithAccountName:((KSResetViewCtl*)resetViewCtl).text_phoneNum.text checkRegister:^(BOOL isRegister,NSError* error) {
             if (isRegister) {
                 // 已经注册过则申请发送邀请码
-                [strongSelf.validateCodeService sendValidateCodeWithAccountName:((KSResetViewCtl*)resetViewCtl).text_phoneNum.text];
+                [strongSelf.validateCodeService sendValidateCodeWithAccountName:((KSResetViewCtl*)resetViewCtl).text_phoneNum.text withOptType:KSLoginServiceSendValidateCodeResetPassword];
             }else{
                 [strongSelf hideLoadingView];
                 [strongSelf.resetViewCtl resetSmsCodeButton];
@@ -212,7 +212,7 @@
             return;
         }
         
-        [strongSelf.validateCodeCheckService checkValidateCodeWithAccountName:resetViewCtl.text_phoneNum.text validateCode:resetViewCtl.text_smsCode.text];
+        [strongSelf.validateCodeCheckService checkValidateCodeWithAccountName:resetViewCtl.text_phoneNum.text validateCode:resetViewCtl.text_smsCode.text withOptType:KSLoginServiceSendValidateCodeResetPassword];
         
     };
 }

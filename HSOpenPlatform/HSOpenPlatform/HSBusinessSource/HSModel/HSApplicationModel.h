@@ -10,11 +10,27 @@
 
 @interface HSApplicationModel : WeAppComponentBaseItem
 
-@property (nonatomic, strong) NSString *appId;
+@property (nonatomic, strong) NSNumber *appId;//待更新
+
+@property (nonatomic, strong) NSNumber *businessId;
+
+@property (nonatomic, strong) NSNumber *partnerId;
+
+@property (nonatomic, strong) NSNumber *productId;
 
 @property (nonatomic, strong) NSString *appName;
 
-@property (nonatomic, strong) NSString *appIconUrl;
+@property (nonatomic, strong) NSString *appInfo;
+
+@property (nonatomic, strong) NSString *appLogo;
+
+@property (nonatomic, strong) NSString *platUrl;
+
+@property (nonatomic, assign) NSInteger status;
+
+@property (nonatomic, strong) NSString *createDate;
+
+@property (nonatomic, strong) NSString *updateDate;
 
 @property (nonatomic, strong) NSString *placeholderImageStr;
 

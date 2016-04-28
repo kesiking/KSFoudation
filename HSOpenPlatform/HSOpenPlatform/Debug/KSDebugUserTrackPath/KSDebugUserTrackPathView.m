@@ -209,6 +209,7 @@ void KSDebug_uncaughtExceptionHandler(NSException *exception){
     NSArray *arr = [exception callStackSymbols];
     NSString *reason = [exception reason];
     NSString *name = [exception name];
+
     
     NSString* arrStr = nil;
     if (arr) {

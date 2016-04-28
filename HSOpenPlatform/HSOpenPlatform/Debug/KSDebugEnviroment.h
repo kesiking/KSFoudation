@@ -30,6 +30,15 @@
  */
 @property(nonatomic, strong)  NSMutableArray*         filePathArray;
 
+/*!
+ *  @author 孟希羲, 2016-04-26 13:04:46
+ *
+ *  @brief classPrefixesToRecord用于检查内存泄露工具，传入如@[@"HS",@"UITableView"]表示跟踪HS开头的NSObject及UITableView类
+ *
+ *  @since 1.0
+ */
+@property(nonatomic, strong)  NSMutableArray <NSString *> *   classPrefixesToRecord;
+
 // 重定向请求的参数，如果需要重定向请求可填充
 @property (nonatomic, strong)  NSString*              redirectHost;
 

@@ -44,19 +44,22 @@
 -(void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation
 updatingLocation:(BOOL)updatingLocation
 {
-    if(updatingLocation)
-    {
+    if(updatingLocation) {
+        self.mapView.showsUserLocation = NO;
         //取出当前位置的坐标
         NSLog(@"updatingLocation :latitude : %f,longitude: %f",userLocation.coordinate.latitude,userLocation.coordinate.longitude);
         self.coordinate = userLocation.coordinate;
         !self.userLocationLoadFinishedBlock?:self.userLocationLoadFinishedBlock(userLocation.coordinate);
+    }
+    else {
         self.mapView.showsUserLocation = NO;
+        !self.userLocationLoadFailedBlock?:self.userLocationLoadFailedBlock();
     }
 }
 
 - (void)mapView:(MAMapView *)mapView didFailToLocateUserWithError:(NSError *)error{
     [WeAppToast toast:@"定位失败，请检查定位设置"];
-
+    self.mapView.showsUserLocation = NO;
     !self.userLocationLoadFailedBlock?:self.userLocationLoadFailedBlock();
 }
 

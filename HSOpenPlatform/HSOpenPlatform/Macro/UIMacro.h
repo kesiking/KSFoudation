@@ -23,6 +23,7 @@
 #import "UIButton+KSTouchEvent.h"
 #import "EHSocialShareHandle.h"
 #import "HSPopMenuListView.h"
+#import "UIImage+Resize.h"
 
 //#define EH_USE_NAVIGATION_NOTIFICATION
 
@@ -32,15 +33,52 @@
 
 #define UI_STATU_HEIGHT (IOS_VERSION<7?20:0)
 
-#define UINAVIGATIONBAR_COLOR RGB(0xf8, 0xf8, 0xf8)
-#define UINAVIGATIONBAR_TITLE_COLOR EHCor5
-#define UINAVIGATIONBAR_COMMON_COLOR EH_cor9
+#define UINAVIGATIONBAR_COLOR RGB(0x2c, 0xcb, 0x6f)
+#define UINAVIGATIONBAR_TITLE_COLOR EH_cor1
+#define UINAVIGATIONBAR_COMMON_COLOR HS_FontCor5
 
 #define UINAVIGATIONBAR_TITLE_SIZE EHSiz0
 
 #define UISYSTEM_FAILED_ERROR_TITLE    @"服务器在偷懒，请稍后再试"
 #define UISYSTEM_NETWORK_ERROR_TITLE   @"网络连接异常"
 #define UISYSTEM_NETWORK_ERROR_MESSAGE @"当前网络异常，请检查您的网络设置！"
+
+#define HS_FontCor1 RGB(0xff, 0xff, 0xff)
+#define HS_FontCor2 RGB(0x33, 0x33, 0x33)
+#define HS_FontCor3 RGB(0x66, 0x66, 0x66)
+#define HS_FontCor4 RGB(0x99, 0x99, 0x99)
+#define HS_FontCor5 RGB(0x2c, 0xcb, 0x6f)
+#define HS_FontCor6 RGB(0xff, 0x3e, 0x3e)
+
+#define HS_linecor1 RGB(0xda, 0xda, 0xda)
+#define HS_linecor2 RGB(0xe6, 0xe6, 0xe6)
+
+#define HS_bgcor1 RGB(0xff, 0xff, 0xff)
+#define HS_bgcor2 RGB(0xfa, 0xfa, 0xfa)
+#define HS_bgcor3 RGB(0xef, 0xef, 0xf4)
+#define HS_bgcor4 RGB(0xf4, 0xf4, 0xf9)
+#define HS_bgcor5 RGB(0xee, 0xee, 0xee)
+
+#define HS_fontsiz1 17//34px
+#define HS_fontsiz2 15//30px
+#define HS_fontsiz3 14//28px
+#define HS_fontsiz4 13//26px
+#define HS_fontsiz5 12//24px
+#define HS_fontsiz6 10//20px
+
+#define HS_font1 [UIFont systemFontOfSize:HS_fontsiz1]//34px
+#define HS_font2 [UIFont systemFontOfSize:HS_fontsiz2]//30px
+#define HS_font3 [UIFont systemFontOfSize:HS_fontsiz3]//28px
+#define HS_font4 [UIFont systemFontOfSize:HS_fontsiz4]//26px
+#define HS_font5 [UIFont systemFontOfSize:HS_fontsiz5]//24px
+#define HS_font6 [UIFont systemFontOfSize:HS_fontsiz6]//20px
+
+#define HS_normal_whitecor RGB(0xff, 0xff, 0xff)
+#define HS_select_whitecor RGB(0xf4, 0xf4, 0xf9)
+#define HS_normal_greencor RGB(0x2c, 0xcb, 0x6f)
+#define HS_select_greencor RGB(0x0a, 0xac, 0x4f)
+
+#pragma eHome
 
 #define EH_bgcor1 RGB(0xf0, 0xf0, 0xf0)
 #define EH_bgcor2 RGB_A(0x00, 0x00, 0x00, 0.5)

@@ -10,6 +10,6 @@
 
 @interface HSOtherAppInfoService : KSAdapterService
 
--(void)loadOtherAppInfoWithAppId:(NSString*)appId;
+-(void)loadOtherAppInfoWithAppId:(NSNumber*)appId;
 
 @end

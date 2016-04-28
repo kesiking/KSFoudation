@@ -10,13 +10,13 @@
 
 @implementation HSBusinessDetailListService
 
--(void)loadBusinessDetailListWithUserPhone:(NSString*)userPhone appId:(NSString*)appId{
+-(void)loadBusinessDetailListWithUserPhone:(NSString*)userPhone productId:(NSString*)productId{
     if ([EHUtils isEmptyString:userPhone]) {
         EHLogError(@"userPhone is nil!");
         return;
     }
-    if ([EHUtils isEmptyString:appId]) {
-        EHLogError(@"appId is nil!");
+    if ([EHUtils isEmptyString:productId]) {
+        EHLogError(@"productId is nil!");
         return;
     }
     
@@ -25,13 +25,13 @@
     if (userPhone) {
         [params setObject:userPhone forKey:@"phone"];
     }
-    if (appId) {
-        [params setObject:appId forKey:@"appId"];
+    if (productId) {
+        [params setObject:productId forKey:@"productId"];
     }
     
     self.itemClass = [HSBusinessDetailModel class];
     
-    [self loadDataListWithAPIName:kHSGetBusinessUserInfoListApiName params:params version:nil];
+    [self loadDataListWithAPIName:kHSGetBusinessUserNickNameApiName params:params version:nil];
 }
 
 @end

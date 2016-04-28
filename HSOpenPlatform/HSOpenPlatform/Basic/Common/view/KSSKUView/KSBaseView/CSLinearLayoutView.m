@@ -66,8 +66,8 @@
 #pragma mark - Lifecycle
 
 - (void)dealloc {
-
-
+    [_items removeAllObjects];
+    _items = nil;
 }
 
 
@@ -364,7 +364,7 @@
     self = [super init];
     if (self) {
         self.view = aView;
-        [self.view setLinearLayoutItem:self];
+        [aView setLinearLayoutItem:self];
         self.horizontalAlignment = CSLinearLayoutItemHorizontalAlignmentLeft;
         self.verticalAlignment = CSLinearLayoutItemVerticalAlignmentTop;
         self.fillMode = CSLinearLayoutItemFillModeNormal;

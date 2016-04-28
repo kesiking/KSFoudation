@@ -12,21 +12,22 @@
 #import "KSSecurityPolicyAdapter.h"
 #import "KSAuthenticationCenter.h"
 #import "KSNetworkDataMock.h"
+#import "KSAdapterNetWork+AuthenticationChallenge.h"
 
-//#define LINK_TEST_NETWORK
+#define LINK_TEST_NETWORK
 
 #ifdef LINK_TEST_NETWORK
-    #define DEFAULT_SCHEME @"http"
-    #define DEFAULT_HOST @"192.168.7.245"
-    #define DEFAULT_PORT @"8081"
+    #define DEFAULT_SCHEME @"https"
+    #define DEFAULT_HOST @"112.5.141.83"
+    #define DEFAULT_PORT @"10203"
+    #define DEFAULT_PARH @"fn_inte/"
 #else
-    #define DEFAULT_SCHEME APP_DEFAULT_SCHEME
+    #define DEFAULT_SCHEME @"https"
     #define DEFAULT_HOST @"112.54.207.12"
     #define DEFAULT_PORT @"9080"
+    #define DEFAULT_PARH @"BMS/"
 #endif
 
-//#define DEFAULT_PARH @"PersonSafeManagement/"
-#define DEFAULT_PARH @"BMS/"
 #define KS_MANWU_BASE_URL [NSString stringWithFormat:@"%@://%@:%@/%@",DEFAULT_SCHEME,DEFAULT_HOST,DEFAULT_PORT,DEFAULT_PARH]
 
 // po [[NSString alloc] initWithData:self.responseData encoding:4]
@@ -93,10 +94,12 @@ typedef NS_ENUM(NSInteger, KSAdapterNetWorkResponseStatus) {
         void(^errorCompleteBlock)(AFHTTPRequestOperation *operation, NSError *error) = [self getErrorCompleteBlockWithApiName:apiName withParam:param jsonTopKey:jsonTopKey serviceContext:serviceContext onSuccess:successBlock onError:errorBlock onCancel:cancelBlock];
         
         [self preProccessParamWithParam:newParams serviceContext:serviceContext];
+        
+        path = [self getSignPathWithPath:path param:newParams serviceContext:serviceContext];
 
         AFHTTPRequestOperationManager *httpRequestOM = [self getAFHTTPRequestOperationManagerWithServiceContext:serviceContext];
         if ([serviceContext.serviceContextDict objectForKey:@"Content-Type"]) {
-            [httpRequestOM.requestSerializer setValue:@"text/html" forHTTPHeaderField:@"Content-Type"];
+            [httpRequestOM.requestSerializer setValue:[serviceContext.serviceContextDict objectForKey:@"Content-Type"] forHTTPHeaderField:@"Content-Type"];
         }else{
             [httpRequestOM.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
         }
@@ -112,6 +115,9 @@ typedef NS_ENUM(NSInteger, KSAdapterNetWorkResponseStatus) {
                 errorCompleteBlock(operation, error);
             }
         }];
+        if (self.needAuthenticationChallenge) {
+            [requestOperation setWillSendRequestForAuthenticationChallengeBlock:[self getAuthenticationChallengeBlock]];
+        }
         if (self.downloadProgress) {
             [requestOperation setDownloadProgressBlock:self.downloadProgress];
         }
@@ -151,12 +157,39 @@ typedef NS_ENUM(NSInteger, KSAdapterNetWorkResponseStatus) {
     [newParams removeObjectForKey:SERVICE_RESPONSE_JSON_TOP_KEY];
 }
 
+-(NSString*)getSignPathWithPath:(NSString*)path param:(NSMutableDictionary*)newParams serviceContext:(WeAppServiceContext*)serviceContext{
+    if (self.addSignParamBlock) {
+        NSDictionary* signParam = self.addSignParamBlock(newParams);
+        NSMutableString * newPath = [NSMutableString stringWithFormat:@"%@",path];
+        
+        NSArray* allKeys = [signParam allKeys];
+        if ([allKeys count] == 0) {
+            return path;
+        }
+        [newPath appendString:@"?"];
+        for (NSString* key in allKeys) {
+            NSString* value = [signParam objectForKey:key];
+            [newPath appendString:key];
+            [newPath appendString:@"="];
+            [newPath appendString:value];
+            //避免最后一个key=value后拼上&符号
+            if ([allKeys indexOfObject:key] < [allKeys count] - 1) {
+                [newPath appendString:@"&"];
+            }
+        }
+        return newPath;
+    }
+    return path;
+}
+
 -(AFHTTPRequestOperationManager*)getAFHTTPRequestOperationManagerWithServiceContext:(WeAppServiceContext*)serviceContext{
     AFHTTPRequestOperationManager *httpRequestOM = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:serviceContext.baseUrl?:KS_MANWU_BASE_URL]];
-    httpRequestOM.shouldUseCredentialStorage = NO;
+//    httpRequestOM.shouldUseCredentialStorage = NO;
     /**** SSL Pinning ****/
     KSSecurityPolicyAdapter *securityPolicy = [KSSecurityPolicyAdapter policyWithPinningMode:AFSSLPinningModeCertificate];
     securityPolicy.allowInvalidCertificates = YES;
+    securityPolicy.validatesDomainName = NO;
+    self.securityPolicy = securityPolicy;
     [httpRequestOM setSecurityPolicy:securityPolicy];
     /**** SSL Pinning ****/
     
@@ -165,6 +198,9 @@ typedef NS_ENUM(NSInteger, KSAdapterNetWorkResponseStatus) {
         [httpRequestOM.requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, NSDictionary *parameters, NSError *__autoreleasing *error) {
             if ([parameters isKindOfClass:[NSString class]]) {
                 return (NSString*)parameters;
+            }
+            if ([parameters count] == 0) {
+                return nil;
             }
             NSError* jsonError = nil;
             NSData*  jsonData = [NSJSONSerialization
@@ -196,12 +232,15 @@ typedef NS_ENUM(NSInteger, KSAdapterNetWorkResponseStatus) {
             /**** 输出 参数 ****/
             NSString* resultString = [responseDict objectForKey:[serviceContext.serviceContextDict objectForKey:@"resultString"]?:@"message"];
             NSString* resultTime = [responseDict objectForKey:[serviceContext.serviceContextDict objectForKey:@"resultTime"]?:@"time"];
+            NSString* resultCodeStr = [responseDict objectForKey:[serviceContext.serviceContextDict objectForKey:@"resultCode"]?:@"status"];
             NSUInteger resultCode = [[responseDict objectForKey:[serviceContext.serviceContextDict objectForKey:@"resultCode"]?:@"status"] integerValue];
             NSUInteger resultDataCount = [[responseDict objectForKey:[serviceContext.serviceContextDict objectForKey:@"resultDataCount"]?:@"dataCounts"] integerValue];
             EHLogInfo(@"\n 服务器响应成功 ----> requestURL : %@ \n requestParams :%@ \nrequest result with \n resultTime:%@,resultstring:%@,resultcode:%lu,apiName:%@,resultDataCount:%lu",operation.request.URL, param?:@{},resultTime,resultString,resultCode,apiName,resultDataCount);
             /**** 输出 参数 ****/
             
-            if (resultCode == KSAdapterNetWorkResponseStatus_Success) {
+            BOOL resultSuccess = (resultCodeStr && [resultCodeStr isKindOfClass:[NSString class]] && [resultCodeStr isEqualToString:KSAdapterNetWorkResponseStatusCode_Success]) || resultCode == KSAdapterNetWorkResponseStatus_Success;
+            
+            if (resultSuccess) {
                 EHLogInfo(@"\n ----> request success responseDict = \n %@",responseDict);
                 successBlock(responseDict);
             }else{

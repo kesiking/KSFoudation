@@ -31,8 +31,6 @@
     Class urlResolverClass = nil;
     if ([KSConfigCenter isHttpUrlWithURL:action.URL]) {
         urlResolverClass = [KSConfigCenter getWebViewUrlResolverClassWithURL:action.URL];
-    }else if([KSConfigCenter isReactUrlWithURL:action.URL]){
-        urlResolverClass = [KSConfigCenter getReactViewUrlResolverClassWithURL:action.URL];
     }else{
         NSString* classNamePath = [action isActionURLLegal] ? [action getURLPathWithoutSlash] : action.urlPath;
         urlResolverClass = [KSConfigCenter getUrlResolverClassWithName:classNamePath];
@@ -50,18 +48,6 @@
     if (!action.targetController) {
         return NO;
     }
-#ifdef kAuthenticationCenterMarocExist
-    if (action.navigationParams.needLogin && ![KSAuthenticationCenter isLogin]) {
-        [[KSAuthenticationCenter sharedCenter] authenticateWithLoginActionBlock:^(BOOL loginSuccess) {
-            if (loginSuccess){
-                TBOpenURLFromTargetWithNativeParams(action.urlPath, action.sourceController, action.extraInfo, action.nativeParams);
-            }
-        } cancelActionBlock:^{
-            
-        }];
-        return NO;
-    }
-#endif
     if ([action.targetController isKindOfClass:[UINavigationController class]] && [((UINavigationController*)action.targetController).viewControllers count] > 0) {
         [[((UINavigationController*)action.targetController) topViewController] setOpenNavigateType:action.navigationParams.navigationType];
     }else{

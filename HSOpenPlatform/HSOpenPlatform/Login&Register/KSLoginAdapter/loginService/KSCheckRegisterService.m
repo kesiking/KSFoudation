@@ -58,8 +58,8 @@
         STRONGSELF
         NSString *errorInfo = error.userInfo[@"NSLocalizedDescription"];
         if (strongSelf.checkRegister) {
-            NSRange range = [errorInfo rangeOfString:@"此用户手机号码已经注册"];
-            if (errorInfo && range.location != NSNotFound) {
+            BOOL isRegister = [errorInfo rangeOfString:@"此用户手机号码已经注册"].location != NSNotFound || [errorInfo rangeOfString:@"该号码已注册"].location != NSNotFound;
+            if (errorInfo && isRegister) {
                 strongSelf.checkRegister(YES,error);
             }else{
                 strongSelf.checkRegister(NO,error);

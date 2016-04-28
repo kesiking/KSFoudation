@@ -7,7 +7,7 @@
 //
 
 #import "WeAppComponentBaseItem.h"
-#import "HSLocalAfterSaleModel.h"
+#import "HSAfterSaleModel.h"
 
 @interface HSMapPoiModel : WeAppComponentBaseItem
 
@@ -23,6 +23,6 @@
 
 - (instancetype)initWithAMapPoi:(AMapPOI*)poi;
 
-- (instancetype)initWithLocalAfterSaleModel:(HSLocalAfterSaleModel*)model;
+- (instancetype)initWithAfterSaleModel:(HSAfterSaleModel*)model;
 
 @end

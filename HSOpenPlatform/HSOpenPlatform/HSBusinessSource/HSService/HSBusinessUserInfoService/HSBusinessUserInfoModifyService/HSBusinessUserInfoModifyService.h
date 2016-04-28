@@ -10,6 +10,6 @@
 
 @interface HSBusinessUserInfoModifyService : KSAdapterService
 
--(void)modifyBusinessUserInfoWithUserPhone:(NSString *)userPhone appId:(NSString*)appId nickName:(NSString*)nickName userTrueName:(NSString*)tureName;
+-(void)modifyBusinessUserInfoWithUserPhone:(NSString *)userPhone memberPhone:(NSString *)memberPhone deviceId:(NSNumber*)deviceId nickName:(NSString*)nickName;
 
 @end

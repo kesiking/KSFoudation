@@ -10,7 +10,6 @@
 #import "EHSocializedShareConfig.h"
 #import "EHTabBarViewController.h"
 #import "KSDebugManager.h"
-#import "MQTTClientShareInstance.h"
 
 @interface AppDelegate ()
 
@@ -37,7 +36,7 @@
     // 配置Navigator，支持全局url跳转
     [KSBasicNavigator configNavigator];
     // 检查是否登录
-    [[KSAuthenticationCenter sharedCenter] autoLoginWithCompleteBlock:nil];
+    [[KSAuthenticationCenter sharedCenter] autoLoginWithCompleteBlock:nil needLoginView:NO];
     // 配置自动埋点
     [KSTouchEvent configTouch];
     // 发布时应该关掉
@@ -52,9 +51,23 @@
     [MobClick setLogEnabled:YES];
     #endif
 #endif
-//    [[MQTTClientShareInstance sharedCenter] publishMessageToDefaultTopic:@"test"];
 
-    [KSDebugManager setupDebugManager];
+#ifdef DEBUG_ENVIEONMENT
+    #ifdef KSDebugToolsEnable
+    KSDebugEnviroment* enviroment = [KSDebugEnviroment new];
+    enviroment.classPrefixesToRecord = [NSMutableArray arrayWithObjects:@"HS", nil];
+    [KSDebugManager setupDebugManagerWithDebugEnviroment:enviroment];
+    #endif
+#endif
+    // 配置webView的URLCache，减少webview的内存占用
+    [self configWebURLCache];
+}
+
+-(void)configWebURLCache{
+    int cacheSizeMemory = 1*1024*1024; // 4MB
+    int cacheSizeDisk = 5*1024*1024; // 32MB
+    NSURLCache *sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:cacheSizeMemory diskCapacity:cacheSizeDisk diskPath:@"nsurlcache"];
+    [NSURLCache setSharedURLCache:sharedCache];
 }
 
 -(void)configUIContent{
@@ -122,6 +135,11 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)applicationDidReceiveMemoryWarning:(UIApplication*)application
+{
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
 }
 
 -(void)configRemoteNotificationWithApplication:(UIApplication *)application launchingWithOptions:(NSDictionary *)launchOptions {

@@ -46,11 +46,24 @@
     [self.topline setOpaque:YES];
 }
 
+-(void)dealloc{
+   
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - reloadData override method
 -(void)reloadData{
-    [self.businessComboBtn setTitle:@"套餐基础包5元" forState:UIControlStateNormal];
-    [self.businessComboLabel setText:@"基础包5元/月包括视频录像回放、实时对讲。基础包5元/月包括视频录像回放、实时对讲。基础包5元/月包括视频录像回放、实时对讲。基础包5元/月包括视频录像回放、实时对讲。基础包5元/月包括视频录像回放、实时对讲。基础包5元/月包括视频录像回放、实时对讲。基础包5元/月包括视频录像回放、实时对讲。基础包5元/月包括视频录像回放、实时对讲。基础包5元/月包括视频录像回放、实时对讲。基础包5元/月包括视频录像回放、实时对讲。基础包5元/月包括视频录像回放、实时对讲。基础包5元/月包括视频录像回放、实时对讲。基础包5元/月包括视频录像回放、实时对讲。基础包5元/月包括视频录像回放、实时对讲。基础包5元/月包括视频录像回放、实时对讲。基础包5元/月包括视频录像回放、实时对讲。基础包5元/月包括视频录像回放、实时对讲。"];
+    if ([EHUtils isEmptyString:self.bussinessDetailModel.combo]) {
+        [self.businessComboBtn setTitle:self.bussinessDetailModel.combo?:@"未选定套餐" forState:UIControlStateNormal];
+        [self.businessComboLabel setText:nil];
+        [self.businessComboBtn setEnabled:NO];
+        [self.businessComboBtn setImage:nil forState:UIControlStateNormal];
+        return;
+    }
+    [self.businessComboBtn setEnabled:YES];
+    [self.businessComboBtn setImage:[UIImage imageNamed:@"icon_details_down"] forState:UIControlStateNormal];
+    [self.businessComboBtn setTitle:self.bussinessDetailModel.combo forState:UIControlStateNormal];
+    [self.businessComboLabel setText:self.bussinessDetailModel.combo];
     [self.businessComboLabel sizeToFit];
 }
 
@@ -61,8 +74,8 @@ KSPropertyInitLabelView(businessComboTitleLabel,{
     [_businessComboTitleLabel setNumberOfLines:1];
     [_businessComboTitleLabel setText:@"套餐"];
     [_businessComboTitleLabel setTextAlignment:NSTextAlignmentLeft];
-    [_businessComboTitleLabel setFont:[UIFont boldSystemFontOfSize:EHSiz2]];
-    [_businessComboTitleLabel setTextColor:EHCor5];
+    [_businessComboTitleLabel setFont:[UIFont boldSystemFontOfSize:HS_fontsiz2]];
+    [_businessComboTitleLabel setTextColor:HS_FontCor2];
 })
 
 -(UIView *)businessComboTitleLabelBottomLine{
@@ -70,7 +83,7 @@ KSPropertyInitLabelView(businessComboTitleLabel,{
         _businessComboTitleLabelBottomLine = [TBDetailUITools drawDivisionLine:0
                                                 yPos:self.businessComboTitleLabel.bottom - 0.5
                                            lineWidth:self.width];
-        [_businessComboTitleLabelBottomLine setBackgroundColor:EH_cor13];
+        [_businessComboTitleLabelBottomLine setBackgroundColor:HS_linecor1];
         [self addSubview:_businessComboTitleLabelBottomLine];
     }
     return _businessComboTitleLabelBottomLine;
@@ -81,7 +94,7 @@ KSPropertyInitLabelView(businessComboTitleLabel,{
         _businessComboBtnBottomLine = [TBDetailUITools drawDivisionLine:0
                                                                           yPos:self.businessComboBtn.bottom - 0.5
                                                                      lineWidth:self.width];
-        [_businessComboBtnBottomLine setBackgroundColor:EH_cor13];
+        [_businessComboBtnBottomLine setBackgroundColor:HS_linecor1];
         [self addSubview:_businessComboBtnBottomLine];
     }
     return _businessComboBtnBottomLine;
@@ -95,8 +108,8 @@ KSPropertyInitImageView(businessComboImageView,{
 KSPropertyInitButtonView(businessComboBtn,{
     [_businessComboBtn setFrame:CGRectMake(0, self.businessComboTitleLabel.bottom, self.width, 44)];
     [_businessComboBtn setTitle:@"套餐基础包" forState:UIControlStateNormal];
-    [_businessComboBtn setTitleColor:EHCor5 forState:UIControlStateNormal];
-    [_businessComboBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:EHSiz2]];
+    [_businessComboBtn setTitleColor:HS_FontCor3 forState:UIControlStateNormal];
+    [_businessComboBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:HS_fontsiz3]];
     [_businessComboBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [_businessComboBtn setImage:[UIImage imageNamed:@"icon_details_down"] forState:UIControlStateNormal];
 })
@@ -104,8 +117,8 @@ KSPropertyInitButtonView(businessComboBtn,{
 KSPropertyInitLabelView(businessComboLabel,{
     [_businessComboLabel setFrame:CGRectMake(BussinessDetailBorderLeft, self.businessComboBtn.bottom, BussinessDetailWidth, 20)];
     [_businessComboLabel setNumberOfLines:0];
-    [_businessComboLabel setFont:[UIFont systemFontOfSize:EHSiz3]];
-    [_businessComboLabel setTextColor:EHCor5];
+    [_businessComboLabel setFont:[UIFont systemFontOfSize:HS_fontsiz4]];
+    [_businessComboLabel setTextColor:HS_FontCor3];
     _businessComboLabel.alpha = 0;
 })
 

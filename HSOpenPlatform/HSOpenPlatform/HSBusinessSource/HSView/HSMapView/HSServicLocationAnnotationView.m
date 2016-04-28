@@ -10,9 +10,6 @@
 #import "HSMapViewManager.h"
 #import "HSMapManagerActionSheet.h"
 
-#define kCalloutWidth       caculateNumber(265)
-#define kCalloutHeight      caculateNumber(66)
-
 @interface HSServicLocationAnnotationView ()
 
 @property (nonatomic, strong)Class calloutViewClass;

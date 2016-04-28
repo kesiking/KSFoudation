@@ -89,6 +89,11 @@ static NSMutableArray *debugViews;
     [self.selectorView setSelectorWithItemArray:_pageButtpns defaultIndex:0];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(debugBasicViewDidClosedNotification:) name:KSDebugBasicViewDidClosedNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(debugBasicViewHideOperationViewNotification:) name:KSDebugBasicViewHideOperationViewNotification object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(debugBasicViewShowOperationViewNotification:) name:KSDebugBasicViewShowOperationViewNotification object:nil];
+
 }
 
 -(void)dealloc{
@@ -298,6 +303,18 @@ static NSMutableArray *debugViews;
                 [self changeSelectorViewProperty:self.selectorView itemView:itemView withIndex:index isSelect:NO];
             }
         }
+    }
+}
+
+-(void)debugBasicViewHideOperationViewNotification:(NSNotification*)notification{
+    if (self.selectorView.alpha != 0) {
+        [self showAndHideButtonClickEvent];
+    }
+}
+
+-(void)debugBasicViewShowOperationViewNotification:(NSNotification*)notification{
+    if (self.selectorView.alpha != 1) {
+        [self showAndHideButtonClickEvent];
     }
 }
 

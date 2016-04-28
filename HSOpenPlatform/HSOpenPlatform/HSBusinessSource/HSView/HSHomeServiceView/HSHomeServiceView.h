@@ -7,8 +7,9 @@
 //
 
 #import "KSView.h"
+#import "HSHomeServiceButton.h"
 
-#define home_serviceView_height               (caculateNumber(131.0))
+#define home_serviceView_height home_serviceButton_height
 
 @interface HSHomeServiceView : KSView
 

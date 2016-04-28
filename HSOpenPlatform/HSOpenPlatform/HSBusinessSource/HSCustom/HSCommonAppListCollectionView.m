@@ -7,7 +7,6 @@
 //
 
 #import "HSCommonAppListCollectionView.h"
-//#import "HSHorizontalCollectionViewCell.h"
 #import "HSBasicCollectionViewCell.h"
 #import "HSApplicationModel.h"
 
@@ -41,7 +40,7 @@
         self.topLine = [CALayer layer];
         [self.topLine setFrame:CGRectMake(0, 0, frame.size.width,0.5 )];
         self.topLine.backgroundColor = EHLinecor1.CGColor;
-        [self.layer addSublayer:self.topLine];
+        //[self.layer addSublayer:self.topLine];
         
         self.backgroundColor = [UIColor whiteColor];
         self.dataArray = [[NSArray alloc]init];
@@ -88,23 +87,27 @@
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    return 0.;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
-    return 0.;
-}
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+//    return 0.;
+//}
+//
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+//    return 0.;
+//}
 
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+//    if (<#condition#>) {
+//        <#statements#>
+//    }
     !self.itemIndexBlock?:self.itemIndexBlock(indexPath);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
     HSBasicCollectionViewCell *cell = (HSBasicCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
+    !self.itemDeselectBlock?:self.itemDeselectBlock(indexPath);
 
 }
 

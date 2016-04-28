@@ -16,6 +16,9 @@
 #import <objc/message.h>
 #import <wax/wax.h>
 
+#import "FLEXObjectExplorerViewController.h"
+#import "FLEXObjectExplorerFactory.h"
+
 static char KSDebug_CALayerDisplayTimeKey;
 
 @interface CALayer (KSDebug_CALayerDisplayTime)
@@ -113,6 +116,8 @@ static char KSDebug_UIViewDisplayTimeKey;
 
 @property(nonatomic, strong)  UITextView            *   scriptOperationShowTextView;
 
+@property(nonatomic, strong)  UIButton              *   changePropertyBtn;
+
 @property(nonatomic, weak)    UIView                *   selectView;
 
 @property(nonatomic, strong)  NSArray               *   viewArray;
@@ -206,6 +211,20 @@ static char KSDebug_UIViewDisplayTimeKey;
         [self addSubview:_scriptDebutTextView];
     }
     return _scriptDebutTextView;
+}
+
+-(UIButton *)changePropertyBtn{
+    if (_changePropertyBtn == nil) {
+        _changePropertyBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.debugTextView.frame.origin.x, CGRectGetMaxY(self.debugTextView.frame) + 2, self.debugTextView.frame.size.width, 44)];
+        _changePropertyBtn.layer.cornerRadius = 8;
+        _changePropertyBtn.layer.masksToBounds = YES;
+        [_changePropertyBtn addTarget:self action:@selector(changePropertyBtnClieked:) forControlEvents:UIControlEventTouchUpInside];
+        [_changePropertyBtn setTitle:@"修改属性" forState:UIControlStateNormal];
+        [_changePropertyBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_changePropertyBtn setBackgroundColor:[UIColor whiteColor]];
+        [self addSubview:_changePropertyBtn];
+    }
+    return _changePropertyBtn;
 }
 
 -(UITextView *)scriptOperationShowTextView{
@@ -311,6 +330,28 @@ static char KSDebug_UIViewDisplayTimeKey;
     self.debugTextView.text = componentStr;
     [self showComponentViewWithAnimation:view];
     [self showCurrentView:YES];
+}
+
+- (void)selectedViewExplorerFinished:(id)sender
+{
+    [self resignKeyAndDismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)resignKeyAndDismissViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion
+{
+    UIViewController* currentViewController = [KSDebugUtils getCurrentAppearedViewController];
+    [currentViewController dismissViewControllerAnimated:animated completion:completion];
+}
+
+-(void)changePropertyBtnClieked:(id)sender{
+    [[NSNotificationCenter defaultCenter] postNotificationName:KSDebugBasicViewHideOperationViewNotification object:self userInfo:@{}];
+    [self canceBackgroundlAction];
+    
+    FLEXObjectExplorerViewController *selectedViewExplorer = [FLEXObjectExplorerFactory explorerViewControllerForObject:self.selectView];
+    selectedViewExplorer.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(selectedViewExplorerFinished:)];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:selectedViewExplorer];
+    UIViewController* currentViewController = [KSDebugUtils getCurrentAppearedViewController];
+    [currentViewController presentViewController:navigationController animated:YES completion:NULL];
 }
 
 -(void)propertyButtonLongClicked:(UILongPressGestureRecognizer *)gestureRecognizer{
@@ -466,9 +507,13 @@ static char KSDebug_UIViewDisplayTimeKey;
         rect.origin.y = CGRectGetMaxY(self.scriptDebutTextView.frame) + 10;
         [self.scriptOperationShowTextView setFrame:rect];
         
+        rect = self.changePropertyBtn.frame;
+        rect.origin.y = CGRectGetMaxY(self.scriptOperationShowTextView.frame) + 10;
+        [self.changePropertyBtn setFrame:rect];
+
         // 修正文本textView位置
         rect = self.debugTextViewFrame;
-        rect.origin.y = CGRectGetMaxY(self.scriptOperationShowTextView.frame) + 10;
+        rect.origin.y = CGRectGetMaxY(self.changePropertyBtn.frame) + 10;
         rect.size.height = [self.debugTextView.text boundingRectWithSize:CGSizeMake(CGRectGetWidth(rect), CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.debugTextView.font,NSFontAttributeName, nil] context:nil].size.height + 5 * self.debugTextView.font.pointSize + 10;
         if (rect.size.height > 8000) {
             rect.size.height = 8000;

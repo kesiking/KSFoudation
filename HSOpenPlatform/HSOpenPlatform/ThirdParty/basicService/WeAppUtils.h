@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <objc/runtime.h>
 
 typedef unsigned long long LongIdType;
 typedef unsigned long long LongTimeType;
@@ -51,16 +50,15 @@ typedef NS_ENUM(NSInteger, WeAppRefreshDataModelType) {
 #define RGB(r, g, b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
 #define RGB_A(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 
-
 @interface WeAppUtils : NSObject
 
-void ks_swizzleSelector(Class classType, SEL originalSelector, SEL swizzledSelector);
 
 + (UIColor *)colorFromString:(NSString *)string;
 
 + (NSArray *)keyChainsFromParseString:(NSString *)string;
 + (NSString*)getCollectionStringWithKeys:(NSArray*)keys withSeparatedByString:(NSString *)separator;
 + (NSString*)getJSONStringWithDictionary:(NSDictionary*)dict;
++ (NSString*)getJSONStringWithArray:(NSArray*)array;
 
 +(NSString*)trimWhitespaceAndNewlineCharacterWithString:(NSString*)string;
 
@@ -96,10 +94,6 @@ void ks_swizzleSelector(Class classType, SEL originalSelector, SEL swizzledSelec
 +(NSString*)longAbbreviation:(long)longValue;
 // number缩写
 +(NSString*)intAbbreviation:(int)intValue;
-
-+(NSNumber*)getNumberWithFloatValue:(double)value withScale:(NSUInteger)scale;
-
-+(NSNumber*)getNumberWithFloatValue:(double)value withScale:(NSUInteger)scale scaleMinus:(BOOL)isScaleMinus;
 
 // 数字超过999显示为“999+”
 +(NSString*)longNumberAbbreviation:(LongIdType)longValue;

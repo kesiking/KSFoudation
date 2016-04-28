@@ -8,7 +8,7 @@
 
 #import "KSView.h"
 
-#define home_banner_height               (caculateNumber(151.0))
+#define home_banner_height               (caculateNumber(150.0))
 
 @interface HSHomeBannerView : KSView
 

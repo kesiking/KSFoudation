@@ -11,6 +11,6 @@
 
 @interface HSBusinessDetailListService : KSAdapterService
 
--(void)loadBusinessDetailListWithUserPhone:(NSString*)userPhone appId:(NSString*)appId;
+-(void)loadBusinessDetailListWithUserPhone:(NSString*)userPhone productId:(NSString*)productId;
 
 @end

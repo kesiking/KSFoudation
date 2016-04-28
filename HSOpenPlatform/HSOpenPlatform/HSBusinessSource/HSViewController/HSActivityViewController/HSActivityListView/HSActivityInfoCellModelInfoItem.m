@@ -44,7 +44,7 @@ static NSDateFormatter *outputFormatter = nil;
         return;
     }
     HSActivityInfoModel* activityInfoItem = (HSActivityInfoModel*)componentItem;
-    CGSize activityInfoDescSize = [activityInfoItem.activityDetailText boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 25 * 2, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:EHSiz4],NSFontAttributeName, nil] context:nil].size;
+    CGSize activityInfoDescSize = [activityInfoItem.activityContent boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 15 * 2, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:EHSiz5],NSFontAttributeName, nil] context:nil].size;
    
     if (activityInfoItem.activityStartTime) {
         self.activityStartDate = [inputFormatter dateFromString:activityInfoItem.activityStartTime];
@@ -55,9 +55,9 @@ static NSDateFormatter *outputFormatter = nil;
         self.activityEndTimeStr = [outputFormatter stringFromDate:self.activityEndDate];
     }
     
-    self.activityInfoDescSize = CGSizeMake(SCREEN_WIDTH - 25 * 2, ceil(activityInfoDescSize.height));
+    self.activityInfoDescSize = CGSizeMake(SCREEN_WIDTH - 15 * 2, ceil(activityInfoDescSize.height));
     
-    self.frame = CGRectMake(0, 0, 320, self.activityInfoDescSize.height + 215 - 18);
+    self.frame = CGRectMake(0, 0, 320, self.activityInfoDescSize.height + 210 - 13);
 }
 
 @end

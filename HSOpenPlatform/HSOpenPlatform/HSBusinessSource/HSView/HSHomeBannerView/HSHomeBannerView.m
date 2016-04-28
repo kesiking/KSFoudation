@@ -141,7 +141,7 @@ static CFRunLoopObserverRef observer;
                     continue;
                 }
                 
-                if (![((HSActivityInfoModel *)oldItem).activityImageUrlForAdv isEqualToString:newItem.activityImageUrlForAdv]) {
+                if (![((HSActivityInfoModel *)oldItem).activityBanner isEqualToString:newItem.activityBanner]) {
                     break;
                 }
             }
@@ -153,7 +153,7 @@ static CFRunLoopObserverRef observer;
         _bannerView.getURLForImageViewForBannerViewBlock =  ^NSString*(WeAppBasicBannerView * bannerView, id obj, NSInteger pageIndex){
             if ([obj isKindOfClass:[HSActivityInfoModel class]]) {
                 HSActivityInfoModel* activityInfoModel = (HSActivityInfoModel*)obj;
-                return activityInfoModel.activityImageUrlForAdv;
+                return activityInfoModel.activityBanner;
             }
             return nil;
         };
@@ -168,8 +168,7 @@ static CFRunLoopObserverRef observer;
         if (componentItem && [componentItem isKindOfClass:[HSActivityInfoModel class]]) {
             HSActivityInfoModel* activityInfoModel = (HSActivityInfoModel*)componentItem;
             NSDictionary* params = @{@"activityInfoModel":activityInfoModel};
-            TBOpenURLFromTargetWithNativeParams(@"reactNative://192.168.7.209:8081/index.ios.bundle?platform=ios&dev=false", self, @{@"needNavigationBar":@NO}, params);
-//            HSActivityInfoDetailOpenURLFromTargetWithNativeParams(self, nil, params,activityInfoModel);
+            HSActivityInfoDetailOpenURLFromTargetWithNativeParams(self, nil, params,activityInfoModel);
         }
     }
 }
@@ -198,9 +197,8 @@ static CFRunLoopObserverRef observer;
 -(void)setupBannerViewWithDataList:(NSArray *)array{
     if (array == nil || array.count == 0) {
         if ([self didBannerViewHasData]) {// 本地内置数据
-            NSArray* nativeDictArray = @[@{@"activityAddress":@"杭州文一西路999",@"activityCanAttend":@YES,@"activityDetailText":@"details",@"activityEndTime":@"2043-02-20 11:01:35",@"activityId":@"999",@"activityImageUrl":@"http://112.54.207.12:9080/imgs/1.png",@"activityImageUrlForAdv":@"http://112.54.207.12:9080/imgs/1.png",@"activityImageUrlForList":@"http://112.54.207.12:9080/imgs/1.png",@"activityIntroduceUrl":@"http://www.baidu.com",@"activityOwner":@"hy",@"activityStartTime":@"2018-07-10 11:01:35",@"activityStatus":@YES,@"activityTargetDesc":@"all",@"activityTitle":@"test999"},@{@"activityAddress":@"杭州文一西路999",@"activityCanAttend":@YES,@"activityDetailText":@"details",@"activityEndTime":@"2043-02-20 11:01:35",@"activityId":@"1000",@"activityImageUrl":@"http://112.54.207.12:9080/imgs/1.png",@"activityImageUrlForAdv":@"http://112.54.207.12:9080/imgs/1.png",@"activityImageUrlForList":@"http://112.54.207.12:9080/imgs/1.png",@"activityIntroduceUrl":@"http://www.baidu.com",@"activityOwner":@"hy",@"activityStartTime":@"2018-07-10 11:01:35",@"activityStatus":@YES,@"activityTargetDesc":@"all",@"activityTitle":@"test999"}];
-            NSArray* activityInfoModelArray = [HSActivityInfoModel modelArrayWithJSON:nativeDictArray];
-            [self.bannerView setLocalData:activityInfoModelArray];
+            NSArray* nativeDictArray = @[HSDefaultPlaceHoldImage];
+            [self.bannerView setLocalData:nativeDictArray];
         }
     }else{
         [self.bannerView setLocalData:array];

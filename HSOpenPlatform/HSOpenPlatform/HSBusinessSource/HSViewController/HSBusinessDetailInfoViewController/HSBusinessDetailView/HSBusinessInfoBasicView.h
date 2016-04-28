@@ -7,7 +7,8 @@
 //
 
 #import "KSView.h"
-#import "HSApplicationModel.h"
+#import "HSDeviceModel.h"
+#import "HSDeviceInfoModel.h"
 
 #define BussinessDetailBorderLeft   (15.0)
 #define BussinessDetailBorderRight  (BussinessDetailBorderLeft)
@@ -22,13 +23,17 @@ typedef void(^businessViewDidSelectBlock) (HSBusinessInfoBasicView* view);
 
 @interface HSBusinessInfoBasicView : KSView
 
-@property (nonatomic, strong) WeAppComponentBaseItem         *bussinessDetailModel;
+@property (nonatomic, strong) HSDeviceInfoModel              *bussinessDetailModel;
 
-@property (nonatomic, strong) HSApplicationModel             *appModel;
+@property (nonatomic, strong) HSDeviceModel                  *deviceModel;
 
-@property (nonatomic, strong) NSString                       *appId;
+@property (nonatomic, strong) NSNumber                       *productId;
+
+@property (nonatomic, strong) NSNumber                       *deviceId;
 
 @property (nonatomic, strong) UIView                         *topline;
+
+@property (nonatomic, strong) UIView                         *middelline;
 
 @property (nonatomic, strong) UIView                         *endline;
 

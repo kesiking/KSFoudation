@@ -156,6 +156,7 @@
                                                               style:UIBarButtonItemStylePlain
                                                              target:self
                                                              action:@selector(goBackTapped:)];
+        _backBarButtonItem.tintColor = SVWebViewToolBarColor;
         _backBarButtonItem.width = 18.0f;
     }
     return _backBarButtonItem;
@@ -167,6 +168,7 @@
                                                                  style:UIBarButtonItemStylePlain
                                                                 target:self
                                                                 action:@selector(goForwardTapped:)];
+        _forwardBarButtonItem.tintColor = SVWebViewToolBarColor;
         _forwardBarButtonItem.width = 18.0f;
     }
     return _forwardBarButtonItem;
@@ -175,6 +177,7 @@
 - (UIBarButtonItem *)refreshBarButtonItem {
     if (!_refreshBarButtonItem) {
         _refreshBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadTapped:)];
+        _refreshBarButtonItem.tintColor = SVWebViewToolBarColor;
     }
     return _refreshBarButtonItem;
 }
@@ -182,6 +185,7 @@
 - (UIBarButtonItem *)stopBarButtonItem {
     if (!_stopBarButtonItem) {
         _stopBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(stopTapped:)];
+        _stopBarButtonItem.tintColor = SVWebViewToolBarColor;
     }
     return _stopBarButtonItem;
 }
@@ -189,6 +193,7 @@
 - (UIBarButtonItem *)actionBarButtonItem {
     if (!_actionBarButtonItem) {
         _actionBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonTapped:)];
+        _actionBarButtonItem.tintColor = SVWebViewToolBarColor;
     }
     return _actionBarButtonItem;
 }

@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HSCommonAppListCollectionView.h"
 #import "HSHomeBusinessListCell.h"
 
-typedef void(^AppSelectedBlock)(NSInteger selectedIndex);
+#define home_business_minimumLineSpacing (caculateNumber(10))
 
-@interface HSHomeBusinessListView : UICollectionView <UICollectionViewDataSource,UICollectionViewDelegate>
+typedef void(^ServiceDidFinishLoadBlock)(void);
 
-@property (strong,nonatomic) NSArray *dataArray;
+@interface HSHomeBusinessListView : HSCommonAppListCollectionView
 
-@property (copy,nonatomic) AppSelectedBlock appSelectedBlock;
+@property (nonatomic, copy) ServiceDidFinishLoadBlock serviceDidFinishLoadBlock;
+
+-(void)refreshDataRequest;
 
 @end

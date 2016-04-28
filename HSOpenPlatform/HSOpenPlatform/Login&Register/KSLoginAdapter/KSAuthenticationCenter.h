@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "KSLoginMaroc.h"
 
-#define kAuthenticationCenterMarocExist
-
 #define kTestAccountName @"18888888888"  //  18867101652   18019437985
 
 @interface KSAuthenticationCenter : NSObject
@@ -56,6 +54,8 @@
 - (void)authenticateWithAlertViewMessage:(NSString*)message LoginActionBlock:(loginActionBlock)loginActionBlock cancelActionBlock:(cancelActionBlock)cancelActionBlock source:(id)source;
 
 - (void)autoLoginWithCompleteBlock:(dispatch_block_t)completeBlock;
+
+- (void)autoLoginWithCompleteBlock:(dispatch_block_t)completeBlock needLoginView:(BOOL)needLoginView;
 
 /*!
  *  @brief  重复登录被挤掉时调用接口，message为弹出aleatview的警告语

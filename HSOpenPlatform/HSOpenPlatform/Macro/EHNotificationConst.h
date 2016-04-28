@@ -33,6 +33,5 @@
 #define EHMESSAGE_BABY_ID_DATA @"__messageBabyIdData__"
 #define EHBabyChatMessageModel_DATA   @"__babyChatMessageModelData__"
 
-#define HSReactNativeErrorMessageNotification  @"ReactNativeErrorMessageNotification"  // reactNative错误消息
 
 #endif

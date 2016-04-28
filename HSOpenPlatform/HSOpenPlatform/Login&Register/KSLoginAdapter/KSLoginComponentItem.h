@@ -22,6 +22,7 @@
 @property (nonatomic,strong) NSNumber* user_age;
 @property (nonatomic,strong) NSNumber* user_sex;
 @property (nonatomic,strong) NSString* user_head_img;
+@property (nonatomic,strong) NSString* userHeadImgSmall;
 @property (nonatomic,strong) NSNumber* user_type;
 @property (nonatomic,strong) NSNumber* user_status;
 @property (nonatomic,strong) NSString* user_last_login_time;

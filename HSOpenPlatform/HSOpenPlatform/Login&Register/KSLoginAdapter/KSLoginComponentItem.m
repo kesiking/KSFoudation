@@ -24,7 +24,7 @@ static KSLoginComponentItem *userInfoModel=nil;
 }
 
 +(TBJSONModelKeyMapper*)modelKeyMapper{
-    NSDictionary* dict = @{@"user_id":@"userId"};
+    NSDictionary* dict = @{@"userLastLoginTime":@"user_last_login_time",@"userRegTime":@"user_reg_time",@"userTruename":@"user_trueName",@"userHeadImg":@"user_head_img"};
     return [[TBJSONModelKeyMapper alloc] initWithDictionary:dict];
 }
 
@@ -53,6 +53,10 @@ static KSLoginComponentItem *userInfoModel=nil;
     }
     self.user_phone = userComponentItem.userPhone?:self.user_phone;
     self.userPhone = userComponentItem.userPhone?:self.userPhone;
+    self.userId = userComponentItem.userId?:self.userId;
+    self.user_last_login_time = userComponentItem.user_last_login_time?:self.user_last_login_time;
+    self.user_reg_time = userComponentItem.user_reg_time?:self.user_reg_time;
+    
     self.userStarLevel = userComponentItem.userStarLevel?:self.userStarLevel;
     self.userPackage = userComponentItem.userPackage?:self.userPackage;
 }

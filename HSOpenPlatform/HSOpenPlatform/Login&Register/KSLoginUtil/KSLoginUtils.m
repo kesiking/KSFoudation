@@ -7,6 +7,7 @@
 //
 
 #import "KSLoginUtils.h"
+#import <objc/message.h>
 
 @implementation KSLoginUtils
 
@@ -52,32 +53,6 @@
         }
     });
     dispatch_resume(_timer);
-}
-
-+ (BOOL)isAuthority:(NSString*)authority
-{
-
-    if ([authority isEqualToString:@"1"])
-    {
-        return YES;
-    }
-    return NO;
-}
-
-+ (BOOL)isBoy:(NSNumber*)sex
-{
-    if ([sex integerValue] == 1) {
-        return YES;
-    }
-    return NO;
-}
-
-+ (BOOL)isGirl:(NSNumber*)sex
-{
-    if ([sex integerValue] == 2) {
-        return YES;
-    }
-    return NO;
 }
 
 + (NSDate*)convertDateFromString:(NSString*)dateString withFormat:(NSString*)dateFormat
@@ -128,7 +103,7 @@
 
 + (BOOL)isValidAuthCode:(NSString*)authCode
 {
-    NSString *regex = @"^\\d{4}$";
+    NSString *regex = @"^\\d{4,6}$";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     return [predicate evaluateWithObject:authCode];
 }
@@ -157,6 +132,16 @@
     NSString *      regex = @"^[A-Za-z0-9\x21-\x7e]{6,20}$";
     NSPredicate *   pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     return [pred evaluateWithObject:password];  ;
+}
+
++ (NSString*)tripleDES:(NSString*)plainText encryptOrDecrypt:(CCOperation)encryptOrDecrypt{
+    NSString* proccessPlaintText = plainText;
+    Class loginUtils = NSClassFromString(@"EHUtils");
+    SEL currentSelector = _cmd;
+    if (loginUtils && [loginUtils instanceMethodForSelector:currentSelector]) {
+        proccessPlaintText = ((NSString*(*)(Class, SEL, NSString*, uint32_t))objc_msgSend)(loginUtils, currentSelector,plainText, encryptOrDecrypt);
+    }
+    return proccessPlaintText;
 }
 
 @end

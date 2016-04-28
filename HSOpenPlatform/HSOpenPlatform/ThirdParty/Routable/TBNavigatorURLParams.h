@@ -26,7 +26,6 @@ typedef void(^SimplePayCallbackBlock)(TBSimplePayStatus status);
 #define kInternalNavigationURLScheme            @"app"
 #define kInternalGoToURLHost                    @"go"
 #define kInternalTabbarURLHost                  @"tabbar"
-#define kInternalReactNativeURLScheme           @"reactNative"
 
 #define loginPath                               @"login"
 

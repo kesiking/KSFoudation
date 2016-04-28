@@ -10,6 +10,8 @@
 
 @interface NSString (StringSize)
 
+- (CGSize)sizeWithFont:(UIFont *)font Width:(float)width;
+
 - (CGSize)sizeWithFontSize:(float)fontSize Width:(float)width;
 
 @end

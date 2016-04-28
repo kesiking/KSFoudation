@@ -8,16 +8,14 @@
 
 #import "HSAfterSaleViewController.h"
 #import "HSAfterSaleForAppViewController.h"
-#import "HSHomeCustomerServiceCollectionView.h"
 #import "HSAfterSaleCollectionViewCell.h"
-
-
+#import "HSAfterSaleProductCollectionView.h"
 
 @interface HSAfterSaleViewController ()
 
 @property (nonatomic, strong) HSAfterSaleForAppViewController *afterSaleForAppVC;
 
-@property (nonatomic, strong) HSHomeCustomerServiceCollectionView *serviceCollectionView;
+@property (nonatomic, strong) HSAfterSaleProductCollectionView *productCollectionView;
 
 @end
 
@@ -25,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = EH_bgcor1;
+    self.view.backgroundColor = HS_bgcor3;
     self.title = @"售后服务网点";
 
     [self.view addSubview:self.afterSaleForAppVC.view];
@@ -35,12 +33,12 @@
 
 #pragma mark - Config TableHeaderView
 - (void)configTableHeaderView {
-    CGRect frame = self.serviceCollectionView.bounds;
+    CGRect frame = self.productCollectionView.bounds;
     frame.size.height += caculateNumber(15);
     
     UIView *tableHeaderView = [[UIView alloc]initWithFrame:frame];
     tableHeaderView.backgroundColor = self.view.backgroundColor;
-    [tableHeaderView addSubview:self.serviceCollectionView];
+    [tableHeaderView addSubview:self.productCollectionView];
     
     self.afterSaleForAppVC.afterSaleForAppView.tableHeaderView = tableHeaderView;
 }
@@ -53,8 +51,8 @@
         WEAKSELF
         self.afterSaleForAppVC.afterSaleForAppView.needRefreshBlock = ^(){
             STRONGSELF
-            if (strongSelf.serviceCollectionView.dataArray.count == 0) {
-                [strongSelf.serviceCollectionView refreshDataRequest];
+            if (strongSelf.productCollectionView.dataArray.count == 0) {
+                [strongSelf.productCollectionView refreshDataRequest];
                 return NO;
             }
             else
@@ -65,41 +63,47 @@
 }
 
 #pragma mark - Config AppListView
-- (HSHomeCustomerServiceCollectionView *)serviceCollectionView {
-    if (!_serviceCollectionView) {
+- (HSAfterSaleProductCollectionView *)productCollectionView {
+    if (!_productCollectionView) {
         UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc] init];
         [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-        _serviceCollectionView = [[HSHomeCustomerServiceCollectionView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH/6.0) collectionViewLayout:flowLayout cellClass:[HSAfterSaleCollectionViewCell class]];
-        _serviceCollectionView.cellHeight = SCREEN_WIDTH/6.0;
-        _serviceCollectionView.cellWidth = SCREEN_WIDTH/6.0;
-        //[_serviceCollectionView setItemIndex:1];
-        
-        WEAKSELF
-        _serviceCollectionView.serviceDidFinishLoadBlock = ^(){
-            STRONGSELF
-            strongSelf.serviceCollectionView.itemIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-//            strongSelf.serviceCollectionView.itemIndexBlock?:strongSelf.serviceCollectionView.itemIndexBlock([NSIndexPath indexPathForRow:0 inSection:0]);
-            };
+        flowLayout.minimumInteritemSpacing = 0;
+        flowLayout.minimumLineSpacing = 0;
+        _productCollectionView = [[HSAfterSaleProductCollectionView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 66*SCREEN_SCALE) collectionViewLayout:flowLayout cellClass:[HSAfterSaleCollectionViewCell class]];
+        _productCollectionView.cellHeight = 66*SCREEN_SCALE;
+        _productCollectionView.cellWidth = SCREEN_WIDTH/6.0;
 
-//            !strongSelf.service
-//            .itemIndexBlock?:strongSelf.itemIndexBlock(strongSelf.itemIndexPath);
-        
-        //app选中，刷新列表
-        
-        _serviceCollectionView.itemIndexBlock = ^(NSIndexPath *itemIndexPath) {
+        WEAKSELF
+        _productCollectionView.serviceDidFinishLoadBlock = ^(){
             STRONGSELF
-            HSApplicationModel *appModel = (HSApplicationModel *)strongSelf.serviceCollectionView.dataArray[itemIndexPath.row];
-            HSAfterSaleCollectionViewCell *cell = (HSAfterSaleCollectionViewCell *)[strongSelf.serviceCollectionView cellForItemAtIndexPath:itemIndexPath];
-            cell.backgroundColor = RGB(0xee, 0xee, 0xee);
-            [strongSelf.afterSaleForAppVC refreshDataWithAppModel:appModel];
+            if (strongSelf.productCollectionView.dataArray.count == 0) {
+                [strongSelf.afterSaleForAppVC.afterSaleForAppView reloadData];
+            }
+            else {
+                strongSelf.productCollectionView.itemIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            }
         };
         
-        _serviceCollectionView.serviceDidFailLoadBlock = ^(){
+        //app选中，刷新列表
+        _productCollectionView.itemIndexBlock = ^(NSIndexPath *itemIndexPath) {
+            STRONGSELF
+            HSProductInfoModel *productModel = (HSProductInfoModel *)strongSelf.productCollectionView.dataArray[itemIndexPath.row];
+            HSAfterSaleCollectionViewCell *cell = (HSAfterSaleCollectionViewCell *)[strongSelf.productCollectionView cellForItemAtIndexPath:itemIndexPath];
+            cell.selected = YES;
+            [strongSelf.afterSaleForAppVC refreshDataWithProductModel:productModel];
+        };
+        _productCollectionView.itemDeselectBlock = ^(NSIndexPath *itemIndexPath) {
+            STRONGSELF
+            HSAfterSaleCollectionViewCell *cell = (HSAfterSaleCollectionViewCell *)[strongSelf.productCollectionView cellForItemAtIndexPath:itemIndexPath];
+            cell.selected = NO;
+        };
+        
+        _productCollectionView.serviceDidFailLoadBlock = ^(){
             STRONGSELF
             [strongSelf.afterSaleForAppVC.afterSaleForAppView reloadFail];
         };
     }
-    return _serviceCollectionView;
+    return _productCollectionView;
 }
 
 - (void)didReceiveMemoryWarning {

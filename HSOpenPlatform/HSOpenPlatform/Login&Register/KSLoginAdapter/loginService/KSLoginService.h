@@ -9,21 +9,26 @@
 #import "KSAdapterService.h"
 #import "KSLoginMaroc.h"
 
-#define login_api_name              @"terUserAction/loginCheck.do"
+#define login_api_name              @"doLogin"
 
-#define logout_api_name             @"terUserAction/memberLoginOut.do"
+#define logout_api_name             @"doLoginOut"
 
-#define register_api_name           @"terUserAction/registerMember.do"
+#define register_api_name           @"doReg"
 
-#define checkAccountName_api_name   @"terUserAction/checkUserPhone.do"
+#define checkAccountName_api_name   @"isReg"
 
-#define reset_api_name              @"terUserAction/updatePassword.do"
+#define reset_api_name              @"resetPwd"
 
-#define modifyPwd_api_name          @"terUserAction/changeUserInfo.do"
+#define modifyPwd_api_name          @"updatePwd"
 
-#define sendValidateCode_api_name   @"terUserAction/resendRandomNum.do"
+#define sendValidateCode_api_name   @"getCode"
 
-#define checkValidateCode_api_name  @"terUserAction/checkSecurityCode.do"
+#define checkValidateCode_api_name  @"checkCode"
+
+typedef NS_ENUM(NSUInteger, KSLoginServiceSendValidateCodeOptType) {
+    KSLoginServiceSendValidateCodeRegister      = 1,
+    KSLoginServiceSendValidateCodeResetPassword = 2,
+};
 
 @interface KSLoginService : KSAdapterService
 
@@ -45,7 +50,7 @@
  */
 -(void)logoutWithAccountName:(NSString*)accountName;
 /*!
- *  @brief  获取验证码接口
+ *  @brief  获取验证码接口，默认获取注册的验证码
  *
  *  @param accountName 用户手机号
  *
@@ -53,7 +58,18 @@
  */
 -(void)sendValidateCodeWithAccountName:(NSString*)accountName;
 /*!
- *  @brief  检验验证码接口
+ *  @author 孟希羲, 2016-03-30 09:03:38
+ *
+ *  @brief 获取验证码接口
+ *
+ *  @param accountName 用户手机号
+ *  @param optType     验证码类型，如注册用的，找回密码用的
+ *
+ *  @since 1.0
+ */
+-(void)sendValidateCodeWithAccountName:(NSString*)accountName withOptType:(KSLoginServiceSendValidateCodeOptType)optType;
+/*!
+ *  @brief  检验验证码接口，默认校验注册的验证码
  *
  *  @param accountName  用户手机号
  *  @param validateCode 验证码
@@ -61,6 +77,18 @@
  *  @since 1.0
  */
 -(void)checkValidateCodeWithAccountName:(NSString*)accountName validateCode:(NSString*)validateCode;
+/*!
+ *  @author 孟希羲, 2016-03-30 09:03:09
+ *
+ *  @brief 检验验证码接口
+ *
+ *  @param accountName  用户手机号
+ *  @param validateCode 验证码
+ *  @param optType      验证码类型，如注册用的，找回密码用的
+ *
+ *  @since 1.0
+ */
+-(void)checkValidateCodeWithAccountName:(NSString*)accountName validateCode:(NSString*)validateCode withOptType:(KSLoginServiceSendValidateCodeOptType)optType;
 /*!
  *  @brief  找回密码接口
  *
@@ -115,7 +143,7 @@
 
 @end
 
-#define get_user_info_api_name      @"user/getUserInfo.do"
+#define get_user_info_api_name      @"getUserInfo"
 
 @interface KSUserInfoService : KSAdapterService
 

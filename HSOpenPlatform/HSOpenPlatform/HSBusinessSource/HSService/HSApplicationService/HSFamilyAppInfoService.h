@@ -10,7 +10,7 @@
 
 @interface HSFamilyAppInfoService : KSAdapterService
 
--(void)loadFamilyAppInfoWithAppId:(NSString*)appId;
+-(void)loadFamilyAppInfoWithAppId:(NSNumber*)appId;
 
 
 @end

@@ -10,10 +10,10 @@
 #import "HSMessageNavBarRightView.h"
 #import "HSHomeBannerView.h"
 #import "HSHomeServiceView.h"
-#import "HSHomeBusinessView.h"
 #import "WeAppLoadingView.h"
+#import "HSHomeBusinessListView.h"
 
-#define kHSHomeHeaderViewHeight     (caculateNumber(31.0))
+#define kHSHomeHeaderViewHeight     (caculateNumber(40.0))
 
 @interface HSHomeTabViewController()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -29,7 +29,7 @@
 
 @property (nonatomic, strong) HSHomeServiceView                 *homeServiceView;
 
-@property (nonatomic, strong) HSHomeBusinessView                *homeBusinessView;
+@property (nonatomic, strong) HSHomeBusinessListView            *homeBusinessListView;
 
 @end
 
@@ -41,16 +41,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"发现";
-    self.view.backgroundColor = EH_bgcor1;
+    self.view.backgroundColor = HS_bgcor3;
     [self.view addSubview:self.tableView];
-    
     [self initBasicNavBarViews];
 }
 
-
 -(void)initBasicNavBarViews{
+    /*!
+     注释我的消息逻辑，第一期不支持我的消息功能
+     */
+    /*
     UIBarButtonItem* rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navBarRightView];
     self.rightBarButtonItem = rightBarButtonItem;
+     */
 }
 
 -(HSMessageNavBarRightView *)navBarRightView{
@@ -90,7 +93,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -104,12 +107,10 @@
     switch (indexPath.section) {
         case 0:
             [cell.contentView addSubview:self.homeBannerView];
-            break;
-        case 1:
             [cell.contentView addSubview:self.homeServiceView];
             break;
-        case 2:
-            [cell.contentView addSubview:self.homeBusinessView];
+        case 1:
+            [cell.contentView addSubview:self.homeBusinessListView];
             break;
         default:
             break;
@@ -119,37 +120,11 @@
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.section) {
-        case 0:
-            return home_banner_height;
-            break;
-        case 1:
-            return home_serviceView_height;
-            break;
-        case 2:
-            return self.homeBusinessView.height;
-            break;
-        default:
-            return 0;
-            break;
-    }
+    return (indexPath.section == 0)?(home_banner_height + home_serviceView_height):self.homeBusinessListView.height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return 0.1;
-            break;
-        case 1:
-            return kHSHomeHeaderViewHeight;
-            break;
-        case 2:
-            return kHSHomeHeaderViewHeight;
-            break;
-        default:
-            return 0;
-            break;
-    }
+    return (section == 0)?0.1:kHSHomeHeaderViewHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -162,27 +137,21 @@
     }
     else {
         UIView *view = [[UIView alloc]initWithFrame:CGRectZero];
-        view.backgroundColor = EH_cor1;
+        view.backgroundColor = HS_bgcor1;
         
         CALayer *layer = [CALayer layer];
-        layer.backgroundColor = EHLinecor1.CGColor;
+        layer.backgroundColor = HS_linecor1.CGColor;
         layer.frame = CGRectMake(0, 0, tableView.width, 0.5);
         [view.layer addSublayer:layer];
         
-        UIImageView *lineImv = [[UIImageView alloc]initWithFrame:CGRectMake(caculateNumber(10), caculateNumber((31-14)/2.0), caculateNumber(3), caculateNumber(14))];
-        lineImv.image = [UIImage imageNamed:@"icon_Head_guide"];
+        UIImageView *lineImv = [[UIImageView alloc]initWithFrame:CGRectMake(caculateNumber(15), (kHSHomeHeaderViewHeight-12.5)/2.0, 13, 12.5)];
+        lineImv.image = [UIImage imageNamed:@"icon_业务介绍"];
         [view addSubview:lineImv];
         
-        UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(caculateNumber(20), 0, CGRectGetWidth(tableView.frame), kHSHomeHeaderViewHeight)];
-        titlelabel.font = EHFont2;
-        titlelabel.textColor = EHCor6;
-        
-        if (section == 1) {
-            titlelabel.text = @"服务";
-        }
-        else if (section == 2) {
-            titlelabel.text = @"业务介绍";
-        }
+        UILabel *titlelabel = [[UILabel alloc]initWithFrame:CGRectMake(caculateNumber(15+6)+13, 0, 100, kHSHomeHeaderViewHeight)];
+        titlelabel.font = HS_font4;
+        titlelabel.textColor = HS_FontCor2;
+        titlelabel.text = @"业务介绍";
         
         [view addSubview:titlelabel];
         return view;
@@ -194,7 +163,7 @@
 #pragma mark - override method refreshDataRequest 刷新数据
 -(void)refreshDataRequest{
     [self.homeBannerView refreshDataRequest];
-    [self.homeBusinessView refreshDataRequest];
+    [self.homeBusinessListView refreshDataRequest];
 }
 
 -(void)didReceiveMemoryWarning{
@@ -295,24 +264,33 @@
 
 - (HSHomeServiceView *)homeServiceView {
     if (!_homeServiceView) {
-        _homeServiceView = [[HSHomeServiceView alloc]initWithFrame:CGRectMake(0, 0, self.tableView.width, home_serviceView_height)];
+        _homeServiceView = [[HSHomeServiceView alloc]initWithFrame:CGRectMake(0, home_banner_height, self.tableView.width, home_serviceView_height)];
     }
     return _homeServiceView;
 }
 
-- (HSHomeBusinessView *)homeBusinessView {
-    if (!_homeBusinessView) {
-        _homeBusinessView = [[HSHomeBusinessView alloc]initWithFrame:CGRectMake(0, 0, self.tableView.width, home_businessListCell_height)];
+- (HSHomeBusinessListView *)homeBusinessListView {
+    if (!_homeBusinessListView) {
+        UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc] init];
+        [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+        flowLayout.minimumLineSpacing = home_business_minimumLineSpacing;
+        flowLayout.minimumInteritemSpacing = 0;
+        _homeBusinessListView = [[HSHomeBusinessListView alloc]initWithFrame:self.view.bounds collectionViewLayout:flowLayout cellClass:[HSHomeBusinessListCell class]];
+        _homeBusinessListView.scrollEnabled = NO;
+        _homeBusinessListView.cellWidth = self.view.width;
+        _homeBusinessListView.cellHeight = home_businessListCell_height;
+        
         WEAKSELF
-        _homeBusinessView.resetFrameBlock = ^(){
+        _homeBusinessListView.serviceDidFinishLoadBlock = ^() {
             STRONGSELF
-            NSIndexSet * indexSet=[[NSIndexSet alloc]initWithIndex:2];//刷新第二个section
+            NSIndexSet * indexSet=[[NSIndexSet alloc]initWithIndex:1];//刷新第二个section
             [strongSelf.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
         };
+        
+        [_homeBusinessListView refreshDataRequest];
     }
-    return _homeBusinessView;
+    return _homeBusinessListView;
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - 登录相关操作

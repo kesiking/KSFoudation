@@ -76,6 +76,8 @@ typedef void(^scrollViewFrameSizeToFitDidFinished)(KSScrollViewServiceController
 @property (nonatomic, strong) NSString*                     nextFootViewTitle;
 // 没有下一页view的文案描述
 @property (nonatomic, strong) NSString*                     hasNoDataFootViewTitle;
+// 翻页展示
+@property (nonatomic, strong) UIView*                       nextFootView;
 // 错误页面
 @property (nonatomic, strong) UIView*                       errorView;
 // 上下文，用于scrollViewController传递给viewCell之间数据的沟通桥梁
@@ -130,8 +132,5 @@ typedef void(^scrollViewFrameSizeToFitDidFinished)(KSScrollViewServiceController
 
 // override subclass 用于配置scrollView的pullToRefreshView
 -(void)configPullToRefreshViewStatus:(UIScrollView *)scrollView;
-
-// override subclass 默认返回YES，即由scrollView的contentOffset控制翻页，子类可返回NO，由子类自己判断，如使用tableView的cell个数等
--(BOOL)loadMoreDataWithScrollView;
 
 @end

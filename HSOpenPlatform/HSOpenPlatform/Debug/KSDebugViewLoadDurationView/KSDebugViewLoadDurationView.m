@@ -183,25 +183,9 @@ static __weak KSDebugViewLoadDurationView* viewLoadDurationView = nil;
 
     _viewLoadDurations = [NSMutableArray array];
     [KSDebugViewLoadDurationView setShareViewLoadDuration:self];
-    [self addNotification];
 
 }
 
--(void)addNotification{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationWillTerminate:)
-                                                 name:UIApplicationWillTerminateNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationDidEnterBackground:)
-                                                 name:UIApplicationDidEnterBackgroundNotification
-                                               object:nil];
-}
-
--(void)removeNotification{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
 -(void)startDebug{
     [super startDebug];
@@ -238,23 +222,9 @@ static __weak KSDebugViewLoadDurationView* viewLoadDurationView = nil;
 
 
 -(void)dealloc{
-    [self removeNotification];
     [KSDebugViewLoadDurationView setShareViewLoadDuration:nil];
     
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma mark - notification method
--(void)applicationWillTerminate:(NSNotification*)notification{
-    //    [self saveKSDebugUserTrackPaths];
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma mark - notification method
--(void)applicationDidEnterBackground:(NSNotification*)notification{
-    //    [self saveKSDebugUserTrackPaths];
-}
-
 
 
 /*

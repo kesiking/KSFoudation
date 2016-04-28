@@ -140,11 +140,11 @@
         [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
         
         if (IOS_VERSION >= 7.0) {
-            [item setSelectedTitleAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10],NSForegroundColorAttributeName:RGB(0x23, 0x74, 0xfa)}];
+            [item setSelectedTitleAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10],NSForegroundColorAttributeName:HS_FontCor5}];
             [item setUnselectedTitleAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10],NSForegroundColorAttributeName:RGB(0x66, 0x66, 0x66)}];
         } else {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
-            [item setSelectedTitleAttributes:@{UITextAttributeFont:[UIFont systemFontOfSize:10],UITextAttributeTextColor:RGB(0x23, 0x74, 0xfa)}];
+            [item setSelectedTitleAttributes:@{UITextAttributeFont:[UIFont systemFontOfSize:10],UITextAttributeTextColor:HS_FontCor5];
             [item setUnselectedTitleAttributes:@{UITextAttributeFont:[UIFont systemFontOfSize:10],UITextAttributeTextColor:RGB(0x66, 0x66, 0x66)}];
 #endif
         }

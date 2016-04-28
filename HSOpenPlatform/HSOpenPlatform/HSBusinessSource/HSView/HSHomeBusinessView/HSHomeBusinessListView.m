@@ -7,65 +7,76 @@
 //
 
 #import "HSHomeBusinessListView.h"
+#import "HSFamilyAppListService.h"
+#import "HSFamilyAppInfoService.h"
+#import "HSApplicationIntroModel.h"
+#import "HSApplicationModel.h"
+#import "HSProductListService.h"
+#import "HSProductInfoService.h"
+
+@interface HSHomeBusinessListView ()
+
+@property (strong, nonatomic) HSProductListService *productListService;
+
+@property (nonatomic, strong) NSDictionary *imageStrDictionary;
+
+@end
 
 @implementation HSHomeBusinessListView
 
--(instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout{
-    self = [super initWithFrame:frame collectionViewLayout:layout];
+-(instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout cellClass:(Class)cellClass {
+    self = [super initWithFrame:frame collectionViewLayout:layout cellClass:cellClass];
     if (self) {
-        self.scrollEnabled = NO;
-        self.delegate = self;
-        self.dataSource = self;
-        [self registerClass:[HSHomeBusinessListCell class] forCellWithReuseIdentifier:@"HSHomeBusinessListCell"];
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = RGB(235, 235, 241);
+        WEAKSELF
+        self.itemIndexBlock = ^(NSIndexPath *itemIndexPath) {
+            [weakSelf openUrlAtIndexPath:itemIndexPath];
+        };
     }
     return self;
 }
 
-#pragma mark - UICollectionViewDataSource
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.dataArray.count;
+-(void)refreshDataRequest {
+    [self.productListService loadProductListWithBusinessId:0];
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellID = @"HSHomeBusinessListCell";
-    HSHomeBusinessListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
-    HSApplicationModel *appModel = self.dataArray[indexPath.row];
-    [cell setupCollectionItem:appModel];
-    return cell;
-    
+- (void)openUrlAtIndexPath:(NSIndexPath *)indexPath {
+    HSProductInfoModel *productInfo = (HSProductInfoModel *)self.dataArray[indexPath.row];
+        TBOpenURLFromSourceAndParams(@"HSProductInfoViewController", self, @{@"productInfo":productInfo});
 }
 
-#pragma mark - UICollectionViewDelegateFlowLayout
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return CGSizeMake(collectionView.width/2.0,home_businessListCell_height);
+#pragma mark - Getters
+- (HSProductListService *)productListService {
+    if (!_productListService) {
+        _productListService = [HSProductListService new];
+        WEAKSELF
+        _productListService.serviceDidFinishLoadBlock = ^(WeAppBasicService* service){
+            NSLog(@"HSProductListService service.dataList = %@",service.dataList);
+            STRONGSELF
+            strongSelf.dataArray = service.dataList;
+            for (NSInteger i=0; i<strongSelf.dataArray.count; i++) {
+                HSProductInfoModel *item = service.dataList[i];
+                item.placeholderImageStr = [strongSelf.imageStrDictionary objectForKey:item.productName];
+            }
+            
+            strongSelf.height = (strongSelf.dataArray.count == 0)?0:strongSelf.dataArray.count * (strongSelf.cellHeight + home_business_minimumLineSpacing) - home_business_minimumLineSpacing;
+            
+            [strongSelf reloadData];
+            !strongSelf.serviceDidFinishLoadBlock?:strongSelf.serviceDidFinishLoadBlock();
+        };
+        _productListService.serviceDidFailLoadBlock = ^(WeAppBasicService* service,NSError* error){
+            [WeAppToast toast:@"获取失败"];
+        };
+    }
+    return _productListService;
 }
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    
-    return UIEdgeInsetsMake(0, 0, 0, 0);
+- (NSDictionary *)imageStrDictionary {
+    if (!_imageStrDictionary) {
+        _imageStrDictionary = @{@"和路由":@"banner_heluyou",@"和目":@"banner_hemu",@"路尚":@"banner_lushang",@"咪咕":@"banner_migu",@"魔百盒":@"banner_mobaihe",@"找它":@"banner_zhaota",};
+    }
+    return _imageStrDictionary;
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    return 0.;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
-    return 0.;
-}
-
-
-#pragma mark - UICollectionViewDelegate
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    !self.appSelectedBlock?:self.appSelectedBlock(indexPath.row);
-}
-
--(BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
 
 @end

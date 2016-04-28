@@ -52,6 +52,10 @@
     [[self shareInstance] setDebugToolsEnabel:debugToolsEnabel];
 }
 
++(void)setDebugEnviromeng:(KSDebugEnviroment *)debugEnviromeng{
+    [[self shareInstance] setDebugEnviromeng:debugEnviromeng];
+}
+
 -(void)setupShareInstance{
     self.debugRefereceView = [[UIApplication sharedApplication] keyWindow];
     if (self.debugRefereceView == nil && [[[UIApplication sharedApplication] windows] count] > 0) {

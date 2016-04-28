@@ -8,13 +8,13 @@
 
 #import "HSAfterSaleListView.h"
 #import "HSApplicationModel.h"
-
+#import "HSProductInfoModel.h"
 typedef BOOL(^NeedRefreshBlock)(void);
 
 @interface HSAfterSaleForAppView : HSAfterSaleListView
 
 @property (nonatomic, strong) NeedRefreshBlock needRefreshBlock;    //可进行外部是否刷新判断回调
 
-- (void)refreshDataWithAppModel:(HSApplicationModel*)appModel;
+- (void)refreshDataWithProductModel:(HSProductInfoModel*)productModel;
 
 @end

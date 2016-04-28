@@ -8,11 +8,12 @@
 
 #import "KSViewController.h"
 #import "HSAfterSaleForAppView.h"
+#import "HSProductInfoModel.h"
 
 @interface HSAfterSaleForAppViewController : KSViewController
 
 @property (nonatomic, strong)HSAfterSaleForAppView *afterSaleForAppView;
 
-- (void)refreshDataWithAppModel:(HSApplicationModel*)appModel;
+- (void)refreshDataWithProductModel:(HSProductInfoModel*)productModel;
 
 @end

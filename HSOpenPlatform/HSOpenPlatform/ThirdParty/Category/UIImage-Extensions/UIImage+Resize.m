@@ -10,19 +10,32 @@
 
 @implementation UIImage (Resize)
 
--(UIImage *)scaleImage:(UIImage *)image toScale:(float)scaleSize
++(UIImage *)scaleImage:(UIImage *)image toScale:(float)scaleSize
 {
     if (scaleSize - 1 < 0.0001 &&  scaleSize - 1 > -0.0001) {
         return image;
     }
-    UIGraphicsBeginImageContext(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize));
+
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize), NO,[UIScreen mainScreen].scale);
     [image drawInRect:CGRectMake(0, 0, image.size.width * scaleSize, image.size.height * scaleSize)];
     UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
                                 
     return scaledImage;
 }
-                                
+
+- (UIImage*)scaleImageToScale:(float)scaleSize{
+    if (scaleSize - 1 < 0.0001 &&  scaleSize - 1 > -0.0001) {
+        return self;
+    }
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(self.size.width * scaleSize, self.size.height * scaleSize), NO,[UIScreen mainScreen].scale);
+    [self drawInRect:CGRectMake(0, 0, self.size.width * scaleSize, self.size.height * scaleSize)];
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return scaledImage;
+}
+
 
 // Returns a copy of this image that is cropped to the given bounds.
 // The bounds will be adjusted using CGRectIntegral.

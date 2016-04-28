@@ -11,10 +11,24 @@
 #import "HSActivityInfoDetailService.h"
 
 void HSActivityInfoDetailOpenURLFromTargetWithNativeParams (id source, NSDictionary* params, NSDictionary *nativeParams, HSActivityInfoModel* activityInfoModel) {
-    if (activityInfoModel.activityIntroduceUrl) {
-        TBOpenURLFromTargetWithNativeParams(activityInfoModel.activityIntroduceUrl, source, params, nativeParams);
+    __weak __typeof(source) weakSource = source;
+    dispatch_block_t openURLBlock = ^(){
+        if (activityInfoModel.activityUrl) {
+            TBOpenURLFromTargetWithNativeParams(activityInfoModel.activityUrl, weakSource, params, nativeParams);
+        }else{
+            TBOpenURLFromTargetWithNativeParams((kHSOPActivityInfoDetail), weakSource, params, nativeParams);
+        }
+    };
+    if ([activityInfoModel.needLogin boolValue]) {
+        [[KSAuthenticationCenter sharedCenter] authenticateWithLoginActionBlock:^(BOOL loginSuccess) {
+            if (openURLBlock) {
+                openURLBlock();
+            }
+        } cancelActionBlock:nil];
     }else{
-        TBOpenURLFromTargetWithNativeParams((kHSOPActivityInfoDetail), source, params, nativeParams);
+        if (openURLBlock) {
+            openURLBlock();
+        }
     }
 }
 

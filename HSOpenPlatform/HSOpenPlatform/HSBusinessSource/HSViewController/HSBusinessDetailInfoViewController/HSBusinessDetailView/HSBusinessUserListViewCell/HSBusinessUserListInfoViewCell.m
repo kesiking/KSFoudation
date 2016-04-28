@@ -10,7 +10,7 @@
 #import "HSBusinessUserAccountInfoModel.h"
 #import "KSTableViewController.h"
 
-#define businessImageViewWidth  (26)
+#define businessImageViewWidth  (21)
 #define businessImageViewHeight (25)
 
 #define BussinessDetailBorderLeft   (15.0)
@@ -42,8 +42,8 @@
 -(UILabel *)businessUsercommoditytitleLabel{
     if (_businessUsercommoditytitleLabel == nil) {
         _businessUsercommoditytitleLabel = [[UILabel alloc] init];
-        _businessUsercommoditytitleLabel.font = [UIFont systemFontOfSize:EHSiz2];
-        [_businessUsercommoditytitleLabel setTextColor:EHCor5];
+        _businessUsercommoditytitleLabel.font = [UIFont systemFontOfSize:HS_fontsiz3];
+        [_businessUsercommoditytitleLabel setTextColor:HS_FontCor3];
         _businessUsercommoditytitleLabel.numberOfLines = 1;
         _businessUsercommoditytitleLabel.backgroundColor = [UIColor whiteColor];
         [self addSubview:_businessUsercommoditytitleLabel];
@@ -54,8 +54,8 @@
 -(UILabel *)businessUsercommoditynameLabel{
     if (_businessUsercommoditynameLabel == nil) {
         _businessUsercommoditynameLabel = [[UILabel alloc] init];
-        _businessUsercommoditynameLabel.font = [UIFont systemFontOfSize:EHSiz2];
-        [_businessUsercommoditynameLabel setTextColor:EHCor5];
+        _businessUsercommoditynameLabel.font = [UIFont systemFontOfSize:HS_fontsiz3];
+        [_businessUsercommoditynameLabel setTextColor:HS_FontCor3];
         _businessUsercommoditynameLabel.numberOfLines = 1;
         _businessUsercommoditynameLabel.backgroundColor = [UIColor whiteColor];
         [_businessUsercommoditynameLabel setTextAlignment:NSTextAlignmentRight];
@@ -74,12 +74,12 @@
 }
 
 - (void)configCellWithCellView:(id<KSViewCellProtocol>)cell Frame:(CGRect)rect componentItem:(WeAppComponentBaseItem *)componentItem extroParams:(KSCellModelInfoItem*)extroParams{
-    if (![componentItem isKindOfClass:[HSBusinessUserAccountInfoModel class]]) {
+    if (![componentItem isKindOfClass:[HSBusinessUserAccountInfoNickNameModel class]]) {
         return;
     }
-    HSBusinessUserAccountInfoModel* accountInfoModel = (HSBusinessUserAccountInfoModel*)componentItem;
-    self.businessUsercommoditytitleLabel.text = accountInfoModel.userAccountPhone;
-    self.businessUsercommoditynameLabel.text = accountInfoModel.userAccountNickName?:accountInfoModel.userAccountName;
+    HSBusinessUserAccountInfoNickNameModel* accountInfoModel = (HSBusinessUserAccountInfoNickNameModel*)componentItem;
+    self.businessUsercommoditytitleLabel.text = accountInfoModel.memberPhone;
+    self.businessUsercommoditynameLabel.text = accountInfoModel.nickname;
     self.businessUsercommodityImageView.hidden = !accountInfoModel.isUserAccountHousehold;
     
     [self updateFrame];

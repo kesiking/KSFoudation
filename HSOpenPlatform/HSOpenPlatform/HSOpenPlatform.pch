@@ -43,15 +43,15 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 // 线上环境
 //#define ONLINE_ENVIEONMENT
-#define APP_DEFAULT_SCHEME @"https"
-#define USE_AsyncDisplayKit
-#define USE_ReactNative
+//#define USE_AsyncDisplayKit
+//#define KSDebugToolsEnable
+
 #ifndef ONLINE_ENVIEONMENT
 // 测试环境
     #define DEBUG_ENVIEONMENT
 // for network mock data
     #define MOCKDATA
-    #define MOCK_USER_PHONE
+//    #define MOCK_USER_PHONE
 #endif
 
 #endif

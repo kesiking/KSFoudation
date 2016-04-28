@@ -43,6 +43,7 @@
     UIImage* message_list_info_background = [UIImage imageNamed:@"message_list_info_background"];
     message_list_info_background = [message_list_info_background resizableImageWithCapInsets:UIEdgeInsetsMake(message_list_info_background.size.height/(4*[UIScreen mainScreen].scale), message_list_info_background.size.width/(4*[UIScreen mainScreen].scale), message_list_info_background.size.height*3/(4*[UIScreen mainScreen].scale), message_list_info_background.size.width*3/(4*[UIScreen mainScreen].scale)) resizingMode:UIImageResizingModeStretch];
     [self.messageBackgroundImageView setImage:message_list_info_background];
+    self.messageBackgroundImageView.opaque = YES;
 }
 
 -(void)setupMessageInfoButton{
@@ -63,11 +64,15 @@
 
 -(void)setupMessageTimeLabel{
     self.messageTimeLabel.textColor = EHCor3;
+    self.messageTimeLabel.backgroundColor = self.backgroundColor;
+    self.messageTimeLabel.opaque = YES;
     [self.messageTimeLabel setFont:[UIFont boldSystemFontOfSize:EHSiz6]];
 }
 
 -(void)setupMessageInfoLabel{
     self.messageInfoLabel.textColor = EHCor5;
+    self.messageInfoLabel.backgroundColor = [UIColor whiteColor];
+    self.messageInfoLabel.opaque = YES;
     [self.messageInfoLabel setFont:[UIFont systemFontOfSize:EHSiz2]];
     self.messageInfoLabel.delegate = self;
     NSMutableDictionary *mutableLinkAttributes = [NSMutableDictionary dictionary];

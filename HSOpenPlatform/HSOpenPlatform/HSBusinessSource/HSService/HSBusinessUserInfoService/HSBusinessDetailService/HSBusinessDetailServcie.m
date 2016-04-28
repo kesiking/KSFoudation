@@ -38,7 +38,7 @@
     
     self.itemClass = [HSBusinessDetailModel class];
     
-    [self loadItemWithAPIName:kHSGetBusinessUserInfoListApiName params:params version:nil];
+    [self loadItemWithAPIName:kHSGetBusinessUserNickNameApiName params:params version:nil];
 }
 
 @end

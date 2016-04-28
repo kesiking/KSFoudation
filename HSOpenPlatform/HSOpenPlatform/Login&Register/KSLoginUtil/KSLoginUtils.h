@@ -17,11 +17,6 @@
 
 + (void)showSecondTimeout:(NSUInteger)time timerOutHandler:(void(^)(BOOL end, NSUInteger remaintime))timerOutHandler;
 
-
-+ (BOOL)isAuthority:(NSString*)authority;
-+ (BOOL)isBoy:(NSNumber*)sex;
-+ (BOOL)isGirl:(NSNumber*)sex;
-
 + (NSDate*)convertDateFromString:(NSString*)dateString withFormat:(NSString*)dateFormat;
 + (NSString *)stringFromDate:(NSDate *)date;
 + (NSString *)stringFromDate:(NSDate *)date withFormat:(NSString *)dateFormat;
@@ -32,5 +27,7 @@
 
 + (BOOL)isValidMobile:(NSString *)mobile;
 + (BOOL)isValidPassword:(NSString *)password;
+
++ (NSString*)tripleDES:(NSString*)plainText encryptOrDecrypt:(CCOperation)encryptOrDecrypt;
 
 @end

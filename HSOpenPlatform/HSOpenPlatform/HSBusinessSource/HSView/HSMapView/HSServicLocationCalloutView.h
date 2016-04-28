@@ -8,6 +8,9 @@
 
 #import "KSView.h"
 
+#define kCalloutWidth       262
+#define kCalloutHeight      64
+
 typedef void(^NavigateButtonClickBlock)(void);
 
 @interface HSServicLocationCalloutView : KSView

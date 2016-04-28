@@ -16,15 +16,11 @@ static char KSDebug_ViewAppearDurationKey;
 
 @interface UIViewController (KSDebug_ViewAppearDuration)
 
-//-(void)KSDebug_ViewDidAppear:(BOOL)animated;
-//-(void)setks_debug_userTrackPathView:(KSDebugUserTrackPathView*)userTrackPathView;
-//
-//-(KSDebugUserTrackPathView*)ks_debug_userTrackPathView;
-
-
 - (instancetype)KSDebug_InitWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil;
 
 - (nullable instancetype)KSDebug_InitWithCoder:(NSCoder *)aDecoder;
+
+-(void)KSDebug_ViewDidAppearDuration:(BOOL)animated;
 
 -(void)setks_debug_viewAppearDurationView:(KSDebugViewAppearDurationView *)viewAppearDurationView;
 
@@ -38,14 +34,11 @@ static char KSDebug_ViewAppearDurationKey;
 
 -(NSDate*)ks_debug_vcInitDate;
 
-
-
-
     
 @end
 
 
-@implementation UIViewController (KSDebug_ViewDidAppear)
+@implementation UIViewController (KSDebug_ViewAppearDuration)
 
 
 - (instancetype)KSDebug_InitWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil{
@@ -55,7 +48,10 @@ static char KSDebug_ViewAppearDurationKey;
     
     if (viewAppearDurationView && [viewAppearDurationView viewAppearDurations]) {
         NSDate* currentDate = [NSDate date];
-        [self setks_debug_vcInitDate:currentDate];
+        NSTimeZone *zone = [NSTimeZone systemTimeZone];
+        NSInteger interval = [zone secondsFromGMTForDate: currentDate];
+        NSDate *localeDate = [currentDate  dateByAddingTimeInterval: interval];
+        [self setks_debug_vcInitDate:localeDate];
         [[viewAppearDurationView viewAppearDurations] addObject:[NSString stringWithFormat:@"%lu、%@时，%@开始初始化",[[viewAppearDurationView viewAppearDurations] count],currentDate,NSStringFromClass([self class])]];
         [viewAppearDurationView trimUserTrackPaths];
 
@@ -71,7 +67,10 @@ static char KSDebug_ViewAppearDurationKey;
     
     if (viewAppearDurationView && [viewAppearDurationView viewAppearDurations]) {
         NSDate* currentDate = [NSDate date];
-        [self setks_debug_vcInitDate:currentDate];
+        NSTimeZone *zone = [NSTimeZone systemTimeZone];
+        NSInteger interval = [zone secondsFromGMTForDate: currentDate];
+        NSDate *localeDate = [currentDate  dateByAddingTimeInterval: interval];
+        [self setks_debug_vcInitDate:localeDate];
         [[viewAppearDurationView viewAppearDurations] addObject:[NSString stringWithFormat:@"%lu、%@时，%@开始初始化",[[viewAppearDurationView viewAppearDurations] count],currentDate,NSStringFromClass([self class])]];
         [viewAppearDurationView trimUserTrackPaths];
 
@@ -86,7 +85,11 @@ static char KSDebug_ViewAppearDurationKey;
     KSDebugViewAppearDurationView *viewAppearDurationView = [self ks_debug_viewAppearDurationView];
     if (viewAppearDurationView && [viewAppearDurationView viewAppearDurations]) {
         NSDate *vcInitDate = [self ks_debug_vcInitDate];
-        NSTimeInterval timerBucket = [[NSDate date] timeIntervalSinceDate:vcInitDate];
+        NSDate* currentDate = [NSDate date];
+        NSTimeZone *zone = [NSTimeZone systemTimeZone];
+        NSInteger interval = [zone secondsFromGMTForDate: currentDate];
+        NSDate *localeDate = [currentDate  dateByAddingTimeInterval: interval];
+        NSTimeInterval timerBucket = [localeDate timeIntervalSinceDate:vcInitDate];
         [[viewAppearDurationView viewAppearDurations] addObject:[NSString stringWithFormat:@"%lu、%@ 从初始化到页面展现共用时 %f" ,[[viewAppearDurationView viewAppearDurations] count],NSStringFromClass([self class]),timerBucket]];
         [viewAppearDurationView trimUserTrackPaths];
     }
@@ -164,72 +167,7 @@ static __weak KSDebugViewAppearDurationView* viewAppearDurationView = nil;
     [self.debugTextView setFont:[UIFont boldSystemFontOfSize:15]];
     _viewAppearDurations = [NSMutableArray array];
     [KSDebugViewAppearDurationView setShareViewAppearDuration:self];
-    [self addNotification];
 //    [self setupExceptionHandler];
-}
-
-//static NSUncaughtExceptionHandler* exceptionHandler = NULL;
-//
-//-(void)setupExceptionHandler{
-//    exceptionHandler = NSGetUncaughtExceptionHandler();
-//    NSSetUncaughtExceptionHandler(&KSDebug_uncaughtExceptionHandler);
-//}
-//
-//-(void)resetExceptionHandler{
-//    if (exceptionHandler) {
-//        NSSetUncaughtExceptionHandler(exceptionHandler);
-//    }else{
-//        NSSetUncaughtExceptionHandler(NULL);
-//    }
-//}
-
-//void KSDebug_uncaughtExceptionHandler(NSException *exception){
-//    NSArray *arr = [exception callStackSymbols];
-//    NSString *reason = [exception reason];
-//    NSString *name = [exception name];
-//    
-//    NSString* arrStr = nil;
-//    if (arr) {
-//        NSError *error = nil;
-//        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:arr
-//                                                           options:NSJSONWritingPrettyPrinted
-//                                                             error:&error];
-//        arrStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-//    }
-//    NSString *url = [NSString stringWithFormat:@"=============异常崩溃报告=============\nname:\n%@\nreason:\n%@\ncallStackSymbols:\n%@", name, reason, arrStr?:[arr componentsJoinedByString:@"\n"]];
-//    if (url) {
-//        [[[KSDebugViewAppearDurationView shareViewAppearDuration] viewAppearDurations] addObject:url];
-//    }
-//    [[KSDebugViewAppearDurationView shareViewAppearDuration] saveKSDebugUserTrackPaths];
-//    
-//    if (exceptionHandler) {
-//        exceptionHandler(exception);
-//    }
-//}
-
--(void)addNotification{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationWillTerminate:)
-                                                 name:UIApplicationWillTerminateNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationDidEnterBackground:)
-                                                 name:UIApplicationDidEnterBackgroundNotification
-                                               object:nil];
-}
-
--(void)removeNotification{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
--(void)startDebug{
-    [super startDebug];
-    self.debugTextView.text = [self generateStringWithArray:self.viewAppearDurations];
-}
-
--(void)endDebug{
-    [super endDebug];
 }
 
 -(void)trimUserTrackPaths{
@@ -253,8 +191,9 @@ static __weak KSDebugViewAppearDurationView* viewAppearDurationView = nil;
     }
 }
 
+
+
 -(void)dealloc{
-    [self removeNotification];
     [KSDebugViewAppearDurationView setShareViewAppearDuration:nil];
     //    [self saveKSDebugUserTrackPaths];
 //    [self resetExceptionHandler];
@@ -271,13 +210,6 @@ static __weak KSDebugViewAppearDurationView* viewAppearDurationView = nil;
 -(void)applicationDidEnterBackground:(NSNotification*)notification{
     //    [self saveKSDebugUserTrackPaths];
 }
-
-
-
-
-
-
-
 
 
 /*

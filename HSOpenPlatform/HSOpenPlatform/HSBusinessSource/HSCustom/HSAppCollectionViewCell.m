@@ -44,14 +44,14 @@
     //_model = model;
     HSApplicationModel *appModel = (HSApplicationModel *)model;
     self.appNameLabel.text = appModel.appName;
-    [self.appIconImageView sd_setImageWithURL:[NSURL URLWithString:appModel.appIconUrl] placeholderImage:[UIImage imageNamed:appModel.placeholderImageStr]];
+    [self.appIconImageView sd_setImageWithURL:[NSURL URLWithString:appModel.appLogo] placeholderImage:[UIImage imageNamed:appModel.placeholderImageStr]];
     //self.layer.borderWidth = 1;
 }
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    [self.appIconImageView setFrame:CGRectMake(29.5*SCREEN_SCALE, 27*SCREEN_SCALE, 67*SCREEN_SCALE, 67*SCREEN_SCALE)];
-    [self.appNameLabel setFrame:CGRectMake(0, 109*SCREEN_SCALE, self.contentView.width, 15*SCREEN_SCALE)];
+    [self.appIconImageView setFrame:CGRectMake((SCREEN_WIDTH/4 - 40*SCREEN_SCALE)/2, 20*SCREEN_SCALE, 40*SCREEN_SCALE, 40*SCREEN_SCALE)];
+    [self.appNameLabel setFrame:CGRectMake(0, 70*SCREEN_SCALE, self.contentView.width, 10*SCREEN_SCALE)];
     self.rightLine.frame = CGRectMake(self.width - 0.5, 0, 0.5, self.height);
     self.bottomLine.frame = CGRectMake(0, self.height - 0.5, self.width, 0.5);
 }
@@ -60,7 +60,7 @@
     if (!_appNameLabel) {
         _appNameLabel = [[UILabel alloc]init];
         self.appNameLabel.textAlignment = NSTextAlignmentCenter;
-        self.appNameLabel.font = EHFont2;
+        self.appNameLabel.font = EHFont5;
         self.appNameLabel.textColor = EHCor5;
     }
     return _appNameLabel;

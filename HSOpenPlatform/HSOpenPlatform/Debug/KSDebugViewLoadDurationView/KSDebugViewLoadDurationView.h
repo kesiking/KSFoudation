@@ -10,8 +10,6 @@
 
 #define KSDebug_ViewLoadDurations_Key @"KSViewLoadDurations"
 
-#define KSDebug_ViewLoadDurations_MaxCount (2)
-
 @interface KSDebugViewLoadDurationView : KSDebugBasicView
 
 @property (nonatomic, strong)  NSMutableArray*   viewLoadDurations;

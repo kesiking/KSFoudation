@@ -10,7 +10,7 @@
 
 @interface HSFamilyAppListService : KSAdapterService
 
--(void)loadFamilyAppListData;
+-(void)loadFamilyAppListDataWithBusinessId:(NSNumber *)businessId;
 
 
 @end

@@ -14,6 +14,7 @@
 #import "KSDebugRequestManager.h"
 #import "KSDebugRequestListToolBar.h"
 #import "KSDebugRequestDetailToolBar.h"
+#import "KSDebugDataCollection.h"
 
 @interface KSDebugRequestView ()
 
@@ -37,6 +38,8 @@
     self.infoLabel.hidden = YES;
     [KSDebugURLProtocol registerProtocol];
     [KSDebugRequestManager resetManager];
+    
+    [KSDebugDataCollection configWithServerAddress:@"https://112.54.207.12:9080/BMS/app/showFamilyAppList.do"];
 }
 
 

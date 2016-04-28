@@ -53,7 +53,7 @@
         strongSelf.coordinate = coordinate;
         strongSelf.currentPage = 1;
         
-        [strongSelf.search AMapPOIAroundSearch: [strongSelf getSearchRequestAtPage:self.currentPage]];
+        [strongSelf.search AMapPOIAroundSearch: [strongSelf getSearchRequestAtPage:strongSelf.currentPage]];
     };
     mapViewManager.userLocationLoadFailedBlock = ^(){
         STRONGSELF

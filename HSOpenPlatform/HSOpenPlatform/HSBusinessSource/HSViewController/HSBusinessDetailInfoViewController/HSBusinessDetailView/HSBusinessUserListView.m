@@ -63,7 +63,13 @@
     [self.businessUserListView reloadData];
     [self.businessUserListView sizeToFit];
     */
-    [self.userInfoListService loadBusinessUserInfoListWithUserPhone:[KSAuthenticationCenter userPhone] appId:self.appId?:[self.bussinessDetailModel valueForKey:@"appId"]];
+    [self.userInfoListService loadBusinessUserInfoListWithUserPhone:[KSAuthenticationCenter userPhone] deviceId:self.deviceId?:self.bussinessDetailModel.deviceId];
+}
+
+-(void)dealloc{
+    _userInfoListService.delegate = nil;
+    _userInfoListService = nil;
+    _businessUserListView = nil;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -82,7 +88,7 @@ KSPropertyInitLabelView(businessUserListTitleLabel,{
         _businessUserListTitleLabelLine = [TBDetailUITools drawDivisionLine:0
                                                                           yPos:self.businessUserListTitleLabel.bottom - 0.5
                                                                      lineWidth:self.width];
-        [_businessUserListTitleLabelLine setBackgroundColor:EH_cor13];
+        [_businessUserListTitleLabelLine setBackgroundColor:HS_linecor1];
         [self addSubview:_businessUserListTitleLabelLine];
     }
     return _businessUserListTitleLabelLine;
@@ -105,13 +111,13 @@ KSPropertyInitLabelView(businessUserListTitleLabel,{
         [_businessUserListView setNextFootViewTitle:@""];
         
         [_businessUserListView getTableView].separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        [_businessUserListView getTableView].separatorColor = EH_cor13;
+        [_businessUserListView getTableView].separatorColor = HS_linecor1;
 
         WEAKSELF
         [_businessUserListView setTableViewDidSelectedBlock:^(UITableView* tableView,NSIndexPath* indexPath,KSDataSource* dataSource,KSCollectionViewConfigObject* configObject){
             STRONGSELF
-             HSBusinessUserAccountInfoModel* accountInfoModel = (HSBusinessUserAccountInfoModel*)[dataSource getComponentItemWithIndex:[indexPath row]];
-            if (![accountInfoModel isKindOfClass:[HSBusinessUserAccountInfoModel class]]) {
+             HSBusinessUserAccountInfoNickNameModel* accountInfoModel = (HSBusinessUserAccountInfoNickNameModel*)[dataSource getComponentItemWithIndex:[indexPath row]];
+            if (![accountInfoModel isKindOfClass:[HSBusinessUserAccountInfoNickNameModel class]]) {
                 return ;
             }
             /*
@@ -134,10 +140,12 @@ KSPropertyInitLabelView(businessUserListTitleLabel,{
             TBOpenURLFromSourceAndParams(@"HSBusinessUserInfoEditViewController", strongSelf, params);
              */
             
-            [strongSelf.userInfoEditAlertView setUserPhone:accountInfoModel.userAccountPhone];
-            [strongSelf.userInfoEditAlertView setAppId:strongSelf.appId?:[strongSelf.bussinessDetailModel valueForKey:@"appId"]];
-            [strongSelf.userInfoEditAlertView setUserTrueName:accountInfoModel.userAccountName];
-            [strongSelf.userInfoEditAlertView setUserNickName:accountInfoModel.userAccountNickName];
+            [strongSelf.userInfoEditAlertView setUserPhone:accountInfoModel.familiaPhone];
+            [strongSelf.userInfoEditAlertView setMemberPhone:accountInfoModel.memberPhone];
+            [strongSelf.userInfoEditAlertView setProductId:strongSelf.productId?:(strongSelf.deviceModel.productId?:strongSelf.bussinessDetailModel.productId)];
+            [strongSelf.userInfoEditAlertView setDeviceId:strongSelf.deviceId?:strongSelf.bussinessDetailModel.deviceId];
+            [strongSelf.userInfoEditAlertView setUserTrueName:accountInfoModel.nickname];
+            [strongSelf.userInfoEditAlertView setUserNickName:accountInfoModel.nickname];
             [strongSelf.userInfoEditAlertView setAlertContext:accountInfoModel];
             [strongSelf.userInfoEditAlertView show];
 
@@ -148,7 +156,6 @@ KSPropertyInitLabelView(businessUserListTitleLabel,{
             [strongSelf sizeToFit];
         }];
         
-        [_businessUserListView setService:self.userInfoListService];
         [self addSubview:_businessUserListView.scrollView];
     }
     return _businessUserListView;
@@ -166,12 +173,12 @@ KSPropertyInitLabelView(businessUserListTitleLabel,{
         _userInfoEditAlertView.serviceDidFinishedBlock = ^(EHAleatView * alertView, WeAppBasicService* service){
             STRONGSELF
             [strongSelf hideLoadingView];
-            HSBusinessUserAccountInfoModel *accountInfoModel = ((HSBusinessUserInfoEditAlertView*)alertView).alertContext;
+            HSBusinessUserAccountInfoNickNameModel *accountInfoModel = ((HSBusinessUserInfoEditAlertView*)alertView).alertContext;
             if (accountInfoModel == nil
-                || ![accountInfoModel isKindOfClass:[HSBusinessUserAccountInfoModel class]]) {
+                || ![accountInfoModel isKindOfClass:[HSBusinessUserAccountInfoNickNameModel class]]) {
                 return;
             }
-            accountInfoModel.userAccountNickName = ((HSBusinessUserInfoEditAlertView*)alertView).userNickName;
+            accountInfoModel.nickname = ((HSBusinessUserInfoEditAlertView*)alertView).userNickName;
             [strongSelf.businessUserListView reloadData];
         };
         _userInfoEditAlertView.serviceDidFailedBlock = ^(EHAleatView * alertView, WeAppBasicService* service, NSError* error){
@@ -190,6 +197,17 @@ KSPropertyInitLabelView(businessUserListTitleLabel,{
 -(HSBusinessUserInfoListService *)userInfoListService{
     if (_userInfoListService == nil) {
         _userInfoListService = [HSBusinessUserInfoListService new];
+        WEAKSELF
+        _userInfoListService.serviceDidFinishLoadBlock = ^(WeAppBasicService* service){
+            STRONGSELF
+            if ([service.item isKindOfClass:[HSBusinessUserAccountInfoModel class]]) {
+                [strongSelf.businessUserListView.dataSourceRead setDataWithPageList:[((HSBusinessUserAccountInfoModel*)service.item) member] extraDataSource:nil];
+                [strongSelf.businessUserListView reloadData];
+            }
+        };
+        _userInfoListService.serviceDidFailLoadBlock = ^(WeAppBasicService* service, NSError* error){
+            [WeAppToast toast:@"获取用户群组关系失败！"];
+        };
     }
     return _userInfoListService;
 }

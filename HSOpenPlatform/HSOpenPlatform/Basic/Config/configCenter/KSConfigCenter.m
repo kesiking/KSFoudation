@@ -95,19 +95,8 @@ static NSMutableDictionary*  _nametoClassDict = nil;
     return NSClassFromString(@"KSWebViewURLResolver");
 }
 
-+(Class)getReactViewUrlResolverClassWithURL:(NSURL*)url{
-    return NSClassFromString(@"KSReactURLResolver");
-}
-
 +(BOOL)isHttpUrlWithURL:(NSURL*)url{
     if([[url scheme] isEqualToString:@"http"] || [[url scheme] isEqualToString:@"https"]){
-        return YES;
-    }
-    return NO;
-}
-
-+(BOOL)isReactUrlWithURL:(NSURL*)url{
-    if([[url scheme] isEqualToString:kInternalReactNativeURLScheme]){
         return YES;
     }
     return NO;

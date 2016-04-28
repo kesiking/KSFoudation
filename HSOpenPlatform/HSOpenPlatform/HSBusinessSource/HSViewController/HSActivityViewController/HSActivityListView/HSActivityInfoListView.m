@@ -44,6 +44,7 @@
     _tableViewCtl = nil;
     _dataSourceRead = nil;
     _dataSourceWrite = nil;
+    _activityInfoPageListService = nil;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -55,7 +56,7 @@
         CGRect frame = self.bounds;
         frame.size.width = frame.size.width;
         _tableViewCtl = [[KSTableViewController alloc] initWithFrame:frame withConfigObject:configObject];
-        [_tableViewCtl setErrorViewTitle:@"暂无活动消息"];
+        [_tableViewCtl setErrorViewTitle:@"暂无活动信息"];
         [_tableViewCtl setHasNoDataFootViewTitle:@"已无活动信息可同步"];
         [_tableViewCtl setNextFootViewTitle:@""];
         [_tableViewCtl registerClass:[HSActivityInfoCell class]];

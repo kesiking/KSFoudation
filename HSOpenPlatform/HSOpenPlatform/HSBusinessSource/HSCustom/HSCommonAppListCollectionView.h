@@ -15,9 +15,11 @@
 }
 
 typedef void(^ItemIndexBlock)(NSIndexPath *itemIndexPath);
+typedef void(^ItemDeselectBlock)(NSIndexPath *itemIndexPath);
 
 @property (strong,nonatomic) NSArray *dataArray;
 @property (copy,nonatomic) ItemIndexBlock itemIndexBlock;
+@property (copy,nonatomic) ItemDeselectBlock itemDeselectBlock;
 @property (strong,nonatomic) NSIndexPath *itemIndexPath;
 @property (assign,nonatomic) CGFloat cellWidth;
 @property (assign,nonatomic) CGFloat cellHeight;

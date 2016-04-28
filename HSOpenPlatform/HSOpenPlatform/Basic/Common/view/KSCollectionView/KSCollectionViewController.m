@@ -338,11 +338,9 @@
      翻页逻辑，grid的scroll滑动导致一下子会翻页多屏幕数据
      **********************************************************************/
     /**************************/
-    if (![self loadMoreDataWithScrollView]) {
-        if ([indexPath row] >= [self.dataSourceRead count] - 1) {
-            if ([self canNextPage]) {
-                [self nextPage];
-            }
+    if ([indexPath row] >= [self.dataSourceRead count] - 1) {
+        if ([self canNextPage]) {
+            [self nextPage];
         }
     }
     /**************************/

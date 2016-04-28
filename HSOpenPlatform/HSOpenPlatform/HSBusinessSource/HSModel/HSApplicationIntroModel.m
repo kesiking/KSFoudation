@@ -11,5 +11,14 @@
 @implementation HSApplicationIntroModel
 
 
++(TBJSONModelKeyMapper*)modelKeyMapper{
+    NSDictionary* dict = @{@"id":@"appId",
+                           };
+    return [[TBJSONModelKeyMapper alloc] initWithDictionary:dict];
+}
+
+-(void)setFromDictionary:(NSDictionary *)dict{
+    [super setFromDictionary:dict];
+}
 
 @end

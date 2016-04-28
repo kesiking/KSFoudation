@@ -9,16 +9,8 @@
 #import "KSAdapterService.h"
 #import "HSBusinessUserAccountInfoModel.h"
 
-@interface HSBusinessUserInfoNickNameListService : KSAdapterService
-
--(void)loadBusinessUserInfoNickNameListWithUserPhones:(NSArray*)userPhones appId:(NSString*)appId;
-
--(void)loadBusinessUserInfoNickNameListWithUserPhoneStr:(NSString*)userPhoneStr appId:(NSString*)appId;
-
-@end
-
 @interface HSBusinessUserInfoListService : KSAdapterService
 
--(void)loadBusinessUserInfoListWithUserPhone:(NSString*)userPhone appId:(NSString*)appId;
+-(void)loadBusinessUserInfoListWithUserPhone:(NSString*)userPhone deviceId:(NSNumber*)deviceId;
 
 @end

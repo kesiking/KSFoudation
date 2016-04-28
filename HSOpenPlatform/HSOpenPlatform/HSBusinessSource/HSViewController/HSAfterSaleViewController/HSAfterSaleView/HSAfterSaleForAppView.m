@@ -8,21 +8,18 @@
 
 #import "HSAfterSaleForAppView.h"
 #import "HSHomeCustomerServiceCollectionView.h"
-#import "HSNationalAfterSaleService.h"
-#import "HSLocalAfterSaleService.h"
+#import "HSAfterSaleListService.h"
 
 #define kHSAfterSaleViewHeaderHeight    caculateNumber(31.0)
 #define kHLocalAfterSaleCellHeight      caculateNumber(105)
 
 @interface HSAfterSaleForAppView ()
 
-@property (nonatomic, strong) HSNationalAfterSaleService *nationalAfterSaleService;
+@property (nonatomic, strong) HSAfterSaleListService *afterSaleListService;
 
-@property (nonatomic, strong) HSLocalAfterSaleService *localAfterSaleService;
+@property (nonatomic, strong) HSProductInfoModel *productModel;
 
 @property (nonatomic, strong) NSDictionary *imageStrDictionary;
-
-@property (nonatomic, assign) BOOL isNationalAfterSaleNeedReload;
 
 @end
 
@@ -30,16 +27,13 @@
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     self = [super initWithFrame:frame style:style];
-    
     if (self) {
-        self.isNationalAfterSaleNeedReload = YES;
     }
     return self;
 }
 
-- (void)refreshDataWithAppModel:(HSApplicationModel*)appModel {
-    self.appModel = appModel;
-    self.isNationalAfterSaleNeedReload = YES;
+- (void)refreshDataWithProductModel:(HSProductInfoModel*)productModel {
+    self.productModel = productModel;
     [self refreshData];
 }
 
@@ -48,26 +42,20 @@
  *  下拉刷新
  */
 - (void)refreshData {
-    
     if (self.needRefreshBlock) {
         BOOL needRefreshData = self.needRefreshBlock();
         if (!needRefreshData) {
             return;
         }
     }
-    if (!self.appModel) {
-        EHLogError(@"appModel = nil!");
+    if (!self.productModel) {
+        EHLogError(@"productModel = nil!");
         [self reloadFail];
         return;
-    }
 
+    }
     self.currentPage = 1;
-
-    if (self.isNationalAfterSaleNeedReload) {
-        [self.nationalAfterSaleService getNationalAfterSaleWithAppId:self.appModel.appId];
-    }
-    
-    [self.localAfterSaleService getLocalAfterSaleWithAppId:self.appModel.appId PageSize:self.offset CurrentPage:self.currentPage];
+    [self.afterSaleListService getAfterSaleListWithProductId:self.productModel.productId PageSize:self.offset CurrentPage:self.currentPage];
 }
 
 /**
@@ -75,9 +63,8 @@
  */
 - (void)loadMoreData {
     self.currentPage++;
-    [self.localAfterSaleService getLocalAfterSaleWithAppId:self.appModel.appId PageSize:self.offset CurrentPage:self.currentPage];
+    [self.afterSaleListService getAfterSaleListWithProductId:self.productModel.productId PageSize:self.offset CurrentPage:self.currentPage];
 }
-
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -91,51 +78,42 @@
     }
 }
 
-
 #pragma mark - Config Services
-- (HSNationalAfterSaleService *)nationalAfterSaleService {
-    if (!_nationalAfterSaleService) {
-        _nationalAfterSaleService = [HSNationalAfterSaleService new];
+- (HSAfterSaleListService *)afterSaleListService {
+    if (!_afterSaleListService) {
+        _afterSaleListService = [HSAfterSaleListService new];
         WEAKSELF
-        _nationalAfterSaleService.serviceDidFinishLoadBlock = ^(WeAppBasicService* service) {
-            STRONGSELF
-            strongSelf.nationalAfterSaleModel = (HSNationalAfterSaleModel *)service.item;
-            strongSelf.nationalAfterSaleModel.appIconUrl = strongSelf.appModel.appIconUrl;
-            strongSelf.nationalAfterSaleModel.placeholderImageStr = [strongSelf.imageStrDictionary objectForKey:strongSelf.appModel.appName];
-            strongSelf.isNationalAfterSaleNeedReload = NO;
-            
-            NSIndexSet * indexSet=[[NSIndexSet alloc]initWithIndex:0];
-            [strongSelf reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
-        };
-        _nationalAfterSaleService.serviceDidFailLoadBlock = ^(WeAppBasicService* service,NSError* error){
-            STRONGSELF
-            strongSelf.isNationalAfterSaleNeedReload = YES;
-        };
-    }
-    return _nationalAfterSaleService;
-}
-
-- (HSLocalAfterSaleService *)localAfterSaleService {
-    if (!_localAfterSaleService) {
-        _localAfterSaleService = [HSLocalAfterSaleService new];
-        WEAKSELF
-        _localAfterSaleService.serviceDidFinishLoadBlock = ^(WeAppBasicService* service) {
+        _afterSaleListService.serviceDidFinishLoadBlock = ^(WeAppBasicService* service) {
             STRONGSELF
             if (strongSelf.currentPage == 1) {
                 [strongSelf.dataArray removeAllObjects];
             }
-            for (HSLocalAfterSaleModel *localAfterSaleModel in service.dataList) {
-                HSMapPoiModel *poiModel = [[HSMapPoiModel alloc]initWithLocalAfterSaleModel:localAfterSaleModel];
-                [strongSelf.dataArray addObject:poiModel];
+            if (service.dataList.count == 0) {
+                strongSelf.nationalAfterSaleModel = nil;
             }
+            //第一个为全国售后，将剩下的本地售后提取加入数据源
+            for (NSUInteger i = 0; i < service.dataList.count; i++) {
+                HSAfterSaleModel *afterSaleModel = service.dataList[i];
+                if (i == 0 && strongSelf.currentPage == 1) {
+                    strongSelf.nationalAfterSaleModel = afterSaleModel;
+                    strongSelf.nationalAfterSaleModel.productIconUrl = strongSelf.productModel.productLogo;
+                    strongSelf.nationalAfterSaleModel.placeholderImageStr = [strongSelf.imageStrDictionary objectForKey:strongSelf.productModel.productName];
+                }
+                else {
+                    HSMapPoiModel *poiModel = [[HSMapPoiModel alloc]initWithAfterSaleModel:afterSaleModel];
+                    [strongSelf.dataArray addObject:poiModel];
+                }
+            }
+            
             [strongSelf reloadData];
+            [strongSelf updateFooterStateAfterRefreshing];
         };
-        _localAfterSaleService.serviceDidFailLoadBlock = ^(WeAppBasicService* service,NSError* error){
+        _afterSaleListService.serviceDidFailLoadBlock = ^(WeAppBasicService* service,NSError* error){
             STRONGSELF
             [strongSelf reloadFail];
         };
     }
-    return _localAfterSaleService;
+    return _afterSaleListService;
 }
 
 - (NSDictionary *)imageStrDictionary {

@@ -7,16 +7,17 @@
 //
 
 #import "HSHomeBusinessListCell.h"
+#import "NSString+StringSize.h"
 
 @interface HSHomeBusinessListCell ()
 
-@property (nonatomic, strong) UIImageView *iconImageView;
+@property (nonatomic, strong) UIImageView *productImageView;
 
-@property (nonatomic, strong) UILabel     *nameLabel;
+@property (nonatomic, strong) UILabel     *productNameLabel;
 
-@property (nonatomic, strong) CALayer     *rightLine;
+@property (nonatomic, strong) UILabel     *productInfoLabel;
 
-@property (nonatomic, strong) CALayer     *bottomLine;
+@property (nonatomic, strong) UILabel     *productPriceLabel;
 
 @end
 
@@ -25,79 +26,121 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self.contentView addSubview:self.iconImageView];
-        [self.contentView addSubview:self.nameLabel];
-        [self.contentView.layer addSublayer:self.rightLine];
-        [self.contentView.layer addSublayer:self.bottomLine];
+        [self.contentView addSubview:self.productImageView];
+        [self.contentView addSubview:self.productNameLabel];
+        [self.contentView addSubview:self.productInfoLabel];
+        [self.contentView addSubview:self.productPriceLabel];
+
+        self.backgroundColor = [UIColor whiteColor];
+        self.layer.borderWidth = 0.5;
+        self.layer.borderColor = EHLinecor1.CGColor;
     }
     return self;
 }
 
-- (void)setupCollectionItem:(HSApplicationModel *)item {
-    self.nameLabel.text = item.appName;
+- (void)setModel:(HSProductInfoModel *)model {
+    _model = model;
     
-    NSURL *imageUrl = [NSURL URLWithString:item.appIconUrl];
-    UIImage *placeholderImage = [UIImage imageNamed:item.placeholderImageStr];
-    [self.iconImageView sd_setImageWithURL:imageUrl placeholderImage:placeholderImage];
+    self.productNameLabel.text = model.productName;
+    self.productInfoLabel.text = model.productInfo;
+
+    NSURL *imageUrl;
+    if (model.productImage) {
+        imageUrl = [NSURL URLWithString:model.productImage];
+    }
+    UIImage *placeholderImage;
+    if (model.placeholderImageStr) {
+        placeholderImage = [UIImage imageNamed:model.placeholderImageStr];
+    }
+    [self.productImageView sd_setImageWithURL:imageUrl placeholderImage:placeholderImage options:SDWebImageLowPriority];
+    
+    [self configFrame];
 }
 
+- (void)configFrame {
+    CGFloat spaceX = caculateNumber(15);
+    CGFloat spaceY = caculateNumber(30);
+    CGFloat labelSpaceY = caculateNumber(7);
+    CGFloat nameHeight = [@"name" sizeWithFont:self.productNameLabel.font Width:MAXFLOAT].height;
+    CGFloat infoHeight = [@"info" sizeWithFont:self.productInfoLabel.font Width:MAXFLOAT].height;
+    CGFloat priceHeight = [@"price" sizeWithFont:self.productPriceLabel.font Width:MAXFLOAT].height;
+
+    CGRect productNameLabelFrame,productInfoLabelFrame,productPriceLabelFrame;
+    if ([self isAppNameOnLeft:((HSProductInfoModel *)self.model).productName]) {
+        productNameLabelFrame = CGRectMake(spaceX, spaceY, self.width/2.0 - spaceX, nameHeight);
+        _productNameLabel.frame = productNameLabelFrame;
+        _productNameLabel.textAlignment = NSTextAlignmentLeft;
+        
+        productInfoLabelFrame = CGRectMake(_productNameLabel.left, _productNameLabel.bottom + labelSpaceY, _productNameLabel.width + caculateNumber(50), infoHeight);
+        _productInfoLabel.frame = productInfoLabelFrame;
+        _productInfoLabel.textAlignment = NSTextAlignmentLeft;
+        
+        productPriceLabelFrame = CGRectMake(_productInfoLabel.left, _productInfoLabel.bottom + caculateNumber(15), _productNameLabel.width, priceHeight);
+        _productPriceLabel.frame = productPriceLabelFrame;
+        _productPriceLabel.textAlignment = NSTextAlignmentLeft;
+    }
+    else {
+        productNameLabelFrame = CGRectMake(self.width / 2.0, spaceY, self.width/2.0 - spaceX, nameHeight);
+        _productNameLabel.frame = productNameLabelFrame;
+        _productNameLabel.textAlignment = NSTextAlignmentRight;
+        
+        productInfoLabelFrame = CGRectMake(_productNameLabel.left - caculateNumber(50), _productNameLabel.bottom + labelSpaceY, _productNameLabel.width + caculateNumber(50), infoHeight);
+        _productInfoLabel.frame = productInfoLabelFrame;
+        _productInfoLabel.textAlignment = NSTextAlignmentRight;
+        
+        productPriceLabelFrame = CGRectMake(_productNameLabel.left, _productInfoLabel.bottom + caculateNumber(15), _productNameLabel.width, priceHeight);
+        _productPriceLabel.frame = productPriceLabelFrame;
+        _productPriceLabel.textAlignment = NSTextAlignmentRight;
+    }
+    
+    self.productImageView.frame = self.bounds;
+}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    CGFloat imageWidth = caculateNumber(67);
-    self.iconImageView.frame = CGRectMake((self.width - imageWidth)/2.0, caculateNumber(15), imageWidth, imageWidth);
-    self.nameLabel.frame = CGRectMake(0, caculateNumber(15+13)+imageWidth, self.width, caculateNumber(14));
-    self.rightLine.frame = CGRectMake(self.width, 0, 0.5, self.height);
-    self.bottomLine.frame = CGRectMake(0, self.height - 0.5, self.width, 0.5);
 }
 
-- (UIImageView *)iconImageView {
-    if (!_iconImageView) {
-        _iconImageView = [[UIImageView alloc]init];
+- (UIImageView *)productImageView {
+    if (!_productImageView) {
+        _productImageView = [[UIImageView alloc]init];
+        _productImageView.contentMode = UIViewContentModeScaleAspectFill;
     }
-    return _iconImageView;
+    return _productImageView;
 }
 
-- (UILabel *)nameLabel {
-    if (!_nameLabel) {
-        _nameLabel = [[UILabel alloc]init];
-        _nameLabel.font = EHFont2;
-        _nameLabel.textColor = EHCor5;
-        _nameLabel.textAlignment = NSTextAlignmentCenter;
+- (UILabel *)productNameLabel {
+    if (!_productNameLabel) {
+        _productNameLabel = [[UILabel alloc]init];
+        _productNameLabel.font = HS_font2;
+        _productNameLabel.textColor = HS_FontCor2;
+        _productNameLabel.textAlignment = NSTextAlignmentRight;
     }
-    return _nameLabel;
+    return _productNameLabel;
 }
 
-- (CALayer *)rightLine {
-    if (!_rightLine) {
-        _rightLine = [CALayer layer];
-        _rightLine.backgroundColor = EHLinecor1.CGColor;
+- (UILabel *)productInfoLabel {
+    if (!_productInfoLabel) {
+        _productInfoLabel = [[UILabel alloc]init];
+        _productInfoLabel.font = HS_font5;
+        _productInfoLabel.textColor = HS_FontCor3;
+        _productInfoLabel.textAlignment = NSTextAlignmentRight;
     }
-    return _rightLine;
+    return _productInfoLabel;
 }
 
-- (CALayer *)bottomLine {
-    if (!_bottomLine) {
-        _bottomLine = [CALayer layer];
-        _bottomLine.backgroundColor = EHLinecor1.CGColor;
+- (UILabel *)productPriceLabel {
+    if (!_productPriceLabel) {
+        _productPriceLabel = [[UILabel alloc]init];
+        _productPriceLabel.font = HS_font1;
+        _productPriceLabel.textColor = HS_FontCor5;
+        _productPriceLabel.textAlignment = NSTextAlignmentRight;
     }
-    return _bottomLine;
+    return _productPriceLabel;
 }
 
-- (void)addSeparatorLines {
-    CGRect frame1 = CGRectMake(caculateNumber(215), 0, 0.5, self.height);
-    CGRect frame2 = CGRectMake(caculateNumber(215), self.height/2.0, self.width - caculateNumber(215), 0.5);
-    
-    NSMutableArray *muArr = [[NSMutableArray alloc]init];
-    [muArr addObject:[NSValue valueWithCGRect:frame1]];
-    [muArr addObject:[NSValue valueWithCGRect:frame2]];
-    
-    for (NSInteger i = 0; i<2; i++) {
-        CALayer *layer = [CALayer layer];
-        layer.backgroundColor = EHLinecor1.CGColor;
-        layer.frame = [muArr[i] CGRectValue];
-        [self.layer addSublayer:layer];
-    }
+- (BOOL)isAppNameOnLeft:(NSString *)appName {
+    NSArray *appNameLeftArray = @[@"和路由",@"咪咕"];
+    return [appNameLeftArray containsObject:appName]?YES:NO;
 }
 
 @end

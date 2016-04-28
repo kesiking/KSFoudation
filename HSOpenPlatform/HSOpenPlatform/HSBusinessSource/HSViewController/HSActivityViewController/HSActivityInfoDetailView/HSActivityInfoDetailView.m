@@ -54,7 +54,7 @@ typedef NS_ENUM(NSInteger, HSActivityInfoDetailViewType) {
 }
 
 -(void)reloadData{
-    self.activityInfoDetailViewType = (self.activityInfoModel.activityImageUrl != nil && self.activityInfoModel.activityImageUrl.length != 0) ? HSActivityInfoDetailViewType_OnlyImage : HSActivityInfoDetailViewType_ImageAndDesc;
+    self.activityInfoDetailViewType = (self.activityInfoModel.activityPoster != nil && self.activityInfoModel.activityPoster.length != 0) ? HSActivityInfoDetailViewType_OnlyImage : HSActivityInfoDetailViewType_ImageAndDesc;
     if (self.activityInfoDetailViewType == HSActivityInfoDetailViewType_ImageAndDesc) {
         [self reloadDataForImageAndDesc];
     }else if (self.activityInfoDetailViewType == HSActivityInfoDetailViewType_OnlyImage) {
@@ -63,7 +63,7 @@ typedef NS_ENUM(NSInteger, HSActivityInfoDetailViewType) {
 }
 
 -(void)reloadDataForOnlyImage{
-    [self.activityDetailAllScreenImageView sd_setImageWithURL:[NSURL URLWithString:self.activityInfoModel.activityImageUrl] placeholderImage:HSDefaultPlaceHoldImage];
+    [self.activityDetailAllScreenImageView sd_setImageWithURL:[NSURL URLWithString:self.activityInfoModel.activityPoster] placeholderImage:HSDefaultPlaceHoldImage];
     
     [self.container removeAllItems];
     
@@ -81,10 +81,10 @@ typedef NS_ENUM(NSInteger, HSActivityInfoDetailViewType) {
 }
 
 -(void)reloadDataForImageAndDesc{
-    [self.activityDetailImageView sd_setImageWithURL:[NSURL URLWithString:self.activityInfoModel.activityImageUrlForAdv] placeholderImage:HSDefaultPlaceHoldImage];
+    [self.activityDetailImageView sd_setImageWithURL:[NSURL URLWithString:self.activityInfoModel.activityBanner] placeholderImage:HSDefaultPlaceHoldImage];
     [self.activityDetailTitleLabel setText:self.activityInfoModel.activityTitle];
     [self.activityDetailTitleLabel sizeToFit];
-    [self.activityDetailInfoDescLabel setText:self.activityInfoModel.activityDetailText];
+    [self.activityDetailInfoDescLabel setText:self.activityInfoModel.activityContent];
     [self.activityDetailInfoDescLabel sizeToFit];
     
     // 修改活动VC的title
@@ -138,19 +138,23 @@ KSPropertyInitImageView(activityDetailImageView,{
 KSPropertyInitLabelView(activityDetailStartTimeLabel)
 KSPropertyInitLabelView(activityDetailEndTimeLabel)
 KSPropertyInitLabelView(activityDetailTitleLabel,{
-    _activityDetailTitleLabel.font = [UIFont systemFontOfSize:EHSiz2];
-    [_activityDetailTitleLabel setTextColor:EHCor5];
+    _activityDetailTitleLabel.font = [UIFont systemFontOfSize:HS_fontsiz2];
+    [_activityDetailTitleLabel setTextColor:HS_FontCor2];
+    _activityDetailTitleLabel.numberOfLines = 0;
     [_activityDetailTitleLabel setFrame:CGRectMake(0, 0, self.width - ActivityInfoDetailBorderX * 2, 15)];
 })
 KSPropertyInitLabelView(activityDetailInfoDescLabel,{
     [_activityDetailInfoDescLabel setFrame:CGRectMake(0, 0, self.width - ActivityInfoDetailBorderX * 2, 20)];
-    [_activityDetailInfoDescLabel setTextColor:EHCor5];
-    _activityDetailInfoDescLabel.font = [UIFont systemFontOfSize:EHSiz2];
+    [_activityDetailInfoDescLabel setTextColor:HS_FontCor2];
+    _activityDetailInfoDescLabel.numberOfLines = 0;
+    _activityDetailInfoDescLabel.font = [UIFont systemFontOfSize:HS_fontsiz4];
 })
 KSPropertyInitButtonView(activityDetailAttendButton,{
     [_activityDetailAttendButton setFrame:CGRectMake(55, self.height - 44, self.width - 55 * 2, 44)];
     [_activityDetailAttendButton setTitle:@"参加活动" forState:UIControlStateNormal];
-    [_activityDetailAttendButton setBackgroundColor:EH_cor9];
+    [_activityDetailAttendButton setTitleColor:HS_FontCor1 forState:UIControlStateNormal];
+    [_activityDetailAttendButton.titleLabel setFont:HS_font2];
+    [_activityDetailAttendButton setBackgroundColor:HS_FontCor5];
 })
 
 -(void)activityDetailAttendButtonClicked:(id)sender{

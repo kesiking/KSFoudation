@@ -8,26 +8,34 @@
 
 #import "WeAppComponentBaseItem.h"
 
+@protocol HSBusinessUserAccountInfoNickNameModel <NSObject>
+
+@end
+
 @interface HSBusinessUserAccountInfoNickNameModel : WeAppComponentBaseItem
 
-@property (nonatomic, strong) NSString      *userPhone;
-
-@property (nonatomic, strong) NSString      *appId;
-
-@property (nonatomic, strong) NSString      *realname;
+@property (nonatomic, strong) NSString      *memberPhone;
 
 @property (nonatomic, strong) NSString      *nickname;
+
+@property (nonatomic, strong) NSString      *familiaPhone;
+
+@property (nonatomic, strong) NSString      *productId;
+
+@property (nonatomic, strong) NSString      *deviceId;
+
+@property (nonatomic, assign) BOOL           isUserAccountHousehold;
 
 @end
 
 @interface HSBusinessUserAccountInfoModel : WeAppComponentBaseItem
 
-@property (nonatomic, strong) NSString      *userAccountPhone;
+@property (nonatomic, strong) NSString      *familiaPhone;
 
-@property (nonatomic, strong) NSString      *userAccountName;
+@property (nonatomic, strong) NSString      *productId;
 
-@property (nonatomic, strong) NSString      *userAccountNickName;
+@property (nonatomic, strong) NSString      *deviceId;
 
-@property (nonatomic, assign) BOOL           isUserAccountHousehold;
+@property (nonatomic, strong) NSArray<HSBusinessUserAccountInfoNickNameModel>       *member;
 
 @end

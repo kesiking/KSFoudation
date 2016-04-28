@@ -26,8 +26,8 @@
     if (_titleLabel == nil) {
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.width, 20)];
         [_titleLabel setBackgroundColor:[UIColor clearColor]];
-        [_titleLabel setTextColor:EHCor5];
-        [_titleLabel setFont:EHFont2];
+        [_titleLabel setTextColor:HS_FontCor2];
+        [_titleLabel setFont:HS_font2];
         [_titleLabel setTextAlignment:NSTextAlignmentCenter];
         [self addSubview:_titleLabel];
     }

@@ -25,7 +25,7 @@ typedef void (^NetworkProgressBlock)(NSUInteger currentSendBytes, long long curr
 serviceContext:(WeAppServiceContext*)serviceContext
      onSuccess:(NetworkSuccessBlock)successBlock
        onError:(NetworkErrorBlock)errorBlock
-       onCancel:(NetworkCancelBlock)cancelBlock;
+      onCancel:(NetworkCancelBlock)cancelBlock;
 
 -(void)uploadfile:(NSString *)apiName
      withFileName:(NSString*)fileName

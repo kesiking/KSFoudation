@@ -44,4 +44,7 @@
 // 释放内存
 -(void)releaseConstrutView;
 
+// 添加
+-(void)addScrollViewDelegateObserve:(id<UIScrollViewDelegate> )observe;
+
 @end

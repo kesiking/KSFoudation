@@ -22,8 +22,10 @@
 
 -(void)refreshDataRequest {
     if (self.dataArray.count == 0) {
-        [self.familyAppListService loadFamilyAppListData];
-
+        [self.familyAppListService loadFamilyAppListDataWithBusinessId:nil];
+    }
+    else {
+        !self.serviceDidFinishLoadBlock?:self.serviceDidFinishLoadBlock();
     }
 }
 
@@ -36,11 +38,22 @@
             EHLogInfo(@"getfamilyAppList完成！");
             STRONGSELF
             EHLogInfo(@"%@",service.dataList);
-            strongSelf.dataArray = service.dataList;
-            NSArray *nameStringArr = @[@"icon_lushang",@"icon_heluyou",@"icon_hemu",@"icon_zhaota",@"icon_mobaihe",@"icon_migu"];
-            for (NSInteger i=0; i<strongSelf.dataArray.count; i++) {
-                HSApplicationModel *item = service.dataList[i];
-                item.placeholderImageStr = nameStringArr[i];
+//            strongSelf.dataArray = service.dataList;
+            NSMutableArray *mutDataArray = [service.dataList mutableCopy];
+            NSInteger column = strongSelf.width/strongSelf.cellWidth;
+            NSInteger num = column - service.dataList.count % column;
+            if (num %column != 0) {
+                for (NSInteger i = 0; i<num; i++) {
+                    HSApplicationModel *model = [[HSApplicationModel alloc]init];
+                    [mutDataArray addObject:model];
+                }
+            }
+            strongSelf.dataArray = mutDataArray;
+            
+            NSDictionary *nameStringDict = @{@"和路由":@"icon_和路由_80",@"和目":@"icon_和目_80",@"路尚":@"icon_路尚_80",@"咪咕":@"icon_咪咕_80",@"魔百盒":@"icon_魔百合_80",@"找他":@"icon_找他_80px",@"甘肃移动掌上营业厅":@"icon_甘肃移动-掌上营业厅_80"};
+            for (NSInteger i=0; i<service.dataList.count; i++) {
+                HSApplicationModel *item = strongSelf.dataArray[i];
+                item.placeholderImageStr = [nameStringDict objectForKey:item.appName];
             }
             [strongSelf reloadData];
             //!strongSelf.itemIndexBlock?:strongSelf.itemIndexBlock(strongSelf.itemIndexPath);

@@ -13,17 +13,17 @@ static NSString * const kHSUploadUserPicApiName = @"terUserPictureAction/upLoadU
 
 static NSString * const kHSModifyUserInfoApiName = @"terUserAction/changeUserInfo.do";
 
-static NSString * const kHSGetActivityAdvertisementListApiName = @"activity/showAdvice.do";
+static NSString * const kHSGetActivityAdvertisementListApiName = @"showAdvice";
 
-static NSString * const kHSActivityInfoListApiName = @"activity/listActivity.do";
+static NSString * const kHSActivityInfoListApiName = @"listActivity";
 
-static NSString * const kHSActivityInfoDetailApiName = @"activity/showActivityDetail.do";
+static NSString * const kHSActivityInfoDetailApiName = @"showActivityDetail";
 
-static NSString * const kHSFamilyAppInfoListApiName = @"app/showFamilyAppList.do";
+static NSString * const kHSFamilyAppInfoListApiName = @"familyAppList";
 
 static NSString * const kHSOtherAppInfoListApiName = @"app/showOtherAppList.do";
 
-static NSString * const kHSFamilyAppIntroApiName = @"app/familyAppIntro.do";
+static NSString * const kHSFamilyAppIntroApiName = @"familyAppIntro";
 
 static NSString * const kHSOtherAppIntroApiName = @"app/otherAppIntro.do";
 
@@ -35,17 +35,22 @@ static NSString * const kHSSubscribedBussinessInfoListApiName = @"activity/listA
 
 static NSString * const kHSUpdateMessageNumberApiName = @"terUserAction/updateMessageNumberByUserPhone.do";
 
-static NSString * const kHSSendFeedbackApiName = @"user/feedback.do";
+static NSString * const kHSSendFeedbackApiName = @"feedback";
 
-static NSString * const kHSNationalAfterSaleApiName = @"device/getUniAfterSale.do";
+static NSString * const kHSGetBusinessUserNickNameApiName = @"getNickname";
 
-static NSString * const kHSLocalAfterSaleApiName = @"device/getLocalAfterSale.do";
+static NSString * const kHSModifyBusinessUserNickNameApiName = @"setNickname";
 
-static NSString * const kHSGetBusinessUserInfoListApiName = @"user/getUserInfoList.do";
+static NSString * const kHSProductListApiName = @"showProductList";
 
-static NSString * const kHSGetBusinessUserInfoNickNameApiName = @"user/getNickname.do";
+static NSString * const kHSProductInfoApiName = @"showProductInfo";
 
-static NSString * const kHSModifyBusinessUserNickNameApiName = @"user/setNickname.do";
+static NSString * const kHSAfterSaleListApiName = @"getAfterSaleList";
+
+static NSString * const kHSDeviceListApiName = @"getDeviceList";
+
+static NSString * const kHSDeviceInfoApiName = @"getDeviceInfo";
+
 
 #define RESPONSE_DATA_KEY @"responseData"
 

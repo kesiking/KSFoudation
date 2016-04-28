@@ -32,6 +32,6 @@
 #define REGISTER_FAIL_INFO                       @"注册失败，请稍后再试"
 
 #define MODIFY_PASSWORD_SUCCESS_INFO             @"修改密码成功"
-#define MODIFY_PASSWORD_FAIL_INFO                @"修改密码是该，请稍后再试"
+#define MODIFY_PASSWORD_FAIL_INFO                @"修改密码失败，请稍后再试"
 
 #endif

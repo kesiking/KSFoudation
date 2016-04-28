@@ -46,10 +46,10 @@ static NSString *const kHSMailImageName        = @"icon_Businesshall_mail";
     return self;
 }
 
-- (void)setModel:(HSNationalAfterSaleModel *)model {
+- (void)setModel:(HSAfterSaleModel *)model {
     _model = model;
     
-    NSURL *imageUrl = [NSURL URLWithString:model.appIconUrl];
+    NSURL *imageUrl = [NSURL URLWithString:model.productIconUrl];
     UIImage *placeholderImage = [UIImage imageNamed:model.placeholderImageStr];
     [self.appImv sd_setImageWithURL:imageUrl placeholderImage:placeholderImage options:SDWebImageLowPriority];
     
@@ -57,9 +57,9 @@ static NSString *const kHSMailImageName        = @"icon_Businesshall_mail";
     self.telImv.image      = [UIImage imageNamed:kHSPhoneImageName];
     self.mailImv.image     = [UIImage imageNamed:kHSMailImageName];
 
-    self.addressLabel.text = model.addressDes;
-    self.telLabel.text     = model.afterSalePhone;
-    self.mailLabel.text    = model.afterSaleMail;
+    self.addressLabel.text = model.outletsName;
+    self.telLabel.text     = model.outletsTel;
+    self.mailLabel.text    = model.outletsMail;
 }
 
 

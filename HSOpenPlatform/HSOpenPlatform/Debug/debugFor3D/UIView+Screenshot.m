@@ -111,7 +111,7 @@
 {
 	UIImage * result = nil;
 	
-    UIGraphicsBeginImageContextWithOptions( frame.size, NO, 1.0 );
+    UIGraphicsBeginImageContextWithOptions( frame.size, NO, [UIScreen mainScreen].scale  );
 
     CGContextRef context = UIGraphicsGetCurrentContext();
 	if ( context )

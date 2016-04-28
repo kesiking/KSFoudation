@@ -8,9 +8,10 @@
 
 #import "HSBusinessDetailViewController.h"
 #import "HSBussinessDetailVerticalContainer.h"
-#import "HSBusinessDetailListService.h"
+#import "HSDeviceInfoService.h"
 #import "HSNavBarTitleCustomView.h"
-#import "HSApplicationModel.h"
+#import "HSDeviceModel.h"
+#import "HSDeviceInfoModel.h"
 
 @interface HSBusinessDetailViewController()
 
@@ -18,15 +19,17 @@
 
 @property (nonatomic,strong) HSNavBarTitleCustomView             *navBarTitleCustomView;
 
-@property (nonatomic,strong) HSBusinessDetailListService         *businessDetailListService;
+@property (nonatomic,strong) HSDeviceInfoService                 *businessDetailListService;
 
 @property (nonatomic,strong) NSArray                             *businessDetailModelList;
 
 @property (nonatomic,strong) HSPopMenuListView                   *popMenuListView;
 
-@property (nonatomic,strong) HSApplicationModel                  *appModel;
+@property (nonatomic,strong) HSDeviceModel                       *deviceModel;
 
-@property (nonatomic,strong) NSString                            *appId;
+@property (nonatomic,strong) NSNumber                            *productId;
+
+@property (nonatomic,strong) NSNumber                            *deviceId;
 
 @end
 
@@ -35,8 +38,9 @@
 -(id)initWithNavigatorURL:(NSURL *)URL query:(NSDictionary *)query nativeParams:(NSDictionary *)nativeParams{
     self = [super initWithNavigatorURL:URL query:query nativeParams:nativeParams];
     if (self) {
-        self.appModel = [nativeParams objectForKey:@"appModel"];
-        self.appId = [nativeParams objectForKey:@"appId"];
+        self.deviceModel = [nativeParams objectForKey:@"deviceModel"];
+        self.productId = [nativeParams objectForKey:@"productId"]?:self.deviceModel.productId;
+        self.deviceId = ((HSDeviceInfoModel*)[self.deviceModel.deviceData firstObject]).deviceId;
     }
     return self;
 }
@@ -57,35 +61,20 @@
 }
 
 -(void)refreshDataRequest{
-//    [self.businessDetailListService loadBusinessDetailListWithUserPhone:[KSAuthenticationCenter userPhone] appId:self.appId];
-    NSArray* businessDetailModelArray = @[
-                                  @{
-                                      @"appId":@"1",
-                                      @"businessId":@"1",
-                                      @"businessNickName":@"我的魔百盒"
-                                      },
-                                  @{
-                                      @"appId":@"1",
-                                      @"businessId":@"2",
-                                      @"businessNickName":@"我的魔百盒1"
-                                      },
-                                  @{
-                                      @"appId":@"1",
-                                      @"businessId":@"3",
-                                      @"businessNickName":@"我的魔百盒2"
-                                      }
-                                  ];
-    NSArray* businessDetailModels = [HSBusinessDetailModel modelArrayWithJSON:businessDetailModelArray];
-    [self refreshPopMenuListViewWithDatalist:businessDetailModels];
-    [self setBusinessDetailModelList:businessDetailModels];
-    [self refreshBusinessDetailContainerWithModel:[businessDetailModels firstObject]];
+    if (self.deviceModel == nil || ![self.deviceModel isKindOfClass:[HSDeviceModel class]]) {
+        [self.businessDetailListService loadDeviceInfoWithUserPhone:[KSAuthenticationCenter userPhone] deviceId:self.deviceId];
+    }else{
+        [self refreshPopMenuListViewWithDatalist:self.deviceModel.deviceData];
+        [self setBusinessDetailModelList:self.deviceModel.deviceData];
+        [self refreshBusinessDetailContainerWithModel:[self.deviceModel.deviceData firstObject]];
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - combo info related view
 KSPropertyInitCustomView(navBarTitleCustomView, HSNavBarTitleCustomView,{
     [_navBarTitleCustomView setFrame:CGRectMake(0, 0, 200, 44)];
-    [_navBarTitleCustomView setBtnTitle:self.appModel.appName];
+    [_navBarTitleCustomView setBtnTitle:self.deviceModel.productName];
     WEAKSELF
     _navBarTitleCustomView.buttonClicedBlock = ^(HSNavBarTitleCustomView* navBarTitleCustomView){
         STRONGSELF
@@ -95,8 +84,8 @@ KSPropertyInitCustomView(navBarTitleCustomView, HSNavBarTitleCustomView,{
 
 KSPropertyInitCustomView(bussinessDetailContainer, HSBussinessDetailVerticalContainer,{
     [_bussinessDetailContainer setFrame:self.view.bounds];
-    [_bussinessDetailContainer setAppModel:self.appModel];
-    [_bussinessDetailContainer setAppId:self.appId];
+    [_bussinessDetailContainer setProductId:self.productId];
+    [_bussinessDetailContainer setDeviceModel:self.deviceModel];
 })
 
 KSPropertyInitCustomView(popMenuListView, HSPopMenuListView,{
@@ -116,9 +105,9 @@ KSPropertyInitCustomView(popMenuListView, HSPopMenuListView,{
     bgCancelBtn.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
 })
 
--(HSBusinessDetailListService *)businessDetailListService{
+-(HSDeviceInfoService *)businessDetailListService{
     if (_businessDetailListService == nil) {
-        _businessDetailListService = [HSBusinessDetailListService new];
+        _businessDetailListService = [HSDeviceInfoService new];
         
         WEAKSELF
         _businessDetailListService.serviceDidStartLoadBlock = ^(WeAppBasicService* service){
@@ -129,11 +118,13 @@ KSPropertyInitCustomView(popMenuListView, HSPopMenuListView,{
         _businessDetailListService.serviceDidFinishLoadBlock = ^(WeAppBasicService* service){
             STRONGSELF
             [strongSelf hideLoadingView];
-            if (service.dataList && [service.dataList count] > 0) {
+            if (service.item && [service.item isKindOfClass:[HSDeviceInfoModel class]]) {
+                HSDeviceInfoModel* deviceModel = (HSDeviceInfoModel*)service.item;
                 strongSelf.navBarTitleCustomView.btn.enabled = YES;
-                [strongSelf refreshPopMenuListViewWithDatalist:service.dataList];
-                [strongSelf setBusinessDetailModelList:service.dataList];
-                [strongSelf refreshBusinessDetailContainerWithModel:[service.dataList firstObject]];
+                NSArray* deviceModels = @[deviceModel];
+                [strongSelf refreshPopMenuListViewWithDatalist:deviceModels];
+                [strongSelf setBusinessDetailModelList:deviceModels];
+                [strongSelf refreshBusinessDetailContainerWithModel:deviceModel];
                 [strongSelf hideEmptyView];
             }else{
                 strongSelf.navBarTitleCustomView.btn.enabled = NO;
@@ -163,11 +154,11 @@ KSPropertyInitCustomView(popMenuListView, HSPopMenuListView,{
 
 -(void)refreshPopMenuListViewWithDatalist:(NSArray*)dataList{
     NSMutableArray* menuArray = [NSMutableArray array];
-    for (HSBusinessDetailModel* componentItem in dataList) {
-        if (![componentItem isKindOfClass:[HSBusinessDetailModel class]]) {
+    for (HSDeviceInfoModel* componentItem in dataList) {
+        if (![componentItem isKindOfClass:[HSDeviceInfoModel class]]) {
             continue;
         }
-        EHPopMenuModel* menu = [[EHPopMenuModel alloc] initWithTitleText:[componentItem valueForKey:@"businessNickName"]];
+        EHPopMenuModel* menu = [[EHPopMenuModel alloc] initWithTitleText:[componentItem valueForKey:@"deviceModel"]];
         menu.menuExtModel = componentItem;
         [menuArray addObject:menu];
     }
@@ -176,8 +167,8 @@ KSPropertyInitCustomView(popMenuListView, HSPopMenuListView,{
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - businessContaier refresh action
--(void)refreshBusinessDetailContainerWithModel:(HSBusinessDetailModel*)businessDetailModel{
-    if (businessDetailModel == nil || ![businessDetailModel isKindOfClass:[HSBusinessDetailModel class]]) {
+-(void)refreshBusinessDetailContainerWithModel:(HSDeviceInfoModel*)businessDetailModel{
+    if (businessDetailModel == nil || ![businessDetailModel isKindOfClass:[HSDeviceInfoModel class]]) {
         return;
     }
     [_bussinessDetailContainer setBussinessDetailModel:businessDetailModel];

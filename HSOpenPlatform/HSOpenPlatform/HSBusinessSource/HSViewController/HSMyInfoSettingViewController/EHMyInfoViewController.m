@@ -16,9 +16,12 @@
 #import "EHLoadingHud.h"
 #import "EHModifyNickNameViewController.h"
 #import "RMActionController.h"
+#import "KSDebugManager.h"
 
 #define kCellHeight     50
 #define kHeaderViewHeight 30
+
+//#define kFutureFunction
 
 @interface EHMyInfoViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -136,16 +139,31 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
+#ifdef kFutureFunction
         return 2;
+#else
+        return 0;
+#endif
     }else if(section == 1){
+#ifdef KSDebugToolsEnable
+        return 4;
+#else
         return 3;
+#endif
     }
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSArray *titleArray = [NSArray arrayWithObjects:@"我的头像",@"我的昵称",@"我的账号",@"更改密码",@"消息设置", nil];
+    NSArray *titleArray = [NSArray arrayWithObjects:
+                           @"我的头像",
+                           @"我的昵称",
+                           @"我的账号",@"更改密码",@"消息设置",
+#ifdef KSDebugToolsEnable
+                           @"Debug设置",
+#endif
+                           nil];
     static NSString *cellID = @"cellID";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if (cell == nil) {
@@ -166,10 +184,11 @@
 
         cell.detailTextLabel.text = nickName;
     }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (indexPath.section == 1 && indexPath.row == 0) {
         cell.detailTextLabel.text = [KSLoginComponentItem sharedInstance].user_phone;
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     return cell;
 }
@@ -206,7 +225,10 @@
     }
     else {
         if (indexPath.row == 0) {
+            /*
+             * 暂时不支持修改账号
             TBOpenURLFromSourceAndParams(internalURL(kModifyPhoneSecurityPage), self, nil);
+             */
         }
         else if (indexPath.row == 1){
             TBOpenURLFromSourceAndParams(internalURL(kModifyPwdPage), self, nil);
@@ -214,6 +236,16 @@
         else if (indexPath.row == 2){
             TBOpenURLFromSourceAndParams(internalURL(@"HSSettingViewController"), self, nil);
         }
+#ifdef KSDebugToolsEnable
+        else if (indexPath.row == 3){
+            static BOOL debugToolsEnable = NO;
+            debugToolsEnable = [[[KSDebugManager shareInstance] valueForKey:@"debugToolsEnabel"] boolValue];
+            debugToolsEnable = !debugToolsEnable;
+    #ifdef DEBUG_ENVIEONMENT
+            [KSDebugManager setupDebugToolsEnable:debugToolsEnable];
+    #endif
+        }
+#endif
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

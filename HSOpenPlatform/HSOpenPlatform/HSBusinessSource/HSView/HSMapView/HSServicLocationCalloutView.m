@@ -8,9 +8,9 @@
 
 #import "HSServicLocationCalloutView.h"
 
-static NSString *const kHS_BgAddress_ImageName        = @"bg_address01";
-static NSString *const kHS_ChinaMobile_ImageName        = @"icon_ChinaMobile";
-static NSString *const kHS_Navigation_ImageName        = @"icon_navigation";
+static NSString *const kHS_BgAddress_ImageName        = @"bg-弹出框";
+static NSString *const kHS_ChinaMobile_ImageName      = @"icon_ChinaMobile";
+static NSString *const kHS_Navigation_ImageName       = @"icon_导航";
 
 
 @interface HSServicLocationCalloutView ()
@@ -51,14 +51,14 @@ static NSString *const kHS_Navigation_ImageName        = @"icon_navigation";
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.bgImgView.frame = self.bounds;
-    self.nameLabel.frame = CGRectMake(caculateNumber(12+30+8), caculateNumber(14), caculateNumber(82.5), caculateNumber(13));
-    self.distanceLabel.frame = CGRectMake(self.width - caculateNumber(5+50+12+50), caculateNumber(14), caculateNumber(50), caculateNumber(13));
-    self.chinaMobileImv.frame = CGRectMake(caculateNumber(12), caculateNumber(5+10), caculateNumber(30), caculateNumber(30));
-    self.addressLabel.frame = CGRectMake(caculateNumber(12+30+8), caculateNumber(14+13+6), self.width - caculateNumber(12+30+8+50+12), caculateNumber(13));
-    self.navigateButton.frame = CGRectMake(self.width - caculateNumber(5+50), 5, caculateNumber(50), caculateNumber(50));
-    self.navigateImv.frame = CGRectMake(self.navigateButton.width - caculateNumber(20+10), caculateNumber(12), caculateNumber(10), caculateNumber(10));
-    self.navigateLabel.frame = CGRectMake(self.navigateButton.width - caculateNumber(50), caculateNumber(12+10+6), caculateNumber(50), caculateNumber(50-12-10-6-9));
-    self.lineLayer.frame = CGRectMake(self.width - caculateNumber(5+50), caculateNumber(5+6), 0.5, caculateNumber(50-6-6));
+    self.nameLabel.frame = CGRectMake(3+10+30+7, 2+10, 82.5+10, 13);
+    self.distanceLabel.frame = CGRectMake(self.width - (3+50+10+50), 2+10, 50, 13);
+    self.chinaMobileImv.frame = CGRectMake(13, 2+10, 30, 30);
+    self.addressLabel.frame = CGRectMake(12+30+8, 2+10+13+7, self.width - (13+30+7+50+10+3), 13);
+    self.navigateButton.frame = CGRectMake(self.width - (3+50), 2, 50, 50);
+    self.navigateImv.frame = CGRectMake((self.navigateButton.width - 15)/2.0, 10, 15, 15);
+    self.navigateLabel.frame = CGRectMake(self.navigateButton.width - 50, 10+15+2, 50, 50-(10+15+2)-10);
+    self.lineLayer.frame = CGRectMake(self.width - (3+50), 2+9, 0.5, 31);
 }
 
 #pragma mark - Events Response
@@ -100,8 +100,8 @@ static NSString *const kHS_Navigation_ImageName        = @"icon_navigation";
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc]init];
-        _nameLabel.font = EHFont3;
-        _nameLabel.textColor = EHCor5;
+        _nameLabel.font = HS_font3;
+        _nameLabel.textColor = HS_FontCor2;
         _nameLabel.textAlignment = NSTextAlignmentLeft;
     }
     return _nameLabel;
@@ -110,8 +110,8 @@ static NSString *const kHS_Navigation_ImageName        = @"icon_navigation";
 - (UILabel *)distanceLabel {
     if (!_distanceLabel) {
         _distanceLabel = [[UILabel alloc]init];
-        _distanceLabel.font = EHFont3;
-        _distanceLabel.textColor = EHCor5;
+        _distanceLabel.font = HS_font3;
+        _distanceLabel.textColor = HS_FontCor2;
         _distanceLabel.textAlignment = NSTextAlignmentRight;
     }
     return _distanceLabel;
@@ -127,8 +127,8 @@ static NSString *const kHS_Navigation_ImageName        = @"icon_navigation";
 - (UILabel *)addressLabel {
     if (!_addressLabel) {
         _addressLabel = [[UILabel alloc]init];
-        _addressLabel.font = EHFont3;
-        _addressLabel.textColor = EHCor6;
+        _addressLabel.font = HS_font5;
+        _addressLabel.textColor = HS_FontCor4;
         _addressLabel.textAlignment = NSTextAlignmentLeft;
     }
     return _addressLabel;
@@ -156,8 +156,8 @@ static NSString *const kHS_Navigation_ImageName        = @"icon_navigation";
 - (UILabel *)navigateLabel {
     if (!_navigateLabel) {
         _navigateLabel = [[UILabel alloc]init];
-        _navigateLabel.font = EHFont3;
-        _navigateLabel.textColor = EHCor4;
+        _navigateLabel.font = HS_font3;
+        _navigateLabel.textColor = HS_FontCor2;
         _navigateLabel.textAlignment = NSTextAlignmentCenter;
         _navigateLabel.text = @"导航";
     }

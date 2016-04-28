@@ -16,6 +16,8 @@
 
 +(void)setupDebugManager;
 
++(void)setDebugEnviromeng:(KSDebugEnviroment *)debugEnviromeng;
+
 +(void)setupDebugManagerWithDebugEnviroment:(KSDebugEnviroment*)debugEnviroment;
 
 +(void)setupDebugToolsEnable:(BOOL)debugToolsEnabel;

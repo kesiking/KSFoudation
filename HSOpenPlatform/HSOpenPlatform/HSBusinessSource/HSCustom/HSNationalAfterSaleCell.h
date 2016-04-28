@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HSNationalAfterSaleModel.h"
+#import "HSAfterSaleModel.h"
 
 @interface HSNationalAfterSaleCell : UITableViewCell
 
-@property (nonatomic, strong) HSNationalAfterSaleModel *model;
+@property (nonatomic, strong) HSAfterSaleModel *model;
 
 @end

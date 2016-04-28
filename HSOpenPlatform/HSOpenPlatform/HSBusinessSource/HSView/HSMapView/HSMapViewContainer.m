@@ -77,9 +77,18 @@ static NSString *const kHS_MyPosition_ImageName        = @"icon_My position";
 }
 
 - (void)reCenterMap{
-    [self.mapView showAnnotations:self.annotationsArray animated:YES];
     HSMapPoiModel *poiModel = self.poiList[self.selectedIndex];
-    [self.mapView setCenterCoordinate:poiModel.coordinate animated:YES];
+    if (self.annotationsArray.count == 0) {
+        return;
+    }
+    else if (self.annotationsArray.count == 1) {
+        MACoordinateRegion region = MACoordinateRegionMakeWithDistance(poiModel.coordinate, 1000 * 2, 1000 * 2);
+        [self.mapView setRegion:region animated:YES];
+    }
+    else {
+        [self.mapView showAnnotations:self.annotationsArray animated:YES];
+        [self.mapView setCenterCoordinate:poiModel.coordinate animated:YES];
+    }
 
     [self hideReCenterButton];
 }
@@ -113,7 +122,10 @@ static NSString *const kHS_MyPosition_ImageName        = @"icon_My position";
             annotationView = [[self.annotationViewClass alloc] initWithAnnotation:annotation reuseIdentifier:reuseIndetifier];
         }
         
-        annotationView.image = [UIImage imageNamed:kHS_BusinesshallPosition_ImageName];
+        UIImage *image = [UIImage imageNamed:kHS_BusinesshallPosition_ImageName];
+        image = [image scaleImageToScale:0.5];
+        annotationView.image = image;
+        
         // 设置为NO，用以调用自定义的calloutView
         annotationView.canShowCallout = NO;
         // 设置中心点偏移，使得标注底部中间点成为经纬度对应点
@@ -144,7 +156,10 @@ static NSString *const kHS_MyPosition_ImageName        = @"icon_My position";
             annotationView = [[MAAnnotationView alloc] initWithAnnotation:annotation
                                                           reuseIdentifier:userLocationStyleReuseIndetifier];
         }
-        annotationView.image = [UIImage imageNamed:kHS_MyPosition_ImageName];
+        
+        UIImage *image = [UIImage imageNamed:kHS_MyPosition_ImageName];
+        image = [image scaleImageToScale:0.5];
+        annotationView.image = image;
         annotationView.canShowCallout = YES;
         return annotationView;
     }
@@ -155,6 +170,7 @@ static NSString *const kHS_MyPosition_ImageName        = @"icon_My position";
 - (void)mapView:(MAMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
     if (!self.isAnnotationSelecting) {
         [self showReCenterButton];
+        [self.mapView deselectAnnotation:self.annotationsArray[self.selectedIndex] animated:NO];
     }
     else {
         [self hideReCenterButton];
@@ -166,6 +182,12 @@ static NSString *const kHS_MyPosition_ImageName        = @"icon_My position";
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.mapView selectAnnotation:self.annotationsArray[self.selectedIndex] animated:YES];
     });
+}
+
+-(void)dealloc{
+    [self resetAnnotations];
+    [_mapView removeFromSuperview];
+    _mapView.delegate = nil;
 }
 
 #pragma mark - Getters And Setters
@@ -182,6 +204,7 @@ static NSString *const kHS_MyPosition_ImageName        = @"icon_My position";
     _mapView.showsScale = YES;
     _mapView.scaleOrigin = CGPointMake(70, _mapView.height - 25);
     _mapView.touchPOIEnabled = NO;
+    [_mapView setZoomLevel:17];
   
     [self addSubview:_mapView];
 }

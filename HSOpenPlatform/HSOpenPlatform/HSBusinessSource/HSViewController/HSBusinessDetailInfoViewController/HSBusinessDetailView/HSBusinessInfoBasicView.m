@@ -10,7 +10,7 @@
 
 @implementation HSBusinessInfoBasicView
 
--(void)setBussinessDetailModel:(WeAppComponentBaseItem *)bussinessDetailModel{
+-(void)setBussinessDetailModel:(HSDeviceInfoModel *)bussinessDetailModel{
     _bussinessDetailModel = bussinessDetailModel;
     if (bussinessDetailModel != nil) {
         [self reloadData];
@@ -22,7 +22,7 @@
         _topline = [TBDetailUITools drawDivisionLine:0
                                                 yPos:0
                                            lineWidth:self.width];
-        [_topline setBackgroundColor:EH_cor13];
+        [_topline setBackgroundColor:HS_linecor1];
         [self addSubview:_topline];
     }
     return _topline;
@@ -33,7 +33,7 @@
         _endline = [TBDetailUITools drawDivisionLine:0
                                                 yPos:self.height - 0.5
                                            lineWidth:self.width];
-        [_endline setBackgroundColor:EH_cor13];
+        [_endline setBackgroundColor:HS_linecor1];
         [self addSubview:_endline];
     }
     return _endline;

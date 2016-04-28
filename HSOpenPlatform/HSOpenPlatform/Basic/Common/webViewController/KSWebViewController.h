@@ -11,7 +11,7 @@
 #import "TBModelStatusHandler.h"
 
 #define WEB_REQUEST_URL_ADDRESS_KEY @"__webRequestUrl__"
-#define WEB_VIEW_TITLE_KEY @"__webViewTitle__"
+//#define WEB_VIEW_TITLE_KEY @"__webViewTitle__"
 
 @interface KSWebViewController : SVWebViewController
 

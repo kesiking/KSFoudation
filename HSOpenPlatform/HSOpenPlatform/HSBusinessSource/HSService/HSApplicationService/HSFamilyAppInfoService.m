@@ -12,7 +12,11 @@
 
 @implementation HSFamilyAppInfoService
 
--(void)loadFamilyAppInfoWithAppId:(NSString*)appId{
+-(void)loadFamilyAppInfoWithAppId:(NSNumber*)appId{
+    if (appId == nil) {
+        EHLogInfo(@"appId is nil");
+        return;
+    }
     self.itemClass = [HSApplicationIntroModel class];
     self.needCache = YES;
     self.jsonTopKey = RESPONSE_DATA_KEY;

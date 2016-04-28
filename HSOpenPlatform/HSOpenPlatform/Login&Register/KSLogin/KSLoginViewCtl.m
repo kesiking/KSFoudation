@@ -83,7 +83,7 @@
         _btn_cancel.layer.borderColor = [UIColor whiteColor].CGColor;
         _btn_cancel.clipsToBounds = YES;
         _btn_cancel.userInteractionEnabled = YES;
-        [_btn_cancel setTitle:@"试用体验" forState:UIControlStateNormal];
+        [_btn_cancel setTitle:@"取消登录" forState:UIControlStateNormal];
         [_btn_cancel setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_btn_cancel addTarget:self action:@selector(cancelLogin) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_btn_cancel];

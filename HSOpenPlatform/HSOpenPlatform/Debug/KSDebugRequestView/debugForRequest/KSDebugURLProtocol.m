@@ -10,6 +10,7 @@
 #import "KSDebugRequestManager.h"
 #import "KSDebugRequestModel.h"
 #import "KSDebugRequestHostCenter.h"
+#import "KSDebugDataCollection.h"
 
 static NSString * const URLProtocolHandledKey = @"URLProtocolHandledKey";
 
@@ -101,8 +102,15 @@ static NSString * const URLProtocolHandledKey = @"URLProtocolHandledKey";
     
     [self.connection cancel];
     self.connection = nil;
+    
+    [self collectData];
 }
 
+- (void)collectData {
+    NSMutableDictionary *muDic = [[NSMutableDictionary alloc]init];
+    [muDic setObject:[self.requestModel getAttributedString].string forKey:@"KSDebugRequest"];
+    [[KSDebugDataCollection sharedCollection]addObject:muDic forDebug:@"KSDebugRequest"];
+}
 
 #pragma mark - NSURLConnectionDelegate
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {

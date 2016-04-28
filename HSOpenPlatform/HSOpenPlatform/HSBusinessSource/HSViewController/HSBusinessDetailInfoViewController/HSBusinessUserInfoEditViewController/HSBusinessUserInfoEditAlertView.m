@@ -72,7 +72,7 @@
 - (void)modifyUserNickName:(NSString*)nickName{
     nickName = [WeAppUtils trimWhitespaceAndNewlineCharacterWithString:nickName];
     self.businessUserInfoModifyService.serviceContext.serviceExtContextData = nickName;
-    [self.businessUserInfoModifyService modifyBusinessUserInfoWithUserPhone:self.userPhone appId:self.appId nickName:nickName userTrueName:self.userTrueName];
+    [self.businessUserInfoModifyService modifyBusinessUserInfoWithUserPhone:self.userPhone memberPhone:self.memberPhone deviceId:self.deviceId nickName:nickName];
 }
 
 - (void)serviceDidStartLoad:(WeAppBasicService *)service{

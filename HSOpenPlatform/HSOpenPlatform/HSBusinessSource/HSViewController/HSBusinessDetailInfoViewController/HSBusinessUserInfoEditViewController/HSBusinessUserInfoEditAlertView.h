@@ -12,11 +12,15 @@
 
 @property (nonatomic, strong) NSString                          *userPhone;
 
+@property (nonatomic, strong) NSString                          *memberPhone;
+
 @property (nonatomic, strong) NSString                          *userNickName;
 
 @property (nonatomic, strong) NSString                          *userTrueName;
 
-@property (nonatomic, strong) NSString                          *appId;
+@property (nonatomic, strong) NSNumber                          *productId;
+
+@property (nonatomic, strong) NSNumber                          *deviceId;
 
 -(UITextField*)getTextField;
 

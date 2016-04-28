@@ -45,8 +45,8 @@
     headerTitleLabel.text = @"请选择导航";
     [headerTitleLabel sizeToFit];
     headerTitleLabel.backgroundColor = [UIColor clearColor];
-    headerTitleLabel.textColor = EH_cor3;
-    headerTitleLabel.font = EH_font4;
+    headerTitleLabel.textColor = HS_FontCor3;
+    headerTitleLabel.font = HS_font2;
     headerTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     headerTitleLabel.textAlignment = NSTextAlignmentCenter;
     headerTitleLabel.numberOfLines = 1;
@@ -68,8 +68,8 @@
                 [HSMapNavigationManager openMapUrlArrayWithCurrentCoordinate:currentCoordinate naviCoordinate:naviCoordinate withMapDescription:mapDescription];
             }
         }];
-        mapAction.titleColor = UINAVIGATIONBAR_COMMON_COLOR;
-        mapAction.titleFont = [UIFont boldSystemFontOfSize:EH_siz4];
+        mapAction.titleColor = HS_FontCor2;
+        mapAction.titleFont = [UIFont boldSystemFontOfSize:HS_fontsiz2];
         UIView* actionView = [mapAction valueForKey:@"view"];
         if (mapImageBundle && mapImageBundle.length > 0 && actionView && [actionView isKindOfClass:[UIButton class]]) {
             UIButton * actionButton = (UIButton*)actionView;
@@ -82,7 +82,7 @@
     RMAction *cancelAction=[RMAction actionWithTitle:@"取消" style:RMActionStyleCancel andHandler:^(RMActionController *controller) {
     }];
     cancelAction.titleColor = UINAVIGATIONBAR_COMMON_COLOR;
-    cancelAction.titleFont = [UIFont boldSystemFontOfSize:EH_siz4];
+    cancelAction.titleFont = [UIFont boldSystemFontOfSize:HS_fontsiz2];
     [actionSheet addAction:cancelAction];
     
     //Now just present the date selection controller using the standard iOS presentation method

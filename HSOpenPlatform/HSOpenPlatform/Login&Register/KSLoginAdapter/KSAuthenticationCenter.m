@@ -215,10 +215,16 @@
 }
 
 - (void)autoLoginWithCompleteBlock:(dispatch_block_t)completeBlock{
+    [self autoLoginWithCompleteBlock:completeBlock needLoginView:YES];
+}
+
+- (void)autoLoginWithCompleteBlock:(dispatch_block_t)completeBlock needLoginView:(BOOL)needLoginView{
     NSString* accountName = [[KSLoginComponentItem sharedInstance] getAccountName];
     NSString* password = [[KSLoginComponentItem sharedInstance] getPassword];
     if (accountName == nil || password == nil || ![KSAuthenticationCenter isLogin]) {
-        TBOpenURLFromTargetWithNativeParams(loginURL, [UIApplication sharedApplication].keyWindow.rootViewController, @{@"needNavigationBar":@"false"}, nil);
+        if (needLoginView) {
+            TBOpenURLFromTargetWithNativeParams(loginURL, [UIApplication sharedApplication].keyWindow.rootViewController, @{@"needNavigationBar":@"false"}, nil);
+        }
     }else{
         [self.autoLoginService loginWithAccountName:accountName password:password];
     }

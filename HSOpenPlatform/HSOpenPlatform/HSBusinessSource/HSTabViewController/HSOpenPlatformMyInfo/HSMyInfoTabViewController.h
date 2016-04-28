@@ -10,4 +10,7 @@
 
 @interface HSMyInfoTabViewController : KSTabBasicViewController
 
+@property (nonatomic, strong) NSString       *emptyDataTitle;       //空数据的提示文案
+
+
 @end

@@ -17,16 +17,6 @@ typedef struct
 
 @implementation WeAppUtils
 
-void ks_swizzleSelector(Class classType, SEL originalSelector, SEL swizzledSelector) {
-    Method originalMethod = class_getInstanceMethod(classType, originalSelector);
-    Method swizzledMethod = class_getInstanceMethod(classType, swizzledSelector);
-    if (class_addMethod(classType, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))) {
-        class_replaceMethod(classType, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
-    } else {
-        method_exchangeImplementations(originalMethod, swizzledMethod);
-    }
-}
-
 + (UIColor *)colorFromString:(NSString *)string{
     if (string == nil
         || ![string isKindOfClass:[NSString class]]
@@ -253,7 +243,26 @@ void ks_swizzleSelector(Class classType, SEL originalSelector, SEL swizzledSelec
     }
     NSError* jsonError = nil;
     
-    NSData*  jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&jsonError];
+    NSData*  jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&jsonError];
+    
+    if ([jsonData length] > 0 && jsonError == nil){
+        id paramObj = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        return paramObj;
+    }
+    
+    return nil;
+}
+
++ (NSString*)getJSONStringWithArray:(NSArray*)array{
+    if ([self isEmpty:array]) {
+        return nil;
+    }
+    if ([array isKindOfClass:[NSString class]]) {
+        return (NSString*)array;
+    }
+    NSError* jsonError = nil;
+    
+    NSData*  jsonData = [NSJSONSerialization dataWithJSONObject:array options:0 error:&jsonError];
     
     if ([jsonData length] > 0 && jsonError == nil){
         id paramObj = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
@@ -536,34 +545,6 @@ void ks_swizzleSelector(Class classType, SEL originalSelector, SEL swizzledSelec
     NSString *intStr = [self intToString:intValue];
     
     return [self abbreviationWithString:intStr];
-}
-
-+(NSNumber*)getNumberWithFloatValue:(double)value withScale:(NSUInteger)scale{
-    return [self getNumberWithFloatValue:value withScale:scale scaleMinus:YES];
-}
-
-+(NSNumber*)getNumberWithFloatValue:(double)value withScale:(NSUInteger)scale scaleMinus:(BOOL)isScaleMinus{
-    // 获取位数
-    NSUInteger numCount = [self getValueDigitCountWithValue:value];
-    NSInteger scaleNumCountDelt = scale - numCount;
-    NSDecimalNumberHandler* roundingBehavior = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundPlain
-                                                                                                      scale:(NSUInteger)(isScaleMinus?scaleNumCountDelt:(scaleNumCountDelt > 0?scaleNumCountDelt:0)) raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
-    
-    NSDecimalNumber *ouncesDecimal;
-    NSDecimalNumber *roundedOunces;
-    
-    ouncesDecimal = [NSDecimalNumber decimalNumberWithDecimal:[@(value) decimalValue]];
-    roundedOunces = [ouncesDecimal decimalNumberByRoundingAccordingToBehavior:roundingBehavior];
-    
-    return roundedOunces;
-}
-
-+(NSUInteger)getValueDigitCountWithValue:(double)value{
-    NSUInteger numCount = 0;
-    for (NSUInteger abcInt = lround(value); abcInt >= 1; abcInt = abcInt / 10) {
-        numCount++;
-    }
-    return numCount;
 }
 
 +(NSString *)longAbbreviation:(long)longValue {

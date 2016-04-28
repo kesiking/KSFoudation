@@ -7,6 +7,7 @@
 //  封装了下拉刷新和上拉加载翻页的UITableView
 
 #import <UIKit/UIKit.h>
+#import "MJRefresh.h"
 
 typedef NS_ENUM(NSInteger, UICellFillStyle) {
     UICellFillStyleInRows = 0,  //!< 填充在一列row中,默认
@@ -42,5 +43,9 @@ typedef NS_ENUM(NSInteger, UICellFillStyle) {
 - (void)beginRefreshing;                                            //!< 自动开始刷新
 
 - (void)updateTableViewState;                                       //!< 更新刷新、加载状态，reloadData会自动调用
+
+- (void)updateFooterStateAfterRefreshing;                           //!< 手动更新刷新后的底部状态
+
+- (void)updateFooterStateAfterLoadingMore;                          //!< 手动更新加载更多后的底部状态
 
 @end

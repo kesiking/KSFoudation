@@ -37,24 +37,28 @@
     [self addGestureRecognizer:headViewTap];
 }
 
+-(void)dealloc{
+    
+}
+
 -(void)reloadData{
-    [self.businessInfoImageView sd_setImageWithURL:[self.bussinessDetailModel valueForKey:@"imageUrl"]?:self.appModel.appIconUrl placeholderImage:HSDefaultPlaceHoldImage];
-    [self.businessInfoTitleLabel setText:[self.bussinessDetailModel valueForKey:@"businessName"]?:self.appModel.appName];
-    [self.businessInfoDetailLabel setText:@"mobile123456"];
+    [self.businessInfoImageView sd_setImageWithURL:[NSURL URLWithString:self.bussinessDetailModel.productLogo] placeholderImage:HSDefaultPlaceHoldImage];
+    [self.businessInfoTitleLabel setText:self.deviceModel.productName?:self.bussinessDetailModel.productName];
+    [self.businessInfoDetailLabel setText:self.bussinessDetailModel.deviceModel];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - combo info related view
 KSPropertyInitLabelView(businessInfoTitleLabel,{
     [_businessInfoTitleLabel setFrame:CGRectMake(self.businessInfoImageView.right + BussinessDetailBorderLeft, 24, BussinessDetailWidth - self.businessInfoImageView.right - BussinessDetailBorderLeft , 16)];
-    [_businessInfoTitleLabel setFont:[UIFont systemFontOfSize:EHSiz1]];
-    [_businessInfoTitleLabel setTextColor:EHCor5];
+    [_businessInfoTitleLabel setFont:[UIFont systemFontOfSize:HS_fontsiz1]];
+    [_businessInfoTitleLabel setTextColor:HS_FontCor2];
     [_businessInfoTitleLabel setNumberOfLines:1];
     [_businessInfoTitleLabel setTextAlignment:NSTextAlignmentLeft];
 })
 
 KSPropertyInitImageView(businessInfoImageView,{
-    [_businessInfoImageView setFrame:CGRectMake(BussinessDetailBorderLeft + 1, (self.height - 68)/2, 68, 68)];
+    [_businessInfoImageView setFrame:CGRectMake(BussinessDetailBorderLeft + 5, (self.height - 60)/2, 60, 60)];
 })
 
 KSPropertyInitImageView(businessInfoArrowView,{
@@ -65,19 +69,19 @@ KSPropertyInitImageView(businessInfoArrowView,{
 KSPropertyInitLabelView(businessInfoDetailLabel,{
     [_businessInfoDetailLabel setFrame:CGRectMake(self.businessInfoTitleLabel.left, self.businessInfoTitleLabel.bottom, self.businessInfoTitleLabel.width, 9)];
     [_businessInfoDetailLabel setNumberOfLines:1];
-    [_businessInfoDetailLabel setTextColor:EHCor3];
-    [_businessInfoDetailLabel setFont:EHFont5];
+    [_businessInfoDetailLabel setTextColor:HS_FontCor4];
+    [_businessInfoDetailLabel setFont:HS_font5];
 })
 
 - (void)headViewTapGestureRecgnizer:(UITapGestureRecognizer *)tap{
-    TBOpenURLFromTargetWithNativeParams([self.bussinessDetailModel valueForKey:@"url"]?:@"http://www.baidu.com", self, nil, nil);
+    TBOpenURLFromTargetWithNativeParams(self.deviceModel.platUrl, self, nil, nil);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - system override method
 -(void)layoutSubviews{
     [super layoutSubviews];
-    [_businessInfoImageView setFrame:CGRectMake(BussinessDetailBorderLeft + 1, (self.height - 68)/2, 68, 68)];
+    [_businessInfoImageView setFrame:CGRectMake(BussinessDetailBorderLeft + 5, (self.height - 60)/2, 60, 60)];
     [_businessInfoArrowView setFrame:CGRectMake(self.width - 9 - BussinessDetailBorderRight, (self.height - 14)/2, 9, 14)];
     [_businessInfoTitleLabel setFrame:CGRectMake(self.businessInfoImageView.right + BussinessDetailBorderLeft, 24, BussinessDetailWidth - _businessInfoImageView.right - BussinessDetailBorderLeft , 20)];
     [_businessInfoDetailLabel setFrame:CGRectMake(self.businessInfoTitleLabel.left, _businessInfoTitleLabel.bottom, _businessInfoTitleLabel.width, 20)];

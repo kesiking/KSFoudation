@@ -30,14 +30,21 @@
 
 -(void)setupView{
     [super setupView];
-    self.activityTitleLabel.textColor = EHCor5;
-    self.activityInfoDescLabel.textColor = EHCor4;
+    self.activityTitleLabel.textColor = HS_FontCor2;
+    self.activityTitleLabel.backgroundColor = [UIColor whiteColor];
+    self.activityTitleLabel.opaque = YES;
+    self.activityInfoDescLabel.textColor = HS_FontCor3;
+    self.activityInfoDescLabel.backgroundColor = [UIColor whiteColor];
+    self.activityInfoDescLabel.opaque = YES;
+
     self.activityStartDateLabel.textColor = EHCor3;
     self.activityEndDateLabel.textColor = EHCor3;
     self.activityStartDateLeftLabel.hidden = YES;
     self.activityStartDateLabel.hidden = YES;
     self.activityEndDateLabel.hidden = YES;
-    self.activityBottomLineImageView.backgroundColor = EH_cor17;
+    
+    self.activityBottomLineImageView.backgroundColor = HS_linecor1;
+    self.activityBottomLineImageView.opaque = YES;
 }
 
 -(void)layoutSubviews{
@@ -62,7 +69,7 @@
 -(void)configCellLabelWithCellView:(id<KSViewCellProtocol>)cell Frame:(CGRect)rect componentItem:(HSActivityInfoModel *)componentItem extroParams:(KSCellModelInfoItem*)extroParams{
     
     self.activityTitleLabel.text = [NSString stringWithFormat:@"%@",componentItem.activityTitle];
-    self.activityInfoDescLabel.text = [NSString stringWithFormat:@"%@",componentItem.activityDetailText];
+    self.activityInfoDescLabel.text = [NSString stringWithFormat:@"%@",componentItem.activityContent];
     
     if (![extroParams isKindOfClass:[HSActivityInfoCellModelInfoItem class]]) {
         self.activityStartDateLabel.text = [NSString stringWithFormat:@"%@",componentItem.activityStartTime];

@@ -10,5 +10,4 @@
 
 @interface HSAfterSaleCollectionViewCell : HSBasicCollectionViewCell
 
-
 @end

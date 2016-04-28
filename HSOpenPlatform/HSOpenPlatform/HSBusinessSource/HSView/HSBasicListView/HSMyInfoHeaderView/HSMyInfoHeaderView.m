@@ -7,6 +7,7 @@
 //
 
 #import "HSMyInfoHeaderView.h"
+#import "Masonry.h"
 
 
 #define kSubViewTag   100
@@ -18,6 +19,7 @@
 
 @property (strong,nonatomic) UILabel *userPhoneLabel;
 @property (strong,nonatomic) UILabel *userPackageLabel;
+@property (strong,nonatomic) UILabel *backgroundLabel;
 //@property (strong,nonatomic) UIButton *starBtn;
 @property (strong, nonatomic) UIImageView *backgroundImgView;
 
@@ -43,6 +45,7 @@
 //            [self addSubview:starBtn];
 //            
 //        }
+        [self addSubview:self.backgroundLabel];
         [self addSubview:self.userPhoneLabel];
         [self addSubview:self.userPackageLabel];
         
@@ -54,8 +57,24 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    [self.userPhoneLabel setFrame:CGRectMake(0, 35, SCREEN_WIDTH, 13)];
-    [self.userPackageLabel setFrame:CGRectMake(0, 78, SCREEN_WIDTH, 16)];
+    [self.backgroundLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX);
+        make.top.equalTo(self.mas_top).with.offset(10);
+        make.size.mas_equalTo(CGSizeMake(150*SCREEN_SCALE, 75*SCREEN_SCALE));
+    }];
+    
+    [self.userPhoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX);
+        make.centerY.equalTo(self.backgroundLabel);
+        make.size.mas_equalTo(CGSizeMake(150*SCREEN_SCALE, 13*SCREEN_SCALE));
+    }];
+    
+    
+    
+    
+//    [self.backgroundLabel setFrame:CGRectMake((SCREEN_WIDTH - 150*SCREEN_SCALE)/2, 10*SCREEN_SCALE, 150*SCREEN_SCALE, 75*SCREEN_SCALE)];
+//    [self.userPhoneLabel setFrame:CGRectMake((SCREEN_WIDTH - 150*SCREEN_SCALE)/2, 30*SCREEN_SCALE, 150*SCREEN_SCALE, 13*SCREEN_SCALE)];
+//    [self.userPackageLabel setFrame:CGRectMake((SCREEN_WIDTH - 150*SCREEN_SCALE)/2, 52*SCREEN_SCALE, SCREEN_WIDTH, 10*SCREEN_SCALE)];
     
 //    CGFloat btnX;
 //    CGFloat btnY = 65;
@@ -90,8 +109,8 @@
     if (!_userPhoneLabel) {
         _userPhoneLabel  = [[UILabel alloc]init];
         _userPhoneLabel.textAlignment = NSTextAlignmentCenter;
-        _userPhoneLabel.font = EHFont1;
-        _userPhoneLabel.textColor = EHCor1;
+        _userPhoneLabel.font = [UIFont boldSystemFontOfSize:17.0];
+        _userPhoneLabel.textColor = HS_FontCor1;
         
     }
     return _userPhoneLabel;
@@ -101,10 +120,22 @@
     if (!_userPackageLabel) {
         _userPackageLabel = [[UILabel alloc]init];
         _userPackageLabel.textAlignment = NSTextAlignmentCenter;
-        _userPackageLabel.font = EHFont1;
-        _userPackageLabel.textColor = EHCor1;
+        _userPackageLabel.font = HS_font5;
+        _userPackageLabel.textColor = HS_FontCor1;
     }
     return _userPackageLabel;
+}
+
+-(UILabel *)backgroundLabel{
+    if (!_backgroundLabel) {
+        _backgroundLabel = [[UILabel alloc]init];
+        _backgroundLabel.layer.cornerRadius = 3;
+        _backgroundLabel.layer.masksToBounds = YES;
+        //_backgroundLabel.backgroundColor = RGB(0x86, 0xd4, 0xba);
+        _backgroundLabel.backgroundColor = [RGB(0x86, 0xd4, 0xba) colorWithAlphaComponent:0.5];
+    
+    }
+    return _backgroundLabel;
 }
 
 //-(UIButton *)starBtn{

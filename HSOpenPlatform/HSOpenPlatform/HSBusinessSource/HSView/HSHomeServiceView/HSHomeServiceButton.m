@@ -26,12 +26,22 @@
     return self;
 }
 
+- (CGRect)imageRectForContentRect:(CGRect)contentRect {
+    return CGRectMake(20, caculateNumber(20), 50, 50);
+}
+
+- (CGRect)titleRectForContentRect:(CGRect)contentRect {
+    return  CGRectMake(0, caculateNumber(20+10) + 50, self.width, 15);
+}
+
+- (CGSize)sizeThatFits:(CGSize)size {
+    return CGSizeMake(50+20+20, home_serviceButton_height);
+}
+
 - (void)setupView {
-    [self setTitleColor:EHCor5 forState:UIControlStateNormal];
-    self.titleLabel.font = EHFont5;
-    self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    self.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
-    self.contentEdgeInsets = UIEdgeInsetsMake(caculateNumber(10), caculateNumber(12), 0, 0);
+    [self setTitleColor:HS_FontCor2 forState:UIControlStateNormal];
+    self.titleLabel.font = HS_font5;
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
 }
 
 @end

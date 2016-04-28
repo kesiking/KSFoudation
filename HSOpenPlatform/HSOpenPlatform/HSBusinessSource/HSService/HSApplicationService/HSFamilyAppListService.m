@@ -11,12 +11,20 @@
 
 @implementation HSFamilyAppListService
 
--(void)loadFamilyAppListData{
+-(void)loadFamilyAppListDataWithBusinessId:(NSNumber *)businessId;
+{
     
     self.itemClass = [HSApplicationModel class];
     self.needCache = YES;
     self.jsonTopKey = RESPONSE_DATA_KEY;
-    [self loadDataListWithAPIName:kHSFamilyAppInfoListApiName params:nil version:nil];
+    
+    NSMutableDictionary* params = [NSMutableDictionary dictionary];
+    
+    if (businessId != nil) {
+        [params setObject:businessId forKey:@"businessId"];
+    }
+    
+    [self loadDataListWithAPIName:kHSFamilyAppInfoListApiName params:params version:nil];
 
     
     

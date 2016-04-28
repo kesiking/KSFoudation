@@ -10,4 +10,11 @@
 
 @implementation HSApplicationModel
 
++(TBJSONModelKeyMapper*)modelKeyMapper{
+    NSDictionary* dict = @{@"id":@"appId",
+                           };
+    return [[TBJSONModelKeyMapper alloc] initWithDictionary:dict];
+}
+
+
 @end

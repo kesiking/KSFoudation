@@ -38,11 +38,6 @@
     if (animated) {
         urlAction.navigationParams.animated = [animated boolValue];
     }
-    
-    id needLogin = [urlAction.extraInfo objectForKey:ACTION_NEEDLOGIN_KEY];
-    if (needLogin) {
-        urlAction.navigationParams.needLogin = [needLogin boolValue];
-    }
 }
 
 -(UIViewController *)viewControllerWithAction:(TBURLAction *)action {

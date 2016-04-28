@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CommonCrypto/CommonCryptor.h>
 
 @interface EHUtils : NSObject
 
@@ -39,4 +40,7 @@
 + (BOOL)stringContainsEmoji:(NSString *)string;
 
 + (BOOL)networkReachable;
+
++ (NSString*)tripleDES:(NSString*)plainText encryptOrDecrypt:(CCOperation)encryptOrDecrypt;
+
 @end
