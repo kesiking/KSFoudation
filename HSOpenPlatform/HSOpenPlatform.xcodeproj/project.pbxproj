@@ -818,6 +818,7 @@
 		5FDF1A361BD8BE5C0059B3F2 /* HSSubscribedBussinessBasicService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDF1A351BD8BE5C0059B3F2 /* HSSubscribedBussinessBasicService.m */; };
 		5FE602281BF1968900DA34EF /* KSASCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE602271BF1968900DA34EF /* KSASCollectionViewController.m */; };
 		5FE6022B1BF19A2A00DA34EF /* KSASCollectionViewCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE6022A1BF19A2A00DA34EF /* KSASCollectionViewCellNode.m */; };
+		5FF560FA1CD19849009B691C /* dyci.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FF560F91CD19849009B691C /* dyci.framework */; };
 		5FFBD0B11BF585AC00A252C8 /* HSBusinessUserInfoListService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFBD0B01BF585AC00A252C8 /* HSBusinessUserInfoListService.m */; };
 		5FFBD0C01BF59D1900A252C8 /* HSPopMenuListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFBD0B91BF59D1900A252C8 /* HSPopMenuListView.m */; };
 		5FFBD0C11BF59D1900A252C8 /* EHPopMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFBD0BC1BF59D1900A252C8 /* EHPopMenuCell.m */; };
@@ -2346,6 +2347,7 @@
 		5FE602271BF1968900DA34EF /* KSASCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSASCollectionViewController.m; sourceTree = "<group>"; };
 		5FE602291BF19A2A00DA34EF /* KSASCollectionViewCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSASCollectionViewCellNode.h; sourceTree = "<group>"; };
 		5FE6022A1BF19A2A00DA34EF /* KSASCollectionViewCellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSASCollectionViewCellNode.m; sourceTree = "<group>"; };
+		5FF560F91CD19849009B691C /* dyci.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = dyci.framework; sourceTree = "<group>"; };
 		5FFBD0AF1BF585AC00A252C8 /* HSBusinessUserInfoListService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSBusinessUserInfoListService.h; sourceTree = "<group>"; };
 		5FFBD0B01BF585AC00A252C8 /* HSBusinessUserInfoListService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSBusinessUserInfoListService.m; sourceTree = "<group>"; };
 		5FFBD0B81BF59D1900A252C8 /* HSPopMenuListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSPopMenuListView.h; sourceTree = "<group>"; };
@@ -2514,6 +2516,7 @@
 				5F66C5831BBA5CC600CC21F7 /* libWeChatSDK.a in Frameworks */,
 				5F66C5751BBA5CC600CC21F7 /* libUMSocial_Sdk_4.2.3.a in Frameworks */,
 				5F66C5421BBA5CC600CC21F7 /* libMWQREncode.a in Frameworks */,
+				5FF560FA1CD19849009B691C /* dyci.framework in Frameworks */,
 				5F66C57E1BBA5CC600CC21F7 /* libSocialSina.a in Frameworks */,
 				5F66C5821BBA5CC600CC21F7 /* libSocialWechat.a in Frameworks */,
 			);
@@ -4579,6 +4582,7 @@
 		5F66C1941BBA5CC300CC21F7 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				5FF560F91CD19849009B691C /* dyci.framework */,
 				5F0910E41C16D05D009962BB /* YYKit */,
 				5F42D08C1BF031F9001E7930 /* AsyncDisplayKit */,
 				5F17FFB91BE0AE1F00670317 /* UMAnalytics_Sdk_3.6.5 */,
