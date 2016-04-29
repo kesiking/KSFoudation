@@ -818,6 +818,7 @@
 		5FDF1A361BD8BE5C0059B3F2 /* HSSubscribedBussinessBasicService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDF1A351BD8BE5C0059B3F2 /* HSSubscribedBussinessBasicService.m */; };
 		5FE602281BF1968900DA34EF /* KSASCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE602271BF1968900DA34EF /* KSASCollectionViewController.m */; };
 		5FE6022B1BF19A2A00DA34EF /* KSASCollectionViewCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE6022A1BF19A2A00DA34EF /* KSASCollectionViewCellNode.m */; };
+		5FEA3E101CD3464600B69EB9 /* UIDeviceEX.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FEA3E0F1CD3464600B69EB9 /* UIDeviceEX.m */; };
 		5FF560FA1CD19849009B691C /* dyci.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FF560F91CD19849009B691C /* dyci.framework */; };
 		5FFBD0B11BF585AC00A252C8 /* HSBusinessUserInfoListService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFBD0B01BF585AC00A252C8 /* HSBusinessUserInfoListService.m */; };
 		5FFBD0C01BF59D1900A252C8 /* HSPopMenuListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFBD0B91BF59D1900A252C8 /* HSPopMenuListView.m */; };
@@ -2347,6 +2348,8 @@
 		5FE602271BF1968900DA34EF /* KSASCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSASCollectionViewController.m; sourceTree = "<group>"; };
 		5FE602291BF19A2A00DA34EF /* KSASCollectionViewCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSASCollectionViewCellNode.h; sourceTree = "<group>"; };
 		5FE6022A1BF19A2A00DA34EF /* KSASCollectionViewCellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSASCollectionViewCellNode.m; sourceTree = "<group>"; };
+		5FEA3E0E1CD3464600B69EB9 /* UIDeviceEX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDeviceEX.h; sourceTree = "<group>"; };
+		5FEA3E0F1CD3464600B69EB9 /* UIDeviceEX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDeviceEX.m; sourceTree = "<group>"; };
 		5FF560F91CD19849009B691C /* dyci.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = dyci.framework; sourceTree = "<group>"; };
 		5FFBD0AF1BF585AC00A252C8 /* HSBusinessUserInfoListService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSBusinessUserInfoListService.h; sourceTree = "<group>"; };
 		5FFBD0B01BF585AC00A252C8 /* HSBusinessUserInfoListService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSBusinessUserInfoListService.m; sourceTree = "<group>"; };
@@ -4720,6 +4723,8 @@
 			children = (
 				5F66C1DE1BBA5CC300CC21F7 /* KSNavigator+RDVTabBarController.h */,
 				5F66C1DF1BBA5CC300CC21F7 /* KSNavigator+RDVTabBarController.m */,
+				5FEA3E0E1CD3464600B69EB9 /* UIDeviceEX.h */,
+				5FEA3E0F1CD3464600B69EB9 /* UIDeviceEX.m */,
 				5F66C1E01BBA5CC300CC21F7 /* NSDictionary+JSONSerialize.h */,
 				5F66C1E11BBA5CC300CC21F7 /* NSDictionary+JSONSerialize.m */,
 				5F66C1E21BBA5CC300CC21F7 /* UIImage-Extensions */,
@@ -7344,6 +7349,7 @@
 				394E30181C2A8FF000145AC9 /* KSDebugResponseEventsModel.m in Sources */,
 				5F1A1D361C0E8D9600B72CFF /* KSDebugBasicMenuItemView.m in Sources */,
 				5FD917F81CD0889200203AAB /* FLEXNetworkSettingsTableViewController.m in Sources */,
+				5FEA3E101CD3464600B69EB9 /* UIDeviceEX.m in Sources */,
 				357AE6EC1C1AA253009CA693 /* KSDebugRequestListToolBar.m in Sources */,
 				391A46EB1C158257003A5098 /* KSDebugFPSLabel.m in Sources */,
 				5F0BCB6A1BBA6FBE00CFE4A4 /* EHLoadingHud.m in Sources */,
